@@ -7,6 +7,7 @@ import { ShowButton } from "@/components/admin/show-button";
 import { AddTask } from "../tasks/AddTask";
 import { TasksIterator } from "../tasks/TasksIterator";
 import { TagsListEdit } from "./TagsListEdit";
+import { ClientOrders } from "./ClientOrders";
 import { ContactStatusSelector } from "./ContactInputs";
 import { ContactPersonalInfo } from "./ContactPersonalInfo";
 import { ContactBackgroundInfo } from "./ContactBackgroundInfo";
@@ -52,6 +53,10 @@ export const ContactAside = ({ link = "edit" }: { link?: "edit" | "show" }) => {
       >
         <TagsListEdit />
       </AsideSection>
+
+      <div className="mb-6">
+        <ClientOrders />
+      </div>
 
       <AsideSection
         title={translate("resources.tasks.name", { smart_count: 2 })}

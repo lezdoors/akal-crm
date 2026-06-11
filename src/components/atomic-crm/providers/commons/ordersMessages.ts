@@ -9,6 +9,46 @@ export const englishOrdersMessages = {
       actions: "Actions",
       new_contact: "New contact",
     },
+    nav: {
+      clients: "Clients",
+      products: "Products",
+      inventory: "Inventory",
+      media: "Media library",
+      catalogue: "Catalogue",
+      studio: "Studio",
+    },
+    products: {
+      count: "%{smart_count} piece |||| %{smart_count} pieces",
+      all: "All",
+      facts: "Details",
+      collection: "Collection",
+      leather: "Leather",
+      variant: "Variant",
+      stock: "Stock",
+      description: "Description",
+      canonical_note:
+        "Catalogue data is managed in Airtable and syncs automatically.",
+      status: {
+        available: "Available",
+        sold: "Sold",
+        reserved: "Reserved",
+        draft: "Draft",
+      },
+    },
+    media: {
+      count: "%{smart_count} asset |||| %{smart_count} assets",
+      copied: "Image URL copied.",
+    },
+    inventory: {
+      note: "One-of-one pieces — a sale removes the piece from the site automatically.",
+    },
+    dashboard: {
+      recent_clients: "New clients",
+      all: "All",
+    },
+    clients: {
+      lifetime: "Lifetime",
+    },
   },
   resources: {
     orders: {
@@ -110,6 +150,46 @@ export const frenchOrdersMessages = {
       navigation: "Aller à",
       actions: "Actions",
       new_contact: "Nouveau client",
+    },
+    nav: {
+      clients: "Clients",
+      products: "Produits",
+      inventory: "Inventaire",
+      media: "Médiathèque",
+      catalogue: "Catalogue",
+      studio: "Studio",
+    },
+    products: {
+      count: "%{smart_count} pièce |||| %{smart_count} pièces",
+      all: "Tout",
+      facts: "Détails",
+      collection: "Collection",
+      leather: "Cuir",
+      variant: "Variante",
+      stock: "Stock",
+      description: "Description",
+      canonical_note:
+        "Le catalogue est géré dans Airtable et se synchronise automatiquement.",
+      status: {
+        available: "Disponible",
+        sold: "Vendue",
+        reserved: "Réservée",
+        draft: "Brouillon",
+      },
+    },
+    media: {
+      count: "%{smart_count} visuel |||| %{smart_count} visuels",
+      copied: "URL de l'image copiée.",
+    },
+    inventory: {
+      note: "Pièces uniques — une vente retire automatiquement la pièce du site.",
+    },
+    dashboard: {
+      recent_clients: "Nouveaux clients",
+      all: "Tout",
+    },
+    clients: {
+      lifetime: "Cumul",
     },
   },
   resources: {

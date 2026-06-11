@@ -85,16 +85,16 @@
 :root {
   /* Maison Tanneurs — clean-white editorial system, tokens mirrored from
      the production storefront's globals.css (Polène discipline). */
-  --radius: 0rem;
+  --radius: 0.45rem;
   --ground: #ffffff;
-  --ground-deep: #f6f4f1;
-  --ink: #1c1a17;
+  --ground-deep: #f8f7f4;
+  --ink: #1d1b19;
   --ink-soft: #57534c;
   --ink-muted: #8d867c;
-  --tobacco: #8b5a2b;
+  --tobacco: #8a6a43;
   --dark-close: #211c17;
-  --hairline: rgba(28, 26, 23, 0.16);
-  --background: var(--ground);
+  --hairline: rgba(29, 27, 25, 0.12);
+  --background: var(--ground-deep);
   --foreground: var(--ink);
   --card: var(--ground);
   --card-foreground: var(--ink);
@@ -117,14 +117,14 @@
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: var(--ground-deep);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--ink);
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgba(29, 27, 25, 0.06);
+  --sidebar-accent-foreground: var(--ink);
+  --sidebar-border: transparent;
+  --sidebar-ring: var(--ink-muted);
   --avatar-0: oklch(0.85 0.08 240);
   --avatar-1: oklch(0.88 0.1 340);
   --avatar-2: oklch(0.85 0.07 180);
@@ -141,7 +141,7 @@
   /* Espresso close — mirrors the storefront dark register */
   --background: var(--dark-close);
   --foreground: #fbfaf7;
-  --card: var(--dark-close);
+  --card: #28221c;
   --card-foreground: #fbfaf7;
   --popover: var(--dark-close);
   --popover-foreground: #fbfaf7;
@@ -162,14 +162,14 @@
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --sidebar: var(--dark-close);
+  --sidebar-foreground: #fbfaf7;
+  --sidebar-primary: #fbfaf7;
+  --sidebar-primary-foreground: var(--ink);
+  --sidebar-accent: rgba(251, 250, 247, 0.07);
+  --sidebar-accent-foreground: #fbfaf7;
+  --sidebar-border: transparent;
+  --sidebar-ring: var(--ink-muted);
   --avatar-0: oklch(0.35 0.12 240);
   --avatar-1: oklch(0.38 0.14 340);
   --avatar-2: oklch(0.35 0.11 180);
@@ -220,6 +220,12 @@ input[type="time"] {
 
 
 /* === Maison Tanneurs refinements === */
+@layer base {
+  a, button, [role="button"] {
+    transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, opacity 150ms ease;
+  }
+}
+
 @keyframes login-pan {
   0% { transform: scale(1.04) translateX(0); }
   100% { transform: scale(1.12) translateX(-1.5%); }

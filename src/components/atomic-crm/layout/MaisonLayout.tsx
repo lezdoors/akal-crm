@@ -1,8 +1,11 @@
 import type { ErrorInfo, ReactNode } from "react";
 import { Suspense, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { cn } from "@/lib/utils";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
 import { UserMenu } from "@/components/admin/user-menu";
 import { ThemeModeToggle } from "@/components/admin/theme-mode-toggle";
 import { Notification } from "@/components/admin/notification";
@@ -24,8 +27,8 @@ import { CommandPalette } from "./CommandPalette";
 import { MaisonSidebar } from "./MaisonSidebar";
 
 /**
- * Linear-style application shell: collapsible maison sidebar, slim top bar
- * with breadcrumb slot + locale/theme/refresh/user controls.
+ * Linear anatomy: borderless sidebar on the warm canvas, content floating
+ * as a rounded white card (SidebarInset), slim utility bar inside the card.
  */
 export const MaisonLayout = ({ children }: { children: ReactNode }) => {
   useConfigurationLoader();
@@ -37,18 +40,9 @@ export const MaisonLayout = ({ children }: { children: ReactNode }) => {
   return (
     <SidebarProvider>
       <MaisonSidebar />
-      <main
-        className={cn(
-          "ml-auto w-full max-w-full",
-          "peer-data-[state=collapsed]:w-[calc(100%-var(--sidebar-width-icon)-1rem)]",
-          "peer-data-[state=expanded]:w-[calc(100%-var(--sidebar-width))]",
-          "sm:transition-[width] sm:duration-200 sm:ease-linear",
-          "flex h-svh flex-col",
-        )}
-        id="main-content"
-      >
-        <header className="flex h-16 md:h-12 shrink-0 items-center gap-2 px-4 border-b">
-          <SidebarTrigger className="scale-125 sm:scale-100" />
+      <SidebarInset className="border md:peer-data-[variant=inset]:rounded-lg md:peer-data-[variant=inset]:shadow-[0_1px_4px_rgba(29,27,25,0.06)] overflow-hidden flex flex-col">
+        <header className="flex h-12 shrink-0 items-center gap-2 px-4">
+          <SidebarTrigger className="text-muted-foreground" />
           <div className="flex-1 flex items-center" id="breadcrumb" />
           <button
             type="button"
@@ -57,10 +51,12 @@ export const MaisonLayout = ({ children }: { children: ReactNode }) => {
                 new KeyboardEvent("keydown", { key: "k", metaKey: true }),
               )
             }
-            className="hidden md:flex items-center gap-2 border px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+            className="hidden md:flex items-center gap-2 rounded-md border px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground"
           >
             <span>{translate("ra.action.search", { _: "Search" })}</span>
-            <kbd className="font-mono text-[10px] border px-1 bg-muted">⌘K</kbd>
+            <kbd className="font-mono text-[10px] rounded border px-1 bg-muted">
+              ⌘K
+            </kbd>
           </button>
           <LocalesMenuButton />
           <ThemeModeToggle />
@@ -88,12 +84,15 @@ export const MaisonLayout = ({ children }: { children: ReactNode }) => {
           )}
         >
           <Suspense fallback={<Loading />}>
-            <div className="flex flex-1 flex-col px-5 pb-8 overflow-y-auto">
+            <div
+              className="flex flex-1 flex-col px-6 pb-10 overflow-y-auto"
+              id="main-content"
+            >
               {children}
             </div>
           </Suspense>
         </ErrorBoundary>
-      </main>
+      </SidebarInset>
       <CommandPalette />
       <Notification />
     </SidebarProvider>

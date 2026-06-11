@@ -26,6 +26,10 @@ import { MobileLayout } from "../layout/MobileLayout";
 import { SignupPage } from "../login/SignupPage";
 import { ConfirmationRequired } from "../login/ConfirmationRequired";
 import { ImportPage } from "../misc/ImportPage";
+import { ProductsPage } from "../catalogue/ProductsPage";
+import { ProductDetailPage } from "../catalogue/ProductDetailPage";
+import { InventoryPage } from "../catalogue/InventoryPage";
+import { MediaLibraryPage } from "../catalogue/MediaLibraryPage";
 import { ChangelogPage } from "../misc/ChangelogPage";
 import {
   getAuthProvider as defaultAuthProviderBuilder,
@@ -265,6 +269,10 @@ const DesktopAdmin = (
         <Route path={SettingsPage.path} element={<SettingsPage />} />
         <Route path={ImportPage.path} element={<ImportPage />} />
         <Route path={ChangelogPage.path} element={<ChangelogPage />} />
+        <Route path="/products" element={<ProductsPage />} />
+        <Route path="/products/:id" element={<ProductDetailPage />} />
+        <Route path="/inventory" element={<InventoryPage />} />
+        <Route path="/media" element={<MediaLibraryPage />} />
       </CustomRoutes>
       <Resource name="orders" {...orders} />
       <Resource name="deals" {...deals} />
