@@ -642,6 +642,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/dashboard/commerceData.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/dashboard/Welcome.tsx",
           "type": "registry:component"
         },
@@ -650,11 +654,19 @@
           "type": "registry:component"
         },
         {
-          "path": "src/components/atomic-crm/dashboard/OrdersToShip.tsx",
+          "path": "src/components/atomic-crm/dashboard/StatTile.tsx",
           "type": "registry:component"
         },
         {
-          "path": "src/components/atomic-crm/dashboard/OrdersRevenue.tsx",
+          "path": "src/components/atomic-crm/dashboard/RevenueTrend.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/dashboard/RecentOrders.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/dashboard/OrdersToShip.tsx",
           "type": "registry:component"
         },
         {
@@ -687,6 +699,10 @@
         },
         {
           "path": "src/components/atomic-crm/dashboard/Dashboard.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/dashboard/CommerceKpis.tsx",
           "type": "registry:component"
         },
         {

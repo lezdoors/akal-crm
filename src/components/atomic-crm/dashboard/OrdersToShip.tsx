@@ -4,6 +4,7 @@ import { PackageOpen } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { formatMoney } from "../orders/orderUtils";
+import { useOrderProductImages } from "../orders/useOrderProductImages";
 import { needsShipping, useDashboardOrders } from "./commerceData";
 
 /**
@@ -14,6 +15,7 @@ export const OrdersToShip = () => {
   const translate = useTranslate();
   const { data: allOrders, isPending } = useDashboardOrders();
   const orders = (allOrders ?? []).filter(needsShipping).reverse();
+  const imageFor = useOrderProductImages(orders);
 
   if (isPending || !orders.length) return null;
 
@@ -35,7 +37,16 @@ export const OrdersToShip = () => {
               to={`/orders/${order.id}`}
               className="flex items-center justify-between py-2 text-sm no-underline hover:bg-muted/50 px-1 rounded"
             >
-              <span className="font-mono">{order.order_number}</span>
+              {imageFor(order.items?.[0] ?? { product_id: "", title: "", price: 0, quantity: 0 }) ? (
+                <img
+                  src={imageFor(order.items[0])}
+                  alt=""
+                  className="h-10 w-10 border object-cover mr-2 shrink-0"
+                />
+              ) : (
+                <div className="h-10 w-10 border bg-muted mr-2 shrink-0" />
+              )}
+              <span className="font-mono text-xs">{order.order_number}</span>
               <span className="text-muted-foreground truncate mx-2 flex-1">
                 {order.customer_name}
               </span>

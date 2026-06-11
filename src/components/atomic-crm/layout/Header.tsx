@@ -133,7 +133,7 @@ const NavigationTab = ({
   </Link>
 );
 
-const UsersMenu = () => {
+export const UsersMenu = () => {
   const translate = useTranslate();
   const userMenuContext = useUserMenu();
   if (!userMenuContext) {
@@ -149,7 +149,7 @@ const UsersMenu = () => {
   );
 };
 
-const ProfileMenu = () => {
+export const ProfileMenu = () => {
   const translate = useTranslate();
   const userMenuContext = useUserMenu();
   if (!userMenuContext) {
@@ -165,7 +165,7 @@ const ProfileMenu = () => {
   );
 };
 
-const SettingsMenu = () => {
+export const SettingsMenu = () => {
   const translate = useTranslate();
   const userMenuContext = useUserMenu();
   if (!userMenuContext) {
@@ -181,7 +181,7 @@ const SettingsMenu = () => {
   );
 };
 
-const ImportFromJsonMenuItem = () => {
+export const ImportFromJsonMenuItem = () => {
   const translate = useTranslate();
   const userMenuContext = useUserMenu();
   if (!userMenuContext) {
@@ -197,7 +197,7 @@ const ImportFromJsonMenuItem = () => {
   );
 };
 
-const ChangelogMenuItem = () => {
+export const ChangelogMenuItem = () => {
   const translate = useTranslate();
   const userMenuContext = useUserMenu();
   if (!userMenuContext) {

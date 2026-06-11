@@ -21,7 +21,7 @@ import orders from "../orders";
 import { Dashboard } from "../dashboard/Dashboard";
 import { MobileDashboard } from "../dashboard/MobileDashboard";
 import deals from "../deals";
-import { Layout } from "../layout/Layout";
+import { MaisonLayout } from "../layout/MaisonLayout";
 import { MobileLayout } from "../layout/MobileLayout";
 import { SignupPage } from "../login/SignupPage";
 import { ConfirmationRequired } from "../login/ConfirmationRequired";
@@ -242,7 +242,7 @@ const DesktopAdmin = (
 ) => {
   return (
     <Admin
-      layout={props.layout ?? Layout}
+      layout={props.layout ?? MaisonLayout}
       dashboard={props.dashboard ?? Dashboard}
       {...props}
     >

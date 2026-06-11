@@ -7,13 +7,16 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatMoney, ORDER_STATUS_BADGE_CLASSES } from "../orders/orderUtils";
 import { OrderChannelBadge } from "../orders/OrderBadges";
 import { useDashboardOrders } from "./commerceData";
+import { useOrderProductImages } from "../orders/useOrderProductImages";
 
 export const RecentOrders = () => {
   const translate = useTranslate();
   const { data: orders } = useDashboardOrders();
 
-  if (!orders?.length) return null;
-  const recent = orders.slice(0, 8);
+  const recent = (orders ?? []).slice(0, 8);
+  const imageFor = useOrderProductImages(recent);
+
+  if (!recent.length) return null;
 
   return (
     <Card>
@@ -35,8 +38,17 @@ export const RecentOrders = () => {
             <RecordContextProvider key={order.id} value={order}>
               <Link
                 to={`/orders/${order.id}/show`}
-                className="grid grid-cols-[auto_1fr_auto_auto_auto] items-center gap-3 py-2.5 text-sm no-underline hover:bg-muted/60 px-1"
+                className="grid grid-cols-[auto_auto_1fr_auto_auto_auto] items-center gap-3 py-2 text-sm no-underline hover:bg-muted/60 px-1"
               >
+                {imageFor(order.items?.[0] ?? { product_id: "", title: "", price: 0, quantity: 0 }) ? (
+                  <img
+                    src={imageFor(order.items[0])}
+                    alt=""
+                    className="h-10 w-10 border object-cover shrink-0"
+                  />
+                ) : (
+                  <div className="h-10 w-10 border bg-muted shrink-0" />
+                )}
                 <span className="font-mono text-xs">{order.order_number}</span>
                 <span className="text-muted-foreground truncate">
                   {order.customer_name || "—"}

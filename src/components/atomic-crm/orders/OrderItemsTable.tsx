@@ -2,11 +2,13 @@ import { useRecordContext, useTranslate } from "ra-core";
 
 import type { Order } from "../types";
 import { formatMoney, orderItemsSubtotal } from "./orderUtils";
+import { useOrderProductImages } from "./useOrderProductImages";
 
 /** Renders the order's `items` JSONB array. Production rows may omit `image`. */
 export const OrderItemsTable = () => {
   const record = useRecordContext<Order>();
   const translate = useTranslate();
+  const imageFor = useOrderProductImages(record);
   if (!record?.items?.length) {
     return (
       <p className="text-sm text-muted-foreground">
@@ -37,14 +39,21 @@ export const OrderItemsTable = () => {
           <tr key={index} className="border-b last:border-b-0">
             <td className="py-2 pr-2">
               <div className="flex items-center gap-3">
-                {item.image ? (
-                  <img
-                    src={item.image}
-                    alt={item.title}
-                    className="h-10 w-10 rounded object-cover"
-                  />
+                {imageFor(item) ? (
+                  <a
+                    href={imageFor(item)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="shrink-0"
+                  >
+                    <img
+                      src={imageFor(item)}
+                      alt={item.title}
+                      className="h-16 w-16 border object-cover"
+                    />
+                  </a>
                 ) : (
-                  <div className="h-10 w-10 rounded bg-muted" />
+                  <div className="h-16 w-16 border bg-muted" />
                 )}
                 <div className="flex flex-col">
                   <span>{item.title}</span>
