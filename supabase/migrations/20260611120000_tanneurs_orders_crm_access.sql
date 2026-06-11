@@ -9,6 +9,10 @@
 -- anon gains nothing. No DELETE policy on purpose: orders are financial
 -- records and must not be deletable from the CRM.
 
+-- Required by Atomic's get_avatar_for_email (extensions.http_get); upstream
+-- enables it via the dashboard, so the stock migrations omit it.
+CREATE EXTENSION IF NOT EXISTS http WITH SCHEMA extensions;
+
 ALTER TABLE public.orders
   ADD COLUMN IF NOT EXISTS shipping_email_sent_at timestamp with time zone;
 

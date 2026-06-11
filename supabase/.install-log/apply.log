@@ -1,0 +1,50 @@
+=== 20240730075029_init_db.sql
+[]
+=== 20240730075425_init_triggers.sql
+[]
+=== 20240806124555_task_sales_id.sql
+[]
+=== 20240807082449_remove-aquisition.sql
+[]
+=== 20240808141826_init_state_configure.sql
+[]
+=== 20240813084010_tags_policy.sql
+[]
+=== 20241104153231_sales_policies.sql
+[]
+=== 20250109152531_email_jsonb.sql
+[]
+=== 20250113132531_phone_jsonb.sql
+[]
+=== 20251204172855_merge_contacts_function.sql
+[]
+=== 20251204201317_drop_merge_contacts_function.sql
+[]
+=== 20260108160722_task_default_sales.sql
+[]
+=== 20260115150819_snake_case_renaming.sql
+[]
+=== 20260127140209_imports.sql
+[]
+=== 20260128165057_sso_handling.sql
+[]
+=== 20260211194545_app_configuration.sql
+[]
+=== 20260226163952_deals_expected_closing_date_date_only.sql
+[]
+=== 20260304104600_note_attachments_trigger.sql
+[]
+=== 20260307120000_nb_tasks_pending_only.sql
+[]
+=== 20260309112831_fix_security_warnings.sql
+[]
+=== 20260314120000_activity_log_view.sql
+[]
+=== 20260320120000_lowercase_email_website.sql
+[]
+=== 20260601120000_grant_init_state_to_api_roles.sql
+[]
+=== 20260611120000_tanneurs_orders_crm_access.sql
+[]
+=== 20260611120100_contacts_from_orders.sql
+[]

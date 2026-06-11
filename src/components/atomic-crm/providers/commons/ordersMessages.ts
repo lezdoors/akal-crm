@@ -1,4 +1,9 @@
 export const englishOrdersMessages = {
+  crm: {
+    auth: {
+      welcome_title: "Welcome to Maison Tanneurs",
+    },
+  },
   resources: {
     orders: {
       name: "Order |||| Orders",
@@ -69,12 +74,18 @@ export const englishOrdersMessages = {
         revenue: "Revenue",
         this_month: "This month",
         total_orders: "Total orders",
+        to_ship: "%{smart_count} order to ship |||| %{smart_count} orders to ship",
       },
     },
   },
 };
 
 export const frenchOrdersMessages = {
+  crm: {
+    auth: {
+      welcome_title: "Bienvenue chez Maison Tanneurs",
+    },
+  },
   resources: {
     orders: {
       name: "Commande |||| Commandes",
@@ -145,6 +156,7 @@ export const frenchOrdersMessages = {
         revenue: "Chiffre d'affaires",
         this_month: "Ce mois-ci",
         total_orders: "Total commandes",
+        to_ship: "%{smart_count} commande à expédier |||| %{smart_count} commandes à expédier",
       },
     },
   },

@@ -93,10 +93,21 @@ export const LoginPage = (props: { redirectTo?: string }) => {
     <div className="min-h-screen flex">
       <div className="relative grid w-full lg:grid-cols-2">
         <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-          <div className="absolute inset-0 bg-zinc-900" />
-          <div className="relative z-20 flex items-center text-lg font-medium">
-            <img className="h-6 mr-2" src={darkModeLogo} alt={title} />
-            {title}
+          <div
+            className="absolute inset-0 bg-zinc-950 bg-cover bg-left"
+            style={{ backgroundImage: "url(./login-atelier.webp)" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/40" />
+          <div className="relative z-20 flex items-center gap-3">
+            <img className="h-7" src={darkModeLogo} alt={title} />
+            <span className="font-serif text-2xl tracking-wide uppercase">
+              {title}
+            </span>
+          </div>
+          <div className="relative z-20 mt-auto">
+            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/60">
+              Atelier · Marrakech
+            </p>
           </div>
         </div>
         <div className="flex flex-col justify-center w-full p-4 lg:p-8">
