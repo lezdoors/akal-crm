@@ -42,10 +42,10 @@ export const ORDER_CURRENCY_CHOICES = [
 ];
 
 export const ORDER_STATUS_BADGE_CLASSES: Record<OrderStatus, string> = {
-  pending: "border-amber-400/70 text-amber-800 dark:text-amber-300 dark:border-amber-700",
-  paid: "border-yellow-700/50 text-yellow-900 dark:text-yellow-200 dark:border-yellow-700",
-  shipped: "border-stone-500/60 text-stone-700 dark:text-stone-300 dark:border-stone-500",
-  delivered: "border-emerald-700/40 text-emerald-900 dark:text-emerald-300 dark:border-emerald-700",
+  pending: "border-amber-600/50 text-amber-800 dark:text-amber-300 dark:border-amber-600/50",
+  paid: "border-tobacco/50 text-tobacco dark:text-amber-200/90 dark:border-tobacco/60",
+  shipped: "border-ink/30 text-ink-soft dark:text-stone-300 dark:border-stone-400/40",
+  delivered: "border-emerald-800/30 text-emerald-900 dark:text-emerald-300 dark:border-emerald-700/50",
 };
 
 export function orderItemsSubtotal(items: OrderItem[] | undefined): number {

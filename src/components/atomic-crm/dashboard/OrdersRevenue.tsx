@@ -48,7 +48,7 @@ export const OrdersRevenue = () => {
         <div className="grid grid-cols-3 gap-4">
           <div>
             <div className="text-xs text-muted-foreground">{translate("resources.orders.dashboard.revenue")}</div>
-            <div className="text-xl font-serif tabular-nums">
+            <div className="font-serif text-2xl font-medium tabular-nums">
               {Object.keys(totals).length
                 ? Object.entries(totals)
                     .map(([code, total]) => formatMoney(total, code))

@@ -1,18 +1,54 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "@fontsource-variable/inter";
-@import "@fontsource/instrument-serif";
-@import "@fontsource/instrument-serif/400-italic.css";
+
+/* Maison Tanneurs brand fonts — exact files from the production storefront (OFL) */
+@font-face {
+  font-family: "Bodoni Moda SC";
+  src: url("./fonts/bodoni-moda-sc.ttf") format("truetype-variations");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Bodoni Moda SC";
+  src: url("./fonts/bodoni-moda-sc-italic.ttf") format("truetype-variations");
+  font-weight: 400 900;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("./fonts/cormorant-garamond.ttf") format("truetype-variations");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("./fonts/cormorant-garamond-italic.ttf") format("truetype-variations");
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-display: "Bodoni Moda SC", "Bodoni Moda", serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --color-ground: var(--ground);
+  --color-ground-deep: var(--ground-deep);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-muted: var(--ink-muted);
+  --color-tobacco: var(--tobacco);
+  --color-hairline: var(--hairline);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -47,26 +83,35 @@
 }
 
 :root {
-  --radius: 0.375rem;
-  /* Maison Tanneurs palette: warm parchment neutrals + dark leather brown. */
-  --background: oklch(0.985 0.006 85);
-  --foreground: oklch(0.21 0.018 60);
-  --card: oklch(0.998 0.003 90);
-  --card-foreground: oklch(0.21 0.018 60);
-  --popover: oklch(0.998 0.003 90);
-  --popover-foreground: oklch(0.21 0.018 60);
-  --primary: oklch(0.31 0.04 60);
-  --primary-foreground: oklch(0.975 0.01 85);
-  --secondary: oklch(0.945 0.018 85);
-  --secondary-foreground: oklch(0.26 0.028 60);
-  --muted: oklch(0.955 0.012 85);
-  --muted-foreground: oklch(0.52 0.025 70);
-  --accent: oklch(0.945 0.018 85);
-  --accent-foreground: oklch(0.26 0.028 60);
+  /* Maison Tanneurs — clean-white editorial system, tokens mirrored from
+     the production storefront's globals.css (Polène discipline). */
+  --radius: 0rem;
+  --ground: #ffffff;
+  --ground-deep: #f6f4f1;
+  --ink: #1c1a17;
+  --ink-soft: #57534c;
+  --ink-muted: #8d867c;
+  --tobacco: #8b5a2b;
+  --dark-close: #211c17;
+  --hairline: rgba(28, 26, 23, 0.16);
+  --background: var(--ground);
+  --foreground: var(--ink);
+  --card: var(--ground);
+  --card-foreground: var(--ink);
+  --popover: var(--ground);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--ground);
+  --secondary: var(--ground-deep);
+  --secondary-foreground: var(--ink);
+  --muted: var(--ground-deep);
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--ground-deep);
+  --accent-foreground: var(--ink);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.905 0.014 85);
-  --input: oklch(0.905 0.014 85);
-  --ring: oklch(0.55 0.035 65);
+  --border: var(--hairline);
+  --input: var(--hairline);
+  --ring: var(--ink-muted);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -93,24 +138,25 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
+  /* Espresso close — mirrors the storefront dark register */
+  --background: var(--dark-close);
+  --foreground: #fbfaf7;
+  --card: var(--dark-close);
+  --card-foreground: #fbfaf7;
+  --popover: var(--dark-close);
+  --popover-foreground: #fbfaf7;
+  --primary: #fbfaf7;
+  --primary-foreground: var(--ink);
+  --secondary: #2a241d;
+  --secondary-foreground: #fbfaf7;
+  --muted: #2a241d;
+  --muted-foreground: var(--ink-muted);
+  --accent: #2a241d;
+  --accent-foreground: #fbfaf7;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 15%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
+  --border: rgba(251, 250, 247, 0.16);
+  --input: rgba(251, 250, 247, 0.16);
+  --ring: var(--ink-muted);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);

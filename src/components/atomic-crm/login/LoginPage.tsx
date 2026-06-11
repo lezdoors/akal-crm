@@ -100,12 +100,12 @@ export const LoginPage = (props: { redirectTo?: string }) => {
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/40" />
           <div className="relative z-20 flex items-center gap-3">
             <img className="h-7" src={darkModeLogo} alt={title} />
-            <span className="font-serif text-2xl tracking-wide uppercase">
+            <span className="font-display text-2xl font-medium tracking-[0.04em]">
               {title}
             </span>
           </div>
           <div className="relative z-20 mt-auto">
-            <p className="font-mono text-[10px] tracking-[0.25em] uppercase text-white/60">
+            <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-white/60">
               Atelier · Marrakech
             </p>
           </div>
@@ -113,7 +113,7 @@ export const LoginPage = (props: { redirectTo?: string }) => {
         <div className="flex flex-col justify-center w-full p-4 lg:p-8">
           <div className="w-full space-y-6 lg:mx-auto lg:w-[350px]">
             <div className="text-center">
-              <h1 className="font-serif text-3xl tracking-tight">
+              <h1 className="font-display text-3xl font-medium tracking-[0.02em]">
                 {translate("ra.auth.sign_in")}
               </h1>
             </div>

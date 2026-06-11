@@ -50,7 +50,7 @@ const Header = () => {
                   src={lightModeLogo}
                   alt={title}
                 />
-                <h1 className="text-xl font-serif tracking-wide uppercase">{title}</h1>
+                <h1 className="font-display text-[21px] font-medium tracking-[0.04em]">{title}</h1>
               </Link>
               <div>
                 <nav className="flex">
@@ -123,7 +123,7 @@ const NavigationTab = ({
 }) => (
   <Link
     to={to}
-    className={`px-5 py-3.5 text-[0.6875rem] font-medium uppercase tracking-[0.14em] transition-colors border-b-2 ${
+    className={`px-5 py-3.5 text-[10px] font-medium uppercase tracking-[0.18em] transition-colors border-b-2 ${
       isActive
         ? "text-secondary-foreground border-secondary-foreground"
         : "text-secondary-foreground/60 border-transparent hover:text-secondary-foreground"
