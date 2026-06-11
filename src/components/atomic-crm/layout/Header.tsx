@@ -50,7 +50,7 @@ const Header = () => {
                   src={lightModeLogo}
                   alt={title}
                 />
-                <h1 className="text-xl font-semibold">{title}</h1>
+                <h1 className="text-xl font-serif tracking-wide uppercase">{title}</h1>
               </Link>
               <div>
                 <nav className="flex">
@@ -60,7 +60,9 @@ const Header = () => {
                     isActive={currentPath === "/"}
                   />
                   <NavigationTab
-                    label="Orders"
+                    label={translate("resources.orders.name", {
+                      smart_count: 2,
+                    })}
                     to="/orders"
                     isActive={currentPath === "/orders"}
                   />

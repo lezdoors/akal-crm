@@ -6,6 +6,10 @@ import { raSupabaseEnglishMessages } from "ra-supabase-language-english";
 import { raSupabaseFrenchMessages } from "ra-supabase-language-french";
 import { englishCrmMessages } from "./englishCrmMessages";
 import { frenchCrmMessages } from "./frenchCrmMessages";
+import {
+  englishOrdersMessages,
+  frenchOrdersMessages,
+} from "./ordersMessages";
 
 const raSupabaseEnglishMessagesOverride = {
   "ra-supabase": {
@@ -29,6 +33,7 @@ const englishCatalog = mergeTranslations(
   raSupabaseEnglishMessages,
   raSupabaseEnglishMessagesOverride,
   englishCrmMessages,
+  englishOrdersMessages,
 );
 
 const frenchCatalog = mergeTranslations(
@@ -37,6 +42,7 @@ const frenchCatalog = mergeTranslations(
   raSupabaseFrenchMessages,
   raSupabaseFrenchMessagesOverride,
   frenchCrmMessages,
+  frenchOrdersMessages,
 );
 
 export const getInitialLocale = (): "en" | "fr" => {

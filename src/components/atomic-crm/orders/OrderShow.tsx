@@ -1,4 +1,4 @@
-import { useRecordContext } from "ra-core";
+import { useRecordContext, useTranslate } from "ra-core";
 import { Show } from "@/components/admin/show";
 import { DateField } from "@/components/admin/date-field";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -9,9 +9,14 @@ import { OrderItemsTable } from "./OrderItemsTable";
 
 const AddressBlock = () => {
   const record = useRecordContext<Order>();
+  const translate = useTranslate();
   const address = record?.shipping_address;
   if (!address || Object.values(address).every((value) => !value)) {
-    return <p className="text-sm text-muted-foreground">No shipping address.</p>;
+    return (
+      <p className="text-sm text-muted-foreground">
+        {translate("resources.orders.show.no_address")}
+      </p>
+    );
   }
   return (
     <div className="text-sm leading-6">
@@ -49,6 +54,7 @@ const ProcessorIds = () => {
 
 const OrderShowContent = () => {
   const record = useRecordContext<Order>();
+  const translate = useTranslate();
   if (!record) return null;
   return (
     <div className="flex flex-col gap-4 mt-2">
@@ -64,7 +70,7 @@ const OrderShowContent = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Customer</CardTitle>
+            <CardTitle className="text-base">{translate("resources.orders.show.customer")}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-sm leading-6">
@@ -80,17 +86,17 @@ const OrderShowContent = () => {
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Shipping</CardTitle>
+            <CardTitle className="text-base">{translate("resources.orders.show.shipping")}</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-col gap-2">
             <AddressBlock />
             <div className="text-sm">
-              <span className="text-muted-foreground">Tracking: </span>
+              <span className="text-muted-foreground">{translate("resources.orders.show.tracking")}: </span>
               {record.tracking_number || "—"}
             </div>
             {record.shipping_email_sent_at && (
               <div className="text-xs text-muted-foreground">
-                Shipping email sent{" "}
+                {translate("resources.orders.show.email_sent_at")}{" "}
                 <DateField source="shipping_email_sent_at" showTime />
               </div>
             )}
@@ -100,7 +106,7 @@ const OrderShowContent = () => {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Items</CardTitle>
+          <CardTitle className="text-base">{translate("resources.orders.show.items")}</CardTitle>
         </CardHeader>
         <CardContent>
           <OrderItemsTable />
@@ -110,7 +116,7 @@ const OrderShowContent = () => {
       {record.notes && (
         <Card>
           <CardHeader>
-            <CardTitle className="text-base">Internal notes</CardTitle>
+            <CardTitle className="text-base">{translate("resources.orders.show.notes")}</CardTitle>
           </CardHeader>
           <CardContent>
             <p className="text-sm whitespace-pre-wrap">{record.notes}</p>

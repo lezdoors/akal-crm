@@ -19,7 +19,7 @@ import {
 const OrderListActions = () => (
   <TopToolbar>
     <ExportButton />
-    <CreateButton label="New order" />
+    <CreateButton label="resources.orders.action.new" />
   </TopToolbar>
 );
 
@@ -27,7 +27,7 @@ const filters = [
   <TextInput
     key="email"
     source="customer_email@ilike"
-    label="Customer email"
+    label="resources.orders.fields.customer_email"
     alwaysOn
   />,
   <SelectInput
@@ -39,7 +39,7 @@ const filters = [
   <SelectInput
     key="channel"
     source="sales_channel"
-    label="Channel"
+    label="resources.orders.fields.sales_channel"
     choices={ORDER_CHANNEL_CHOICES}
   />,
 ];
@@ -76,20 +76,20 @@ export function OrderList() {
       perPage={25}
     >
       <DataTable rowClick="show">
-        <DataTable.Col source="order_number" label="Order" />
-        <DataTable.Col label="Customer">
+        <DataTable.Col source="order_number" label="resources.orders.fields.order_number" />
+        <DataTable.Col label="resources.orders.fields.customer">
           <CustomerField />
         </DataTable.Col>
-        <DataTable.Col label="Channel">
+        <DataTable.Col label="resources.orders.fields.sales_channel">
           <OrderChannelBadge />
         </DataTable.Col>
-        <DataTable.Col label="Total">
+        <DataTable.Col label="resources.orders.fields.total">
           <TotalField />
         </DataTable.Col>
-        <DataTable.Col label="Status">
+        <DataTable.Col label="resources.orders.fields.status">
           <OrderStatusBadge />
         </DataTable.Col>
-        <DataTable.Col source="created_at" label="Date">
+        <DataTable.Col source="created_at" label="resources.orders.fields.created_at">
           <DateField source="created_at" />
         </DataTable.Col>
       </DataTable>

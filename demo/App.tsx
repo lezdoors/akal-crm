@@ -7,6 +7,9 @@ import { memoryStore } from "ra-core";
 
 const App = () => (
   <CRM
+    title="Maison Tanneurs"
+    lightModeLogo="./logos/mt-logo-light.png"
+    darkModeLogo="./logos/mt-logo-dark.png"
     dataProvider={dataProvider}
     authProvider={authProvider}
     store={memoryStore()}

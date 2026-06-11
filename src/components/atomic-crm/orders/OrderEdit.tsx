@@ -3,6 +3,7 @@ import {
   useNotify,
   useRecordContext,
   useRedirect,
+  useTranslate,
 } from "ra-core";
 import { Edit } from "@/components/admin/edit";
 import { SimpleForm } from "@/components/admin/simple-form";
@@ -15,10 +16,13 @@ import { ORDER_STATUS_CHOICES } from "./orderUtils";
 
 const OrderEditTitle = () => {
   const record = useRecordContext<Order>();
+  const translate = useTranslate();
   if (!record) return null;
   return (
     <h2 className="text-lg font-semibold mb-2">
-      Fulfillment — {record.order_number}
+      {translate("resources.orders.edit.title", {
+        order_number: record.order_number,
+      })}
     </h2>
   );
 };
@@ -37,6 +41,7 @@ export function OrderEdit() {
   const dataProvider = useDataProvider<CrmDataProvider>();
   const notify = useNotify();
   const redirect = useRedirect();
+  const translate = useTranslate();
 
   const transform = (data: Order, options?: { previousData?: Order }) => {
     const previous = options?.previousData?.tracking_number ?? "";
@@ -57,16 +62,21 @@ export function OrderEdit() {
       try {
         const result = await dataProvider.sendShippingEmail(updated.id);
         if (result.sent) {
-          notify("Shipping email sent to the customer.", { type: "success" });
+          notify(translate("resources.orders.edit.email_sent"), {
+            type: "success",
+          });
         } else {
-          notify("Shipping email already sent earlier — not re-sent.", {
+          notify(translate("resources.orders.edit.email_already_sent"), {
             type: "info",
           });
         }
       } catch (error: unknown) {
         const message =
           error instanceof Error ? error.message : "Unexpected error";
-        notify(`Shipping email failed: ${message}`, { type: "error" });
+        notify(
+          translate("resources.orders.edit.email_failed", { message }),
+          { type: "error" },
+        );
       }
     }
     redirect("show", "orders", updated.id);
@@ -88,12 +98,12 @@ export function OrderEdit() {
           />
           <TextInput
             source="tracking_number"
-            label="Tracking number"
-            helperText="Saving with a tracking number emails the customer (exactly once per number)."
+            label="resources.orders.fields.tracking_number"
+            helperText={translate("resources.orders.edit.tracking_helper")}
           />
           <TextInput
             source="notes"
-            label="Internal notes"
+            label="resources.orders.fields.notes"
             multiline
             helperText={false}
           />

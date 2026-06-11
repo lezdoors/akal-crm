@@ -1,4 +1,4 @@
-import { required } from "ra-core";
+import { required, useTranslate } from "ra-core";
 import { ArrayInput } from "@/components/admin/array-input";
 import { Create } from "@/components/admin/create";
 import { NumberInput } from "@/components/admin/number-input";
@@ -60,6 +60,7 @@ const transform = (data: OrderDraft) => {
 };
 
 export function OrderCreate() {
+  const translate = useTranslate();
   return (
     <Create transform={transform as any} redirect="show">
       <SimpleForm
@@ -69,7 +70,9 @@ export function OrderCreate() {
           draft_items: [{ title: "", price: 0, quantity: 1 }],
         }}
       >
-        <h2 className="text-lg font-semibold mb-2">Manual order</h2>
+        <h2 className="text-lg font-semibold mb-2">
+          {translate("resources.orders.create.title")}
+        </h2>
         <div className="space-y-4 w-full max-w-xl">
           <div className="grid grid-cols-2 gap-4">
             <TextInput
@@ -86,7 +89,7 @@ export function OrderCreate() {
           <div className="grid grid-cols-3 gap-4">
             <SelectInput
               source="sales_channel"
-              label="Channel"
+              label="resources.orders.fields.sales_channel"
               choices={ORDER_CHANNEL_CHOICES}
               validate={required()}
               helperText={false}
@@ -99,65 +102,71 @@ export function OrderCreate() {
             />
             <TextInput
               source="etsy_order_id"
-              label="Etsy order id"
+              label="resources.orders.fields.etsy_order_id"
               helperText={false}
             />
           </div>
 
-          <ArrayInput source="draft_items" label="Items">
+          <ArrayInput source="draft_items" label="resources.orders.create.items">
             <SimpleFormIterator inline>
               <TextInput
                 source="title"
+                label="resources.orders.create.item_title"
                 validate={required()}
                 helperText={false}
               />
               <NumberInput
                 source="price"
-                label="Unit price"
+                label="resources.orders.create.unit_price"
                 step={0.01}
                 validate={required()}
                 helperText={false}
               />
-              <NumberInput source="quantity" step={1} helperText={false} />
+              <NumberInput
+                source="quantity"
+                label="resources.orders.create.quantity"
+                step={1}
+                helperText={false}
+              />
             </SimpleFormIterator>
           </ArrayInput>
 
           <div className="grid grid-cols-2 gap-4">
             <TextInput
               source="shipping_address.line1"
-              label="Address line 1"
+              label="resources.orders.create.address_line1"
               helperText={false}
             />
             <TextInput
               source="shipping_address.line2"
-              label="Address line 2"
+              label="resources.orders.create.address_line2"
               helperText={false}
             />
             <TextInput
               source="shipping_address.city"
-              label="City"
+              label="resources.orders.create.city"
               helperText={false}
             />
             <TextInput
               source="shipping_address.state"
-              label="State"
+              label="resources.orders.create.state"
               helperText={false}
             />
             <TextInput
               source="shipping_address.postal_code"
-              label="Postal code"
+              label="resources.orders.create.postal_code"
               helperText={false}
             />
             <TextInput
               source="shipping_address.country"
-              label="Country"
+              label="resources.orders.create.country"
               helperText={false}
             />
           </div>
 
           <TextInput
             source="notes"
-            label="Internal notes"
+            label="resources.orders.fields.notes"
             multiline
             helperText={false}
           />

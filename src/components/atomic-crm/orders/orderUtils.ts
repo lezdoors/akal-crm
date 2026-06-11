@@ -24,15 +24,15 @@ export function generateOrderNumber(): string {
 }
 
 export const ORDER_STATUS_CHOICES: { id: OrderStatus; name: string }[] = [
-  { id: "pending", name: "Pending" },
-  { id: "paid", name: "Paid" },
-  { id: "shipped", name: "Shipped" },
-  { id: "delivered", name: "Delivered" },
+  { id: "pending", name: "resources.orders.status.pending" },
+  { id: "paid", name: "resources.orders.status.paid" },
+  { id: "shipped", name: "resources.orders.status.shipped" },
+  { id: "delivered", name: "resources.orders.status.delivered" },
 ];
 
 export const ORDER_CHANNEL_CHOICES = [
-  { id: "direct", name: "Direct" },
-  { id: "etsy", name: "Etsy" },
+  { id: "direct", name: "resources.orders.channel.direct" },
+  { id: "etsy", name: "resources.orders.channel.etsy" },
 ];
 
 export const ORDER_CURRENCY_CHOICES = [

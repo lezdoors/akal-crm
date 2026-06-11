@@ -1,4 +1,4 @@
-import { useGetList } from "ra-core";
+import { useGetList, useTranslate } from "ra-core";
 import { Link } from "react-router";
 import { ShoppingBag } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -17,6 +17,7 @@ import {
  * full order list. Revenue is reported per ISO currency, never summed across.
  */
 export const OrdersRevenue = () => {
+  const translate = useTranslate();
   const { data: orders, isPending } = useGetList<Order>("orders", {
     pagination: { page: 1, perPage: 1000 },
     sort: { field: "created_at", order: "DESC" },
@@ -37,16 +38,16 @@ export const OrdersRevenue = () => {
       <CardHeader className="flex flex-row items-center justify-between">
         <CardTitle className="text-base flex items-center gap-2">
           <ShoppingBag className="h-4 w-4" />
-          Sales
+          {translate("resources.orders.dashboard.title")}
         </CardTitle>
         <Link to="/orders" className="text-sm text-muted-foreground underline">
-          All orders
+          {translate("resources.orders.dashboard.all_orders")}
         </Link>
       </CardHeader>
       <CardContent className="flex flex-col gap-4">
         <div className="grid grid-cols-3 gap-4">
           <div>
-            <div className="text-xs text-muted-foreground">Revenue</div>
+            <div className="text-xs text-muted-foreground">{translate("resources.orders.dashboard.revenue")}</div>
             <div className="text-lg font-semibold tabular-nums">
               {Object.keys(totals).length
                 ? Object.entries(totals)
@@ -56,13 +57,13 @@ export const OrdersRevenue = () => {
             </div>
           </div>
           <div>
-            <div className="text-xs text-muted-foreground">This month</div>
+            <div className="text-xs text-muted-foreground">{translate("resources.orders.dashboard.this_month")}</div>
             <div className="text-lg font-semibold tabular-nums">
               {ordersThisMonth.length}
             </div>
           </div>
           <div>
-            <div className="text-xs text-muted-foreground">Total orders</div>
+            <div className="text-xs text-muted-foreground">{translate("resources.orders.dashboard.total_orders")}</div>
             <div className="text-lg font-semibold tabular-nums">
               {orders.length}
             </div>
