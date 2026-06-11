@@ -90,33 +90,38 @@ export const LoginPage = (props: { redirectTo?: string }) => {
   };
 
   return (
-    <div className="min-h-screen flex">
-      <div className="relative grid w-full lg:grid-cols-2">
-        <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-          <div
-            className="absolute inset-0 bg-zinc-950 bg-cover bg-left"
-            style={{ backgroundImage: "url(./login-atelier.webp)" }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-black/40" />
-          <div className="relative z-20 flex items-center gap-3">
-            <img className="h-7" src={darkModeLogo} alt={title} />
-            <span className="font-display text-2xl font-medium tracking-[0.04em]">
-              {title}
-            </span>
-          </div>
-          <div className="relative z-20 mt-auto">
-            <p className="font-mono text-[10px] tracking-[0.24em] uppercase text-white/60">
-              Atelier · Marrakech
-            </p>
-          </div>
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-zinc-950">
+      {/* Full-bleed leather-grain loop — the entrance. */}
+      <video
+        className="absolute inset-0 h-full w-full object-cover"
+        src="./login-leather.mp4"
+        poster="./login-poster.webp"
+        autoPlay
+        muted
+        loop
+        playsInline
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/60" />
+
+      <div className="relative z-20 flex flex-col items-center w-full px-4 login-enter">
+        <img className="h-9 mb-4" src={darkModeLogo} alt={title} />
+        <div className="font-display text-[34px] font-medium tracking-[0.04em] text-white text-center leading-none">
+          {title}
         </div>
-        <div className="flex flex-col justify-center w-full p-4 lg:p-8">
-          <div className="w-full space-y-6 lg:mx-auto lg:w-[350px]">
-            <div className="text-center">
-              <h1 className="font-display text-3xl font-medium tracking-[0.02em]">
-                {translate("ra.auth.sign_in")}
-              </h1>
-            </div>
+        <div className="mt-3 mb-8 flex items-center gap-3 text-white/60">
+          <span className="h-px w-10 bg-white/30" />
+          <span className="font-mono text-[10px] tracking-[0.24em] uppercase">
+            Atelier · Marrakech
+          </span>
+          <span className="h-px w-10 bg-white/30" />
+        </div>
+
+        <div className="w-full max-w-[380px] bg-card border px-8 py-8 space-y-6 shadow-2xl">
+          <div className="text-center">
+            <h1 className="font-serif text-2xl font-medium tracking-[0.02em]">
+              {translate("ra.auth.sign_in")}
+            </h1>
+          </div>
             {disableEmailPasswordAuthentication ? null : (
               <Form className="space-y-8" onSubmit={handleSubmit}>
                 <TextInput
@@ -159,8 +164,11 @@ export const LoginPage = (props: { redirectTo?: string }) => {
                 })}
               </Link>
             )}
-          </div>
         </div>
+
+        <p className="mt-6 font-mono text-[9px] tracking-[0.24em] uppercase text-white/40">
+          Espace équipe — Maison Tanneurs
+        </p>
       </div>
       <Notification />
     </div>

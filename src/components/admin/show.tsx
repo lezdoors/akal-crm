@@ -169,7 +169,7 @@ export const ShowView = ({
           className,
         )}
       >
-        <h2 className="text-2xl font-bold tracking-tight">
+        <h2 className="font-serif text-3xl font-medium tracking-[0.02em]">
           {title !== undefined ? title : context.defaultTitle}
         </h2>
         {actions ?? (
