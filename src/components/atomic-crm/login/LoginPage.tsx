@@ -91,14 +91,14 @@ export const LoginPage = (props: { redirectTo?: string }) => {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-zinc-950">
-      {/* Full-bleed leather-grain loop — the entrance. */}
+      {/* Full-bleed entrance: rotating hide in golden particles, plays once
+          and settles on the embossed brand reveal. */}
       <video
         className="absolute inset-0 h-full w-full object-cover"
         src="./login-leather.mp4"
         poster="./login-poster.webp"
         autoPlay
         muted
-        loop
         playsInline
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/60" />
