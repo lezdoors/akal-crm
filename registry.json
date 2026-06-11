@@ -338,6 +338,38 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/orders/orderUtils.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/orders/index.ts",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/orders/OrderShow.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/orders/OrderList.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/orders/OrderItemsTable.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/orders/OrderEdit.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/orders/OrderCreate.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/orders/OrderBadges.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/notes/utils.ts",
           "type": "registry:component"
         },
@@ -607,6 +639,10 @@
         },
         {
           "path": "src/components/atomic-crm/dashboard/TasksList.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/dashboard/OrdersRevenue.tsx",
           "type": "registry:component"
         },
         {
