@@ -271,6 +271,12 @@ export const createDataProvider = ({
       }
       return true;
     },
+    sendShippingEmail: async (
+      _orderId: Identifier,
+    ): Promise<{ sent: boolean; reason?: string }> => {
+      // Demo mode: no real email infrastructure.
+      return { sent: true };
+    },
     updatePassword: async (id: Identifier): Promise<true> => {
       const currentUser = await getIdentity();
       if (!currentUser) {

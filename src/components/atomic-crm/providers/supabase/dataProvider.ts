@@ -181,6 +181,36 @@ const getDataProviderWithCustomMethods = () => {
 
       return passwordUpdated;
     },
+    /**
+     * Triggers the shipping-notification email for an order. Exactly-once
+     * delivery is enforced server-side (shipping_email_sent_at claim in the
+     * edge function), so calling this repeatedly is safe.
+     */
+    async sendShippingEmail(orderId: Identifier) {
+      const { data, error } = await getSupabaseClient().functions.invoke<{
+        sent: boolean;
+        reason?: string;
+      }>("shipping-email", {
+        method: "POST",
+        body: { order_id: orderId },
+      });
+
+      if (error) {
+        console.error("sendShippingEmail.error", error);
+        const errorDetails = await (async () => {
+          try {
+            return (await error?.context?.json()) ?? {};
+          } catch {
+            return {};
+          }
+        })();
+        throw new Error(
+          errorDetails?.message || "Failed to send the shipping email",
+        );
+      }
+
+      return data ?? { sent: false };
+    },
     async unarchiveDeal(deal: Deal) {
       // get all deals where stage is the same as the deal to unarchive
       const { data: deals } = await baseDataProvider.getList<Deal>("deals", {
