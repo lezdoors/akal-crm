@@ -226,3 +226,51 @@ export interface ContactGender {
   label: string;
   icon: ComponentType<{ className?: string }>;
 }
+
+// === Maison Tanneurs commerce (storefront-owned `orders` table) ===
+
+export type OrderStatus = "pending" | "paid" | "shipped" | "delivered";
+export type OrderChannel = "direct" | "etsy";
+
+export interface OrderItem {
+  product_id: string;
+  slug?: string;
+  title: string;
+  /** Unit price in minor units (cents) in the order's currency. */
+  price: number;
+  usd_price?: number;
+  quantity: number;
+  image?: string;
+}
+
+export interface OrderShippingAddress {
+  line1?: string;
+  line2?: string;
+  city?: string;
+  state?: string;
+  postal_code?: string;
+  country?: string;
+}
+
+export type Order = {
+  order_number: string;
+  sales_channel: OrderChannel;
+  revolut_order_id?: string;
+  stripe_session_id?: string;
+  etsy_order_id?: string;
+  customer_email: string;
+  customer_name: string;
+  shipping_address: OrderShippingAddress;
+  items: OrderItem[];
+  /** Minor units (cents). */
+  subtotal: number;
+  shipping_cost: number;
+  total: number;
+  currency: string;
+  status: OrderStatus;
+  tracking_number?: string;
+  notes?: string;
+  shipping_email_sent_at?: string;
+  created_at: string;
+  updated_at: string;
+} & Pick<RaRecord, "id">;
