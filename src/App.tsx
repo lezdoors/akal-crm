@@ -24,6 +24,12 @@ import { CRM } from "@/components/atomic-crm/root/CRM";
  *    />
  * );
  */
-const App = () => <CRM />;
+const App = () => (
+  <CRM
+    title="Maison Tanneurs"
+    lightModeLogo="./logos/mt-logo-light.png"
+    darkModeLogo="./logos/mt-logo-dark.png"
+  />
+);
 
 export default App;
