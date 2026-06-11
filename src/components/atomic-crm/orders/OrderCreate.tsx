@@ -101,7 +101,7 @@ export function OrderCreate() {
           draft_items: [{ quantity: 1 }],
         }}
       >
-        <h2 className="font-serif text-2xl font-medium mb-3">
+        <h2 className="text-[15px] font-semibold mb-3">
           {translate("resources.orders.create.title")}
         </h2>
         <div className="space-y-4 w-full max-w-2xl">

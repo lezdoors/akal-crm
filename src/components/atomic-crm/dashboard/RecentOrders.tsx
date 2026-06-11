@@ -27,7 +27,7 @@ export const RecentOrders = () => {
         </CardTitle>
         <Link
           to="/orders"
-          className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground underline underline-offset-4"
+          className="text-[11px] text-muted-foreground no-underline hover:text-foreground"
         >
           {translate("resources.orders.dashboard.all_orders")}
         </Link>

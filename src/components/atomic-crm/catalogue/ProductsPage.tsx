@@ -26,10 +26,12 @@ export const useCatalogue = () =>
   });
 
 const STATUS_BADGE: Record<string, string> = {
-  available: "border-emerald-800/30 text-emerald-900 dark:text-emerald-300",
-  sold: "border-ink/30 text-ink-soft dark:text-stone-300",
-  reserved: "border-amber-600/50 text-amber-800 dark:text-amber-300",
-  draft: "border-ink/20 text-muted-foreground",
+  available:
+    "border-transparent bg-emerald-500/12 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300",
+  sold: "border-transparent bg-muted text-muted-foreground",
+  reserved:
+    "border-transparent bg-amber-500/15 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300",
+  draft: "border-transparent bg-muted text-muted-foreground",
 };
 
 export const ProductStatusBadge = ({
@@ -96,7 +98,7 @@ export const ProductsPage = () => {
   return (
     <div className="flex flex-col gap-4 mt-2">
       <div className="flex items-baseline justify-between flex-wrap gap-2">
-        <h2 className="font-serif text-3xl font-medium tracking-[0.02em]">
+        <h2 className="text-[15px] font-semibold">
           {translate("crm.nav.products")}
         </h2>
         <span className="text-xs text-muted-foreground">

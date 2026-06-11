@@ -670,15 +670,15 @@
           "type": "registry:component"
         },
         {
-          "path": "src/components/atomic-crm/dashboard/StatTile.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "src/components/atomic-crm/dashboard/RevenueTrend.tsx",
+          "path": "src/components/atomic-crm/dashboard/StockAlerts.tsx",
           "type": "registry:component"
         },
         {
           "path": "src/components/atomic-crm/dashboard/RecentOrders.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/dashboard/RecentClients.tsx",
           "type": "registry:component"
         },
         {
@@ -715,10 +715,6 @@
         },
         {
           "path": "src/components/atomic-crm/dashboard/Dashboard.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "src/components/atomic-crm/dashboard/CommerceKpis.tsx",
           "type": "registry:component"
         },
         {
@@ -810,6 +806,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/contacts/ClientOrders.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/contacts/BulkTagButton.tsx",
           "type": "registry:component"
         },
@@ -875,6 +875,22 @@
         },
         {
           "path": "src/components/atomic-crm/companies/AutocompleteCompanyInput.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/catalogue/ProductsPage.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/catalogue/ProductDetailPage.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/catalogue/MediaLibraryPage.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/catalogue/InventoryPage.tsx",
           "type": "registry:component"
         },
         {

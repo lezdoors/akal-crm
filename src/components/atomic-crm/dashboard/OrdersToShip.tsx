@@ -20,7 +20,7 @@ export const OrdersToShip = () => {
   if (isPending || !orders.length) return null;
 
   return (
-    <Card className="border-t-2 border-t-tobacco">
+    <Card>
       <CardHeader>
         <CardTitle className="text-base flex items-center gap-2">
           <PackageOpen className="h-4 w-4" />

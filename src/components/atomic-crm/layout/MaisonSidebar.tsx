@@ -72,7 +72,7 @@ const NavItem = ({ entry }: { entry: NavEntry }) => {
       <SidebarMenuButton
         asChild
         isActive={isActive}
-        className="h-8 text-[13px] rounded-md"
+        className="h-7 text-[13px] rounded-md"
       >
         <Link to={entry.to} onClick={() => openMobile && setOpenMobile(false)}>
           <entry.icon className="!size-4 opacity-70" />
@@ -185,7 +185,7 @@ export function MaisonSidebar() {
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="h-8 text-[13px] rounded-md text-muted-foreground"
+              className="h-7 text-[13px] rounded-md text-muted-foreground"
             >
               <Link to="/settings">
                 <Settings className="!size-4 opacity-70" />

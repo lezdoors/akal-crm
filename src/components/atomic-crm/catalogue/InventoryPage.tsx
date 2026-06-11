@@ -73,7 +73,7 @@ export const InventoryPage = () => {
 
   return (
     <div className="flex flex-col gap-2 mt-2 max-w-3xl">
-      <h2 className="font-serif text-3xl font-medium tracking-[0.02em]">
+      <h2 className="text-[15px] font-semibold">
         {translate("crm.nav.inventory")}
       </h2>
       <p className="text-xs text-muted-foreground">

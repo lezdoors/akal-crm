@@ -59,7 +59,7 @@ const OrderShowContent = () => {
   return (
     <div className="flex flex-col gap-4 mt-2">
       <div className="flex items-center gap-3">
-        <h2 className="font-serif text-2xl font-medium">{record.order_number}</h2>
+        <h2 className="text-[15px] font-semibold">{record.order_number}</h2>
         <OrderStatusBadge />
         <OrderChannelBadge />
         <span className="text-sm text-muted-foreground ml-auto">

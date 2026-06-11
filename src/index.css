@@ -83,17 +83,17 @@
 }
 
 :root {
-  /* Maison Tanneurs — clean-white editorial system, tokens mirrored from
-     the production storefront's globals.css (Polène discipline). */
-  --radius: 0.45rem;
+  /* Linear light palette, verbatim — Maison identity lives in the wordmark,
+     login, and photography, not the chrome. Leather kept as ONE accent. */
+  --radius: 0.5rem;
   --ground: #ffffff;
-  --ground-deep: #f8f7f4;
-  --ink: #1d1b19;
-  --ink-soft: #57534c;
-  --ink-muted: #8d867c;
+  --ground-deep: #f9f8f9;
+  --ink: #282a30;
+  --ink-soft: #3c4149;
+  --ink-muted: #6f6e77;
   --tobacco: #8a6a43;
-  --dark-close: #211c17;
-  --hairline: rgba(29, 27, 25, 0.12);
+  --dark-close: #18191b;
+  --hairline: #e9e8ea;
   --background: var(--ground-deep);
   --foreground: var(--ink);
   --card: var(--ground);
@@ -102,16 +102,16 @@
   --popover-foreground: var(--ink);
   --primary: var(--ink);
   --primary-foreground: var(--ground);
-  --secondary: var(--ground-deep);
+  --secondary: #f1f0f3;
   --secondary-foreground: var(--ink);
-  --muted: var(--ground-deep);
+  --muted: #f1f0f3;
   --muted-foreground: var(--ink-muted);
-  --accent: var(--ground-deep);
+  --accent: #f1f0f3;
   --accent-foreground: var(--ink);
   --destructive: oklch(0.577 0.245 27.325);
   --border: var(--hairline);
   --input: var(--hairline);
-  --ring: var(--ink-muted);
+  --ring: #6e79d6;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -121,7 +121,7 @@
   --sidebar-foreground: var(--ink);
   --sidebar-primary: var(--ink);
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: rgba(29, 27, 25, 0.06);
+  --sidebar-accent: #e9e8ea;
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: transparent;
   --sidebar-ring: var(--ink-muted);
@@ -140,34 +140,34 @@
 .dark {
   /* Espresso close — mirrors the storefront dark register */
   --background: var(--dark-close);
-  --foreground: #fbfaf7;
-  --card: #28221c;
-  --card-foreground: #fbfaf7;
-  --popover: var(--dark-close);
-  --popover-foreground: #fbfaf7;
-  --primary: #fbfaf7;
-  --primary-foreground: var(--ink);
-  --secondary: #2a241d;
-  --secondary-foreground: #fbfaf7;
-  --muted: #2a241d;
-  --muted-foreground: var(--ink-muted);
-  --accent: #2a241d;
-  --accent-foreground: #fbfaf7;
+  --foreground: #eeeff1;
+  --card: #1f2023;
+  --card-foreground: #eeeff1;
+  --popover: #1f2023;
+  --popover-foreground: #eeeff1;
+  --primary: #eeeff1;
+  --primary-foreground: #18191b;
+  --secondary: #26282b;
+  --secondary-foreground: #eeeff1;
+  --muted: #26282b;
+  --muted-foreground: #8a8f98;
+  --accent: #26282b;
+  --accent-foreground: #eeeff1;
   --destructive: oklch(0.704 0.191 22.216);
-  --border: rgba(251, 250, 247, 0.16);
-  --input: rgba(251, 250, 247, 0.16);
-  --ring: var(--ink-muted);
+  --border: #2c2d31;
+  --input: #2c2d31;
+  --ring: #6e79d6;
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: var(--dark-close);
-  --sidebar-foreground: #fbfaf7;
-  --sidebar-primary: #fbfaf7;
+  --sidebar-foreground: #eeeff1;
+  --sidebar-primary: #eeeff1;
   --sidebar-primary-foreground: var(--ink);
-  --sidebar-accent: rgba(251, 250, 247, 0.07);
-  --sidebar-accent-foreground: #fbfaf7;
+  --sidebar-accent: #26282b;
+  --sidebar-accent-foreground: #eeeff1;
   --sidebar-border: transparent;
   --sidebar-ring: var(--ink-muted);
   --avatar-0: oklch(0.35 0.12 240);
@@ -243,12 +243,10 @@ input[type="time"] {
 }
 
 @layer base {
-  /* List/table headers read as boutique micro-labels */
+  /* Linear-style table headers: small, quiet, sentence case */
   thead th {
-    font-size: 0.6875rem;
+    font-size: 0.75rem;
     font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
     color: var(--muted-foreground);
   }
 }

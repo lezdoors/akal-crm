@@ -41,7 +41,7 @@ export const ProductDetailPage = () => {
         </Link>
       </div>
       <div className="flex items-baseline gap-3 flex-wrap">
-        <h2 className="font-serif text-3xl font-medium tracking-[0.02em]">
+        <h2 className="text-[17px] font-semibold">
           {product.title}
         </h2>
         <ProductStatusBadge product={product} />

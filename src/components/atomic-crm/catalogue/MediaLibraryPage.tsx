@@ -53,7 +53,7 @@ export const MediaLibraryPage = () => {
   return (
     <div className="flex flex-col gap-4 mt-2">
       <div className="flex items-baseline justify-between flex-wrap gap-2">
-        <h2 className="font-serif text-3xl font-medium tracking-[0.02em]">
+        <h2 className="text-[15px] font-semibold">
           {translate("crm.nav.media")}
         </h2>
         <span className="text-xs text-muted-foreground">
