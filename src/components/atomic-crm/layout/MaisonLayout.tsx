@@ -20,6 +20,7 @@ import {
   SettingsMenu,
   UsersMenu,
 } from "./Header";
+import { CommandPalette } from "./CommandPalette";
 import { MaisonSidebar } from "./MaisonSidebar";
 
 /**
@@ -48,6 +49,18 @@ export const MaisonLayout = ({ children }: { children: ReactNode }) => {
         <header className="flex h-16 md:h-12 shrink-0 items-center gap-2 px-4 border-b">
           <SidebarTrigger className="scale-125 sm:scale-100" />
           <div className="flex-1 flex items-center" id="breadcrumb" />
+          <button
+            type="button"
+            onClick={() =>
+              document.dispatchEvent(
+                new KeyboardEvent("keydown", { key: "k", metaKey: true }),
+              )
+            }
+            className="hidden md:flex items-center gap-2 border px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <span>Rechercher</span>
+            <kbd className="font-mono text-[10px] border px-1 bg-muted">⌘K</kbd>
+          </button>
           <LocalesMenuButton />
           <ThemeModeToggle />
           <RefreshButton />
@@ -80,6 +93,7 @@ export const MaisonLayout = ({ children }: { children: ReactNode }) => {
           </Suspense>
         </ErrorBoundary>
       </main>
+      <CommandPalette />
       <Notification />
     </SidebarProvider>
   );

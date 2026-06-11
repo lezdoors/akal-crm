@@ -67,64 +67,68 @@ const OrderShowContent = () => {
         </span>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">{translate("resources.orders.show.customer")}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-sm leading-6">
-              <div>{record.customer_name}</div>
-              <a
-                className="text-muted-foreground underline"
-                href={`mailto:${record.customer_email}`}
-              >
-                {record.customer_email}
-              </a>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">{translate("resources.orders.show.shipping")}</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-col gap-2">
-            <AddressBlock />
-            <div className="text-sm">
-              <span className="text-muted-foreground">{translate("resources.orders.show.tracking")}: </span>
-              {record.tracking_number || "—"}
-            </div>
-            {record.shipping_email_sent_at && (
-              <div className="text-xs text-muted-foreground">
-                {translate("resources.orders.show.email_sent_at")}{" "}
-                <DateField source="shipping_email_sent_at" showTime />
+      {/* Polaris resource-details split: packing list left, context rail right */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+        <div className="lg:col-span-8 flex flex-col gap-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">{translate("resources.orders.show.items")}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <OrderItemsTable />
+            </CardContent>
+          </Card>
+
+          {record.notes && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-base">{translate("resources.orders.show.notes")}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm whitespace-pre-wrap">{record.notes}</p>
+              </CardContent>
+            </Card>
+          )}
+        </div>
+
+        <div className="lg:col-span-4 flex flex-col gap-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base">{translate("resources.orders.show.customer")}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-sm leading-6">
+                <div>{record.customer_name}</div>
+                <a
+                  className="text-muted-foreground underline"
+                  href={`mailto:${record.customer_email}`}
+                >
+                  {record.customer_email}
+                </a>
               </div>
-            )}
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+          <Card className="border-t-2 border-t-tobacco">
+            <CardHeader>
+              <CardTitle className="text-base">{translate("resources.orders.show.shipping")}</CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-2">
+              <AddressBlock />
+              <div className="text-sm">
+                <span className="text-muted-foreground">{translate("resources.orders.show.tracking")}: </span>
+                {record.tracking_number || "—"}
+              </div>
+              {record.shipping_email_sent_at && (
+                <div className="text-xs text-muted-foreground">
+                  {translate("resources.orders.show.email_sent_at")}{" "}
+                  <DateField source="shipping_email_sent_at" showTime />
+                </div>
+              )}
+            </CardContent>
+          </Card>
+          <ProcessorIds />
+        </div>
       </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base">{translate("resources.orders.show.items")}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <OrderItemsTable />
-        </CardContent>
-      </Card>
-
-      {record.notes && (
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-base">{translate("resources.orders.show.notes")}</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-sm whitespace-pre-wrap">{record.notes}</p>
-          </CardContent>
-        </Card>
-      )}
-
-      <ProcessorIds />
     </div>
   );
 };
