@@ -1,11 +1,11 @@
 import type { ConfigurationContextValue } from "./ConfigurationContext";
 
-export const defaultDarkModeLogo = "./logos/logo_atomic_crm_dark.svg";
-export const defaultLightModeLogo = "./logos/logo_atomic_crm_light.svg";
+export const defaultDarkModeLogo = "./logos/mt-logo-dark.png";
+export const defaultLightModeLogo = "./logos/mt-logo-light.png";
 
 export const defaultCurrency = "USD";
 
-export const defaultTitle = "Atomic CRM";
+export const defaultTitle = "Maison Tanneurs";
 
 export const defaultCompanySectors = [
   { value: "communication-services", label: "Communication Services" },
