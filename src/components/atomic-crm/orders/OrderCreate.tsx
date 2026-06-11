@@ -1,5 +1,7 @@
-import { required, useTranslate } from "ra-core";
+import { required, useGetList, useTranslate } from "ra-core";
+import { useMemo } from "react";
 import { ArrayInput } from "@/components/admin/array-input";
+import { AutocompleteInput } from "@/components/admin/autocomplete-input";
 import { Create } from "@/components/admin/create";
 import { NumberInput } from "@/components/admin/number-input";
 import { SelectInput } from "@/components/admin/select-input";
@@ -14,10 +16,21 @@ import {
   ORDER_CURRENCY_CHOICES,
 } from "./orderUtils";
 
-interface OrderDraftItem {
+interface ProductRow {
+  id: string;
   title: string;
-  /** Entered in major units (e.g. dollars); converted to minor units on save. */
+  /** USD minor units. */
   price: number;
+  images?: string[];
+  status?: string;
+}
+
+interface OrderDraftItem {
+  product_id?: string;
+  /** Free-text fallback when the piece isn't in the catalogue. */
+  title?: string;
+  /** Major units; only used when no product is selected. */
+  price?: number;
   quantity: number;
 }
 
@@ -35,45 +48,63 @@ interface OrderDraft {
 /**
  * Manual order entry for sales made off-site (Etsy, in-person).
  * Online orders are inserted by the storefront's Revolut webhook — never here.
+ * Items are picked from the live products catalogue so the order carries a
+ * real product_id (and therefore a photo); free-text remains as fallback.
  */
-const transform = (data: OrderDraft) => {
-  const items = (data.draft_items ?? []).map((item) => ({
-    product_id: "",
-    title: item.title,
-    price: Math.round((item.price ?? 0) * 100),
-    quantity: item.quantity ?? 1,
-  }));
-  const subtotal = items.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0,
-  );
-  const { draft_items: _draftItems, ...rest } = data;
-  return {
-    ...rest,
-    order_number: generateOrderNumber(),
-    items,
-    subtotal,
-    shipping_cost: 0,
-    total: subtotal,
-    status: "paid",
-  };
-};
-
 export function OrderCreate() {
   const translate = useTranslate();
+  const { data: products } = useGetList<ProductRow>("products", {
+    pagination: { page: 1, perPage: 200 },
+    sort: { field: "title", order: "ASC" },
+  });
+
+  const transform = useMemo(() => {
+    const byId = new Map((products ?? []).map((p) => [p.id, p]));
+    return (data: OrderDraft) => {
+      const items = (data.draft_items ?? []).map((item) => {
+        const product = item.product_id ? byId.get(item.product_id) : undefined;
+        return {
+          product_id: item.product_id ?? "",
+          title: product?.title ?? item.title ?? "",
+          price: product ? product.price : Math.round((item.price ?? 0) * 100),
+          quantity: item.quantity ?? 1,
+        };
+      });
+      const subtotal = items.reduce(
+        (sum, item) => sum + item.price * item.quantity,
+        0,
+      );
+      const { draft_items: _draftItems, ...rest } = data;
+      return {
+        ...rest,
+        order_number: generateOrderNumber(),
+        items,
+        subtotal,
+        shipping_cost: 0,
+        total: subtotal,
+        status: "paid",
+      };
+    };
+  }, [products]);
+
+  const productChoices = (products ?? []).map((product) => ({
+    id: product.id,
+    name: `${product.title} — $${(product.price / 100).toFixed(0)}`,
+  }));
+
   return (
     <Create transform={transform as any} redirect="show">
       <SimpleForm
         defaultValues={{
           sales_channel: "etsy",
           currency: "USD",
-          draft_items: [{ title: "", price: 0, quantity: 1 }],
+          draft_items: [{ quantity: 1 }],
         }}
       >
         <h2 className="font-serif text-2xl font-medium mb-3">
           {translate("resources.orders.create.title")}
         </h2>
-        <div className="space-y-4 w-full max-w-xl">
+        <div className="space-y-4 w-full max-w-2xl">
           <div className="grid grid-cols-2 gap-4">
             <TextInput
               source="customer_name"
@@ -107,19 +138,26 @@ export function OrderCreate() {
             />
           </div>
 
-          <ArrayInput source="draft_items" label="resources.orders.create.items">
+          <ArrayInput
+            source="draft_items"
+            label="resources.orders.create.items"
+          >
             <SimpleFormIterator inline>
+              <AutocompleteInput
+                source="product_id"
+                label="resources.orders.create.product"
+                choices={productChoices}
+                helperText={false}
+              />
               <TextInput
                 source="title"
                 label="resources.orders.create.item_title"
-                validate={required()}
                 helperText={false}
               />
               <NumberInput
                 source="price"
                 label="resources.orders.create.unit_price"
                 step={0.01}
-                validate={required()}
                 helperText={false}
               />
               <NumberInput
@@ -130,6 +168,9 @@ export function OrderCreate() {
               />
             </SimpleFormIterator>
           </ArrayInput>
+          <p className="text-xs text-muted-foreground -mt-2">
+            {translate("resources.orders.create.product_helper")}
+          </p>
 
           <div className="grid grid-cols-2 gap-4">
             <TextInput

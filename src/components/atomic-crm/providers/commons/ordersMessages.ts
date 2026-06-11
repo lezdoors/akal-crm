@@ -3,6 +3,12 @@ export const englishOrdersMessages = {
     auth: {
       welcome_title: "Welcome to Maison Tanneurs",
     },
+    command: {
+      placeholder: "Search orders, customers, or jump to…",
+      navigation: "Go to",
+      actions: "Actions",
+      new_contact: "New contact",
+    },
   },
   resources: {
     orders: {
@@ -45,6 +51,9 @@ export const englishOrdersMessages = {
       create: {
         title: "Manual order",
         items: "Items",
+        product: "Product",
+        product_helper:
+          "Pick from the catalogue so the order carries the product photo; use free text only for pieces not in the catalogue.",
         item_title: "Item",
         unit_price: "Unit price",
         quantity: "Qty",
@@ -96,6 +105,12 @@ export const frenchOrdersMessages = {
     auth: {
       welcome_title: "Bienvenue chez Maison Tanneurs",
     },
+    command: {
+      placeholder: "Rechercher commandes, clients, ou naviguer…",
+      navigation: "Aller à",
+      actions: "Actions",
+      new_contact: "Nouveau client",
+    },
   },
   resources: {
     orders: {
@@ -138,6 +153,9 @@ export const frenchOrdersMessages = {
       create: {
         title: "Commande manuelle",
         items: "Articles",
+        product: "Produit",
+        product_helper:
+          "Choisissez dans le catalogue pour que la commande affiche la photo du produit ; texte libre uniquement pour les pièces hors catalogue.",
         item_title: "Article",
         unit_price: "Prix unitaire",
         quantity: "Qté",

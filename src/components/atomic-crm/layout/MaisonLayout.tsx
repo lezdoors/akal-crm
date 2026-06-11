@@ -10,7 +10,7 @@ import { RefreshButton } from "@/components/admin/refresh-button";
 import { LocalesMenuButton } from "@/components/admin/locales-menu-button";
 import { Error } from "@/components/admin/error";
 import { Loading } from "@/components/admin/loading";
-import { CanAccess } from "ra-core";
+import { CanAccess, useTranslate } from "ra-core";
 
 import { useConfigurationLoader } from "../root/useConfigurationLoader";
 import {
@@ -29,6 +29,7 @@ import { MaisonSidebar } from "./MaisonSidebar";
  */
 export const MaisonLayout = ({ children }: { children: ReactNode }) => {
   useConfigurationLoader();
+  const translate = useTranslate();
   const [errorInfo, setErrorInfo] = useState<ErrorInfo | undefined>(undefined);
   const handleError = (_: unknown, info: ErrorInfo) => {
     setErrorInfo(info);
@@ -58,7 +59,7 @@ export const MaisonLayout = ({ children }: { children: ReactNode }) => {
             }
             className="hidden md:flex items-center gap-2 border px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground transition-colors"
           >
-            <span>Rechercher</span>
+            <span>{translate("ra.action.search", { _: "Search" })}</span>
             <kbd className="font-mono text-[10px] border px-1 bg-muted">⌘K</kbd>
           </button>
           <LocalesMenuButton />
