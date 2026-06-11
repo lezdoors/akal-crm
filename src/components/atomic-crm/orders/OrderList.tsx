@@ -9,6 +9,7 @@ import { TextInput } from "@/components/admin/text-input";
 
 import { TopToolbar } from "../layout/TopToolbar";
 import type { Order } from "../types";
+import { useOrderProductImages } from "./useOrderProductImages";
 import { OrderChannelBadge, OrderStatusBadge } from "./OrderBadges";
 import {
   formatMoney,
@@ -44,6 +45,17 @@ const filters = [
   />,
 ];
 
+const ThumbField = (_props: { label?: string | boolean }) => {
+  const record = useRecordContext<Order>();
+  const imageFor = useOrderProductImages(record);
+  const first = record?.items?.[0];
+  const src = first ? imageFor(first) : undefined;
+  if (!src) return <div className="h-10 w-10 border bg-muted" />;
+  return (
+    <img src={src} alt={first?.title} className="h-10 w-10 border object-cover" />
+  );
+};
+
 const TotalField = (_props: { label?: string | boolean }) => {
   const record = useRecordContext<Order>();
   if (!record) return null;
@@ -76,6 +88,9 @@ export function OrderList() {
       perPage={25}
     >
       <DataTable rowClick="show">
+        <DataTable.Col label={false}>
+          <ThumbField />
+        </DataTable.Col>
         <DataTable.Col source="order_number" label="resources.orders.fields.order_number" />
         <DataTable.Col label="resources.orders.fields.customer">
           <CustomerField />

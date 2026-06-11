@@ -346,6 +346,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/orders/useOrderProductImages.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/orders/orderUtils.ts",
           "type": "registry:component"
         },
@@ -563,6 +567,14 @@
         },
         {
           "path": "src/components/atomic-crm/layout/MobileContent.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/layout/MaisonSidebar.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/layout/MaisonLayout.tsx",
           "type": "registry:component"
         },
         {
