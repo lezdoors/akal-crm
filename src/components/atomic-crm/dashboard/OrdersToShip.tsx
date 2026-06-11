@@ -1,10 +1,10 @@
-import { useGetList, useTranslate } from "ra-core";
+import { useTranslate } from "ra-core";
 import { Link } from "react-router";
 import { PackageOpen } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import type { Order } from "../types";
 import { formatMoney } from "../orders/orderUtils";
+import { needsShipping, useDashboardOrders } from "./commerceData";
 
 /**
  * The action queue: paid orders with no tracking number yet.
@@ -12,16 +12,13 @@ import { formatMoney } from "../orders/orderUtils";
  */
 export const OrdersToShip = () => {
   const translate = useTranslate();
-  const { data: orders, isPending } = useGetList<Order>("orders", {
-    pagination: { page: 1, perPage: 50 },
-    sort: { field: "created_at", order: "ASC" },
-    filter: { status: "paid", "tracking_number@is": "null" },
-  });
+  const { data: allOrders, isPending } = useDashboardOrders();
+  const orders = (allOrders ?? []).filter(needsShipping).reverse();
 
-  if (isPending || !orders?.length) return null;
+  if (isPending || !orders.length) return null;
 
   return (
-    <Card className="border-amber-300/60 dark:border-amber-700/60">
+    <Card className="border-t-2 border-t-tobacco">
       <CardHeader>
         <CardTitle className="text-base flex items-center gap-2">
           <PackageOpen className="h-4 w-4" />

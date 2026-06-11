@@ -1,15 +1,19 @@
 import { useGetList } from "ra-core";
 
 import type { Contact, ContactNote } from "../types";
+import { CommerceKpis } from "./CommerceKpis";
 import { DashboardActivityLog } from "./DashboardActivityLog";
 import { DashboardStepper } from "./DashboardStepper";
-import { DealsChart } from "./DealsChart";
-import { HotContacts } from "./HotContacts";
-import { OrdersRevenue } from "./OrdersRevenue";
 import { OrdersToShip } from "./OrdersToShip";
+import { RecentOrders } from "./RecentOrders";
+import { RevenueTrend } from "./RevenueTrend";
 import { TasksList } from "./TasksList";
 import { Welcome } from "./Welcome";
 
+/**
+ * Commerce cockpit: KPI band on top, revenue trend + recent orders on the
+ * left, action rail (to-ship queue, activity, tasks) on the right.
+ */
 export const Dashboard = () => {
   const {
     data: dataContact,
@@ -24,14 +28,7 @@ export const Dashboard = () => {
       pagination: { page: 1, perPage: 1 },
     });
 
-  const { total: totalDeal, isPending: isPendingDeal } = useGetList<Contact>(
-    "deals",
-    {
-      pagination: { page: 1, perPage: 1 },
-    },
-  );
-
-  const isPending = isPendingContact || isPendingContactNotes || isPendingDeal;
+  const isPending = isPendingContact || isPendingContactNotes;
 
   if (isPending) {
     return null;
@@ -46,24 +43,19 @@ export const Dashboard = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mt-1">
-      <div className="md:col-span-3">
-        <div className="flex flex-col gap-4">
-          {import.meta.env.VITE_IS_DEMO === "true" ? <Welcome /> : null}
-          <HotContacts />
+    <div className="flex flex-col gap-5 mt-2">
+      {import.meta.env.VITE_IS_DEMO === "true" ? <Welcome /> : null}
+      <CommerceKpis />
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+        <div className="lg:col-span-8 flex flex-col gap-5">
+          <RevenueTrend />
+          <RecentOrders />
         </div>
-      </div>
-      <div className="md:col-span-6">
-        <div className="flex flex-col gap-6">
+        <div className="lg:col-span-4 flex flex-col gap-5">
           <OrdersToShip />
-          <OrdersRevenue />
-          {totalDeal ? <DealsChart /> : null}
           <DashboardActivityLog />
+          <TasksList />
         </div>
-      </div>
-
-      <div className="md:col-span-3">
-        <TasksList />
       </div>
     </div>
   );
