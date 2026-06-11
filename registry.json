@@ -650,6 +650,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/dashboard/OrdersToShip.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/dashboard/OrdersRevenue.tsx",
           "type": "registry:component"
         },

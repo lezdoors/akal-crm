@@ -41,12 +41,12 @@ const Header = () => {
                 className="flex items-center gap-2 text-secondary-foreground no-underline"
               >
                 <img
-                  className="[.light_&]:hidden h-6"
+                  className="[.light_&]:hidden h-7"
                   src={darkModeLogo}
                   alt={title}
                 />
                 <img
-                  className="[.dark_&]:hidden h-6"
+                  className="[.dark_&]:hidden h-7"
                   src={lightModeLogo}
                   alt={title}
                 />
@@ -123,10 +123,10 @@ const NavigationTab = ({
 }) => (
   <Link
     to={to}
-    className={`px-6 py-3 text-sm font-medium transition-colors border-b-2 ${
+    className={`px-5 py-3.5 text-[0.6875rem] font-medium uppercase tracking-[0.14em] transition-colors border-b-2 ${
       isActive
         ? "text-secondary-foreground border-secondary-foreground"
-        : "text-secondary-foreground/70 border-transparent hover:text-secondary-foreground/80"
+        : "text-secondary-foreground/60 border-transparent hover:text-secondary-foreground"
     }`}
   >
     {label}
