@@ -72,7 +72,7 @@ export const MediaLibraryPage = () => {
           onClick={() => setCategory(null)}
           className={`overline px-1 py-1 transition-colors ${
             !category
-              ? "text-foreground border-b border-foreground"
+              ? "!text-foreground border-b border-foreground"
               : "hover:text-foreground"
           }`}
         >
@@ -85,7 +85,7 @@ export const MediaLibraryPage = () => {
             onClick={() => setCategory(category === entry ? null : entry)}
             className={`overline px-1 py-1 transition-colors ${
               category === entry
-                ? "text-foreground border-b border-foreground"
+                ? "!text-foreground border-b border-foreground"
                 : "hover:text-foreground"
             }`}
           >

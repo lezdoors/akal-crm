@@ -1,6 +1,7 @@
 import { useLocaleState, useTranslate } from "ra-core";
 import { Link } from "react-router";
 
+import { ChannelOverview } from "./ChannelOverview";
 import { DashboardActivityLog } from "./DashboardActivityLog";
 import { OrdersToShip } from "./OrdersToShip";
 import { RecentClients } from "./RecentClients";
@@ -62,6 +63,7 @@ export const Dashboard = () => {
           {today}
         </h1>
       </div>
+      <ChannelOverview />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-10">
         <div className="lg:col-span-8 flex flex-col gap-10">
           {orders?.length ? (

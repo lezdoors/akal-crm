@@ -45,6 +45,8 @@ export const englishOrdersMessages = {
       note: "One-of-one pieces — a sale removes the piece from the site automatically.",
     },
     dashboard: {
+      overview: "Overview",
+      total: "Total",
       recent_clients: "New clients",
       all: "All",
       empty_title: "Awaiting the first order",
@@ -80,8 +82,9 @@ export const englishOrdersMessages = {
         delivered: "Delivered",
       },
       channel: {
-        direct: "Direct",
+        direct: "Site",
         etsy: "Etsy",
+        facebook: "Facebook",
       },
       action: {
         new: "New order",
@@ -202,6 +205,8 @@ export const frenchOrdersMessages = {
       note: "Pièces uniques — une vente retire automatiquement la pièce du site.",
     },
     dashboard: {
+      overview: "Vue d'ensemble",
+      total: "Total",
       recent_clients: "Nouveaux clients",
       all: "Tout",
       empty_title: "En attente de la première commande",
@@ -237,8 +242,9 @@ export const frenchOrdersMessages = {
         delivered: "Livrée",
       },
       channel: {
-        direct: "Direct",
+        direct: "Site",
         etsy: "Etsy",
+        facebook: "Facebook",
       },
       action: {
         new: "Nouvelle commande",

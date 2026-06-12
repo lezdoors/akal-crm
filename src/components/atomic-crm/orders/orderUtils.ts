@@ -38,6 +38,7 @@ export const ORDER_STATUS_CHOICES: { id: OrderStatus; name: string }[] = [
 export const ORDER_CHANNEL_CHOICES = [
   { id: "direct", name: "resources.orders.channel.direct" },
   { id: "etsy", name: "resources.orders.channel.etsy" },
+  { id: "facebook", name: "resources.orders.channel.facebook" },
 ];
 
 export const ORDER_CURRENCY_CHOICES = [

@@ -67,7 +67,7 @@ const FilterWord = ({
     onClick={onClick}
     className={`overline px-1 py-1 transition-colors ${
       active
-        ? "text-foreground border-b border-foreground"
+        ? "!text-foreground border-b border-foreground"
         : "hover:text-foreground"
     }`}
   >
