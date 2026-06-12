@@ -45,6 +45,10 @@ export const englishOrdersMessages = {
     dashboard: {
       recent_clients: "New clients",
       all: "All",
+      empty_title: "Awaiting the first order",
+      empty_body:
+        "Orders placed on maisontanneurs.com appear here automatically, and each customer becomes a client file. Etsy or offline sales can be entered by hand.",
+      empty_action: "Enter an order manually",
     },
     clients: {
       lifetime: "Lifetime",
@@ -187,6 +191,10 @@ export const frenchOrdersMessages = {
     dashboard: {
       recent_clients: "Nouveaux clients",
       all: "Tout",
+      empty_title: "En attente de la première commande",
+      empty_body:
+        "Les commandes passées sur maisontanneurs.com apparaissent ici automatiquement, et chaque acheteur devient une fiche client. Les ventes Etsy ou hors ligne se saisissent à la main.",
+      empty_action: "Saisir une commande manuellement",
     },
     clients: {
       lifetime: "Cumul",
