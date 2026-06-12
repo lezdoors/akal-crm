@@ -260,6 +260,10 @@ export const createDataProvider = ({
       });
       return { ...sale, user_id: sale.id.toString() };
     },
+    salesDelete: async (id: Identifier): Promise<{ id: Identifier }> => {
+      await dataProvider.delete("sales", { id });
+      return { id };
+    },
     isInitialized: async (): Promise<boolean> => {
       const sales = await dataProvider.getList<Sale>("sales", {
         filter: {},

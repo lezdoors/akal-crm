@@ -141,6 +141,15 @@ export const englishOrdersMessages = {
         recent_title: "Recent orders",
       },
     },
+    sales: {
+      delete: {
+        action: "Delete user",
+        title: "Delete this user?",
+        body: "%{name} will lose access immediately. Their clients, notes and tasks are reassigned to you.",
+        confirm: "Delete",
+        success: "User deleted",
+      },
+    },
   },
 };
 
@@ -285,6 +294,15 @@ export const frenchOrdersMessages = {
         customers_sub: "Créés automatiquement depuis les commandes",
         trend_title: "Chiffre d'affaires — 6 derniers mois",
         recent_title: "Commandes récentes",
+      },
+    },
+    sales: {
+      delete: {
+        action: "Supprimer l'utilisateur",
+        title: "Supprimer cet utilisateur ?",
+        body: "%{name} perdra l'accès immédiatement. Ses clients, notes et tâches vous seront réattribués.",
+        confirm: "Supprimer",
+        success: "Utilisateur supprimé",
       },
     },
   },

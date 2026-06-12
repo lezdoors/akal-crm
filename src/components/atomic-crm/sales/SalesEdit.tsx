@@ -15,13 +15,17 @@ import { Card, CardContent } from "@/components/ui/card";
 
 import type { CrmDataProvider } from "../providers/types";
 import type { Sale, SalesFormData } from "../types";
+import { SalesDeleteButton } from "./SalesDeleteButton";
 import { SalesInputs } from "./SalesInputs";
 
-function EditToolbar() {
+function EditToolbar({ record }: { record?: Sale }) {
   return (
-    <div className="flex justify-end gap-4">
-      <CancelButton />
-      <SaveButton />
+    <div className="flex items-center justify-between gap-4">
+      <SalesDeleteButton record={record} />
+      <div className="flex justify-end gap-4 flex-1">
+        <CancelButton />
+        <SaveButton />
+      </div>
     </div>
   );
 }
@@ -73,7 +77,7 @@ export function SalesEdit() {
       <Card>
         <CardContent>
           <SimpleForm
-            toolbar={<EditToolbar />}
+            toolbar={<EditToolbar record={record} />}
             onSubmit={onSubmit as SubmitHandler<any>}
             record={record}
           >

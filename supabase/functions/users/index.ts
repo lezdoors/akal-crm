@@ -33,7 +33,6 @@ async function createSale(
   user_id: string,
   data: {
     email: string;
-    password: string;
     first_name: string;
     last_name: string;
     disabled: boolean;
@@ -116,12 +115,19 @@ async function inviteUser(req: Request, currentUserSale: any) {
 
       const sale = await createSale(user.id, {
         email,
-        password,
         first_name,
         last_name,
         disabled,
         administrator,
       });
+
+      // The auth user was created on a previous (failed) attempt and never
+      // received its invitation — send it now so the flow can complete.
+      const { error: emailError } =
+        await supabaseAdmin.auth.admin.inviteUserByEmail(email);
+      if (emailError) {
+        console.error(`Error re-inviting existing user: ${emailError}`);
+      }
 
       return new Response(
         JSON.stringify({
@@ -176,6 +182,84 @@ async function inviteUser(req: Request, currentUserSale: any) {
     console.error("Error patching sale:", e);
     return createErrorResponse(500, "Internal Server Error");
   }
+}
+
+/** Tables owning records via sales_id; reassigned to the requesting admin on delete. */
+const SALES_OWNED_TABLES = [
+  "contacts",
+  "contact_notes",
+  "companies",
+  "deals",
+  "deal_notes",
+  "tasks",
+];
+
+async function deleteUser(req: Request, currentUserSale: any) {
+  const { sales_id } = await req.json();
+
+  if (!currentUserSale.administrator) {
+    return createErrorResponse(401, "Not Authorized");
+  }
+  if (currentUserSale.id === sales_id) {
+    return createErrorResponse(400, "You cannot delete your own account");
+  }
+
+  const { data: sale } = await supabaseAdmin
+    .from("sales")
+    .select("*")
+    .eq("id", sales_id)
+    .single();
+
+  if (!sale) {
+    return createErrorResponse(404, "Not Found");
+  }
+
+  if (sale.administrator) {
+    const { count } = await supabaseAdmin
+      .from("sales")
+      .select("*", { count: "exact", head: true })
+      .eq("administrator", true);
+    if ((count ?? 0) <= 1) {
+      return createErrorResponse(400, "Cannot delete the last administrator");
+    }
+  }
+
+  for (const table of SALES_OWNED_TABLES) {
+    const { error } = await supabaseAdmin
+      .from(table)
+      .update({ sales_id: currentUserSale.id })
+      .eq("sales_id", sales_id);
+    if (error) {
+      console.error(`Error reassigning ${table}:`, error);
+      return createErrorResponse(500, `Failed to reassign ${table}`);
+    }
+  }
+
+  const { error: salesError } = await supabaseAdmin
+    .from("sales")
+    .delete()
+    .eq("id", sales_id);
+  if (salesError) {
+    console.error("Error deleting sale:", salesError);
+    return createErrorResponse(500, "Failed to delete the user");
+  }
+
+  if (sale.user_id) {
+    const { error: userError } = await supabaseAdmin.auth.admin.deleteUser(
+      sale.user_id,
+    );
+    if (userError) {
+      console.error("Error deleting auth user:", userError);
+      return createErrorResponse(
+        500,
+        "User removed from CRM but the auth account could not be deleted",
+      );
+    }
+  }
+
+  return new Response(JSON.stringify({ data: { id: sales_id } }), {
+    headers: { "Content-Type": "application/json", ...corsHeaders },
+  });
 }
 
 async function patchUser(req: Request, currentUserSale: any) {
@@ -274,6 +358,10 @@ Deno.serve(async (req: Request) =>
 
         if (req.method === "PATCH") {
           return patchUser(req, currentUserSale);
+        }
+
+        if (req.method === "DELETE") {
+          return deleteUser(req, currentUserSale);
         }
 
         return createErrorResponse(405, "Method Not Allowed");
