@@ -1,6 +1,5 @@
 import { useTranslate } from "ra-core";
 import { Link } from "react-router";
-import { PackageOpen } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { formatMoney } from "../orders/orderUtils";
@@ -8,8 +7,9 @@ import { useOrderProductImages } from "../orders/useOrderProductImages";
 import { needsShipping, useDashboardOrders } from "./commerceData";
 
 /**
- * The action queue: paid orders with no tracking number yet.
- * Each row links straight to the fulfillment form.
+ * The action queue — what must leave the atelier. Paid orders with no
+ * tracking number; each row links straight to the fulfillment form.
+ * Larger plates than elsewhere: this is the page's reason to exist.
  */
 export const OrdersToShip = () => {
   const translate = useTranslate();
@@ -22,32 +22,39 @@ export const OrdersToShip = () => {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base flex items-center gap-2">
-          <PackageOpen className="h-4 w-4" />
+        <CardTitle>
+          <span className="inline-block size-1.5 rounded-full bg-tobacco" />
           {translate("resources.orders.dashboard.to_ship", {
             smart_count: orders.length,
           })}
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-col divide-y">
+        <div className="flex flex-col divide-y divide-hairline">
           {orders.map((order) => (
             <Link
               key={order.id}
               to={`/orders/${order.id}`}
-              className="flex items-center justify-between py-2 text-sm no-underline hover:bg-muted/50 px-1 rounded"
+              className="flex items-center justify-between py-3 text-[13px] no-underline transition-colors hover:bg-secondary/40 px-1"
             >
-              {imageFor(order.items?.[0] ?? { product_id: "", title: "", price: 0, quantity: 0 }) ? (
+              {imageFor(
+                order.items?.[0] ?? {
+                  product_id: "",
+                  title: "",
+                  price: 0,
+                  quantity: 0,
+                },
+              ) ? (
                 <img
                   src={imageFor(order.items[0])}
                   alt=""
-                  className="h-10 w-10 border object-cover mr-2 shrink-0"
+                  className="plate h-14 w-14 mr-3 shrink-0"
                 />
               ) : (
-                <div className="h-10 w-10 border bg-muted mr-2 shrink-0" />
+                <div className="plate h-14 w-14 mr-3 shrink-0" />
               )}
               <span className="font-mono text-xs">{order.order_number}</span>
-              <span className="text-muted-foreground truncate mx-2 flex-1">
+              <span className="text-muted-foreground truncate mx-3 flex-1">
                 {order.customer_name}
               </span>
               <span className="text-xs text-muted-foreground mr-3">

@@ -57,22 +57,24 @@ const OrderShowContent = () => {
   const translate = useTranslate();
   if (!record) return null;
   return (
-    <div className="flex flex-col gap-4 mt-2">
-      <div className="flex items-center gap-3">
-        <h2 className="text-[15px] font-semibold">{record.order_number}</h2>
+    <div className="flex flex-col gap-8 mt-4">
+      <div className="flex items-baseline gap-4 flex-wrap">
+        <h2 className="display text-[26px] leading-none">
+          {record.order_number}
+        </h2>
         <OrderStatusBadge />
         <OrderChannelBadge />
-        <span className="text-sm text-muted-foreground ml-auto">
+        <span className="text-xs text-muted-foreground ml-auto">
           <DateField source="created_at" showTime />
         </span>
       </div>
 
-      {/* Polaris resource-details split: packing list left, context rail right */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-        <div className="lg:col-span-8 flex flex-col gap-4">
+      {/* Work order left, client & shipping context right */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-8">
+        <div className="lg:col-span-8 flex flex-col gap-8">
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">{translate("resources.orders.show.items")}</CardTitle>
+              <CardTitle>{translate("resources.orders.show.items")}</CardTitle>
             </CardHeader>
             <CardContent>
               <OrderItemsTable />
@@ -82,25 +84,29 @@ const OrderShowContent = () => {
           {record.notes && (
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">{translate("resources.orders.show.notes")}</CardTitle>
+                <CardTitle>{translate("resources.orders.show.notes")}</CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm whitespace-pre-wrap">{record.notes}</p>
+                <p className="text-[13px] leading-relaxed whitespace-pre-wrap">
+                  {record.notes}
+                </p>
               </CardContent>
             </Card>
           )}
         </div>
 
-        <div className="lg:col-span-4 flex flex-col gap-4">
+        <div className="lg:col-span-4 flex flex-col gap-8">
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">{translate("resources.orders.show.customer")}</CardTitle>
+              <CardTitle>
+                {translate("resources.orders.show.customer")}
+              </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-sm leading-6">
+              <div className="text-[13px] leading-6">
                 <div>{record.customer_name}</div>
                 <a
-                  className="text-muted-foreground underline"
+                  className="text-muted-foreground underline underline-offset-2 hover:text-foreground"
                   href={`mailto:${record.customer_email}`}
                 >
                   {record.customer_email}
@@ -108,14 +114,18 @@ const OrderShowContent = () => {
               </div>
             </CardContent>
           </Card>
-          <Card className="border-t-2 border-t-tobacco">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-base">{translate("resources.orders.show.shipping")}</CardTitle>
+              <CardTitle>
+                {translate("resources.orders.show.shipping")}
+              </CardTitle>
             </CardHeader>
             <CardContent className="flex flex-col gap-2">
               <AddressBlock />
-              <div className="text-sm">
-                <span className="text-muted-foreground">{translate("resources.orders.show.tracking")}: </span>
+              <div className="text-[13px]">
+                <span className="text-muted-foreground">
+                  {translate("resources.orders.show.tracking")}:{" "}
+                </span>
                 {record.tracking_number || "—"}
               </div>
               {record.shipping_email_sent_at && (

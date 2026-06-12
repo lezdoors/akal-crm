@@ -390,6 +390,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/notes/useAttachmentUrl.ts",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/notes/noteModel.ts",
           "type": "registry:component"
         },

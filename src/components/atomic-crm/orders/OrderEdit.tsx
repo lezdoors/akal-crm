@@ -19,7 +19,7 @@ const OrderEditTitle = () => {
   const translate = useTranslate();
   if (!record) return null;
   return (
-    <h2 className="text-[15px] font-semibold mb-3">
+    <h2 className="display text-[26px] leading-none mb-4">
       {translate("resources.orders.edit.title", {
         order_number: record.order_number,
       })}

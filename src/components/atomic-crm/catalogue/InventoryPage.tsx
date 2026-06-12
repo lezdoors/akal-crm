@@ -2,52 +2,54 @@ import { useTranslate } from "ra-core";
 import { Link } from "react-router";
 
 import type { CatalogueProduct } from "./ProductsPage";
-import { ProductStatusBadge, useCatalogue } from "./ProductsPage";
+import { useCatalogue } from "./ProductsPage";
+
+import { formatMoney } from "../orders/orderUtils";
 
 const Section = ({
   title,
   products,
-  accent,
+  dot,
 }: {
   title: string;
   products: CatalogueProduct[];
-  accent?: string;
+  dot: string;
 }) => {
   if (!products.length) return null;
   return (
-    <div className="flex flex-col gap-1">
-      <div className="flex items-baseline gap-2 pt-4 pb-1">
-        <span
-          className="inline-block h-2 w-2 rounded-full"
-          style={{ background: accent ?? "var(--ink-muted)" }}
-        />
-        <h3 className="text-sm font-medium">{title}</h3>
-        <span className="text-xs text-muted-foreground">{products.length}</span>
+    <div className="flex flex-col gap-2 border-t pt-4">
+      <div className="flex items-baseline gap-2">
+        <h3 className="overline flex items-center gap-1.5">
+          <span className={`inline-block size-1.5 rounded-full ${dot}`} />
+          {title}
+        </h3>
+        <span className="text-xs text-muted-foreground tabular-nums">
+          {products.length}
+        </span>
       </div>
-      <div className="flex flex-col -mx-2">
+      <div className="flex flex-col -mx-1 divide-y divide-hairline">
         {products.map((product) => (
           <Link
             key={product.id}
             to={`/products/${product.id}`}
-            className="grid grid-cols-[auto_minmax(0,1fr)_auto_auto_auto] items-center gap-3 rounded-md px-2 py-1.5 no-underline hover:bg-muted/70"
+            className="grid grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-4 px-1 py-2 no-underline transition-colors hover:bg-secondary/40"
           >
             {product.images?.[0] ? (
               <img
                 src={product.images[0]}
                 alt=""
                 loading="lazy"
-                className="h-9 w-9 rounded-md border object-cover"
+                className="plate h-10 w-10"
               />
             ) : (
-              <div className="h-9 w-9 rounded-md border bg-muted" />
+              <div className="plate h-10 w-10" />
             )}
-            <span className="text-sm truncate">{product.title}</span>
+            <span className="text-[13px] truncate">{product.title}</span>
             <span className="text-xs text-muted-foreground">
               {product.category}
             </span>
-            <ProductStatusBadge product={product} />
-            <span className="text-sm tabular-nums w-16 text-right">
-              ${(product.price / 100).toFixed(0)}
+            <span className="text-[13px] tabular-nums w-16 text-right">
+              {formatMoney(product.price, "USD")}
             </span>
           </Link>
         ))}
@@ -57,7 +59,7 @@ const Section = ({
 };
 
 /**
- * Stock states at a glance: what's gone, what's held, what's live.
+ * The collection's ledger: what's gone, what's held, what's live.
  * One-of-one pieces mean "sold" IS the inventory alert.
  */
 export const InventoryPage = () => {
@@ -72,29 +74,34 @@ export const InventoryPage = () => {
   );
 
   return (
-    <div className="flex flex-col gap-2 mt-2 max-w-3xl">
-      <h2 className="text-[15px] font-semibold">
-        {translate("crm.nav.inventory")}
-      </h2>
-      <p className="text-xs text-muted-foreground">
-        {translate("crm.inventory.note", {
-          _: "One-of-one pieces — a sale removes the piece from the site automatically.",
-        })}
-      </p>
+    <div className="flex flex-col gap-8 mt-6 max-w-3xl">
+      <div>
+        <p className="overline">
+          {translate("crm.nav.catalogue", { _: "Collection" })}
+        </p>
+        <h1 className="display mt-1 text-[28px] leading-none">
+          {translate("crm.nav.inventory")}
+        </h1>
+        <p className="text-xs text-muted-foreground mt-3">
+          {translate("crm.inventory.note", {
+            _: "One-of-one pieces — a sale removes the piece from the site automatically.",
+          })}
+        </p>
+      </div>
       <Section
-        title={translate("crm.products.status.sold", { _: "Sold" })}
-        products={sold}
-        accent="var(--ink)"
+        title={translate("crm.products.status.available", { _: "Available" })}
+        products={available}
+        dot="bg-moss"
       />
       <Section
         title={translate("crm.products.status.reserved", { _: "Reserved" })}
         products={reserved}
-        accent="var(--tobacco)"
+        dot="bg-tobacco"
       />
       <Section
-        title={translate("crm.products.status.available", { _: "Available" })}
-        products={available}
-        accent="#1f4d3a"
+        title={translate("crm.products.status.sold", { _: "Sold" })}
+        products={sold}
+        dot="bg-ink"
       />
     </div>
   );

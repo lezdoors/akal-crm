@@ -49,11 +49,11 @@ export const OrderItemsTable = () => {
                     <img
                       src={imageFor(item)}
                       alt={item.title}
-                      className="h-16 w-16 border object-cover"
+                      className="plate h-16 w-16"
                     />
                   </a>
                 ) : (
-                  <div className="h-16 w-16 border bg-muted" />
+                  <div className="plate h-16 w-16" />
                 )}
                 <div className="flex flex-col">
                   <span>{item.title}</span>

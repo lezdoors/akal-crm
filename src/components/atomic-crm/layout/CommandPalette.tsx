@@ -15,7 +15,7 @@ import type { Contact, Order } from "../types";
 import { formatMoney } from "../orders/orderUtils";
 
 /**
- * Linear-style global command palette (Cmd+K / Ctrl+K): navigation,
+ * Global command palette (Cmd+K / Ctrl+K) in the register voice: navigation,
  * quick actions, and live search across orders and contacts.
  */
 export const CommandPalette = () => {

@@ -1,31 +1,42 @@
 import { useRecordContext, useTranslate } from "ra-core";
-import { Badge } from "@/components/ui/badge";
 
-import type { Order } from "../types";
-import { ORDER_STATUS_BADGE_CLASSES } from "./orderUtils";
+import type { Order, OrderStatus } from "../types";
+import { ORDER_STATUS_DOT_CLASSES } from "./orderUtils";
+
+/**
+ * The register's status voice: a 6px dot and an overline word.
+ * `● PAYÉE` — reads at a glance, never shouts.
+ */
+export const OrderStatusWord = ({ status }: { status: OrderStatus }) => {
+  const translate = useTranslate();
+  return (
+    <span className="overline flex items-center gap-1.5 whitespace-nowrap">
+      <span
+        className={`inline-block size-1.5 rounded-full ${ORDER_STATUS_DOT_CLASSES[status] ?? "bg-ink-muted"}`}
+      />
+      {translate(`resources.orders.status.${status}`, { _: status })}
+    </span>
+  );
+};
 
 export const OrderStatusBadge = (_props: { label?: string | boolean }) => {
   const record = useRecordContext<Order>();
-  const translate = useTranslate();
   if (!record?.status) return null;
+  return <OrderStatusWord status={record.status} />;
+};
+
+/** Channel as a quiet overline word — SITE, ETSY. */
+export const OrderChannelWord = ({ channel }: { channel: string }) => {
+  const translate = useTranslate();
   return (
-    <Badge variant="outline" className={ORDER_STATUS_BADGE_CLASSES[record.status]}>
-      {translate(`resources.orders.status.${record.status}`, {
-        _: record.status,
-      })}
-    </Badge>
+    <span className="overline whitespace-nowrap">
+      {translate(`resources.orders.channel.${channel}`, { _: channel })}
+    </span>
   );
 };
 
 export const OrderChannelBadge = (_props: { label?: string | boolean }) => {
   const record = useRecordContext<Order>();
-  const translate = useTranslate();
   if (!record?.sales_channel) return null;
-  return (
-    <Badge variant="secondary">
-      {translate(`resources.orders.channel.${record.sales_channel}`, {
-        _: record.sales_channel,
-      })}
-    </Badge>
-  );
+  return <OrderChannelWord channel={record.sales_channel} />;
 };

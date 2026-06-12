@@ -54,9 +54,12 @@ interface OrderDraft {
  */
 export function OrderCreate() {
   const translate = useTranslate();
+  // One-of-one pieces: only what's still available can be sold. The
+  // database trigger marks picked pieces sold on save.
   const { data: products } = useGetList<ProductRow>("products", {
     pagination: { page: 1, perPage: 200 },
     sort: { field: "title", order: "ASC" },
+    filter: { status: "available" },
   });
 
   const transform = useMemo(() => {
@@ -109,7 +112,7 @@ export function OrderCreate() {
           draft_items: [{ quantity: 1 }],
         }}
       >
-        <h2 className="text-[15px] font-semibold mb-3">
+        <h2 className="display text-[26px] leading-none mb-4">
           {translate("resources.orders.create.title")}
         </h2>
         <div className="space-y-4 w-full max-w-2xl">

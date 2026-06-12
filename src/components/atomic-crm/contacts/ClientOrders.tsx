@@ -1,12 +1,8 @@
 import { useGetList, useRecordContext, useTranslate } from "ra-core";
 import { Link } from "react-router";
-import { Badge } from "@/components/ui/badge";
 
-import {
-  formatMoney,
-  ORDER_STATUS_BADGE_CLASSES,
-  revenueByCurrency,
-} from "../orders/orderUtils";
+import { OrderStatusWord } from "../orders/OrderBadges";
+import { formatMoney, revenueByCurrency } from "../orders/orderUtils";
 import type { Contact, Order } from "../types";
 
 const contactEmail = (contact: Contact): string | undefined =>
@@ -35,9 +31,9 @@ export const ClientOrders = () => {
   const lifetime = revenueByCurrency(orders);
 
   return (
-    <div className="space-y-2">
+    <div className="space-y-2 border-t pt-4">
       <div className="flex items-baseline justify-between">
-        <h3 className="text-sm font-medium">
+        <h3 className="overline">
           {translate("resources.orders.name", { smart_count: 2 })}
         </h3>
         <span className="text-xs text-muted-foreground tabular-nums">
@@ -47,22 +43,15 @@ export const ClientOrders = () => {
             .join(" · ")}
         </span>
       </div>
-      <div className="flex flex-col -mx-1">
+      <div className="flex flex-col -mx-1 divide-y divide-hairline">
         {orders.map((order) => (
           <Link
             key={String(order.id)}
             to={`/orders/${order.id}/show`}
-            className="flex items-center gap-2 rounded-md px-1 py-1.5 text-sm no-underline hover:bg-muted/70"
+            className="flex items-center gap-2 px-1 py-2 text-[13px] no-underline transition-colors hover:bg-secondary/40"
           >
             <span className="font-mono text-xs">{order.order_number}</span>
-            <Badge
-              variant="outline"
-              className={ORDER_STATUS_BADGE_CLASSES[order.status]}
-            >
-              {translate(`resources.orders.status.${order.status}`, {
-                _: order.status,
-              })}
-            </Badge>
+            <OrderStatusWord status={order.status} />
             <span className="text-xs text-muted-foreground flex-1 text-right">
               {new Date(order.created_at).toLocaleDateString()}
             </span>

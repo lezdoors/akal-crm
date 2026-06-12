@@ -1,7 +1,6 @@
 import { useGetList, useTranslate } from "ra-core";
 import { useState } from "react";
 import { Link } from "react-router";
-import { Badge } from "@/components/ui/badge";
 
 import { formatMoney } from "../orders/orderUtils";
 
@@ -27,13 +26,11 @@ export const useCatalogue = () =>
     sort: { field: "title", order: "ASC" },
   });
 
-const STATUS_BADGE: Record<string, string> = {
-  available:
-    "border-transparent bg-emerald-500/12 text-emerald-700 dark:bg-emerald-500/15 dark:text-emerald-300",
-  sold: "border-transparent bg-muted text-muted-foreground",
-  reserved:
-    "border-transparent bg-amber-500/15 text-amber-700 dark:bg-amber-500/15 dark:text-amber-300",
-  draft: "border-transparent bg-muted text-muted-foreground",
+const STATUS_DOT: Record<string, string> = {
+  available: "bg-moss",
+  sold: "bg-ink",
+  reserved: "bg-tobacco",
+  draft: "bg-ink-muted",
 };
 
 export const ProductStatusBadge = ({
@@ -44,15 +41,19 @@ export const ProductStatusBadge = ({
   const translate = useTranslate();
   if (!product.status) return null;
   return (
-    <Badge variant="outline" className={STATUS_BADGE[product.status] ?? ""}>
+    <span className="overline flex items-center gap-1.5 whitespace-nowrap">
+      <span
+        className={`inline-block size-1.5 rounded-full ${STATUS_DOT[product.status] ?? "bg-ink-muted"}`}
+      />
       {translate(`crm.products.status.${product.status}`, {
         _: product.status,
       })}
-    </Badge>
+    </span>
   );
 };
 
-const FilterChip = ({
+/** Filters are words, not pills: ink when chosen, muted otherwise. */
+const FilterWord = ({
   active,
   onClick,
   children,
@@ -64,10 +65,10 @@ const FilterChip = ({
   <button
     type="button"
     onClick={onClick}
-    className={`rounded-md px-2.5 py-1 text-xs transition-colors ${
+    className={`overline px-1 py-1 transition-colors ${
       active
-        ? "bg-ink text-white dark:bg-white dark:text-ink"
-        : "border text-muted-foreground hover:text-foreground"
+        ? "text-foreground border-b border-foreground"
+        : "hover:text-foreground"
     }`}
   >
     {children}
@@ -98,74 +99,80 @@ export const ProductsPage = () => {
   );
 
   return (
-    <div className="flex flex-col gap-4 mt-2">
-      <div className="flex items-baseline justify-between flex-wrap gap-2">
-        <h2 className="text-[15px] font-semibold">
-          {translate("crm.nav.products")}
-        </h2>
-        <span className="text-xs text-muted-foreground">
-          {translate("crm.products.count", { smart_count: visible.length })}
-        </span>
+    <div className="flex flex-col gap-8 mt-6">
+      <div>
+        <p className="overline">
+          {translate("crm.nav.catalogue", { _: "Collection" })}
+        </p>
+        <div className="flex items-baseline justify-between flex-wrap gap-2 mt-1">
+          <h1 className="display text-[28px] leading-none">
+            {translate("crm.nav.products")}
+          </h1>
+          <span className="text-xs text-muted-foreground tabular-nums">
+            {translate("crm.products.count", { smart_count: visible.length })}
+          </span>
+        </div>
       </div>
 
-      <div className="flex flex-wrap gap-1.5">
-        <FilterChip active={!category} onClick={() => setCategory(null)}>
+      <div className="flex flex-wrap items-center gap-3 border-t pt-4">
+        <FilterWord active={!category} onClick={() => setCategory(null)}>
           {translate("crm.products.all", { _: "All" })}
-        </FilterChip>
+        </FilterWord>
         {categories.map((entry) => (
-          <FilterChip
+          <FilterWord
             key={entry}
             active={category === entry}
             onClick={() => setCategory(category === entry ? null : entry)}
           >
             {entry}
-          </FilterChip>
+          </FilterWord>
         ))}
-        <span className="mx-2 self-center h-4 w-px bg-border" />
+        <span className="mx-2 self-center h-3 w-px bg-border" />
         {(["available", "sold", "reserved"] as const).map((entry) => (
-          <FilterChip
+          <FilterWord
             key={entry}
             active={stock === entry}
             onClick={() => setStock(stock === entry ? null : entry)}
           >
             {translate(`crm.products.status.${entry}`, { _: entry })}
-          </FilterChip>
+          </FilterWord>
         ))}
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4">
+      {/* The contact sheet */}
+      <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10">
         {visible.map((product) => (
           <Link
             key={product.id}
             to={`/products/${product.id}`}
             className="group flex flex-col no-underline"
           >
-            <div className="aspect-square overflow-hidden rounded-md border bg-muted">
+            <div className="plate aspect-square overflow-hidden">
               {product.images?.[0] && (
                 <img
                   src={product.images[0]}
                   alt={product.title}
                   loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                  className="h-full w-full object-cover transition-opacity duration-200 group-hover:opacity-90"
                 />
               )}
             </div>
-            <div className="flex items-start justify-between gap-2 pt-2">
+            <div className="flex items-start justify-between gap-2 pt-3">
               <div className="min-w-0">
-                <div className="text-sm font-medium truncate">
+                <div className="text-[13px] font-medium truncate">
                   {product.title}
                 </div>
-                <div className="text-xs text-muted-foreground truncate">
+                <div className="text-xs text-muted-foreground truncate mt-0.5">
                   {[product.category, product.variant_attribute?.value]
                     .filter(Boolean)
                     .join(" · ")}
                 </div>
               </div>
-              <div className="text-sm tabular-nums shrink-0">
+              <div className="text-[13px] tabular-nums shrink-0">
                 {formatMoney(product.price, "USD")}
               </div>
             </div>
-            <div className="pt-1.5">
+            <div className="pt-2">
               <ProductStatusBadge product={product} />
             </div>
           </Link>

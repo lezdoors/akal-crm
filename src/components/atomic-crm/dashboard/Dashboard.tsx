@@ -1,7 +1,5 @@
-import { useTranslate } from "ra-core";
+import { useLocaleState, useTranslate } from "ra-core";
 import { Link } from "react-router";
-import { ShoppingBag } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
 
 import { DashboardActivityLog } from "./DashboardActivityLog";
 import { OrdersToShip } from "./OrdersToShip";
@@ -14,45 +12,58 @@ import { useDashboardOrders } from "./commerceData";
 const AwaitingFirstOrder = () => {
   const translate = useTranslate();
   return (
-    <Card>
-      <CardContent className="flex flex-col items-center gap-2 py-12 text-center">
-        <ShoppingBag className="h-5 w-5 text-muted-foreground" />
-        <p className="text-[13px] font-semibold">
-          {translate("crm.dashboard.empty_title", {
-            _: "Awaiting the first order",
-          })}
-        </p>
-        <p className="max-w-sm text-[13px] text-muted-foreground">
-          {translate("crm.dashboard.empty_body", { _: "" })}
-        </p>
-        <Link
-          to="/orders/create"
-          className="mt-2 text-[13px] no-underline text-tobacco hover:opacity-80"
-        >
-          {translate("crm.dashboard.empty_action", {
-            _: "Enter an order manually",
-          })}
-        </Link>
-      </CardContent>
-    </Card>
+    <div className="border-t pt-4">
+      <p className="overline">
+        {translate("crm.dashboard.empty_title", {
+          _: "Awaiting the first order",
+        })}
+      </p>
+      <p className="display mt-3 max-w-md text-[19px] leading-snug text-ink-soft">
+        {translate("crm.dashboard.empty_body", { _: "" })}
+      </p>
+      <Link
+        to="/orders/create"
+        className="mt-4 inline-block text-[13px] no-underline text-tobacco transition-opacity hover:opacity-80"
+      >
+        {translate("crm.dashboard.empty_action", {
+          _: "Enter an order manually",
+        })}
+        {" →"}
+      </Link>
+    </div>
   );
 };
 
 /**
- * A work queue, not analytics: orders to ship + recent orders left,
- * new clients / inventory pulse / activity right.
+ * Aujourd'hui — the register's action page. The date in the maison's voice,
+ * then: what must ship, what just happened, who is new, what remains.
  */
 export const Dashboard = () => {
   const { data: orders, isPending } = useDashboardOrders();
+  const translate = useTranslate();
+  const [locale] = useLocaleState();
 
   if (isPending) {
     return null;
   }
 
+  const today = new Date().toLocaleDateString(
+    locale === "fr" ? "fr-FR" : "en-US",
+    { weekday: "long", day: "numeric", month: "long" },
+  );
+
   return (
-    <div className="flex flex-col gap-5 mt-2">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-        <div className="lg:col-span-8 flex flex-col gap-5">
+    <div className="flex flex-col gap-10 mt-6">
+      <div>
+        <p className="overline">
+          {translate("crm.nav.today", { _: "Today" })}
+        </p>
+        <h1 className="display mt-1 text-[28px] leading-none capitalize">
+          {today}
+        </h1>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-10">
+        <div className="lg:col-span-8 flex flex-col gap-10">
           {orders?.length ? (
             <>
               <OrdersToShip />
@@ -62,7 +73,7 @@ export const Dashboard = () => {
             <AwaitingFirstOrder />
           )}
         </div>
-        <div className="lg:col-span-4 flex flex-col gap-5">
+        <div className="lg:col-span-4 flex flex-col gap-10">
           <RecentClients />
           <StockAlerts />
           <DashboardActivityLog />

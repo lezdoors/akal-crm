@@ -31,29 +31,27 @@ export const ProductDetailPage = () => {
   const images = product.images ?? [];
 
   return (
-    <div className="flex flex-col gap-4 mt-2">
-      <div className="flex items-center gap-3">
+    <div className="flex flex-col gap-8 mt-6">
+      <div>
         <Link
           to="/products"
-          className="flex items-center gap-1 text-xs text-muted-foreground no-underline hover:text-foreground"
+          className="overline flex items-center gap-1 no-underline hover:text-foreground"
         >
-          <ArrowLeft className="size-3.5" />
+          <ArrowLeft className="size-3" />
           {translate("crm.nav.products")}
         </Link>
-      </div>
-      <div className="flex items-baseline gap-3 flex-wrap">
-        <h2 className="text-[17px] font-semibold">
-          {product.title}
-        </h2>
-        <ProductStatusBadge product={product} />
-        <span className="text-lg tabular-nums ml-auto">
-          {formatMoney(product.price, "USD")}
-        </span>
+        <div className="flex items-baseline gap-4 flex-wrap mt-2">
+          <h1 className="display text-[28px] leading-none">{product.title}</h1>
+          <ProductStatusBadge product={product} />
+          <span className="display text-[22px] tabular-nums ml-auto">
+            {formatMoney(product.price, "USD")}
+          </span>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-8">
         <div className="lg:col-span-8 flex flex-col gap-3">
-          <div className="aspect-square max-h-[560px] overflow-hidden rounded-md border bg-muted">
+          <div className="plate aspect-square max-h-[560px] overflow-hidden">
             {images[activeImage] && (
               <img
                 src={images[activeImage]}
@@ -69,10 +67,10 @@ export const ProductDetailPage = () => {
                   key={image}
                   type="button"
                   onClick={() => setActiveImage(index)}
-                  className={`h-16 w-16 shrink-0 overflow-hidden rounded-md border transition-opacity ${
+                  className={`plate h-16 w-16 shrink-0 overflow-hidden transition-opacity ${
                     index === activeImage
-                      ? "ring-1 ring-ink"
-                      : "opacity-70 hover:opacity-100"
+                      ? "border-foreground"
+                      : "opacity-60 hover:opacity-100"
                   }`}
                 >
                   <img
@@ -87,10 +85,10 @@ export const ProductDetailPage = () => {
           )}
         </div>
 
-        <div className="lg:col-span-4 flex flex-col gap-4">
+        <div className="lg:col-span-4 flex flex-col gap-8">
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">
+              <CardTitle>
                 {translate("crm.products.facts", { _: "Details" })}
               </CardTitle>
             </CardHeader>
@@ -117,12 +115,12 @@ export const ProductDetailPage = () => {
           {product.description && (
             <Card>
               <CardHeader>
-                <CardTitle className="text-base">
+                <CardTitle>
                   {translate("crm.products.description", { _: "Description" })}
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm leading-6 text-muted-foreground whitespace-pre-wrap">
+                <p className="text-[13px] leading-6 text-muted-foreground whitespace-pre-wrap">
                   {product.description}
                 </p>
               </CardContent>

@@ -10,11 +10,13 @@ export const englishOrdersMessages = {
       new_contact: "New contact",
     },
     nav: {
+      today: "Today",
+      register: "Le Registre",
       clients: "Clients",
-      products: "Products",
+      products: "Pieces",
       inventory: "Inventory",
       media: "Media library",
-      catalogue: "Catalogue",
+      catalogue: "Collection",
       studio: "Studio",
     },
     products: {
@@ -165,11 +167,13 @@ export const frenchOrdersMessages = {
       new_contact: "Nouveau client",
     },
     nav: {
+      today: "Aujourd'hui",
+      register: "Le Registre",
       clients: "Clients",
-      products: "Produits",
+      products: "Pièces",
       inventory: "Inventaire",
       media: "Médiathèque",
-      catalogue: "Catalogue",
+      catalogue: "Collection",
       studio: "Studio",
     },
     products: {

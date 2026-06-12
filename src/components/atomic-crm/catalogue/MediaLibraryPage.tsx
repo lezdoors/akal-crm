@@ -51,24 +51,29 @@ export const MediaLibraryPage = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 mt-2">
-      <div className="flex items-baseline justify-between flex-wrap gap-2">
-        <h2 className="text-[15px] font-semibold">
-          {translate("crm.nav.media")}
-        </h2>
-        <span className="text-xs text-muted-foreground">
-          {translate("crm.media.count", { smart_count: visible.length })}
-        </span>
+    <div className="flex flex-col gap-8 mt-6">
+      <div>
+        <p className="overline">
+          {translate("crm.nav.studio", { _: "Studio" })}
+        </p>
+        <div className="flex items-baseline justify-between flex-wrap gap-2 mt-1">
+          <h1 className="display text-[28px] leading-none">
+            {translate("crm.nav.media")}
+          </h1>
+          <span className="text-xs text-muted-foreground tabular-nums">
+            {translate("crm.media.count", { smart_count: visible.length })}
+          </span>
+        </div>
       </div>
 
-      <div className="flex flex-wrap gap-1.5">
+      <div className="flex flex-wrap items-center gap-3 border-t pt-4">
         <button
           type="button"
           onClick={() => setCategory(null)}
-          className={`rounded-md px-2.5 py-1 text-xs ${
+          className={`overline px-1 py-1 transition-colors ${
             !category
-              ? "bg-ink text-white dark:bg-white dark:text-ink"
-              : "border text-muted-foreground hover:text-foreground"
+              ? "text-foreground border-b border-foreground"
+              : "hover:text-foreground"
           }`}
         >
           {translate("crm.products.all", { _: "All" })}
@@ -78,10 +83,10 @@ export const MediaLibraryPage = () => {
             key={entry}
             type="button"
             onClick={() => setCategory(category === entry ? null : entry)}
-            className={`rounded-md px-2.5 py-1 text-xs ${
+            className={`overline px-1 py-1 transition-colors ${
               category === entry
-                ? "bg-ink text-white dark:bg-white dark:text-ink"
-                : "border text-muted-foreground hover:text-foreground"
+                ? "text-foreground border-b border-foreground"
+                : "hover:text-foreground"
             }`}
           >
             {entry}
@@ -89,11 +94,11 @@ export const MediaLibraryPage = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-3">
+      <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-4">
         {visible.map((entry) => (
           <div
             key={entry.url}
-            className="group relative aspect-square overflow-hidden rounded-md border bg-muted"
+            className="plate group relative aspect-square overflow-hidden"
           >
             <img
               src={entry.url}
@@ -113,7 +118,7 @@ export const MediaLibraryPage = () => {
                   type="button"
                   aria-label="Copy URL"
                   onClick={() => copyUrl(entry.url)}
-                  className="flex size-6 items-center justify-center rounded bg-white/15 text-white hover:bg-white/30"
+                  className="flex size-6 items-center justify-center bg-white/15 text-white hover:bg-white/30"
                 >
                   <Copy className="size-3" />
                 </button>
@@ -122,7 +127,7 @@ export const MediaLibraryPage = () => {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Open"
-                  className="flex size-6 items-center justify-center rounded bg-white/15 text-white hover:bg-white/30"
+                  className="flex size-6 items-center justify-center bg-white/15 text-white hover:bg-white/30"
                 >
                   <ExternalLink className="size-3" />
                 </a>

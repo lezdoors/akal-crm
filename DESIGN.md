@@ -1,98 +1,85 @@
-# Maison Tanneurs CRM — Design Direction
+# Le Registre — design vision for the Maison Tanneurs operations platform
 
-"Linear meets luxury operations software." Built by a fashion house, not a CRM vendor.
+*Supersedes the Linear-replica spec of 2026-06-11. The Linear phase taught the
+anatomy (density, hierarchy, speed); this phase replaces its skin and several
+of its assumptions with the maison's own language.*
 
-## Audit vs Linear (2026-06-11)
+## Thesis
 
-What we had vs what Linear actually does:
+This is not a CRM that looks nice. It is the maison's **working register** —
+the software equivalent of the atelier's ledger: paper, ink, photographs of
+the pieces, hairline rules. Every screen answers one question: *what needs my
+attention right now?* Everything else stays quiet.
 
-| Surface | Current | Linear | Verdict |
-|---|---|---|---|
-| Canvas | White everywhere, bordered sidebar | Soft gray canvas, **borderless** sidebar, content floats as a rounded white card | REBUILD — adopt inset-card anatomy |
-| Nav | Uppercase tracked eyebrows, serif wordmark, border-r | 13px sans, pill active states, workspace header w/ search+compose | REBUILD — chrome is sans/compact; serif lives in content only |
-| Dashboard | KPI band + revenue chart (SaaS cliché) | No dashboards — queues of work | REDESIGN — action queues, not revenue widgets |
-| Tables | DataTable w/ visible column chrome | Rows feel like lists: hover, no cell borders, fast scan | RESTYLE |
-| Radius | 0 (storefront transplant) | Soft (~6-8px) rounding everywhere | CHANGE — radius 0.45rem; editorial sharpness stays in content typography, not chrome |
-| Nav model | Deals/Companies (CRM vendor concepts) | n/a | REMOVE from nav (data kept) |
-| Color | Tobacco used broadly | Color almost absent; one accent, rarely | RESTRAIN — leather accent only for action/attention |
+## Material
 
-**Remove:** KPI tiles, revenue trend chart, deals/companies nav, uppercase chrome labels, border-heavy cards.
-**Keep:** command palette (⌘K), product-photo joins, FR/EN, login entrance, order work-order layout.
+The chrome is **paper, not app**. One warm surface; regions are made with
+whitespace and single hairlines, never boxes. No cards, no shadows, no tinted
+chips, no rounded containers.
 
-## Tokens (Ryan's spec)
+| Token        | Light    | Dark (espresso) |
+|--------------|----------|-----------------|
+| paper        | #F7F4EE  | #16120D         |
+| paper-raised | #FCFAF6  | #1D1812         |
+| ink          | #221C14  | #EBE4D8         |
+| ink-soft     | #4A4238  | #C9C0B2         |
+| ink-muted    | #8A8071  | #877C6C         |
+| hairline     | #E6DFD2  | #2D2820         |
+| tobacco      | #8A6A43  | #A8845B         |
 
-- Canvas `#F8F7F4` · Content `#FFFFFF` · Text `#1D1B19` · Leather accent `#8A6A43`
-- Inter for ALL UI. Cormorant/Bodoni reserved for major section headings + login only.
-- Radius 0.45rem. Borders: hairline, minimal. Shadows: one soft shadow on the floating content card, none inside.
-- Spacing: 8px scale.
+Tobacco is the only accent. It marks money-adjacent state (paid, reserved)
+and primary actions. Nothing else gets color; success/error speak through
+ink weight and a small dot.
 
-## Navigation
+## Typography
 
-```
-[MT] Maison Tanneurs        ⌕ ✎
-  Tableau de bord
-  Commandes
-  Clients
-CATALOGUE
-  Produits
-  Collections      (category-grouped product views)
-  Inventaire       (stock states: sold / low / reserved)
-STUDIO
-  Médiathèque      (product photography DAM, v1 from products.images)
-  Campagnes        (deferred — no data surface yet; ships when campaign assets get an API)
-  Réglages (footer)
-```
+Three voices, never more:
 
-Deals & Companies leave the nav. Contacts presented as **Clients**.
+1. **Cormorant Garamond 500** — page titles (26px), editorial figures, the
+   date on Today. The voice of the maison.
+2. **Inter overline** — 10px, uppercase, tracking 0.14em, ink-muted. Section
+   labels, table headers, status words. The voice of the register.
+3. **Inter 13px** — all data. Money always `tabular-nums`, never bold.
 
-## Wireframes
+## Status language
 
-### Dashboard — a work queue, not analytics
-```
-┌─ À expédier (N) ──────────────────────────────┐ ┌ Activité ────────┐
-│ [img] MT-0001  Claire Dubois   3j   680 €  →  │ │ · note ...       │
-│ [img] MT-0002  J. Whitford     1j   £540   →  │ │ · commande ...   │
-└───────────────────────────────────────────────┘ │ · client ...     │
-┌─ Nouveaux clients ────────┐ ┌─ Stock ─────────┐ └──────────────────┘
-│ ◯ Claire D.   2 cmd  1.3k │ │ ● épuisé: 3     │
-│ ◯ Marcus B.   1 cmd  720  │ │ ● réservé: 1    │
-└───────────────────────────┘ └─────────────────┘
-```
-(Revenue lives in Commandes filters/export — not as dashboard wallpaper.)
+No pills. A 6px dot + an overline word: `● PAYÉE`. Dot colors: tobacco =
+paid/reserved · ink = shipped/sold · moss (#5A6B52) = delivered/available ·
+muted = pending/draft. Reads at a glance, never shouts.
 
-### Commandes — product-centric rows
-```
-[56px photo] Atlas Kilim Duffle        Claire Dubois     ● Payée   suivi —   680 €   2j
-             Cuir pleine fleur · Cognac  claire@…
-```
-One line per order, photo-first, hover reveals row, click → work order.
+## Imagery
 
-### Clients — luxury profile
-```
-◯ Claire Dubois            Paris, FR        2 commandes · 1 360 € à vie
-[Commandes] [Notes/timeline] [Préférences produit]
-```
-Implemented as an order-history + LTV module added to the existing contact profile.
+The pieces are the interface. Photos are **plates**: square, flush crops,
+hairline frame, zero radius. Order rows lead with the piece. Today leads
+with what must ship. The collection grid is a contact sheet, not a card grid.
 
-### Produits — catalogue cards
-```
-┌────────┐ ┌────────┐ ┌────────┐
-│ photo  │ │ photo  │ │ photo  │   filters: collection / stock
-│ Title  │ │ Title  │ │ Title  │
-│ 680 €  │ │ sold   │ │ 540 €  │
-└────────┘ └────────┘ └────────┘
-```
-Read-only (Airtable remains canonical via the sync cron).
+## Motion
 
-### Médiathèque — luxury DAM grid
-```
-[≣ grid of product photography, hover → product + copy-URL]
-v1 source: products.images[] (every published photo). Video/campaign
-assets enter when they live somewhere a browser can reach (Supabase
-storage listing or a manifest) — Drive isn't browser-accessible.
-```
+One entrance per page: 240ms fade + 4px rise, ease-out — the page is *placed*
+on the desk. Hovers shift ink or reveal a hairline; nothing slides, bounces,
+or glows. 150ms everywhere else.
 
-## Interactions
+## Information architecture
 
-150ms ease transitions on hover/active; pill hovers in nav; ⌘K everywhere;
-no entrance animations inside the app (login only).
+- **Aujourd'hui** — the action page. Pieces to ship (photo-first), latest
+  orders, new clients, collection pulse, recent activity. No revenue widgets,
+  no charts: a register, not a boardroom.
+- **Commandes** — photo-first rows; the row IS the work order.
+- **Clients** — a client file reads like a maison's client book: who, what
+  they own, what was said.
+- **Collection** (Pièces / Inventaire) — contact sheet + counts.
+- **Studio** — the maison's images.
+- Réglages stays in the footer. Deals/companies stay registered but invisible
+  (future wholesale pipeline).
+
+## Empty states
+
+Empty is a state of readiness, not failure: an overline, one serif sentence,
+one quiet action. The register before the season opens.
+
+## What was deliberately rejected
+
+- Boxed widget dashboards, KPI tiles, charts (no decision they'd inform yet)
+- Tinted status pills, colored badges, avatars-as-decoration
+- Inset floating content card (Linear's anatomy) — content sits ON the paper
+- Blue focus rings, cool grays, pure white — the register is never cold

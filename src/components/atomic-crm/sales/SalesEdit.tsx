@@ -95,7 +95,7 @@ const SaleEditTitle = () => {
   const translate = useTranslate();
   if (!record) return null;
   return (
-    <h2 className="text-[15px] font-semibold mb-4">
+    <h2 className="display text-[22px] leading-none mb-4">
       {translate("resources.sales.edit.title", {
         name: `${record.first_name} ${record.last_name}`,
       })}

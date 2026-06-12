@@ -14,6 +14,7 @@ import { LocalesMenuButton } from "@/components/admin/locales-menu-button";
 import { Error } from "@/components/admin/error";
 import { Loading } from "@/components/admin/loading";
 import { CanAccess, useTranslate } from "ra-core";
+import { useLocation } from "react-router";
 
 import { useConfigurationLoader } from "../root/useConfigurationLoader";
 import {
@@ -27,22 +28,27 @@ import { CommandPalette } from "./CommandPalette";
 import { MaisonSidebar } from "./MaisonSidebar";
 
 /**
- * Linear anatomy: borderless sidebar on the warm canvas, content floating
- * as a rounded white card (SidebarInset), slim utility bar inside the card.
+ * Le Registre: one continuous paper surface. The sidebar is a quiet rail,
+ * the content sits directly on the paper (no floating card), separated only
+ * by whitespace. Each page is placed on the desk with a single entrance.
  */
 export const MaisonLayout = ({ children }: { children: ReactNode }) => {
   useConfigurationLoader();
   const translate = useTranslate();
   const [errorInfo, setErrorInfo] = useState<ErrorInfo | undefined>(undefined);
+  const location = useLocation();
+  // First path segment: navigating within a resource (list → detail) should
+  // not replay the entrance — only moving to another register page does.
+  const section = location.pathname.split("/")[1] ?? "";
   const handleError = (_: unknown, info: ErrorInfo) => {
     setErrorInfo(info);
   };
   return (
     <SidebarProvider>
       <MaisonSidebar />
-      <SidebarInset className="border md:peer-data-[variant=inset]:rounded-lg md:peer-data-[variant=inset]:shadow-[0_1px_4px_rgba(29,27,25,0.06)] overflow-hidden flex flex-col">
-        <header className="flex h-12 shrink-0 items-center gap-2 px-4">
-          <SidebarTrigger className="text-muted-foreground" />
+      <SidebarInset className="bg-background flex flex-col">
+        <header className="flex h-14 shrink-0 items-center gap-2 px-8">
+          <SidebarTrigger className="text-muted-foreground md:hidden" />
           <div className="flex-1 flex items-center" id="breadcrumb" />
           <button
             type="button"
@@ -51,10 +57,10 @@ export const MaisonLayout = ({ children }: { children: ReactNode }) => {
                 new KeyboardEvent("keydown", { key: "k", metaKey: true }),
               )
             }
-            className="hidden md:flex items-center gap-2 rounded-md border px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground"
+            className="hidden md:flex items-center gap-2 px-2 py-1 text-xs text-muted-foreground transition-colors hover:text-foreground"
           >
             <span>{translate("ra.action.search", { _: "Search" })}</span>
-            <kbd className="font-mono text-[10px] rounded border px-1 bg-muted">
+            <kbd className="font-mono text-[10px] border px-1 text-muted-foreground">
               ⌘K
             </kbd>
           </button>
@@ -85,10 +91,13 @@ export const MaisonLayout = ({ children }: { children: ReactNode }) => {
         >
           <Suspense fallback={<Loading />}>
             <div
-              className="flex flex-1 flex-col px-6 pb-10 overflow-y-auto"
+              key={section}
+              className="page-enter flex flex-1 flex-col px-8 pb-16 overflow-y-auto"
               id="main-content"
             >
-              {children}
+              <div className="w-full max-w-[1200px] mx-auto flex flex-1 flex-col">
+                {children}
+              </div>
             </div>
           </Suspense>
         </ErrorBoundary>

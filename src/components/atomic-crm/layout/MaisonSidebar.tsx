@@ -1,12 +1,12 @@
 import {
   Boxes,
-  House,
   Images,
   Layers,
   PenLine,
   Search,
   Settings,
   ShoppingBag,
+  Sun,
   Users,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -26,8 +26,6 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 
-import { useConfigurationContext } from "../root/ConfigurationContext";
-
 interface NavEntry {
   to: string;
   icon: LucideIcon;
@@ -36,7 +34,7 @@ interface NavEntry {
 }
 
 const MAIN_NAV: NavEntry[] = [
-  { to: "/", icon: House, label: "ra.page.dashboard" },
+  { to: "/", icon: Sun, label: "crm.nav.today" },
   {
     to: "/orders",
     icon: ShoppingBag,
@@ -50,7 +48,7 @@ const MAIN_NAV: NavEntry[] = [
   },
 ];
 
-const CATALOGUE_NAV: NavEntry[] = [
+const COLLECTION_NAV: NavEntry[] = [
   { to: "/products", icon: Layers, label: "crm.nav.products" },
   { to: "/inventory", icon: Boxes, label: "crm.nav.inventory" },
 ];
@@ -72,10 +70,12 @@ const NavItem = ({ entry }: { entry: NavEntry }) => {
       <SidebarMenuButton
         asChild
         isActive={isActive}
-        className="h-7 text-[13px] rounded-md"
+        className="h-7 text-[13px] rounded-sm data-[active=true]:bg-transparent data-[active=true]:font-medium data-[active=true]:text-foreground text-ink-soft"
       >
         <Link to={entry.to} onClick={() => openMobile && setOpenMobile(false)}>
-          <entry.icon className="!size-4 opacity-70" />
+          <entry.icon
+            className={`!size-[15px] ${isActive ? "text-tobacco" : "opacity-50"}`}
+          />
           <span>
             {translate(
               entry.label,
@@ -89,67 +89,56 @@ const NavItem = ({ entry }: { entry: NavEntry }) => {
 };
 
 const GroupLabel = ({ children }: { children: string }) => (
-  <SidebarGroupLabel className="text-[11px] font-medium text-muted-foreground/80 normal-case tracking-normal">
+  <SidebarGroupLabel className="overline h-auto pb-1.5 pt-1">
     {children}
   </SidebarGroupLabel>
 );
 
 /**
- * Linear anatomy, maison identity: borderless sidebar on the warm canvas,
- * workspace-style header (monogram + name + search/compose), compact sans
- * nav with pill active states. Serif stays out of the chrome.
+ * Le Registre's rail: the maison wordmark in small caps, typographic nav on
+ * the same paper as the content — no inset card, no boxes. The active page
+ * is marked by ink weight and a tobacco icon, not a pill.
  */
 export function MaisonSidebar() {
-  const { lightModeLogo, darkModeLogo, title } = useConfigurationContext();
   const translate = useTranslate();
   const navigate = useNavigate();
   return (
-    <Sidebar collapsible="icon" variant="inset" className="border-0">
-      <SidebarHeader>
-        <div className="flex items-center gap-1.5 px-1 pt-1">
-          <Link
-            to="/"
-            className="flex items-center gap-2 min-w-0 flex-1 no-underline rounded-md px-1 py-1 hover:bg-sidebar-accent"
-          >
-            <span className="flex size-6 shrink-0 items-center justify-center rounded-md bg-white border">
-              <img
-                className="h-4 w-4 [.dark_&]:hidden"
-                src={lightModeLogo}
-                alt=""
-              />
-              <img
-                className="h-4 w-4 hidden [.dark_&]:block"
-                src={darkModeLogo}
-                alt=""
-              />
+    <Sidebar collapsible="offcanvas" className="border-0 bg-background">
+      <SidebarHeader className="px-4 pt-6 pb-4">
+        <div className="flex items-start justify-between gap-2">
+          <Link to="/" className="no-underline min-w-0">
+            <span className="display block text-[17px] leading-tight tracking-[0.02em] text-foreground">
+              Maison Tanneurs
             </span>
-            <span className="truncate text-[13px] font-semibold group-data-[collapsible=icon]:hidden">
-              {title}
+            <span className="overline mt-1 block">
+              {translate("crm.nav.register", { _: "Le Registre" })}
             </span>
           </Link>
-          <button
-            type="button"
-            aria-label="Search"
-            onClick={() =>
-              document.dispatchEvent(
-                new KeyboardEvent("keydown", { key: "k", metaKey: true }),
-              )
-            }
-            className="flex size-7 items-center justify-center rounded-md text-muted-foreground hover:bg-sidebar-accent hover:text-foreground group-data-[collapsible=icon]:hidden"
-          >
-            <Search className="size-4" />
-          </button>
-          <button
-            type="button"
-            aria-label={translate("resources.orders.action.new")}
-            onClick={() => navigate("/orders/create")}
-            className="flex size-7 items-center justify-center rounded-md text-muted-foreground hover:bg-sidebar-accent hover:text-foreground group-data-[collapsible=icon]:hidden"
-          >
-            <PenLine className="size-4" />
-          </button>
+          <div className="flex items-center gap-0.5 pt-0.5">
+            <button
+              type="button"
+              aria-label="Search"
+              onClick={() =>
+                document.dispatchEvent(
+                  new KeyboardEvent("keydown", { key: "k", metaKey: true }),
+                )
+              }
+              className="flex size-7 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <Search className="size-[15px]" />
+            </button>
+            <button
+              type="button"
+              aria-label={translate("resources.orders.action.new")}
+              onClick={() => navigate("/orders/create")}
+              className="flex size-7 items-center justify-center text-muted-foreground transition-colors hover:text-foreground"
+            >
+              <PenLine className="size-[15px]" />
+            </button>
+          </div>
         </div>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="px-1">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -160,10 +149,12 @@ export function MaisonSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
-          <GroupLabel>{translate("crm.nav.catalogue", { _: "Catalogue" })}</GroupLabel>
+          <GroupLabel>
+            {translate("crm.nav.catalogue", { _: "Collection" })}
+          </GroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {CATALOGUE_NAV.map((entry) => (
+              {COLLECTION_NAV.map((entry) => (
                 <NavItem key={entry.to} entry={entry} />
               ))}
             </SidebarMenu>
@@ -180,15 +171,15 @@ export function MaisonSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="px-1 pb-4">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="h-7 text-[13px] rounded-md text-muted-foreground"
+              className="h-7 text-[13px] rounded-sm text-muted-foreground"
             >
               <Link to="/settings">
-                <Settings className="!size-4 opacity-70" />
+                <Settings className="!size-[15px] opacity-50" />
                 <span>{translate("crm.settings.title", { _: "Settings" })}</span>
               </Link>
             </SidebarMenuButton>

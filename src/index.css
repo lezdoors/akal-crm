@@ -48,6 +48,7 @@
   --color-ink-soft: var(--ink-soft);
   --color-ink-muted: var(--ink-muted);
   --color-tobacco: var(--tobacco);
+  --color-moss: var(--moss);
   --color-hairline: var(--hairline);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -83,35 +84,36 @@
 }
 
 :root {
-  /* Linear light palette, verbatim — Maison identity lives in the wordmark,
-     login, and photography, not the chrome. Leather kept as ONE accent. */
-  --radius: 0.5rem;
-  --ground: #ffffff;
-  --ground-deep: #f9f8f9;
-  --ink: #282a30;
-  --ink-soft: #3c4149;
-  --ink-muted: #6f6e77;
+  /* Le Registre — paper & ink. One warm surface; regions are whitespace and
+     hairlines, never boxes. Tobacco is the single accent. */
+  --radius: 0.25rem;
+  --ground: #fcfaf6; /* paper-raised */
+  --ground-deep: #f7f4ee; /* paper */
+  --ink: #221c14;
+  --ink-soft: #4a4238;
+  --ink-muted: #8a8071;
   --tobacco: #8a6a43;
-  --dark-close: #18191b;
-  --hairline: #e9e8ea;
+  --moss: #5a6b52;
+  --dark-close: #16120d;
+  --hairline: #e6dfd2;
   --background: var(--ground-deep);
   --foreground: var(--ink);
-  --card: var(--ground);
+  --card: var(--ground-deep);
   --card-foreground: var(--ink);
   --popover: var(--ground);
   --popover-foreground: var(--ink);
   --primary: var(--ink);
-  --primary-foreground: var(--ground);
-  --secondary: #f1f0f3;
+  --primary-foreground: var(--ground-deep);
+  --secondary: #efe9de;
   --secondary-foreground: var(--ink);
-  --muted: #f1f0f3;
+  --muted: #efe9de;
   --muted-foreground: var(--ink-muted);
-  --accent: #f1f0f3;
+  --accent: #efe9de;
   --accent-foreground: var(--ink);
-  --destructive: oklch(0.577 0.245 27.325);
+  --destructive: #8c3a2e;
   --border: var(--hairline);
   --input: var(--hairline);
-  --ring: #6e79d6;
+  --ring: var(--tobacco);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -120,11 +122,11 @@
   --sidebar: var(--ground-deep);
   --sidebar-foreground: var(--ink);
   --sidebar-primary: var(--ink);
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #e9e8ea;
+  --sidebar-primary-foreground: var(--ground-deep);
+  --sidebar-accent: #efe9de;
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: transparent;
-  --sidebar-ring: var(--ink-muted);
+  --sidebar-ring: var(--tobacco);
   --avatar-0: oklch(0.85 0.08 240);
   --avatar-1: oklch(0.88 0.1 340);
   --avatar-2: oklch(0.85 0.07 180);
@@ -138,38 +140,44 @@
 }
 
 .dark {
-  /* Espresso close — mirrors the storefront dark register */
+  /* Espresso — the register by lamplight */
   --background: var(--dark-close);
-  --foreground: #eeeff1;
-  --card: #1f2023;
-  --card-foreground: #eeeff1;
-  --popover: #1f2023;
-  --popover-foreground: #eeeff1;
-  --primary: #eeeff1;
-  --primary-foreground: #18191b;
-  --secondary: #26282b;
-  --secondary-foreground: #eeeff1;
-  --muted: #26282b;
-  --muted-foreground: #8a8f98;
-  --accent: #26282b;
-  --accent-foreground: #eeeff1;
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: #2c2d31;
-  --input: #2c2d31;
-  --ring: #6e79d6;
+  --foreground: #ebe4d8;
+  --card: var(--dark-close);
+  --card-foreground: #ebe4d8;
+  --popover: #1d1812;
+  --popover-foreground: #ebe4d8;
+  --primary: #ebe4d8;
+  --primary-foreground: #16120d;
+  --secondary: #262017;
+  --secondary-foreground: #ebe4d8;
+  --muted: #262017;
+  --muted-foreground: #877c6c;
+  --accent: #262017;
+  --accent-foreground: #ebe4d8;
+  --destructive: #b3614f;
+  --border: #2d2820;
+  --input: #2d2820;
+  --ring: #a8845b;
+  --tobacco: #a8845b;
+  --moss: #7d8f72;
+  --ink: #ebe4d8;
+  --ink-soft: #c9c0b2;
+  --ink-muted: #877c6c;
+  --hairline: #2d2820;
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
   --sidebar: var(--dark-close);
-  --sidebar-foreground: #eeeff1;
-  --sidebar-primary: #eeeff1;
-  --sidebar-primary-foreground: var(--ink);
-  --sidebar-accent: #26282b;
-  --sidebar-accent-foreground: #eeeff1;
+  --sidebar-foreground: #ebe4d8;
+  --sidebar-primary: #ebe4d8;
+  --sidebar-primary-foreground: #16120d;
+  --sidebar-accent: #262017;
+  --sidebar-accent-foreground: #ebe4d8;
   --sidebar-border: transparent;
-  --sidebar-ring: var(--ink-muted);
+  --sidebar-ring: var(--tobacco);
   --avatar-0: oklch(0.35 0.12 240);
   --avatar-1: oklch(0.38 0.14 340);
   --avatar-2: oklch(0.35 0.11 180);
@@ -242,12 +250,52 @@ input[type="time"] {
   animation: login-enter 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* === Le Registre — the three voices === */
+
+/* Voice 2: the register's overline — section labels, table headers, status.
+   text-decoration none neutralizes Tailwind's same-named decoration utility
+   (this unlayered rule outranks @layer utilities). */
+.overline {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+
+/* Voice 1: the maison's serif for page titles and editorial figures */
+.display {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Photographs are plates: square, hairline frame, zero radius */
+.plate {
+  border-radius: 0;
+  border: 1px solid var(--hairline);
+  object-fit: cover;
+  background: var(--secondary);
+}
+
+/* Each page is placed on the desk once */
+@keyframes page-enter {
+  0% { opacity: 0; transform: translateY(4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+.page-enter {
+  animation: page-enter 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
 @layer base {
-  /* Linear-style table headers: small, quiet, sentence case */
+  /* Table headers speak in the overline voice */
   thead th {
-    font-size: 0.75rem;
+    font-size: 10px;
     font-weight: 500;
-    color: var(--muted-foreground);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
   }
 }
 
