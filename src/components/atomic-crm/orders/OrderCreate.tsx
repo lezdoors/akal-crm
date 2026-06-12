@@ -11,6 +11,7 @@ import { TextInput } from "@/components/admin/text-input";
 
 import type { Order } from "../types";
 import {
+  formatMoney,
   generateOrderNumber,
   ORDER_CHANNEL_CHOICES,
   ORDER_CURRENCY_CHOICES,
@@ -87,9 +88,10 @@ export function OrderCreate() {
     };
   }, [products]);
 
+  // Catalogue prices are stored in USD minor units.
   const productChoices = (products ?? []).map((product) => ({
     id: product.id,
-    name: `${product.title} — $${(product.price / 100).toFixed(0)}`,
+    name: `${product.title} — ${formatMoney(product.price, "USD")}`,
   }));
 
   return (

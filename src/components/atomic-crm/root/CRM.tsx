@@ -138,19 +138,8 @@ export const CRM = ({
   disableTelemetry,
   ...rest
 }: CRMProps) => {
-  useEffect(() => {
-    if (
-      disableTelemetry ||
-      process.env.NODE_ENV !== "production" ||
-      typeof window === "undefined" ||
-      typeof window.location === "undefined" ||
-      typeof Image === "undefined"
-    ) {
-      return;
-    }
-    const img = new Image();
-    img.src = `https://atomic-crm-telemetry.marmelab.com/atomic-crm-telemetry?domain=${window.location.hostname}`;
-  }, [disableTelemetry]);
+  // Upstream's marmelab telemetry beacon was removed here — no external
+  // pings from production.
 
   // Seed the store with CRM prop values if not already stored
   // (backwards compatibility for prop-based config)
@@ -287,26 +276,31 @@ const DesktopAdmin = (
   );
 };
 
+// Instantiated once at module level: re-creating the QueryClient on each
+// render would discard the cache and defeat the offline persistence.
+const mobileQueryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      gcTime: 1000 * 60 * 60 * 24, // 24 hours
+      networkMode: "offlineFirst",
+    },
+    mutations: {
+      networkMode: "offlineFirst",
+    },
+  },
+});
+const mobileStoragePersister = createAsyncStoragePersister({
+  storage: localStorage,
+});
+
 const MobileAdmin = (
   props: CoreAdminProps & {
     dashboard?: DashboardComponent;
     layout?: LayoutComponent;
   },
 ) => {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        gcTime: 1000 * 60 * 60 * 24, // 24 hours
-        networkMode: "offlineFirst",
-      },
-      mutations: {
-        networkMode: "offlineFirst",
-      },
-    },
-  });
-  const asyncStoragePersister = createAsyncStoragePersister({
-    storage: localStorage,
-  });
+  const queryClient = mobileQueryClient;
+  const asyncStoragePersister = mobileStoragePersister;
 
   return (
     <PersistQueryClientProvider

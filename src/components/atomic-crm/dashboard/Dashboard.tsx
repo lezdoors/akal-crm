@@ -8,7 +8,6 @@ import { OrdersToShip } from "./OrdersToShip";
 import { RecentClients } from "./RecentClients";
 import { RecentOrders } from "./RecentOrders";
 import { StockAlerts } from "./StockAlerts";
-import { Welcome } from "./Welcome";
 import { useDashboardOrders } from "./commerceData";
 
 /** Shown in the orders column until the first order exists. */
@@ -52,7 +51,6 @@ export const Dashboard = () => {
 
   return (
     <div className="flex flex-col gap-5 mt-2">
-      {import.meta.env.VITE_IS_DEMO === "true" ? <Welcome /> : null}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         <div className="lg:col-span-8 flex flex-col gap-5">
           {orders?.length ? (

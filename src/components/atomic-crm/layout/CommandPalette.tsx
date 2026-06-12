@@ -1,11 +1,4 @@
-import {
-  Building2,
-  Handshake,
-  House,
-  Plus,
-  ShoppingBag,
-  Users,
-} from "lucide-react";
+import { House, Package, Plus, ShoppingBag, Users } from "lucide-react";
 import { useGetList, useRedirect, useTranslate } from "ra-core";
 import { useEffect, useState } from "react";
 import {
@@ -74,6 +67,8 @@ export const CommandPalette = () => {
     redirect(path);
   };
 
+  // Deals/companies stay registered for a future wholesale pipeline but are
+  // deliberately absent from every navigation surface.
   const nav = [
     { path: "/", icon: House, label: translate("ra.page.dashboard") },
     {
@@ -87,14 +82,9 @@ export const CommandPalette = () => {
       label: translate("resources.contacts.name", { smart_count: 2 }),
     },
     {
-      path: "/companies",
-      icon: Building2,
-      label: translate("resources.companies.name", { smart_count: 2 }),
-    },
-    {
-      path: "/deals",
-      icon: Handshake,
-      label: translate("resources.deals.name", { smart_count: 2 }),
+      path: "/products",
+      icon: Package,
+      label: translate("crm.nav.products", { _: "Products" }),
     },
   ];
 

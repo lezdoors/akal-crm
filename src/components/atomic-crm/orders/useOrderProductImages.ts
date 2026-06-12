@@ -21,12 +21,15 @@ export const useOrderProducts = (
   orders: Order[] | Order | undefined,
 ): ((item: OrderItem) => ProductLookupRow | undefined) => {
   const list = Array.isArray(orders) ? orders : orders ? [orders] : [];
+  // products.id is a UUID; manual orders may carry free text in product_id.
+  const UUID_RE =
+    /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   const ids = Array.from(
     new Set(
       list
         .flatMap((order) => order.items ?? [])
         .map((item) => item.product_id)
-        .filter((id) => id && id.length > 10),
+        .filter((id) => id && UUID_RE.test(id)),
     ),
   );
   const { data: products } = useGetMany<ProductLookupRow>(

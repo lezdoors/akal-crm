@@ -7,7 +7,12 @@ const CURRENCY_INTL_LOCALE: Record<string, string> = {
 };
 
 /** Order amounts are stored as integer minor units (cents) with an ISO currency column. */
-export function formatMoney(minorUnits: number, currency?: string | null): string {
+export function formatMoney(
+  minorUnits: number | null | undefined,
+  currency?: string | null,
+): string {
+  // A missing amount must not masquerade as $0.00.
+  if (minorUnits == null) return "—";
   const code = currency || "USD";
   return new Intl.NumberFormat(CURRENCY_INTL_LOCALE[code] ?? "en-US", {
     style: "currency",

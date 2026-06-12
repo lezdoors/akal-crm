@@ -3,6 +3,8 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { Badge } from "@/components/ui/badge";
 
+import { formatMoney } from "../orders/orderUtils";
+
 export interface CatalogueProduct {
   id: string;
   title: string;
@@ -160,7 +162,7 @@ export const ProductsPage = () => {
                 </div>
               </div>
               <div className="text-sm tabular-nums shrink-0">
-                ${(product.price / 100).toFixed(0)}
+                {formatMoney(product.price, "USD")}
               </div>
             </div>
             <div className="pt-1.5">

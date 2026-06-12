@@ -107,10 +107,20 @@ async function inviteUser(req: Request, currentUserSale: any) {
         });
       }
       if (existingSale.length > 0) {
-        return createErrorResponse(
-          400,
-          "A sales for this email already exists",
-        );
+        // The user and their profile both exist — a previous invite attempt
+        // failed at the email step. Re-adding them re-sends the invitation.
+        const { error: emailError } =
+          await supabaseAdmin.auth.admin.inviteUserByEmail(email);
+        if (emailError) {
+          console.error(`Error re-inviting existing user: ${emailError}`);
+          return createErrorResponse(
+            500,
+            "User already exists but the invitation email failed again",
+          );
+        }
+        return new Response(JSON.stringify({ data: existingSale[0] }), {
+          headers: { "Content-Type": "application/json", ...corsHeaders },
+        });
       }
 
       const sale = await createSale(user.id, {
@@ -162,7 +172,10 @@ async function inviteUser(req: Request, currentUserSale: any) {
 
     if (emailError) {
       console.error(`Error inviting user, email_error=${emailError}`);
-      return createErrorResponse(500, "Failed to send invitation mail");
+      return createErrorResponse(
+        500,
+        "User created but the invitation email failed — add them again with the same email to resend it",
+      );
     }
   }
 
@@ -285,6 +298,22 @@ async function patchUser(req: Request, currentUserSale: any) {
   // Users can only update their own profile unless they are an administrator
   if (!currentUserSale.administrator && currentUserSale.id !== sale.id) {
     return createErrorResponse(401, "Not Authorized");
+  }
+
+  // Never demote the last administrator — that would lock the CRM with no
+  // recovery path short of a direct database edit.
+  if (
+    currentUserSale.administrator &&
+    sale.administrator &&
+    administrator === false
+  ) {
+    const { count } = await supabaseAdmin
+      .from("sales")
+      .select("*", { count: "exact", head: true })
+      .eq("administrator", true);
+    if ((count ?? 0) <= 1) {
+      return createErrorResponse(400, "Cannot demote the last administrator");
+    }
   }
 
   const { data, error: userError } =

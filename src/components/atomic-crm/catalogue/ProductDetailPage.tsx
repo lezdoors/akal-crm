@@ -4,6 +4,7 @@ import { Link, useParams } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
+import { formatMoney } from "../orders/orderUtils";
 import type { CatalogueProduct } from "./ProductsPage";
 import { ProductStatusBadge } from "./ProductsPage";
 
@@ -46,7 +47,7 @@ export const ProductDetailPage = () => {
         </h2>
         <ProductStatusBadge product={product} />
         <span className="text-lg tabular-nums ml-auto">
-          ${(product.price / 100).toFixed(0)}
+          {formatMoney(product.price, "USD")}
         </span>
       </div>
 

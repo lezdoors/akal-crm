@@ -16,18 +16,27 @@ interface OrderRow {
   shipping_email_sent_at: string | null;
 }
 
+/** customer_name (and friends) are customer-supplied — never interpolate raw. */
+function esc(value: string | null | undefined): string {
+  return (value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
 function shippingEmailHtml(order: OrderRow, carrier?: string): string {
   return `
     <div style="max-width:600px;margin:0 auto;background:#f5efe3;padding:48px 32px;font-family:'Inter Tight',Helvetica,Arial,sans-serif;color:#1f1b16;">
       <div style="text-align:center;margin-bottom:40px;">
         <div style="font-family:Georgia,serif;font-size:36px;letter-spacing:-0.01em;">MAISON TANNEURS</div>
       </div>
-      <p style="font-family:Georgia,serif;font-style:italic;font-size:18px;color:#3a332a;">Dear ${order.customer_name},</p>
-      <p style="font-size:15px;line-height:1.7;color:#3a332a;">Your order ${order.order_number} has been shipped from Marrakech.</p>
+      <p style="font-family:Georgia,serif;font-style:italic;font-size:18px;color:#3a332a;">Dear ${esc(order.customer_name)},</p>
+      <p style="font-size:15px;line-height:1.7;color:#3a332a;">Your order ${esc(order.order_number)} has been shipped from Marrakech.</p>
       <div style="background:#ebe3d1;padding:24px;margin:24px 0;">
         <div style="font-family:monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#7a6f5c;margin-bottom:8px;">Tracking</div>
-        <p style="font-family:monospace;font-size:16px;margin:0;">${order.tracking_number}</p>
-        ${carrier ? `<p style="font-family:monospace;font-size:12px;color:#7a6f5c;margin:4px 0 0;">via ${carrier}</p>` : ""}
+        <p style="font-family:monospace;font-size:16px;margin:0;">${esc(order.tracking_number)}</p>
+        ${carrier ? `<p style="font-family:monospace;font-size:12px;color:#7a6f5c;margin:4px 0 0;">via ${esc(carrier)}</p>` : ""}
       </div>
       <div style="text-align:center;margin-top:40px;padding-top:24px;border-top:1px solid #d9cfbb;">
         <div style="font-family:monospace;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:#7a6f5c;">Maison Tanneurs · Marrakech</div>
@@ -118,10 +127,23 @@ async function handleSend(req: Request): Promise<Response> {
     await sendViaResend(order, body.carrier);
   } catch (error) {
     console.error("Resend send failed, releasing claim:", error);
-    await supabaseAdmin
+    const { error: releaseError } = await supabaseAdmin
       .from("orders")
       .update({ shipping_email_sent_at: null })
       .eq("id", order.id);
+    if (releaseError) {
+      // Claim is stuck: the UI will show "already sent" although nothing
+      // was sent. Surface it loudly — recovery is clearing the column.
+      console.error(
+        "CRITICAL: claim release failed for order",
+        order.id,
+        releaseError,
+      );
+      return createErrorResponse(
+        502,
+        "Email send failed AND the retry guard is stuck — clear the order's shipping_email_sent_at to retry",
+      );
+    }
     return createErrorResponse(502, "Email send failed; claim released");
   }
 
