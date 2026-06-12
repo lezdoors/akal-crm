@@ -44,6 +44,29 @@ const processCompanyLogo = async (params: any) => {
   };
 };
 
+const salesDeleteViaFunction = async (id: Identifier) => {
+  const { data, error } = await getSupabaseClient().functions.invoke<{
+    data: { id: Identifier };
+  }>("users", {
+    method: "DELETE",
+    body: { sales_id: id },
+  });
+
+  if (!data || error) {
+    console.error("salesDelete.error", error);
+    const errorDetails = await (async () => {
+      try {
+        return (await error?.context?.json()) ?? {};
+      } catch {
+        return {};
+      }
+    })();
+    throw new Error(errorDetails?.message || "Failed to delete the user");
+  }
+
+  return data.data;
+};
+
 const getDataProviderWithCustomMethods = () => {
   const baseDataProvider = getBaseDataProvider();
 
@@ -85,6 +108,26 @@ const getDataProviderWithCustomMethods = () => {
       }
 
       return baseDataProvider.getOne(resource, params);
+    },
+    // Users must be deleted through the edge function (it removes the auth
+    // account and reassigns owned records). The sales table is SELECT-only
+    // via RLS, so a direct PostgREST delete silently does nothing — which is
+    // exactly what the list's bulk-delete would otherwise hit.
+    async delete(resource: string, params: any) {
+      if (resource === "sales") {
+        await salesDeleteViaFunction(params.id);
+        return { data: params.previousData ?? { id: params.id } };
+      }
+      return baseDataProvider.delete(resource, params);
+    },
+    async deleteMany(resource: string, params: any) {
+      if (resource === "sales") {
+        for (const id of params.ids) {
+          await salesDeleteViaFunction(id);
+        }
+        return { data: params.ids };
+      }
+      return baseDataProvider.deleteMany(resource, params);
     },
 
     async signUp({ email, password, first_name, last_name }: SignUpData) {
@@ -166,26 +209,7 @@ const getDataProviderWithCustomMethods = () => {
       return updatedData.data;
     },
     async salesDelete(id: Identifier) {
-      const { data, error } = await getSupabaseClient().functions.invoke<{
-        data: { id: Identifier };
-      }>("users", {
-        method: "DELETE",
-        body: { sales_id: id },
-      });
-
-      if (!data || error) {
-        console.error("salesDelete.error", error);
-        const errorDetails = await (async () => {
-          try {
-            return (await error?.context?.json()) ?? {};
-          } catch {
-            return {};
-          }
-        })();
-        throw new Error(errorDetails?.message || "Failed to delete the user");
-      }
-
-      return data.data;
+      return salesDeleteViaFunction(id);
     },
     async updatePassword(id: Identifier) {
       const { data: passwordUpdated, error } =
