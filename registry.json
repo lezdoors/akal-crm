@@ -666,10 +666,6 @@
           "type": "registry:component"
         },
         {
-          "path": "src/components/atomic-crm/dashboard/Welcome.tsx",
-          "type": "registry:component"
-        },
-        {
           "path": "src/components/atomic-crm/dashboard/TasksList.tsx",
           "type": "registry:component"
         },

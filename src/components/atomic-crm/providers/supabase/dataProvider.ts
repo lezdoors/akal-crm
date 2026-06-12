@@ -523,12 +523,19 @@ const uploadToBucket = async (fi: RAFile) => {
     throw new Error("Failed to upload attachment");
   }
 
-  const { data } = getSupabaseClient()
+  // The bucket is private: store a signed URL for immediate display. The
+  // canonical reference is `path` — render components re-sign from it.
+  const { data, error: signError } = await getSupabaseClient()
     .storage.from(ATTACHMENTS_BUCKET)
-    .getPublicUrl(filePath);
+    .createSignedUrl(filePath, 60 * 60);
+
+  if (signError || !data) {
+    console.error("signError", signError);
+    throw new Error("Failed to upload attachment");
+  }
 
   fi.path = filePath;
-  fi.src = data.publicUrl;
+  fi.src = data.signedUrl;
 
   // save MIME type
   const mimeType = file.type;

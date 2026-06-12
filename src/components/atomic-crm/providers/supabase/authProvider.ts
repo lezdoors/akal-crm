@@ -1,8 +1,20 @@
 import type { AuthProvider } from "ra-core";
 import { supabaseAuthProvider } from "ra-supabase-core";
 
+import { ATTACHMENTS_BUCKET } from "../commons/attachments";
 import { canAccess } from "../commons/canAccess";
 import { getSupabaseClient } from "./supabase";
+
+/** The attachments bucket is private — avatars are re-signed per session. */
+const signAvatarUrl = async (
+  avatar?: { src?: string; path?: string },
+): Promise<string | undefined> => {
+  if (!avatar?.path) return avatar?.src;
+  const { data } = await getSupabaseClient()
+    .storage.from(ATTACHMENTS_BUCKET)
+    .createSignedUrl(avatar.path, 60 * 60 * 24 * 7);
+  return data?.signedUrl ?? avatar.src;
+};
 
 const getBaseAuthProvider = () =>
   supabaseAuthProvider(getSupabaseClient(), {
@@ -16,7 +28,7 @@ const getBaseAuthProvider = () =>
       return {
         id: sale.id,
         fullName: `${sale.first_name} ${sale.last_name}`,
-        avatar: sale.avatar?.src,
+        avatar: await signAvatarUrl(sale.avatar),
       };
     },
   });

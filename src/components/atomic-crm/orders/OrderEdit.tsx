@@ -43,13 +43,21 @@ export function OrderEdit() {
   const redirect = useRedirect();
   const translate = useTranslate();
 
+  // Only fulfillment fields are sent — the database's column-level UPDATE
+  // grant rejects anything else (order contents/amounts are immutable).
   const transform = (data: Order, options?: { previousData?: Order }) => {
     const previous = options?.previousData?.tracking_number ?? "";
     const next = data.tracking_number ?? "";
+    const fulfillment: Partial<Order> = {
+      id: data.id,
+      status: data.status,
+      tracking_number: data.tracking_number,
+      notes: data.notes,
+    };
     if (next && next !== previous) {
-      return { ...data, shipping_email_sent_at: null };
+      return { ...fulfillment, shipping_email_sent_at: null };
     }
-    return data;
+    return fulfillment;
   };
 
   const onSuccess = async (data: unknown) => {

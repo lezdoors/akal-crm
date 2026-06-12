@@ -2,6 +2,8 @@ import { useFieldValue, useRecordContext, useTranslate } from "ra-core";
 import type { FileFieldProps } from "@/components/admin";
 import { cn } from "@/lib/utils";
 
+import { useAttachmentUrl } from "./useAttachmentUrl";
+
 /**
  * Displays a preview for a single attachment record.
  *
@@ -33,6 +35,11 @@ export const AttachmentField = (props: FileFieldProps) => {
       source: title,
     })?.toString() ?? title;
   const translate = useTranslate();
+  // Private bucket: persisted attachments are re-signed at render time.
+  const signedSrc = useAttachmentUrl(
+    sourceValue == null ? undefined : sourceValue.toString(),
+    (record as { path?: string } | undefined)?.path,
+  );
 
   if (sourceValue == null) {
     if (!empty) {
@@ -47,7 +54,7 @@ export const AttachmentField = (props: FileFieldProps) => {
   }
 
   const type = record?.type ?? record?.rawFile?.type;
-  const srcValue = sourceValue.toString();
+  const srcValue = signedSrc ?? sourceValue.toString();
 
   return (
     <div className={cn("inline-block", className)} {...rest}>

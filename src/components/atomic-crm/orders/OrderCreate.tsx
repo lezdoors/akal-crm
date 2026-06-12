@@ -62,8 +62,10 @@ export function OrderCreate() {
   const transform = useMemo(() => {
     const byId = new Map((products ?? []).map((p) => [p.id, p]));
     return (data: OrderDraft) => {
+      let hasCataloguePrice = false;
       const items = (data.draft_items ?? []).map((item) => {
         const product = item.product_id ? byId.get(item.product_id) : undefined;
+        if (product) hasCataloguePrice = true;
         return {
           product_id: item.product_id ?? "",
           title: product?.title ?? item.title ?? "",
@@ -71,6 +73,9 @@ export function OrderCreate() {
           quantity: item.quantity ?? 1,
         };
       });
+      // Catalogue prices are USD minor units — a mismatched currency column
+      // would misstate the amounts, so catalogue picks pin the currency.
+      const currency = hasCataloguePrice ? "USD" : data.currency;
       const subtotal = items.reduce(
         (sum, item) => sum + item.price * item.quantity,
         0,
@@ -78,6 +83,7 @@ export function OrderCreate() {
       const { draft_items: _draftItems, ...rest } = data;
       return {
         ...rest,
+        currency,
         order_number: generateOrderNumber(),
         items,
         subtotal,
