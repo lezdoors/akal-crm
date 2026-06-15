@@ -57,12 +57,21 @@ const ImageEditorField = (props: ImageEditorFieldProps) => {
               <AvatarImage src={imageUrl} />
               <AvatarFallback>{emptyText}</AvatarFallback>
             </Avatar>
-          ) : (
+          ) : imageUrl ? (
             <img
               {...commonProps}
               className="cursor-pointer object-cover"
               style={{ width, height }}
               alt={translate("crm.image_editor.editable_content", {
+                _: "Editable content",
+              })}
+            />
+          ) : (
+            <div
+              onClick={() => setIsDialogOpen(true)}
+              className="cursor-pointer rounded border border-dashed bg-secondary"
+              style={{ width, height }}
+              aria-label={translate("crm.image_editor.editable_content", {
                 _: "Editable content",
               })}
             />

@@ -28,6 +28,11 @@ export default defineConfig({
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,woff,woff2}"],
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024, // 5 MiB
+        // Take over immediately and purge stale precaches so a deploy never
+        // leaves a client serving deleted assets (e.g. a removed image).
+        cleanupOutdatedCaches: true,
+        skipWaiting: true,
+        clientsClaim: true,
       },
       manifest: false, // Use existing manifest.json from public/
     }),

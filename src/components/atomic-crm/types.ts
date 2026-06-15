@@ -230,7 +230,7 @@ export interface ContactGender {
 // === Maison Tanneurs commerce (storefront-owned `orders` table) ===
 
 export type OrderStatus = "pending" | "paid" | "shipped" | "delivered";
-export type OrderChannel = "direct" | "etsy";
+export type OrderChannel = "direct" | "etsy" | "facebook";
 
 export interface OrderItem {
   product_id: string;
