@@ -48,7 +48,7 @@ export const ClientOrders = () => {
           <Link
             key={String(order.id)}
             to={`/orders/${order.id}/show`}
-            className="flex items-center gap-2 px-1 py-2 text-[13px] no-underline transition-colors hover:bg-secondary/40"
+            className="flex items-center gap-2 px-1 py-2 text-[13px] no-underline transition-colors hover:bg-secondary"
           >
             <span className="font-mono text-xs">{order.order_number}</span>
             <OrderStatusWord status={order.status} />

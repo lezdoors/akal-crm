@@ -28,7 +28,7 @@ export function ActivityLogNote({ header, text, link }: ActivityLogNoteProps) {
           {link !== false ? (
             <Link
               to={link}
-              className="hover:bg-muted rounded transition-colors"
+              className="hover:bg-secondary rounded transition-colors"
             >
               {textElement}
             </Link>

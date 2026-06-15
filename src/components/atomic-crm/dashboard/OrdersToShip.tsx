@@ -35,7 +35,7 @@ export const OrdersToShip = () => {
             <Link
               key={order.id}
               to={`/orders/${order.id}`}
-              className="flex items-center justify-between py-3 text-[13px] no-underline transition-colors hover:bg-secondary/40 px-1"
+              className="flex items-center justify-between py-3 text-[13px] no-underline transition-colors hover:bg-secondary px-1"
             >
               {imageFor(
                 order.items?.[0] ?? {

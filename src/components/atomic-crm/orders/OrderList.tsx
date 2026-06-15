@@ -69,7 +69,7 @@ const OrderRows = () => {
           <Link
             key={String(order.id)}
             to={`/orders/${order.id}/show`}
-            className="group flex items-center gap-4 px-1 py-3 no-underline transition-colors hover:bg-secondary/40 md:grid md:grid-cols-[auto_minmax(0,2.2fr)_minmax(0,1.6fr)_auto_minmax(0,1fr)_auto_auto] md:items-center md:gap-5"
+            className="group flex items-center gap-4 px-1 py-3 no-underline transition-colors hover:bg-secondary md:grid md:grid-cols-[auto_minmax(0,2.2fr)_minmax(0,1.6fr)_auto_minmax(0,1fr)_auto_auto] md:items-center md:gap-5"
           >
             {image ? (
               <img src={image} alt="" className="plate h-16 w-16 shrink-0" />

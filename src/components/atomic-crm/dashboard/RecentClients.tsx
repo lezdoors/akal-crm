@@ -33,7 +33,7 @@ export const RecentClients = () => {
             <Link
               key={String(contact.id)}
               to={`/contacts/${contact.id}/show`}
-              className="flex items-baseline gap-2.5 px-1 py-2 no-underline transition-colors hover:bg-secondary/40"
+              className="flex items-baseline gap-2.5 px-1 py-2 no-underline transition-colors hover:bg-secondary"
             >
               <span className="text-[13px] truncate flex-1">
                 {contact.first_name} {contact.last_name}

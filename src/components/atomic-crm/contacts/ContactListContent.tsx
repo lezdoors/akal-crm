@@ -112,7 +112,7 @@ const ContactItemContent = ({
     : null;
 
   return (
-    <div className="flex flex-row items-center pl-2 pr-4 py-2 hover:bg-secondary/40 transition-colors duration-150">
+    <div className="flex flex-row items-center pl-2 pr-4 py-2 hover:bg-secondary transition-colors duration-150">
       <div
         className="px-4 py-3 flex items-center cursor-pointer"
         onClick={(e) => handleToggleItem(contact.id, e)}
@@ -252,7 +252,7 @@ const ContactItemContentMobile = ({ contact }: { contact: Contact }) => {
   return (
     <Link
       to={`/contacts/${contact.id}/show`}
-      className="flex flex-row gap-4 items-center py-2 hover:bg-secondary/40 transition-colors duration-150"
+      className="flex flex-row gap-4 items-center py-2 hover:bg-secondary transition-colors duration-150"
     >
       <Avatar />
       <div className="flex flex-col grow justify-between">

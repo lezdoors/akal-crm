@@ -32,7 +32,7 @@ const Section = ({
           <Link
             key={product.id}
             to={`/products/${product.id}`}
-            className="grid grid-cols-[auto_minmax(0,1fr)_auto] sm:grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-4 px-1 py-2 no-underline transition-colors hover:bg-secondary/40"
+            className="grid grid-cols-[auto_minmax(0,1fr)_auto] sm:grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-4 px-1 py-2 no-underline transition-colors hover:bg-secondary"
           >
             {product.images?.[0] ? (
               <img

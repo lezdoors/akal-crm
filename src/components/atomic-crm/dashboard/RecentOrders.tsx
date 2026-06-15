@@ -35,7 +35,7 @@ export const RecentOrders = () => {
             <Link
               key={order.id}
               to={`/orders/${order.id}/show`}
-              className="grid grid-cols-[auto_auto_1fr_auto_auto_auto] items-center gap-4 py-2.5 text-[13px] no-underline transition-colors hover:bg-secondary/40 px-1"
+              className="grid grid-cols-[auto_auto_1fr_auto_auto_auto] items-center gap-4 py-2.5 text-[13px] no-underline transition-colors hover:bg-secondary px-1"
             >
               {imageFor(
                 order.items?.[0] ?? {

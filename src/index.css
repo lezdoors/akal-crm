@@ -84,18 +84,19 @@
 }
 
 :root {
-  /* Le Registre — white & ink. One clean surface; regions are whitespace and
-     hairlines, never boxes. Tobacco is the single accent. */
+  /* Le Registre — clean white & neutral ink. Canvas reads cool/white; the
+     ONLY warmth in the UI is the tobacco accent. Neutrals are true grays so
+     nothing reads as cream. */
   --radius: 0.25rem;
   --ground: #ffffff; /* raised surface */
   --ground-deep: #ffffff; /* page surface */
-  --ink: #221c14;
-  --ink-soft: #4a4238;
-  --ink-muted: #8a8071;
+  --ink: #1c1c1e;
+  --ink-soft: #515154;
+  --ink-muted: #86868b;
   --tobacco: #8a6a43;
   --moss: #5a6b52;
   --dark-close: #16120d;
-  --hairline: #e7e5e2;
+  --hairline: #ececee;
   --background: var(--ground-deep);
   --foreground: var(--ink);
   --card: var(--ground-deep);
@@ -104,11 +105,11 @@
   --popover-foreground: var(--ink);
   --primary: var(--ink);
   --primary-foreground: var(--ground-deep);
-  --secondary: #f4f4f3;
+  --secondary: #f5f5f7;
   --secondary-foreground: var(--ink);
-  --muted: #f4f4f3;
+  --muted: #f5f5f7;
   --muted-foreground: var(--ink-muted);
-  --accent: #f4f4f3;
+  --accent: #f5f5f7;
   --accent-foreground: var(--ink);
   --destructive: #8c3a2e;
   --border: var(--hairline);
@@ -123,7 +124,7 @@
   --sidebar-foreground: var(--ink);
   --sidebar-primary: var(--ink);
   --sidebar-primary-foreground: var(--ground-deep);
-  --sidebar-accent: #f4f4f3;
+  --sidebar-accent: #f5f5f7;
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: transparent;
   --sidebar-ring: var(--tobacco);
