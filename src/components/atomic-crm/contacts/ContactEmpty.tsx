@@ -28,10 +28,10 @@ export const ContactEmpty = () => {
           alt={translate("resources.contacts.empty.title")}
         />
         <div className="flex flex-col gap-0 items-center">
-          <h6 className="text-lg font-bold">
+          <h6 className="display text-[22px] leading-none mb-2">
             {translate("resources.contacts.empty.title")}
           </h6>
-          <p className="text-sm text-muted-foreground text-center mb-4">
+          <p className="text-[13px] text-muted-foreground text-center mb-4">
             {translate("resources.contacts.empty.description")}
           </p>
         </div>

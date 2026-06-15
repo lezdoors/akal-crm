@@ -317,7 +317,7 @@ const SettingsFormFields = () => {
                 smart_count: 2,
               })}
             </h2>
-            <h3 className="text-lg font-medium text-muted-foreground">
+            <h3 className="overline text-ink-soft">
               {translate("crm.settings.companies.sectors")}
             </h3>
             <ArrayInput

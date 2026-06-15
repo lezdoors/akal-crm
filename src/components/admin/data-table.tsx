@@ -31,7 +31,6 @@ import { useNavigate } from "react-router";
 import { ArrowDownAZ, ArrowUpZA } from "lucide-react";
 import get from "lodash/get";
 import { cn } from "@/lib/utils";
-import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
   Table,
   TableBody,
@@ -112,7 +111,7 @@ export function DataTable<RecordType extends RaRecord = RaRecord>(
       empty={<DataTableEmpty />}
       {...rest}
     >
-      <div className={cn("rounded-md border", className)}>
+      <div className={cn("border-t border-hairline", className)}>
         <Table>
           <DataTableRenderContext.Provider value="header">
             <DataTableHead>{columns}</DataTableHead>
@@ -286,10 +285,18 @@ const isPromise = (value: any): value is Promise<any> =>
   value && typeof value.then === "function";
 
 const DataTableEmpty = () => {
+  const translate = useTranslate();
   return (
-    <Alert>
-      <AlertDescription>No results found.</AlertDescription>
-    </Alert>
+    <div className="flex flex-col items-center justify-center gap-2 py-16 text-center">
+      <p className="overline">
+        {translate("ra.navigation.no_results", { _: "Registre vide" })}
+      </p>
+      <p className="display text-[19px] text-ink-soft">
+        {translate("ra.message.no_results", {
+          _: "Aucun résultat pour cette vue.",
+        })}
+      </p>
+    </div>
   );
 };
 

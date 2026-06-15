@@ -113,7 +113,7 @@ export const CommandPalette = () => {
                 onSelect={() => go(`/orders/${order.id}/show`)}
               >
                 <ShoppingBag className="size-4" />
-                <span className="font-mono text-xs">{order.order_number}</span>
+                <span className="tabular-nums text-xs">{order.order_number}</span>
                 <span className="text-muted-foreground truncate flex-1">
                   {order.customer_name}
                 </span>

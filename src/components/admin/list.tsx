@@ -182,20 +182,23 @@ export const Empty = () => {
   const inviteMessage = translate("ra.page.invite");
 
   return (
-    <div className="flex min-h-[50vh] flex-col items-center justify-center gap-2 text-center">
-      <h2 className="text-2xl font-semibold">
+    <div className="flex min-h-[50vh] flex-col items-center justify-center gap-3 text-center">
+      <p className="overline">{resourceName}</p>
+      <h2 className="display text-[26px] leading-none">
         {translate(`resources.${resource}.empty`, {
           _: emptyMessage,
         })}
       </h2>
       {hasCreate ? (
         <>
-          <p className="text-muted-foreground">
+          <p className="text-[13px] text-muted-foreground">
             {translate(`resources.${resource}.invite`, {
               _: inviteMessage,
             })}
           </p>
-          <CreateButton />
+          <div className="mt-2">
+            <CreateButton />
+          </div>
         </>
       ) : null}
     </div>

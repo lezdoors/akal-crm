@@ -163,11 +163,11 @@ const ImageEditorDialog = (props: ImageEditorDialogProps) => {
         </DialogHeader>
         <div className="flex flex-col gap-2 justify-center">
           <div
-            className="flex flex-row justify-center bg-muted cursor-pointer p-4 border-2 border-dashed border-border rounded-lg hover:bg-secondary transition-colors"
+            className="flex flex-row justify-center bg-secondary cursor-pointer p-4 border border-dashed border-hairline rounded-md hover:bg-muted transition-colors"
             {...getRootProps()}
           >
             <input {...getInputProps()} />
-            <p className="text-gray-600">
+            <p className="text-[13px] text-muted-foreground">
               {translate("crm.image_editor.drop_hint", {
                 _: "Drop a file to upload, or click to select it.",
               })}

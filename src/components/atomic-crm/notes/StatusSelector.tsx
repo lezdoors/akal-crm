@@ -42,7 +42,7 @@ export const StatusSelector = ({
         <div
           aria-hidden="true"
           className={cn(
-            "border-input flex w-full items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap shadow-xs h-9",
+            "border-input flex w-full items-center justify-between gap-2 rounded-md border bg-transparent px-3 py-2 text-sm whitespace-nowrap h-9",
             disabled && "cursor-not-allowed opacity-50",
           )}
         >
