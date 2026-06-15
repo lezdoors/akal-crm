@@ -71,7 +71,7 @@ export const Error = (props: InternalErrorProps & {}) => {
               <li>
                 Check the{" "}
                 <a
-                  className="text-primary underline-offset-4 hover:underline"
+                  className="text-tobacco underline-offset-4 hover:underline"
                   href="https://marmelab.com/shadcn-admin-kit/docs"
                 >
                   shadcn-admin-kit documentation
@@ -80,7 +80,7 @@ export const Error = (props: InternalErrorProps & {}) => {
               <li>
                 Search on{" "}
                 <a
-                  className="text-primary underline-offset-4 hover:underline"
+                  className="text-tobacco underline-offset-4 hover:underline"
                   href="https://stackoverflow.com/questions/tagged/shadcn-admin-kit"
                 >
                   StackOverflow
@@ -90,7 +90,7 @@ export const Error = (props: InternalErrorProps & {}) => {
               <li>
                 Get help from the core team via{" "}
                 <a
-                  className="text-primary underline-offset-4 hover:underline"
+                  className="text-tobacco underline-offset-4 hover:underline"
                   href="https://marmelab.com/shadcn-admin-kit/"
                 >
                   Shadcn Enterprise Edition

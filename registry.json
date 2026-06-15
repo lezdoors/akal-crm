@@ -170,6 +170,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/sales/SalesInviteLinkButton.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/sales/SalesInputs.tsx",
           "type": "registry:component"
         },

@@ -175,7 +175,6 @@ export const NoteInputs = ({
             source="date"
             label="resources.notes.fields.date"
             helperText={false}
-            className="text-primary"
             defaultValue={getCurrentDate()}
           />
         </div>

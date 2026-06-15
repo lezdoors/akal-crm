@@ -211,7 +211,7 @@ const ProfileSection = () => {
       <SectionLabel>
         {translate("crm.profile.title", { _: "Profile" })}
       </SectionLabel>
-      <ItemGroup className="rounded-lg border overflow-hidden">
+      <ItemGroup className="border overflow-hidden">
         <Form record={data}>
           <Item size="sm">
             <ItemContent>
@@ -351,7 +351,7 @@ const PreferencesSection = () => {
       <SectionLabel>
         {translate("crm.settings.preferences", { _: "Preferences" })}
       </SectionLabel>
-      <ItemGroup className="rounded-lg border overflow-hidden">
+      <ItemGroup className="border overflow-hidden">
         <LanguageRow />
         <ItemSeparator />
         <ThemeRow />
@@ -457,7 +457,7 @@ const InboundEmailSection = () => {
           field: "Cc:",
         })}
       </p>
-      <ItemGroup className="rounded-lg border overflow-hidden">
+      <ItemGroup className="border overflow-hidden">
         <CopyPasteRow value={import.meta.env.VITE_INBOUND_EMAIL} />
       </ItemGroup>
     </div>
@@ -477,7 +477,7 @@ const McpServerSection = () => {
           _: "Use this URL to connect your AI assistant to your CRM data via the Model Context Protocol (MCP).",
         })}
       </p>
-      <ItemGroup className="rounded-lg border overflow-hidden">
+      <ItemGroup className="border overflow-hidden">
         <CopyPasteRow
           value={`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/mcp`}
         />
@@ -492,7 +492,7 @@ const AboutSection = () => {
   return (
     <div>
       <SectionLabel>{translate("crm.settings.about")}</SectionLabel>
-      <ItemGroup className="rounded-lg border overflow-hidden">
+      <ItemGroup className="border overflow-hidden">
         <Item asChild size="sm" className="cursor-pointer">
           <Link to={ChangelogPage.path}>
             <ItemContent>
