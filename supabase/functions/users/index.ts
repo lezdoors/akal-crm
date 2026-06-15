@@ -393,11 +393,13 @@ async function generateInviteLink(req: Request, currentUserSale: any) {
 
   const siteUrl = Deno.env.get("SITE_URL") ?? "https://crm.akalds.com";
   // A recovery link works whether or not the account is already confirmed:
-  // the recipient sets a password and is signed in.
+  // the recipient sets a password and is signed in. Redirect to the bare
+  // origin — the app's index.html self-heal routes the recovery tokens to
+  // the set-password page (a fragment in redirect_to would be stripped).
   const { data, error } = await supabaseAdmin.auth.admin.generateLink({
     type: "recovery",
     email: sale.email,
-    options: { redirectTo: `${siteUrl}/#/set-password` },
+    options: { redirectTo: siteUrl },
   });
 
   if (error || !data?.properties?.action_link) {
