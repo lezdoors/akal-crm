@@ -19,7 +19,6 @@ import companies from "../companies";
 import contacts from "../contacts";
 import orders from "../orders";
 import { Dashboard } from "../dashboard/Dashboard";
-import { MobileDashboard } from "../dashboard/MobileDashboard";
 import deals from "../deals";
 import { MaisonLayout } from "../layout/MaisonLayout";
 import { MobileLayout } from "../layout/MobileLayout";
@@ -310,7 +309,7 @@ const MobileAdmin = (
       <Admin
         queryClient={queryClient}
         layout={props.layout ?? MobileLayout}
-        dashboard={props.dashboard ?? MobileDashboard}
+        dashboard={props.dashboard ?? Dashboard}
         {...props}
       >
         <CustomRoutes noLayout>
@@ -327,12 +326,18 @@ const MobileAdmin = (
           <Route path={OAuthConsentPage.path} element={<OAuthConsentPage />} />
         </CustomRoutes>
         <CustomRoutes>
+          <Route path={ProfilePage.path} element={<ProfilePage />} />
           <Route
             path={SettingsPageMobile.path}
             element={<SettingsPageMobile />}
           />
           <Route path={ChangelogPage.path} element={<ChangelogPage />} />
+          <Route path="/products" element={<ProductsPage />} />
+          <Route path="/products/:id" element={<ProductDetailPage />} />
+          <Route path="/inventory" element={<InventoryPage />} />
+          <Route path="/media" element={<MediaLibraryPage />} />
         </CustomRoutes>
+        <Resource name="orders" {...orders} />
         <Resource
           name="contacts"
           list={ContactListMobile}
@@ -342,7 +347,10 @@ const MobileAdmin = (
           <Route path=":id/notes/:noteId" element={<NoteShowPage />} />
         </Resource>
         <Resource name="companies" show={CompanyShow} />
+        <Resource name="contact_notes" />
         <Resource name="tasks" list={MobileTasksList} />
+        <Resource name="sales" {...sales} />
+        <Resource name="tags" />
       </Admin>
     </PersistQueryClientProvider>
   );

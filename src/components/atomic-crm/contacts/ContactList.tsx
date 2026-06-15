@@ -30,8 +30,7 @@ import {
 } from "./ContactListFilter";
 import { TopToolbar } from "../layout/TopToolbar";
 import { InfinitePagination } from "../misc/InfinitePagination";
-import MobileHeader from "../layout/MobileHeader";
-import { MobileContent } from "../layout/MobileContent";
+import { useTranslate } from "ra-core";
 
 export const ContactList = () => {
   const { identity } = useGetIdentity();
@@ -115,25 +114,27 @@ export const ContactListMobile = () => {
 
 const ContactListLayoutMobile = () => {
   const { isPending, data, error, filterValues } = useListContext();
+  const translate = useTranslate();
 
   const hasFilters = filterValues && Object.keys(filterValues).length > 0;
 
   if (!isPending && !data?.length && !hasFilters) return <ContactEmpty />;
 
   return (
-    <div>
-      <MobileHeader>
+    <div className="flex flex-col gap-5 mt-2">
+      <div className="flex items-center justify-between gap-3">
+        <h1 className="display text-[26px] leading-none">
+          {translate("crm.nav.clients", { _: "Clients" })}
+        </h1>
         <ContactListFilter />
-      </MobileHeader>
-      <MobileContent>
-        <ContactListFilterSummary />
-        <ContactListContentMobile />
-        {!error && (
-          <div className="flex justify-center">
-            <InfinitePagination />
-          </div>
-        )}
-      </MobileContent>
+      </div>
+      <ContactListFilterSummary />
+      <ContactListContentMobile />
+      {!error && (
+        <div className="flex justify-center">
+          <InfinitePagination />
+        </div>
+      )}
     </div>
   );
 };

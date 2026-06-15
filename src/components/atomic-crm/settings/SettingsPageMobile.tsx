@@ -41,8 +41,6 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-import { MobileContent } from "../layout/MobileContent";
-import MobileHeader from "../layout/MobileHeader";
 import { ChangelogPage } from "../misc/ChangelogPage";
 import ImageEditorField from "../misc/ImageEditorField";
 import type { CrmDataProvider } from "../providers/types";
@@ -98,36 +96,30 @@ export const SettingsPageMobile = () => {
   if (!authProvider) return null;
 
   return (
-    <>
-      <MobileHeader>
-        <h1 className="text-xl font-semibold">
-          {translate("crm.settings.title")}
-        </h1>
-      </MobileHeader>
-      <MobileContent>
-        <div className="flex flex-col min-h-[calc(100dvh-3.5rem-4.5rem)]">
-          <div className="space-y-6">
-            <ProfileSection />
-            <PreferencesSection />
-            <InboundEmailSection />
-            <McpServerSection />
-            <AboutSection />
-          </div>
+    <div className="flex flex-col gap-5 mt-2">
+      <h1 className="display text-[26px] leading-none">
+        {translate("crm.settings.title")}
+      </h1>
+      <div className="space-y-6">
+        <ProfileSection />
+        <PreferencesSection />
+        <InboundEmailSection />
+        <McpServerSection />
+        <AboutSection />
+      </div>
 
-          <div className="mt-auto pt-6 space-y-3 mb-4">
-            <ChangePasswordButton />
-            <Button
-              variant="destructive"
-              className="w-full text-base h-auto"
-              onClick={() => logout()}
-            >
-              <LogOut className="size-5 mr-3" />
-              <Translate i18nKey="ra.auth.logout">Log out</Translate>
-            </Button>
-          </div>
-        </div>
-      </MobileContent>
-    </>
+      <div className="pt-2 space-y-3">
+        <ChangePasswordButton />
+        <Button
+          variant="destructive"
+          className="w-full text-base h-auto"
+          onClick={() => logout()}
+        >
+          <LogOut className="size-5 mr-3" />
+          <Translate i18nKey="ra.auth.logout">Log out</Translate>
+        </Button>
+      </div>
+    </div>
   );
 };
 

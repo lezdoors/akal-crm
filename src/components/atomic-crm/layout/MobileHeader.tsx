@@ -1,8 +1,13 @@
+/**
+ * A per-page sticky sub-bar that docks just beneath the global mobile top
+ * bar (see MobileLayout). Detail pages use it for a back button + actions.
+ * It bleeds to the screen edges (-mx-5 cancels the main's px-5).
+ */
 const MobileHeader = ({ children }: { children: React.ReactNode }) => {
   return (
-    <header className="fixed top-0 left-0 right-0 z-10 bg-secondary h-14 px-4 w-full flex justify-between items-center">
+    <div className="sticky top-14 z-30 -mx-5 mb-3 flex h-12 items-center gap-2 border-b border-hairline bg-background px-5">
       {children}
-    </header>
+    </div>
   );
 };
 

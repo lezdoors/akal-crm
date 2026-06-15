@@ -84,18 +84,18 @@
 }
 
 :root {
-  /* Le Registre — paper & ink. One warm surface; regions are whitespace and
+  /* Le Registre — white & ink. One clean surface; regions are whitespace and
      hairlines, never boxes. Tobacco is the single accent. */
   --radius: 0.25rem;
-  --ground: #fcfaf6; /* paper-raised */
-  --ground-deep: #f7f4ee; /* paper */
+  --ground: #ffffff; /* raised surface */
+  --ground-deep: #ffffff; /* page surface */
   --ink: #221c14;
   --ink-soft: #4a4238;
   --ink-muted: #8a8071;
   --tobacco: #8a6a43;
   --moss: #5a6b52;
   --dark-close: #16120d;
-  --hairline: #e6dfd2;
+  --hairline: #e7e5e2;
   --background: var(--ground-deep);
   --foreground: var(--ink);
   --card: var(--ground-deep);
@@ -104,11 +104,11 @@
   --popover-foreground: var(--ink);
   --primary: var(--ink);
   --primary-foreground: var(--ground-deep);
-  --secondary: #efe9de;
+  --secondary: #f4f4f3;
   --secondary-foreground: var(--ink);
-  --muted: #efe9de;
+  --muted: #f4f4f3;
   --muted-foreground: var(--ink-muted);
-  --accent: #efe9de;
+  --accent: #f4f4f3;
   --accent-foreground: var(--ink);
   --destructive: #8c3a2e;
   --border: var(--hairline);
@@ -123,7 +123,7 @@
   --sidebar-foreground: var(--ink);
   --sidebar-primary: var(--ink);
   --sidebar-primary-foreground: var(--ground-deep);
-  --sidebar-accent: #efe9de;
+  --sidebar-accent: #f4f4f3;
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: transparent;
   --sidebar-ring: var(--tobacco);

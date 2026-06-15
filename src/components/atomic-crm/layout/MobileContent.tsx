@@ -1,10 +1,10 @@
 import { type ReactNode } from "react";
 
+/**
+ * Page body on mobile. The global MobileLayout owns the scroll container,
+ * the top-bar offset and the bottom-nav padding — this is just a centered
+ * max-width wrapper so content stays comfortable on large phones/tablets.
+ */
 export const MobileContent = ({ children }: { children: ReactNode }) => (
-  <main
-    className="max-w-screen-xl mx-auto pt-18 px-4 pb-20 min-h-screen overflow-y-auto"
-    id="main-content"
-  >
-    {children}
-  </main>
+  <div className="mx-auto w-full max-w-screen-md">{children}</div>
 );
