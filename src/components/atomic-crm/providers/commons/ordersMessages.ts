@@ -159,7 +159,7 @@ export const englishOrdersMessages = {
       invite: {
         action: "Invite link",
         title: "Join link for %{name}",
-        body: "Send this link directly (WhatsApp, SMS, email). It lets them set a password and sign in — no invitation email required. It expires after 24 hours.",
+        body: "Send this link directly (WhatsApp, SMS, email). It lets them set a password and sign in — no invitation email required. It is valid for about an hour; generate a fresh one anytime from this button.",
       },
     },
   },
@@ -326,7 +326,7 @@ export const frenchOrdersMessages = {
       invite: {
         action: "Lien d'accès",
         title: "Lien d'accès pour %{name}",
-        body: "Envoyez ce lien directement (WhatsApp, SMS, email). Il permet de choisir un mot de passe et de se connecter — sans email d'invitation. Il expire après 24 heures.",
+        body: "Envoyez ce lien directement (WhatsApp, SMS, email). Il permet de choisir un mot de passe et de se connecter — sans email d'invitation. Valable environ une heure ; régénérez-en un à tout moment avec ce bouton.",
       },
     },
   },
