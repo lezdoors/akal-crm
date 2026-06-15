@@ -25,9 +25,15 @@ const OrderListActions = () => (
 
 const filters = [
   <TextInput
-    key="email"
-    source="customer_email@ilike"
-    label="resources.orders.fields.customer_email"
+    key="order_number"
+    source="order_number@ilike"
+    label="resources.orders.fields.order_number"
+    alwaysOn
+  />,
+  <TextInput
+    key="customer_name"
+    source="customer_name@ilike"
+    label="resources.orders.fields.customer_name"
     alwaysOn
   />,
   <SelectInput
@@ -36,11 +42,21 @@ const filters = [
     choices={ORDER_STATUS_CHOICES}
     alwaysOn
   />,
+  <TextInput
+    key="email"
+    source="customer_email@ilike"
+    label="resources.orders.fields.customer_email"
+  />,
   <SelectInput
     key="channel"
     source="sales_channel"
     label="resources.orders.fields.sales_channel"
     choices={ORDER_CHANNEL_CHOICES}
+  />,
+  <TextInput
+    key="etsy"
+    source="etsy_order_id@ilike"
+    label="resources.orders.fields.etsy_order_id"
   />,
 ];
 

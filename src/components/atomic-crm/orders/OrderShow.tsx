@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { useRecordContext, useTranslate } from "ra-core";
+import { Check, Copy } from "lucide-react";
 import { Show } from "@/components/admin/show";
 import { DateField } from "@/components/admin/date-field";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -28,6 +30,37 @@ const AddressBlock = () => {
           .join(", ")}
       </div>
       {address.country && <div>{address.country}</div>}
+    </div>
+  );
+};
+
+/** Customer email with a one-click mailto + copy-to-clipboard, for fast reach-out. */
+const CustomerEmail = ({ email }: { email: string }) => {
+  const [copied, setCopied] = useState(false);
+  return (
+    <div className="flex items-center gap-2">
+      <a
+        className="text-muted-foreground underline underline-offset-2 hover:text-foreground"
+        href={`mailto:${email}`}
+      >
+        {email}
+      </a>
+      <button
+        type="button"
+        aria-label="Copy email"
+        className="text-muted-foreground hover:text-foreground"
+        onClick={async () => {
+          await navigator.clipboard.writeText(email);
+          setCopied(true);
+          window.setTimeout(() => setCopied(false), 1500);
+        }}
+      >
+        {copied ? (
+          <Check className="size-3.5 text-moss" />
+        ) : (
+          <Copy className="size-3.5" />
+        )}
+      </button>
     </div>
   );
 };
@@ -105,12 +138,9 @@ const OrderShowContent = () => {
             <CardContent>
               <div className="text-[13px] leading-6">
                 <div>{record.customer_name}</div>
-                <a
-                  className="text-muted-foreground underline underline-offset-2 hover:text-foreground"
-                  href={`mailto:${record.customer_email}`}
-                >
-                  {record.customer_email}
-                </a>
+                {record.customer_email && (
+                  <CustomerEmail email={record.customer_email} />
+                )}
               </div>
             </CardContent>
           </Card>

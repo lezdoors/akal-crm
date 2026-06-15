@@ -1,6 +1,7 @@
 import { useGetList, useTranslate } from "ra-core";
 import { matchPath, useLocation, Link } from "react-router";
 import type { ReactNode } from "react";
+import { Handshake } from "lucide-react";
 import { CreateButton } from "@/components/admin/create-button";
 import { Progress } from "@/components/ui/progress";
 
@@ -26,22 +27,19 @@ export const DealEmpty = ({ children }: { children?: ReactNode }) => {
 
   return (
     <div
-      className="flex flex-col justify-center items-center gap-12"
+      className="flex flex-col justify-center items-center gap-6"
       style={{
         height: `calc(100dvh - ${appbarHeight}px)`,
       }}
     >
-      <img
-        src="./img/empty.svg"
-        alt={translate("resources.deals.empty.title")}
-      />
+      <Handshake className="size-9 text-ink-muted mb-1" strokeWidth={1.25} />
       {contacts && contacts.length > 0 ? (
         <>
           <div className="flex flex-col items-center gap-0">
-            <h3 className="text-lg font-bold">
+            <h3 className="display text-[22px] leading-none mb-2">
               {translate("resources.deals.empty.title")}
             </h3>
-            <p className="text-sm text-center text-muted-foreground mb-4">
+            <p className="text-[13px] text-center text-muted-foreground mb-4">
               {translate("resources.deals.empty.description")}
             </p>
           </div>
@@ -53,10 +51,10 @@ export const DealEmpty = ({ children }: { children?: ReactNode }) => {
         </>
       ) : (
         <div className="flex flex-col items-center gap-0">
-          <h3 className="text-lg font-bold">
+          <h3 className="display text-[22px] leading-none mb-2">
             {translate("resources.deals.empty.title")}
           </h3>
-          <p className="text-sm text-center text-muted-foreground mb-4">
+          <p className="text-[13px] text-center text-muted-foreground mb-4">
             {translate("resources.contacts.empty.description")}
             <br />
             <Link to="/contacts/create" className="hover:underline">

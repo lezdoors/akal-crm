@@ -674,10 +674,6 @@
           "type": "registry:component"
         },
         {
-          "path": "src/components/atomic-crm/dashboard/TasksList.tsx",
-          "type": "registry:component"
-        },
-        {
           "path": "src/components/atomic-crm/dashboard/StockAlerts.tsx",
           "type": "registry:component"
         },
@@ -691,22 +687,6 @@
         },
         {
           "path": "src/components/atomic-crm/dashboard/OrdersToShip.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "src/components/atomic-crm/dashboard/LatestNotes.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "src/components/atomic-crm/dashboard/HotContacts.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "src/components/atomic-crm/dashboard/DealsPipeline.tsx",
-          "type": "registry:component"
-        },
-        {
-          "path": "src/components/atomic-crm/dashboard/DealsChart.tsx",
           "type": "registry:component"
         },
         {
