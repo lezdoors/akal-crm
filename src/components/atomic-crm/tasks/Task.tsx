@@ -103,10 +103,10 @@ export const Task = ({
             className="mt-1"
           />
           <div className={`flex-grow ${task.done_date ? "line-through" : ""}`}>
-            <div className="text-sm">
+            <div className="text-[13px]">
               {task.type && task.type !== "none" && (
                 <>
-                  <span className="font-semibold text-sm">
+                  <span className="overline mr-1.5">
                     {(() => {
                       const matchedTaskType = taskTypes.find(
                         (taskType) => taskType.value === task.type,
@@ -116,12 +116,11 @@ export const Task = ({
                         : task.type;
                     })()}
                   </span>
-                  &nbsp;
                 </>
               )}
               {task.text}
             </div>
-            <div className="text-sm text-muted-foreground">
+            <div className="text-[13px] text-muted-foreground">
               {translate("resources.tasks.fields.due_short")}
               &nbsp;
               <DateField source="due_date" record={task} showDate showTime />
@@ -131,7 +130,7 @@ export const Task = ({
                   reference="contacts"
                   record={task}
                   link="show"
-                  className="inline text-sm text-muted-foreground"
+                  className="inline text-[13px] text-muted-foreground"
                   render={({ referenceRecord }) => {
                     if (!referenceRecord) return null;
                     return (

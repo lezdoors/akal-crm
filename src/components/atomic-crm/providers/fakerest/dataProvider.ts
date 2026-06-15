@@ -264,6 +264,9 @@ export const createDataProvider = ({
       await dataProvider.delete("sales", { id });
       return { id };
     },
+    salesInviteLink: async (_id: Identifier): Promise<string> => {
+      return "https://example.test/#/set-password?token=demo";
+    },
     isInitialized: async (): Promise<boolean> => {
       const sales = await dataProvider.getList<Sale>("sales", {
         filter: {},

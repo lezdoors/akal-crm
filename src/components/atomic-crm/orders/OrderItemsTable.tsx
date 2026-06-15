@@ -17,7 +17,8 @@ export const OrderItemsTable = () => {
     );
   }
   return (
-    <table className="w-full text-sm">
+    <div className="overflow-x-auto">
+    <table className="w-full min-w-[28rem] text-sm">
       <thead>
         <tr className="border-b text-left text-muted-foreground">
           <th className="py-2 pr-2 font-medium">
@@ -107,5 +108,6 @@ export const OrderItemsTable = () => {
         </tr>
       </tfoot>
     </table>
+    </div>
   );
 };

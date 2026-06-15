@@ -105,7 +105,7 @@ export const LoginPage = (props: { redirectTo?: string }) => {
 
       <div className="relative z-20 flex flex-col items-center w-full px-4 login-enter">
         <img className="h-9 mb-4" src={darkModeLogo} alt={title} />
-        <div className="font-display text-[34px] font-medium tracking-[0.04em] text-white text-center leading-none">
+        <div className="display text-[34px] tracking-[0.04em] text-white text-center leading-none">
           {title}
         </div>
         <div className="mt-3 mb-8 flex items-center gap-3 text-white/60">
@@ -116,9 +116,9 @@ export const LoginPage = (props: { redirectTo?: string }) => {
           <span className="h-px w-10 bg-white/30" />
         </div>
 
-        <div className="w-full max-w-[380px] bg-card border px-8 py-8 space-y-6 shadow-2xl">
+        <div className="w-full max-w-[380px] bg-card border px-8 py-8 space-y-6">
           <div className="text-center">
-            <h1 className="font-serif text-2xl font-medium tracking-[0.02em]">
+            <h1 className="overline text-white/70">
               {translate("ra.auth.sign_in")}
             </h1>
           </div>

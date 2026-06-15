@@ -248,24 +248,26 @@ const SettingsFormFields = () => {
     <div className="flex gap-8 mt-4 pb-20">
       {/* Left navigation */}
       <nav className="hidden md:block w-48 shrink-0">
-        <div className="sticky top-4 space-y-1">
-          <h1 className="text-2xl font-semibold px-3 mb-2">
+        <div className="sticky top-4">
+          <h1 className="display text-[26px] leading-none mb-4">
             {translate("crm.settings.title")}
           </h1>
-          {SECTIONS.map((section) => (
-            <button
-              key={section.id}
-              type="button"
-              onClick={() => {
-                document
-                  .getElementById(section.id)
-                  ?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="block w-full text-left px-3 py-1 text-sm rounded-md hover:text-foreground hover:bg-muted transition-colors"
-            >
-              {translate(section.label, { smart_count: 2 })}
-            </button>
-          ))}
+          <div className="flex flex-col">
+            {SECTIONS.map((section) => (
+              <button
+                key={section.id}
+                type="button"
+                onClick={() => {
+                  document
+                    .getElementById(section.id)
+                    ?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="overline w-full border-b py-2 text-left text-ink-muted transition-colors duration-150 hover:text-foreground"
+              >
+                {translate(section.label, { smart_count: 2 })}
+              </button>
+            ))}
+          </div>
         </div>
       </nav>
 
@@ -274,13 +276,13 @@ const SettingsFormFields = () => {
         {/* Branding */}
         <Card id="branding">
           <CardContent className="space-y-4">
-            <h2 className="text-xl font-semibold text-muted-foreground">
+            <h2 className="overline">
               {translate("crm.settings.sections.branding")}
             </h2>
             <TextInput source="title" label="crm.settings.app_title" />
             <div className="flex gap-8">
               <div className="flex flex-col items-center gap-1">
-                <p className="text-sm text-muted-foreground">
+                <p className="overline text-ink-muted">
                   {translate("crm.settings.light_mode_logo")}
                 </p>
                 <ImageEditorField
@@ -288,11 +290,11 @@ const SettingsFormFields = () => {
                   width={100}
                   height={100}
                   linkPosition="bottom"
-                  backgroundImageColor="#f5f5f5"
+                  backgroundImageColor="#f4f4f3"
                 />
               </div>
               <div className="flex flex-col items-center gap-1">
-                <p className="text-sm text-muted-foreground">
+                <p className="overline text-ink-muted">
                   {translate("crm.settings.dark_mode_logo")}
                 </p>
                 <ImageEditorField
@@ -310,7 +312,7 @@ const SettingsFormFields = () => {
         {/* Companies */}
         <Card id="companies">
           <CardContent className="space-y-4">
-            <h2 className="text-xl font-semibold text-muted-foreground">
+            <h2 className="overline">
               {translate("resources.companies.name", {
                 smart_count: 2,
               })}
@@ -333,12 +335,12 @@ const SettingsFormFields = () => {
         {/* Deals */}
         <Card id="deals">
           <CardContent className="space-y-4">
-            <h2 className="text-xl font-semibold text-muted-foreground">
+            <h2 className="overline">
               {translate("resources.deals.name", {
                 smart_count: 2,
               })}
             </h2>
-            <h3 className="text-lg font-medium text-muted-foreground">
+            <h3 className="overline text-ink-soft">
               {translate("crm.settings.deals.currency")}
             </h3>
             <AutocompleteInput
@@ -351,7 +353,7 @@ const SettingsFormFields = () => {
 
             <Separator />
 
-            <h3 className="text-lg font-medium text-muted-foreground">
+            <h3 className="overline text-ink-soft">
               {translate("crm.settings.deals.stages")}
             </h3>
             <ArrayInput
@@ -367,10 +369,10 @@ const SettingsFormFields = () => {
 
             <Separator />
 
-            <h3 className="text-lg font-medium text-muted-foreground">
+            <h3 className="overline text-ink-soft">
               {translate("crm.settings.deals.pipeline_statuses")}
             </h3>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-[13px] text-muted-foreground">
               {translate("crm.settings.deals.pipeline_help")}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -408,7 +410,7 @@ const SettingsFormFields = () => {
 
             <Separator />
 
-            <h3 className="text-lg font-medium text-muted-foreground">
+            <h3 className="overline text-ink-soft">
               {translate("crm.settings.deals.categories")}
             </h3>
             <ArrayInput
@@ -427,12 +429,12 @@ const SettingsFormFields = () => {
         {/* Notes */}
         <Card id="notes">
           <CardContent className="space-y-4">
-            <h2 className="text-xl font-semibold text-muted-foreground">
+            <h2 className="overline">
               {translate("resources.notes.name", {
                 smart_count: 2,
               })}
             </h2>
-            <h3 className="text-lg font-medium text-muted-foreground">
+            <h3 className="overline text-ink-soft">
               {translate("crm.settings.notes.statuses")}
             </h3>
             <ArrayInput source="noteStatuses" label={false} helperText={false}>
@@ -447,12 +449,12 @@ const SettingsFormFields = () => {
         {/* Tasks */}
         <Card id="tasks">
           <CardContent className="space-y-4">
-            <h2 className="text-xl font-semibold text-muted-foreground">
+            <h2 className="overline">
               {translate("resources.tasks.name", {
                 smart_count: 2,
               })}
             </h2>
-            <h3 className="text-lg font-medium text-muted-foreground">
+            <h3 className="overline text-ink-soft">
               {translate("crm.settings.tasks.types")}
             </h3>
             <ArrayInput source="taskTypes" label={false} helperText={false}>

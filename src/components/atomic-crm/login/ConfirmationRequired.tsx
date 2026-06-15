@@ -7,24 +7,22 @@ export const ConfirmationRequired = () => {
   const { darkModeLogo: logo, title } = useConfigurationContext();
 
   return (
-    <div className="h-screen p-8">
+    <div className="h-screen p-8 bg-background">
       <div className="flex items-center gap-4">
-        <img
-          src={logo}
-          alt={title}
-          width={24}
-          className="filter brightness-0 invert"
-        />
-        <h1 className="text-xl font-semibold">{title}</h1>
+        <img src={logo} alt={title} width={24} />
+        <span className="overline">{title}</span>
       </div>
       <div className="h-full text-center">
         <div className="max-w-sm mx-auto h-full flex flex-col justify-center gap-4">
-          <h1 className="text-2xl font-bold mb-4">
+          <p className="overline mb-1">
+            {translate("crm.auth.check_email", { _: "Check your email" })}
+          </p>
+          <h1 className="display text-[26px] leading-none mb-2">
             {translate("crm.auth.welcome_title", {
               _: "Welcome to Maison Tanneurs",
             })}
           </h1>
-          <p className="text-base mb-4">
+          <p className="text-[13px] text-ink-soft mb-4">
             {translate("crm.auth.confirmation_required", {
               _: "Please follow the link we just sent you by email to confirm your account.",
             })}

@@ -13,7 +13,6 @@ import { TextField } from "@/components/admin/text-field";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { Pencil } from "lucide-react";
 import { Link } from "react-router";
 
@@ -81,7 +80,9 @@ const ContactShowContentMobile = () => {
         <MobileBackButton />
         <div className="flex flex-1 min-w-0">
           <Link to="/contacts" className="flex-1 min-w-0">
-            <h1 className="truncate text-xl font-semibold">{defaultTitle}</h1>
+            <h1 className="truncate display text-[22px] leading-none">
+              {defaultTitle}
+            </h1>
           </Link>
         </div>
         <Button
@@ -100,10 +101,10 @@ const ContactShowContentMobile = () => {
           <div className="flex items-center mb-4">
             <Avatar />
             <div className="mx-3 flex-1">
-              <h2 className="text-2xl font-bold">
+              <h2 className="display text-[26px] leading-none">
                 <RecordRepresentation />
               </h2>
-              <div className="text-sm text-muted-foreground">
+              <div className="text-[13px] text-muted-foreground mt-1">
                 {record.title && record.company_id != null
                   ? `${translate("resources.contacts.position_at", {
                       title: record.title,
@@ -186,43 +187,39 @@ const ContactShowContentMobile = () => {
           </TabsContent>
 
           <TabsContent value="details" className="mt-4">
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-lg font-semibold">
+            <div className="flex flex-col gap-6">
+              <div className="border-t pt-4">
+                <h3 className="overline">
                   {translate("resources.notes.fields.status")}
                 </h3>
-                <Separator />
                 <div className="mt-3">
                   <ContactStatusSelector />
                 </div>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold">
+              <div className="border-t pt-4">
+                <h3 className="overline">
                   {translate(
                     "resources.contacts.field_categories.personal_info",
                   )}
                 </h3>
-                <Separator />
                 <div className="mt-3">
                   <ContactPersonalInfo />
                 </div>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold">
+              <div className="border-t pt-4">
+                <h3 className="overline">
                   {translate(
                     "resources.contacts.field_categories.background_info",
                   )}
                 </h3>
-                <Separator />
                 <div className="mt-3">
                   <ContactBackgroundInfo />
                 </div>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold">
+              <div className="border-t pt-4">
+                <h3 className="overline">
                   {translate("resources.tags.name", { smart_count: 2 })}
                 </h3>
-                <Separator />
                 <div className="mt-3">
                   <TagsListEdit />
                 </div>
@@ -247,11 +244,11 @@ const ContactShowContent = () => {
           <CardContent>
             <div className="flex">
               <Avatar />
-              <div className="ml-2 flex-1">
-                <h5 className="text-xl font-semibold">
+              <div className="ml-3 flex-1">
+                <h5 className="display text-[26px] leading-none">
                   <RecordRepresentation />
                 </h5>
-                <div className="inline-flex text-sm text-muted-foreground">
+                <div className="inline-flex text-[13px] text-muted-foreground mt-1">
                   {record.title && record.company_id != null
                     ? `${translate("resources.contacts.position_at", {
                         title: record.title,

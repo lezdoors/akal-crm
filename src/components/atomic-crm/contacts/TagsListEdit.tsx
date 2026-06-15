@@ -1,4 +1,4 @@
-import { Edit, Plus } from "lucide-react";
+import { Edit, Plus, X } from "lucide-react";
 import {
   useGetMany,
   useRecordContext,
@@ -7,7 +7,6 @@ import {
   type Identifier,
 } from "ra-core";
 import { useCallback, useState } from "react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -16,10 +15,53 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { TagChip } from "../tags/TagChip";
 import { TagCreateModal } from "../tags/TagCreateModal";
+import { TagEditModal } from "../tags/TagEditModal";
 import { useTags } from "../tags/useTags";
 import type { Contact, Tag } from "../types";
+
+/**
+ * An editable tag in the register: a 6px dot in the user's color + the name
+ * as an overline word, with a quiet unlink. Click the word to edit the tag.
+ * No pill, no fill.
+ */
+const TagWordEdit = ({
+  tag,
+  onUnlink,
+}: {
+  tag: Tag;
+  onUnlink: () => void;
+}) => {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <span className="overline inline-flex items-center gap-1.5 whitespace-nowrap">
+        <span
+          className="inline-block size-1.5 rounded-full"
+          style={{ backgroundColor: tag.color }}
+        />
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="cursor-pointer transition-colors hover:text-foreground"
+        >
+          {tag.name}
+        </button>
+        <button
+          type="button"
+          onClick={(e) => {
+            e.stopPropagation();
+            onUnlink();
+          }}
+          className="cursor-pointer text-muted-foreground transition-colors hover:text-foreground"
+        >
+          <X className="size-3" />
+        </button>
+      </span>
+      <TagEditModal tag={tag} open={open} onClose={() => setOpen(false)} />
+    </>
+  );
+};
 
 export const TagsListEdit = () => {
   const record = useRecordContext<Contact>();
@@ -99,11 +141,13 @@ export const TagsListEdit = () => {
   if (isPendingRecordTags || isPendingAllTags) return null;
 
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
       {tags?.map((tag) => (
-        <div key={tag.id}>
-          <TagChip tag={tag} onUnlink={() => handleTagDelete(tag.id)} />
-        </div>
+        <TagWordEdit
+          key={tag.id}
+          tag={tag}
+          onUnlink={() => handleTagDelete(tag.id)}
+        />
       ))}
 
       <div>
@@ -124,15 +168,13 @@ export const TagsListEdit = () => {
                 key={tag.id}
                 onClick={() => handleTagAdd(tag.id)}
               >
-                <Badge
-                  variant="secondary"
-                  className="text-sm md:text-xs font-normal text-black"
-                  style={{
-                    backgroundColor: tag.color,
-                  }}
-                >
+                <span className="overline inline-flex items-center gap-1.5">
+                  <span
+                    className="inline-block size-1.5 rounded-full"
+                    style={{ backgroundColor: tag.color }}
+                  />
                   {tag.name}
-                </Badge>
+                </span>
               </DropdownMenuItem>
             ))}
             <DropdownMenuItem onClick={openTagCreateDialog}>

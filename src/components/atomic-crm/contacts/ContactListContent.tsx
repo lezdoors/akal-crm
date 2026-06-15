@@ -76,7 +76,7 @@ export const ContactListContent = () => {
   }
 
   return (
-    <div className="md:divide-y">
+    <div className="md:divide-y md:divide-hairline">
       {contacts.map((contact) => (
         <RecordContextProvider key={contact.id} value={contact}>
           <ContactItemContent
@@ -88,7 +88,7 @@ export const ContactListContent = () => {
 
       {contacts.length === 0 && (
         <div className="p-4">
-          <div className="text-muted-foreground">
+          <div className="text-[13px] text-muted-foreground">
             {translate("resources.contacts.empty.title", {})}
           </div>
         </div>
@@ -112,7 +112,7 @@ const ContactItemContent = ({
     : null;
 
   return (
-    <div className="flex flex-row items-center pl-2 pr-4 py-2 hover:bg-muted transition-colors first:rounded-t-xl last:rounded-b-xl">
+    <div className="flex flex-row items-center pl-2 pr-4 py-2 hover:bg-secondary/40 transition-colors duration-150">
       <div
         className="px-4 py-3 flex items-center cursor-pointer"
         onClick={(e) => handleToggleItem(contact.id, e)}
@@ -128,11 +128,11 @@ const ContactItemContent = ({
       >
         <Avatar />
         <div className="flex-1 min-w-0">
-          <div className="font-medium">
+          <div className="text-[13px] font-medium">
             {`${contact.first_name} ${contact.last_name ?? ""}`}
           </div>
           {contact.title || contact.company_id != null || contact.nb_tasks ? (
-            <div className="text-sm text-muted-foreground">
+            <div className="text-[13px] text-muted-foreground">
               {contact.title && contact.company_id != null
                 ? `${translate("resources.contacts.position_at", {
                     title: contact.title,
@@ -160,7 +160,7 @@ const ContactItemContent = ({
         {contact.last_seen && (
           <div className="text-right ml-4">
             <div
-              className="text-sm text-muted-foreground"
+              className="text-[13px] text-muted-foreground"
               title={contact.last_seen}
             >
               {translate("crm.common.last_activity_with_date", {
@@ -194,7 +194,7 @@ export const ContactListContentMobile = () => {
         {[...Array(5)].map((_, index) => (
           <div
             key={index}
-            className="flex flex-row items-center py-2 hover:bg-muted transition-colors first:rounded-t-xl last:rounded-b-xl"
+            className="flex flex-row items-center py-2 transition-colors duration-150"
           >
             <div className="flex flex-row gap-4 items-center mr-4">
               <Skeleton className="w-10 h-10 rounded-full" />
@@ -212,7 +212,7 @@ export const ContactListContentMobile = () => {
   if (error && !contacts) {
     return (
       <div className="p-4">
-        <div className="text-center text-muted-foreground mb-4">
+        <div className="text-center text-[13px] text-muted-foreground mb-4">
           {translate("resources.contacts.list.error_loading")}
         </div>
         <div className="text-center mt-2">
@@ -230,7 +230,7 @@ export const ContactListContentMobile = () => {
   }
 
   return (
-    <div className="md:divide-y">
+    <div className="md:divide-y md:divide-hairline">
       {contacts.map((contact) => (
         <RecordContextProvider key={contact.id} value={contact}>
           <ContactItemContentMobile contact={contact} />
@@ -238,7 +238,7 @@ export const ContactListContentMobile = () => {
       ))}
       {contacts.length === 0 && (
         <div className="p-4">
-          <div className="text-muted-foreground">
+          <div className="text-[13px] text-muted-foreground">
             {translate("resources.contacts.empty.title")}
           </div>
         </div>
@@ -252,18 +252,18 @@ const ContactItemContentMobile = ({ contact }: { contact: Contact }) => {
   return (
     <Link
       to={`/contacts/${contact.id}/show`}
-      className="flex flex-row gap-4 items-center py-2 hover:bg-muted transition-colors"
+      className="flex flex-row gap-4 items-center py-2 hover:bg-secondary/40 transition-colors duration-150"
     >
       <Avatar />
       <div className="flex flex-col grow justify-between">
         <div className="flex-1 min-w-0">
           <div className="flex justify-between">
-            <div className="font-medium">
+            <div className="text-[13px] font-medium">
               <RecordRepresentation />
             </div>
             <Status status={contact.status} />
           </div>
-          <div className="text-sm text-muted-foreground">
+          <div className="text-[13px] text-muted-foreground">
             <div className="flex flex-col gap-1">
               <span>
                 {contact.title && contact.company_id != null

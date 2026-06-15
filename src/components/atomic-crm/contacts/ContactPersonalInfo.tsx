@@ -28,7 +28,7 @@ export const ContactPersonalInfo = () => {
       </ArrayField>
 
       {record.has_newsletter && (
-        <p className="pl-6 py-1 text-sm text-muted-foreground">
+        <p className="pl-6 py-1 text-[13px] text-muted-foreground">
           {translate("resources.contacts.fields.has_newsletter")}
         </p>
       )}
@@ -38,7 +38,7 @@ export const ContactPersonalInfo = () => {
           icon={<Linkedin className="w-4 h-4 text-muted-foreground" />}
           primary={
             <a
-              className="underline hover:no-underline text-sm text-muted-foreground"
+              className="underline hover:no-underline text-[13px] text-muted-foreground"
               href={record.linkedin_url}
               target="_blank"
               rel="noopener noreferrer"
@@ -106,7 +106,7 @@ const EmailRow = () => {
           className="text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
           {copied ? (
-            <Check className="w-4 h-4 text-green-500" />
+            <Check className="w-4 h-4 text-foreground" />
           ) : (
             <Mail className="w-4 h-4" />
           )}
@@ -131,7 +131,7 @@ const PersonalInfoRow = ({
   return (
     <div className="flex flex-row items-center gap-x-2 py-1 min-h-6">
       {icon}
-      <div className="flex flex-wrap gap-x-2 gap-y-0 text-sm">
+      <div className="flex flex-wrap gap-x-2 gap-y-0 text-[13px]">
         {primary}
         {showType ? (
           <WithRecord

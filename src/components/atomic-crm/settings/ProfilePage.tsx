@@ -176,9 +176,7 @@ const ProfileForm = ({
       <Card>
         <CardContent>
           <div className="mb-4 flex flex-row justify-between">
-            <h2 className="text-xl font-semibold text-muted-foreground">
-              {translate("crm.profile.title")}
-            </h2>
+            <h2 className="overline">{translate("crm.profile.title")}</h2>
           </div>
 
           <div className="space-y-4 mb-4">
@@ -234,10 +232,10 @@ const ProfileForm = ({
         <Card>
           <CardContent>
             <div className="space-y-4 justify-between">
-              <h2 className="text-xl font-semibold text-muted-foreground">
+              <h2 className="overline">
                 {translate("crm.profile.inbound.title")}
               </h2>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-[13px] text-muted-foreground">
                 {translate("crm.profile.inbound.description", {
                   _: "You can start sending emails to your server's inbound email address, e.g. by adding it to the Cc: field. Maison Tanneurs CRM will process the emails and add notes to the corresponding contacts.",
                   field: "Cc:",
@@ -251,12 +249,12 @@ const ProfileForm = ({
       <Card>
         <CardContent>
           <div className="space-y-4 justify-between">
-            <h2 className="text-xl font-semibold text-muted-foreground">
+            <h2 className="overline">
               {translate("crm.profile.mcp.title", {
                 _: "MCP Server",
               })}
             </h2>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-[13px] text-muted-foreground">
               {translate("crm.profile.mcp.description", {
                 _: "Use this URL to connect your AI assistant to your CRM data via the Model Context Protocol (MCP).",
               })}
@@ -282,9 +280,7 @@ const LanguageSelector = () => {
 
   return (
     <div className="space-y-2">
-      <p className="text-xs text-muted-foreground">
-        {translate("crm.language")}
-      </p>
+      <p className="overline text-ink-muted">{translate("crm.language")}</p>
       <Select value={locale} onValueChange={setLocale}>
         <SelectTrigger className="w-full">
           <SelectValue />

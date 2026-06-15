@@ -17,7 +17,7 @@ export const ChangelogPage = () => {
         <MobileHeader>
           <MobileBackButton to="/settings" />
           <div className="flex flex-1 min-w-0">
-            <h1 className="text-xl font-semibold">
+            <h1 className="display text-[26px] leading-none">
               {translate("crm.changelog.title")}
             </h1>
           </div>

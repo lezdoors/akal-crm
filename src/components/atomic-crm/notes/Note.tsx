@@ -110,7 +110,7 @@ export const Note = ({
         <ReferenceField source="company_id" reference="companies" link="show">
           <CompanyAvatar width={20} height={20} />
         </ReferenceField>
-        <div className="inline-flex h-full items-center text-sm text-muted-foreground">
+        <div className="inline-flex h-full items-center text-[13px] text-muted-foreground">
           {translate(
             isCurrentUser
               ? "resources.notes.you_added"
@@ -158,7 +158,7 @@ export const Note = ({
           </TooltipProvider>
         </span>
         <div className="flex-1"></div>
-        <span className="text-sm text-muted-foreground">
+        <span className="text-[13px] text-muted-foreground">
           <RelativeDate date={note.date} />
         </span>
       </div>
@@ -186,7 +186,7 @@ export const Note = ({
           </div>
         </Form>
       ) : (
-        <div className="pt-2 text-sm max-w-150">
+        <div className="pt-2 text-[13px] max-w-150">
           {note.text && (
             <div
               ref={contentRef}
@@ -204,7 +204,7 @@ export const Note = ({
                 e.stopPropagation();
                 setExpanded(!isExpanded);
               }}
-              className="text-primary text-sm mt-1 underline hover:no-underline cursor-pointer"
+              className="text-tobacco text-[13px] mt-1 no-underline transition-opacity hover:opacity-80 cursor-pointer"
             >
               {isExpanded
                 ? translate("crm.common.show_less")

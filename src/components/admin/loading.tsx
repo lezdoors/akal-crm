@@ -1,5 +1,4 @@
 import { Translate, useTimeout } from "ra-core";
-import { Spinner } from "./spinner";
 
 /**
  * Loading indicator used for slow element or page loads.
@@ -20,12 +19,11 @@ export const Loading = (props: LoadingProps) => {
   const oneSecondHasPassed = useTimeout(delay);
   return oneSecondHasPassed ? (
     <div className="flex flex-col justify-center items-center h-full" {...rest}>
-      <div className="text-center font-sans color-muted pt-1 pb-1">
-        <Spinner size="large" className="width-9 height-9" />
-        <h5 className="mt-3 text-2xl text-secondary-foreground">
+      <div className="text-center">
+        <p className="overline">
           <Translate i18nKey={loadingPrimary}>{loadingPrimary}</Translate>
-        </h5>
-        <p className="text-primary">
+        </p>
+        <p className="display mt-2 text-[19px] text-ink-soft">
           <Translate i18nKey={loadingSecondary}>{loadingSecondary}</Translate>
         </p>
       </div>

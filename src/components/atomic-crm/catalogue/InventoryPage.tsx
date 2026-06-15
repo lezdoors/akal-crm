@@ -32,7 +32,7 @@ const Section = ({
           <Link
             key={product.id}
             to={`/products/${product.id}`}
-            className="grid grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-4 px-1 py-2 no-underline transition-colors hover:bg-secondary/40"
+            className="grid grid-cols-[auto_minmax(0,1fr)_auto] sm:grid-cols-[auto_minmax(0,1fr)_auto_auto] items-center gap-4 px-1 py-2 no-underline transition-colors hover:bg-secondary/40"
           >
             {product.images?.[0] ? (
               <img
@@ -45,7 +45,7 @@ const Section = ({
               <div className="plate h-10 w-10" />
             )}
             <span className="text-[13px] truncate">{product.title}</span>
-            <span className="text-xs text-muted-foreground">
+            <span className="hidden text-xs text-muted-foreground sm:block">
               {product.category}
             </span>
             <span className="text-[13px] tabular-nums w-16 text-right">

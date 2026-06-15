@@ -35,8 +35,11 @@ export const Error = (props: InternalErrorProps & {}) => {
 
   return (
     <div className="flex flex-col items-center md:p-16 gap-5" {...rest}>
-      <h1 className="flex items-center text-3xl mt-5 mb-5 gap-3" role="alert">
-        <CircleAlert className="w-2em h-2em" />
+      <h1
+        className="display text-[26px] leading-none flex items-center mt-5 mb-5 gap-3"
+        role="alert"
+      >
+        <CircleAlert className="w-2em h-2em text-tobacco" />
         <Translate i18nKey="ra.page.error" />
       </h1>
       <div>
@@ -46,14 +49,16 @@ export const Error = (props: InternalErrorProps & {}) => {
         <>
           <Accordion
             type="multiple"
-            className="mt-1 p-2 bg-secondary w-full lg:w-150"
+            className="mt-1 border-t w-full lg:w-150"
           >
             <AccordionItem value="error">
-              <AccordionTrigger className="py-2">
+              <AccordionTrigger className="py-2 overline">
                 <Translate i18nKey={errorMessage}>{errorMessage}</Translate>
               </AccordionTrigger>
               <AccordionContent className="whitespace-pre-wrap pt-1">
-                <pre className="text-xls">{errorInfo?.componentStack}</pre>
+                <pre className="text-[13px] text-ink-soft">
+                  {errorInfo?.componentStack}
+                </pre>
               </AccordionContent>
             </AccordionItem>
           </Accordion>

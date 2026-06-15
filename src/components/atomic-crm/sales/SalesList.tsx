@@ -4,9 +4,9 @@ import { DataTable } from "@/components/admin/data-table";
 import { ExportButton } from "@/components/admin/export-button";
 import { List } from "@/components/admin/list";
 import { SearchInput } from "@/components/admin/search-input";
-import { Badge } from "@/components/ui/badge";
 
 import { TopToolbar } from "../layout/TopToolbar";
+import { SalesInviteLinkButton } from "./SalesInviteLinkButton";
 
 const SalesListActions = () => (
   <TopToolbar>
@@ -17,27 +17,24 @@ const SalesListActions = () => (
 
 const filters = [<SearchInput source="q" alwaysOn />];
 
+/** Flags in the register's voice: a 6px dot + an overline word, never a pill. */
 const OptionsField = (_props: { label?: string | boolean }) => {
   const record = useRecordContext();
   const translate = useTranslate();
   if (!record) return null;
   return (
-    <div className="flex flex-row gap-1">
+    <div className="flex flex-row items-center gap-4">
       {record.administrator && (
-        <Badge
-          variant="outline"
-          className="border-blue-300 dark:border-blue-700"
-        >
+        <span className="overline flex items-center gap-1.5 whitespace-nowrap">
+          <span className="inline-block size-1.5 rounded-full bg-tobacco" />
           {translate("resources.sales.fields.administrator")}
-        </Badge>
+        </span>
       )}
       {record.disabled && (
-        <Badge
-          variant="outline"
-          className="border-orange-300 dark:border-orange-700"
-        >
+        <span className="overline flex items-center gap-1.5 whitespace-nowrap">
+          <span className="inline-block size-1.5 rounded-full bg-ink-muted" />
           {translate("resources.sales.fields.disabled")}
-        </Badge>
+        </span>
       )}
     </div>
   );
@@ -56,6 +53,9 @@ export function SalesList() {
         <DataTable.Col source="email" />
         <DataTable.Col label={false}>
           <OptionsField />
+        </DataTable.Col>
+        <DataTable.Col label={false}>
+          <SalesInviteLinkButton />
         </DataTable.Col>
       </DataTable>
     </List>

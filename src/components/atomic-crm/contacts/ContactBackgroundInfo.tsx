@@ -32,14 +32,14 @@ export const ContactBackgroundInfo = () => {
       <WithRecord<Contact>
         render={(record) =>
           record?.background ? (
-            <div className="pb-2 text-sm">
+            <div className="pb-2 text-[13px]">
               <TextField source="background" record={record} />
             </div>
           ) : null
         }
       />
       <div className="text-muted-foreground md:py-0.5">
-        <span className="text-sm">
+        <span className="text-[13px]">
           {translate("resources.contacts.background.added_on", {
             date: formattedFirstSeen,
           })}
@@ -47,14 +47,14 @@ export const ContactBackgroundInfo = () => {
       </div>
 
       <div className="text-muted-foreground md:py-0.5">
-        <span className="text-sm">
+        <span className="text-[13px]">
           {translate("resources.contacts.background.last_activity_on", {
             date: formattedLastSeen,
           })}
         </span>
       </div>
 
-      <div className="inline-flex text-muted-foreground text-sm md:py-0.5">
+      <div className="inline-flex text-muted-foreground text-[13px] md:py-0.5">
         {translate(
           isCurrentUser
             ? "resources.contacts.background.followed_by_you"

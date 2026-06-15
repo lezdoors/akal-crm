@@ -94,7 +94,7 @@ export const MediaLibraryPage = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-6 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
         {visible.map((entry) => (
           <div
             key={entry.url}
@@ -106,7 +106,7 @@ export const MediaLibraryPage = () => {
               loading="lazy"
               className="h-full w-full object-cover"
             />
-            <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 via-transparent to-transparent p-2 opacity-0 transition-opacity duration-150 group-hover:opacity-100">
+            <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-black/60 via-transparent to-transparent p-2 opacity-100 transition-opacity duration-150 md:opacity-0 md:group-hover:opacity-100">
               <Link
                 to={`/products/${entry.productId}`}
                 className="text-[11px] font-medium text-white truncate no-underline hover:underline"
@@ -118,7 +118,7 @@ export const MediaLibraryPage = () => {
                   type="button"
                   aria-label="Copy URL"
                   onClick={() => copyUrl(entry.url)}
-                  className="flex size-6 items-center justify-center bg-white/15 text-white hover:bg-white/30"
+                  className="flex size-8 items-center justify-center bg-white/15 text-white hover:bg-white/30 md:size-6"
                 >
                   <Copy className="size-3" />
                 </button>
@@ -127,7 +127,7 @@ export const MediaLibraryPage = () => {
                   target="_blank"
                   rel="noreferrer"
                   aria-label="Open"
-                  className="flex size-6 items-center justify-center bg-white/15 text-white hover:bg-white/30"
+                  className="flex size-8 items-center justify-center bg-white/15 text-white hover:bg-white/30 md:size-6"
                 >
                   <ExternalLink className="size-3" />
                 </a>

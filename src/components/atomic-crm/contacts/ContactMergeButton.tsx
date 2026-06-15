@@ -182,19 +182,19 @@ const ContactMergeDialog = ({ open, onClose }: ContactMergeDialogProps) => {
         </DialogHeader>
 
         <div className="space-y-4">
-          <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
-            <p className="font-medium text-sm">
+          <div className="border-t pt-4">
+            <p className="overline">
               {translate("resources.contacts.merge.current_contact", {
                 _: "Current Contact (will be deleted)",
               })}
             </p>
-            <div className="font-medium text-sm mt-4">{contactOptionText}</div>
+            <div className="text-[13px] mt-3">{contactOptionText}</div>
 
             <div className="flex justify-center my-4">
               <ArrowDown className="h-5 w-5 text-muted-foreground" />
             </div>
 
-            <p className="font-medium text-sm mb-2">
+            <p className="overline mb-2">
               {translate("resources.contacts.merge.target_contact", {
                 _: "Target Contact (will be kept)",
               })}
@@ -220,12 +220,12 @@ const ContactMergeDialog = ({ open, onClose }: ContactMergeDialogProps) => {
           {winnerId && (
             <>
               <div className="space-y-2">
-                <p className="font-medium text-sm">
+                <p className="overline">
                   {translate("resources.contacts.merge.what_will_be_merged", {
                     _: "What will be merged:",
                   })}
                 </p>
-                <ul className="text-sm text-muted-foreground space-y-1 ml-4">
+                <ul className="text-[13px] text-muted-foreground space-y-1 ml-4">
                   {notesCount != null && notesCount > 0 && (
                     <li>
                       • {notesCount} note

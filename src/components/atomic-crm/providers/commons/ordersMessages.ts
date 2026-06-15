@@ -2,6 +2,7 @@ export const englishOrdersMessages = {
   crm: {
     auth: {
       welcome_title: "Welcome to Maison Tanneurs",
+      check_email: "Check your email",
     },
     command: {
       placeholder: "Search orders, customers, or jump to…",
@@ -11,6 +12,7 @@ export const englishOrdersMessages = {
     },
     nav: {
       today: "Today",
+      welcome: "Setup",
       register: "Le Registre",
       clients: "Clients",
       products: "Pieces",
@@ -154,6 +156,11 @@ export const englishOrdersMessages = {
         confirm: "Delete",
         success: "User deleted",
       },
+      invite: {
+        action: "Invite link",
+        title: "Join link for %{name}",
+        body: "Send this link directly (WhatsApp, SMS, email). It lets them set a password and sign in — no invitation email required. It expires after 24 hours.",
+      },
     },
   },
 };
@@ -162,6 +169,7 @@ export const frenchOrdersMessages = {
   crm: {
     auth: {
       welcome_title: "Bienvenue chez Maison Tanneurs",
+      check_email: "Vérifiez vos emails",
     },
     command: {
       placeholder: "Rechercher commandes, clients, ou naviguer…",
@@ -171,6 +179,7 @@ export const frenchOrdersMessages = {
     },
     nav: {
       today: "Aujourd'hui",
+      welcome: "Configuration",
       register: "Le Registre",
       clients: "Clients",
       products: "Pièces",
@@ -313,6 +322,11 @@ export const frenchOrdersMessages = {
         body: "%{name} perdra l'accès immédiatement. Ses clients, notes et tâches vous seront réattribués.",
         confirm: "Supprimer",
         success: "Utilisateur supprimé",
+      },
+      invite: {
+        action: "Lien d'accès",
+        title: "Lien d'accès pour %{name}",
+        body: "Envoyez ce lien directement (WhatsApp, SMS, email). Il permet de choisir un mot de passe et de se connecter — sans email d'invitation. Il expire après 24 heures.",
       },
     },
   },

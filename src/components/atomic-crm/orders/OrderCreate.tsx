@@ -116,7 +116,7 @@ export function OrderCreate() {
           {translate("resources.orders.create.title")}
         </h2>
         <div className="space-y-4 w-full max-w-2xl">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <TextInput
               source="customer_name"
               validate={required()}
@@ -128,7 +128,7 @@ export function OrderCreate() {
               helperText={false}
             />
           </div>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <SelectInput
               source="sales_channel"
               label="resources.orders.fields.sales_channel"
@@ -183,7 +183,7 @@ export function OrderCreate() {
             {translate("resources.orders.create.product_helper")}
           </p>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <TextInput
               source="shipping_address.line1"
               label="resources.orders.create.address_line1"

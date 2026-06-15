@@ -1,21 +1,28 @@
 import { useRecordContext } from "ra-core";
 import { ReferenceArrayField } from "@/components/admin/reference-array-field";
 import { SingleFieldList } from "@/components/admin/single-field-list";
-import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-const ColoredBadge = (props: any) => {
-  const record = useRecordContext();
+/**
+ * A tag in the register: the user's color survives only as a 6px dot; the
+ * name is a quiet overline word. No pill, no fill.
+ */
+const TagWord = (props: { className?: string }) => {
+  const record = useRecordContext<{ name: string; color: string }>();
   if (!record) return null;
   return (
-    <Badge
-      {...props}
-      style={{ backgroundColor: record.color, border: 0 }}
-      variant="outline"
-      className={cn("text-black font-normal", props.className)}
+    <span
+      className={cn(
+        "overline inline-flex items-center gap-1.5 whitespace-nowrap",
+        props.className,
+      )}
     >
+      <span
+        className="inline-block size-1.5 rounded-full"
+        style={{ backgroundColor: record.color }}
+      />
       {record.name}
-    </Badge>
+    </span>
   );
 };
 
@@ -26,8 +33,8 @@ export const TagsList = () => (
     source="tags"
     reference="tags"
   >
-    <SingleFieldList>
-      <ColoredBadge source="name" />
+    <SingleFieldList className="gap-x-3 gap-y-1">
+      <TagWord />
     </SingleFieldList>
   </ReferenceArrayField>
 );

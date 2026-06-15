@@ -11,7 +11,6 @@ import type { SubmitHandler } from "react-hook-form";
 import { SimpleForm } from "@/components/admin/simple-form";
 import { CancelButton } from "@/components/admin/cancel-button";
 import { SaveButton } from "@/components/admin/form";
-import { Card, CardContent } from "@/components/ui/card";
 
 import type { CrmDataProvider } from "../providers/types";
 import type { Sale, SalesFormData } from "../types";
@@ -74,18 +73,14 @@ export function SalesEdit() {
 
   return (
     <div className="max-w-lg w-full mx-auto mt-8">
-      <Card>
-        <CardContent>
-          <SimpleForm
-            toolbar={<EditToolbar record={record} />}
-            onSubmit={onSubmit as SubmitHandler<any>}
-            record={record}
-          >
-            <SaleEditTitle />
-            <SalesInputs />
-          </SimpleForm>
-        </CardContent>
-      </Card>
+      <SimpleForm
+        toolbar={<EditToolbar record={record} />}
+        onSubmit={onSubmit as SubmitHandler<any>}
+        record={record}
+      >
+        <SaleEditTitle />
+        <SalesInputs />
+      </SimpleForm>
     </div>
   );
 }
@@ -95,7 +90,7 @@ const SaleEditTitle = () => {
   const translate = useTranslate();
   if (!record) return null;
   return (
-    <h2 className="display text-[22px] leading-none mb-4">
+    <h2 className="display text-[26px] leading-none mb-4">
       {translate("resources.sales.edit.title", {
         name: `${record.first_name} ${record.last_name}`,
       })}

@@ -211,6 +211,27 @@ const getDataProviderWithCustomMethods = () => {
     async salesDelete(id: Identifier) {
       return salesDeleteViaFunction(id);
     },
+    /** Generates a deliver-by-hand join link for a team member (admin only). */
+    async salesInviteLink(id: Identifier): Promise<string> {
+      const { data, error } = await getSupabaseClient().functions.invoke<{
+        data: { link: string };
+      }>("users", {
+        method: "PUT",
+        body: { sales_id: id },
+      });
+      if (!data?.data?.link || error) {
+        console.error("salesInviteLink.error", error);
+        const details = await (async () => {
+          try {
+            return (await error?.context?.json()) ?? {};
+          } catch {
+            return {};
+          }
+        })();
+        throw new Error(details?.message || "Failed to generate invite link");
+      }
+      return data.data.link;
+    },
     async updatePassword(id: Identifier) {
       const { data: passwordUpdated, error } =
         await getSupabaseClient().functions.invoke<boolean>("update_password", {

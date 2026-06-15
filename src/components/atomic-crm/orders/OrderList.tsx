@@ -69,14 +69,14 @@ const OrderRows = () => {
           <Link
             key={String(order.id)}
             to={`/orders/${order.id}/show`}
-            className="group grid grid-cols-[auto_minmax(0,2.2fr)_minmax(0,1.6fr)_auto_minmax(0,1fr)_auto_auto] items-center gap-5 px-1 py-3 no-underline transition-colors hover:bg-secondary/40"
+            className="group flex items-center gap-4 px-1 py-3 no-underline transition-colors hover:bg-secondary/40 md:grid md:grid-cols-[auto_minmax(0,2.2fr)_minmax(0,1.6fr)_auto_minmax(0,1fr)_auto_auto] md:items-center md:gap-5"
           >
             {image ? (
-              <img src={image} alt="" className="plate h-16 w-16" />
+              <img src={image} alt="" className="plate h-16 w-16 shrink-0" />
             ) : (
-              <div className="plate h-16 w-16" />
+              <div className="plate h-16 w-16 shrink-0" />
             )}
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
               <div className="text-[13px] font-medium truncate">
                 {first?.title || order.order_number}
                 {extraCount > 0 && (
@@ -91,8 +91,13 @@ const OrderRows = () => {
                   ? detailParts.join(" · ")
                   : order.order_number}
               </div>
+              {/* Mobile-only: customer name folds under the title */}
+              <div className="text-xs text-muted-foreground truncate mt-0.5 md:hidden">
+                {order.customer_name || "—"}
+              </div>
             </div>
-            <div className="min-w-0">
+            {/* Customer column — desktop only */}
+            <div className="hidden min-w-0 md:block">
               <div className="text-[13px] truncate">
                 {order.customer_name || "—"}
               </div>
@@ -100,14 +105,24 @@ const OrderRows = () => {
                 {order.customer_email}
               </div>
             </div>
-            <OrderStatusWord status={order.status} />
-            <div className="text-xs text-muted-foreground font-mono truncate">
+            {/* Mobile-only: status over total, right-aligned */}
+            <div className="flex shrink-0 flex-col items-end gap-1 md:hidden">
+              <OrderStatusWord status={order.status} />
+              <div className="text-[13px] tabular-nums">
+                {formatMoney(order.total, order.currency)}
+              </div>
+            </div>
+            {/* Desktop status */}
+            <div className="hidden md:block">
+              <OrderStatusWord status={order.status} />
+            </div>
+            <div className="hidden text-xs text-muted-foreground font-mono truncate md:block">
               {order.tracking_number || "—"}
             </div>
-            <div className="text-[13px] tabular-nums text-right w-20">
+            <div className="hidden text-[13px] tabular-nums text-right w-20 md:block">
               {formatMoney(order.total, order.currency)}
             </div>
-            <div className="text-xs text-muted-foreground w-16 text-right">
+            <div className="hidden text-xs text-muted-foreground w-16 text-right md:block">
               {new Date(order.created_at).toLocaleDateString()}
             </div>
           </Link>

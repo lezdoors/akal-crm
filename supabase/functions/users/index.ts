@@ -372,6 +372,45 @@ async function patchUser(req: Request, currentUserSale: any) {
   }
 }
 
+/**
+ * Generates a one-click join link for a team member so an admin can deliver
+ * it directly (WhatsApp/SMS) — independent of email deliverability. The link
+ * lets the recipient set a password and land in the CRM. Admin-only.
+ */
+async function generateInviteLink(req: Request, currentUserSale: any) {
+  if (!currentUserSale.administrator) {
+    return createErrorResponse(401, "Not Authorized");
+  }
+  const { sales_id } = await req.json();
+  const { data: sale } = await supabaseAdmin
+    .from("sales")
+    .select("*")
+    .eq("id", sales_id)
+    .single();
+  if (!sale) {
+    return createErrorResponse(404, "Not Found");
+  }
+
+  const siteUrl = Deno.env.get("SITE_URL") ?? "https://crm.akalds.com";
+  // A recovery link works whether or not the account is already confirmed:
+  // the recipient sets a password and is signed in.
+  const { data, error } = await supabaseAdmin.auth.admin.generateLink({
+    type: "recovery",
+    email: sale.email,
+    options: { redirectTo: `${siteUrl}/#/set-password` },
+  });
+
+  if (error || !data?.properties?.action_link) {
+    console.error("Error generating invite link:", error);
+    return createErrorResponse(500, "Failed to generate the invite link");
+  }
+
+  return new Response(
+    JSON.stringify({ data: { link: data.properties.action_link } }),
+    { headers: { "Content-Type": "application/json", ...corsHeaders } },
+  );
+}
+
 Deno.serve(async (req: Request) =>
   OptionsMiddleware(req, async (req) =>
     AuthMiddleware(req, async (req) =>
@@ -387,6 +426,10 @@ Deno.serve(async (req: Request) =>
 
         if (req.method === "PATCH") {
           return patchUser(req, currentUserSale);
+        }
+
+        if (req.method === "PUT") {
+          return generateInviteLink(req, currentUserSale);
         }
 
         if (req.method === "DELETE") {

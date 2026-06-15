@@ -55,7 +55,7 @@ const ContactIdentityInputs = () => {
   const translate = useTranslate();
   return (
     <div className="flex flex-col gap-4">
-      <h6 className="text-lg font-semibold">
+      <h6 className="overline">
         {translate("resources.contacts.field_categories.identity")}
       </h6>
       <RadioButtonGroupInput
@@ -121,7 +121,7 @@ const ContactPersonalInformationInputs = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <h6 className="text-lg font-semibold">
+      <h6 className="overline">
         {translate("resources.contacts.field_categories.personal_info")}
       </h6>
       <ArrayInput source="email_jsonb" helperText={false}>
@@ -185,7 +185,7 @@ const ContactMiscInputs = () => {
   const translate = useTranslate();
   return (
     <div className="flex flex-col gap-4">
-      <h6 className="text-lg font-semibold">
+      <h6 className="overline">
         {translate("resources.contacts.field_categories.misc")}
       </h6>
       <TextInput source="background" multiline helperText={false} />

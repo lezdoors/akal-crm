@@ -2,7 +2,6 @@ import { useMutation } from "@tanstack/react-query";
 import { useDataProvider, useNotify, useRedirect, useTranslate } from "ra-core";
 import type { SubmitHandler } from "react-hook-form";
 import { SimpleForm } from "@/components/admin/simple-form";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import type { CrmDataProvider } from "../providers/types";
 import type { SalesFormData } from "../types";
@@ -45,20 +44,14 @@ export function SalesCreate() {
 
   return (
     <div className="max-w-lg w-full mx-auto mt-8">
-      <Card>
-        <CardHeader>
-          <CardTitle>
-            {translate("resources.sales.create.title", {
-              _: "Create a new user",
-            })}
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <SimpleForm onSubmit={onSubmit as SubmitHandler<any>}>
-            <SalesInputs />
-          </SimpleForm>
-        </CardContent>
-      </Card>
+      <h2 className="display text-[26px] leading-none mb-4">
+        {translate("resources.sales.create.title", {
+          _: "Create a new user",
+        })}
+      </h2>
+      <SimpleForm onSubmit={onSubmit as SubmitHandler<any>}>
+        <SalesInputs />
+      </SimpleForm>
     </div>
   );
 }

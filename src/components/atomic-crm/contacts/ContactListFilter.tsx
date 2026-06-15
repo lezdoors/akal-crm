@@ -7,7 +7,6 @@ import {
   useTranslate,
 } from "ra-core";
 import { ToggleFilterButton } from "@/components/admin/toggle-filter-button";
-import { Badge } from "@/components/ui/badge";
 
 import { FilterCategory } from "../filters/FilterCategory";
 import { Status } from "../misc/Status";
@@ -112,15 +111,13 @@ export const ContactListFilter = () => {
               className="w-auto md:w-full justify-between h-10 md:h-8"
               key={record.id}
               label={
-                <Badge
-                  variant="secondary"
-                  className="text-black text-sm md:text-xs font-normal cursor-pointer"
-                  style={{
-                    backgroundColor: record?.color,
-                  }}
-                >
+                <span className="overline inline-flex items-center gap-1.5">
+                  <span
+                    className="inline-block size-1.5 rounded-full"
+                    style={{ backgroundColor: record?.color }}
+                  />
                   {record?.name}
-                </Badge>
+                </span>
               }
               value={{ "tags@cs": `{${record.id}}` }}
               size={isMobile ? "lg" : undefined}
@@ -233,15 +230,13 @@ export const ContactListFilterSummary = () => {
             className="w-auto justify-between h-8"
             key={record.id}
             label={
-              <Badge
-                variant="secondary"
-                className="text-black text-sm md:text-xs font-normal cursor-pointer"
-                style={{
-                  backgroundColor: record?.color,
-                }}
-              >
+              <span className="overline inline-flex items-center gap-1.5">
+                <span
+                  className="inline-block size-1.5 rounded-full"
+                  style={{ backgroundColor: record?.color }}
+                />
                 {record?.name}
-              </Badge>
+              </span>
             }
             value={{ "tags@cs": `{${record.id}}` }}
           />
