@@ -1,7 +1,7 @@
 import { CreateButton } from "@/components/admin/create-button";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { BookUser, Plus } from "lucide-react";
 import { useTranslate } from "ra-core";
 
 import useAppBarHeight from "../misc/useAppBarHeight";
@@ -23,11 +23,12 @@ export const ContactEmpty = () => {
           height: `calc(100dvh - ${appbarHeight}px)`,
         }}
       >
-        <img
-          src="./img/empty.svg"
-          alt={translate("resources.contacts.empty.title")}
+        <BookUser
+          className="size-9 text-ink-muted mb-1"
+          strokeWidth={1.25}
         />
         <div className="flex flex-col gap-0 items-center">
+          <p className="overline mb-2">{translate("crm.nav.clients")}</p>
           <h6 className="display text-[22px] leading-none mb-2">
             {translate("resources.contacts.empty.title")}
           </h6>
