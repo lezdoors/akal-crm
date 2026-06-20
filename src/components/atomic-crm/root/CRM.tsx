@@ -29,6 +29,7 @@ import { ProductsPage } from "../catalogue/ProductsPage";
 import { ProductDetailPage } from "../catalogue/ProductDetailPage";
 import { InventoryPage } from "../catalogue/InventoryPage";
 import { MediaLibraryPage } from "../catalogue/MediaLibraryPage";
+import { CartsPage } from "../carts/CartsPage";
 import { ChangelogPage } from "../misc/ChangelogPage";
 import {
   getAuthProvider as defaultAuthProviderBuilder,
@@ -261,6 +262,7 @@ const DesktopAdmin = (
         <Route path="/products/:id" element={<ProductDetailPage />} />
         <Route path="/inventory" element={<InventoryPage />} />
         <Route path="/media" element={<MediaLibraryPage />} />
+        <Route path="/carts" element={<CartsPage />} />
       </CustomRoutes>
       <Resource name="orders" {...orders} />
       <Resource name="deals" {...deals} />
@@ -336,6 +338,7 @@ const MobileAdmin = (
           <Route path="/products/:id" element={<ProductDetailPage />} />
           <Route path="/inventory" element={<InventoryPage />} />
           <Route path="/media" element={<MediaLibraryPage />} />
+          <Route path="/carts" element={<CartsPage />} />
         </CustomRoutes>
         <Resource name="orders" {...orders} />
         <Resource

@@ -878,6 +878,10 @@
           "type": "registry:component"
         },
         {
+          "path": "src/components/atomic-crm/carts/CartsPage.tsx",
+          "type": "registry:component"
+        },
+        {
           "path": "src/components/atomic-crm/activity/ActivityLogNote.tsx",
           "type": "registry:component"
         },

@@ -6,6 +6,7 @@ import {
   Search,
   Settings,
   ShoppingBag,
+  ShoppingCart,
   Sun,
   Users,
 } from "lucide-react";
@@ -40,6 +41,11 @@ const MAIN_NAV: NavEntry[] = [
     icon: ShoppingBag,
     label: "resources.orders.name",
     isResource: true,
+  },
+  {
+    to: "/carts",
+    icon: ShoppingCart,
+    label: "crm.nav.carts",
   },
   {
     to: "/contacts",

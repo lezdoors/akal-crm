@@ -7,6 +7,7 @@ import {
   type ResourceCallbacks,
 } from "ra-core";
 import type {
+  AbandonedCart,
   ContactNote,
   Deal,
   DealNote,
@@ -321,6 +322,31 @@ const getDataProviderWithCustomMethods = () => {
       }
 
       return data;
+    },
+    /**
+     * Read-only window onto the storefront-owned `abandoned_checkouts` table,
+     * via the `abandoned-carts` edge function (the table is RLS-locked to
+     * service-role). The CRM never writes here — the storefront owns the
+     * write path and the recovery emails.
+     */
+    async getAbandonedCarts(): Promise<{
+      inProgress: AbandonedCart[];
+      recovered: AbandonedCart[];
+    }> {
+      const { data, error } = await getSupabaseClient().functions.invoke<{
+        inProgress: AbandonedCart[];
+        recovered: AbandonedCart[];
+      }>("abandoned-carts", { method: "POST" });
+
+      if (error || !data) {
+        console.error("getAbandonedCarts.error", error);
+        throw new Error("Failed to load carts");
+      }
+
+      return {
+        inProgress: data.inProgress ?? [],
+        recovered: data.recovered ?? [],
+      };
     },
     async getConfiguration(): Promise<ConfigurationContextValue> {
       const { data } = await baseDataProvider.getOne("configuration", {

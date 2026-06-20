@@ -9,6 +9,7 @@ import {
 import fakeRestDataProvider from "ra-data-fakerest";
 
 import type {
+  AbandonedCart,
   Company,
   Contact,
   ContactNote,
@@ -266,6 +267,13 @@ export const createDataProvider = ({
     },
     salesInviteLink: async (_id: Identifier): Promise<string> => {
       return "https://example.test/#/set-password?token=demo";
+    },
+    getAbandonedCarts: async (): Promise<{
+      inProgress: AbandonedCart[];
+      recovered: AbandonedCart[];
+    }> => {
+      // Demo mode: the abandoned_checkouts table is storefront-owned.
+      return { inProgress: [], recovered: [] };
     },
     isInitialized: async (): Promise<boolean> => {
       const sales = await dataProvider.getList<Sale>("sales", {

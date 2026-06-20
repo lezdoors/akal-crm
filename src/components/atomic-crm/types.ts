@@ -252,6 +252,31 @@ export interface OrderShippingAddress {
   country?: string;
 }
 
+/**
+ * Storefront-owned `abandoned_checkouts` row (read-only in the CRM).
+ * Surfaced via the `abandoned-carts` edge function — the table is RLS-locked
+ * to service-role, so the CRM never reads it through PostgREST. The one-click
+ * `recovery_token` and `revolut_order_id` are deliberately never exposed here.
+ */
+export type AbandonedCartStatus = "pending" | "converted";
+
+export type AbandonedCart = {
+  id: string;
+  email: string;
+  customer_name?: string | null;
+  items: OrderItem[];
+  /** Minor units (cents). */
+  amount_minor: number;
+  currency: string;
+  promo_code?: string | null;
+  status: AbandonedCartStatus;
+  first_email_sent_at?: string | null;
+  second_email_sent_at?: string | null;
+  unsubscribed: boolean;
+  created_at: string;
+  updated_at: string;
+};
+
 export type Order = {
   order_number: string;
   sales_channel: OrderChannel;
