@@ -39,26 +39,32 @@ const Row = ({ cart }: { cart: AbandonedCart }) => {
   const status = cartStatus(cart);
   const image = cart.items?.[0]?.image;
   return (
-    <div className="grid grid-cols-[auto_minmax(0,1fr)_auto] sm:grid-cols-[auto_minmax(0,1fr)_auto_auto_auto] items-center gap-4 px-1 py-2.5">
+    <div className="flex items-center gap-3 px-1 py-2.5 sm:grid sm:grid-cols-[auto_minmax(0,1fr)_auto_auto_auto] sm:gap-4">
       {image ? (
-        <img src={image} alt="" loading="lazy" className="plate h-10 w-10" />
+        <img src={image} alt="" loading="lazy" className="plate h-10 w-10 shrink-0" />
       ) : (
-        <div className="plate h-10 w-10" />
+        <div className="plate h-10 w-10 shrink-0" />
       )}
-      <div className="min-w-0">
+      <div className="min-w-0 flex-1">
         <div className="text-[13px] truncate">{cartTitle(cart.items)}</div>
         <div className="text-xs text-muted-foreground truncate mt-0.5">
           {cart.customer_name ? `${cart.customer_name} · ` : ""}
           {cart.email}
         </div>
+        {/* On a phone the status reads under the email; on desktop it has its
+            own column at the end of the row. */}
+        <span className="overline mt-1 flex items-center gap-1.5 whitespace-nowrap sm:hidden">
+          <span className={`inline-block size-1.5 rounded-full ${status.dot}`} />
+          {status.label}
+        </span>
       </div>
       <span className="hidden sm:block text-xs text-muted-foreground tabular-nums w-12 text-right">
         {formatAge(cart.created_at)}
       </span>
-      <span className="text-[13px] tabular-nums w-20 text-right">
+      <span className="text-[13px] tabular-nums text-right shrink-0 sm:w-20">
         {formatMoney(cart.amount_minor, cart.currency)}
       </span>
-      <span className="overline flex items-center justify-end gap-1.5 whitespace-nowrap w-24">
+      <span className="overline hidden items-center justify-end gap-1.5 whitespace-nowrap sm:flex sm:w-24">
         <span className={`inline-block size-1.5 rounded-full ${status.dot}`} />
         {status.label}
       </span>

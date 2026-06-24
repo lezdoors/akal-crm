@@ -105,7 +105,7 @@ export const ChannelOverview = () => {
           _: "This month",
         })}
       </p>
-      <div className="mt-5 grid grid-cols-2 gap-y-8 sm:grid-cols-4">
+      <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
         {columns.map((column) => (
           <ChannelColumn
             key={column.channel}
@@ -116,7 +116,9 @@ export const ChannelOverview = () => {
             filter={column.channel}
           />
         ))}
-        <div className="border-l border-hairline pl-8 hidden sm:block">
+        {/* Total: a quiet grid cell on a phone (no divider), set off by a
+            hairline rule on wider screens where it sits in its own column. */}
+        <div className="sm:border-l sm:border-hairline sm:pl-8">
           <ChannelColumn
             label={translate("crm.dashboard.total", { _: "Total" })}
             monthOrders={month}
