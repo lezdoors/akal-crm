@@ -68,7 +68,7 @@ export const NoteCreateSheet = ({
     <CreateSheet
       resource="contact_notes"
       title={
-        <span className="text-xl font-semibold truncate">
+        <span className="display text-[20px] leading-none truncate">
           {!selectContact
             ? translate("resources.notes.sheet.create_for", {
                 name: getContactRepresentation(contact!),

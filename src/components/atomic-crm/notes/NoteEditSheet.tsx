@@ -50,7 +50,7 @@ export const NoteEditSheet = ({
           source={foreignKeyMapping["contacts"]}
           reference="contacts"
           render={({ referenceRecord }) => (
-            <span className="text-xl font-semibold truncate">
+            <span className="display text-[20px] leading-none truncate">
               {referenceRecord
                 ? translate("resources.notes.sheet.edit_for", {
                     name: getContactRepresentation(referenceRecord),
