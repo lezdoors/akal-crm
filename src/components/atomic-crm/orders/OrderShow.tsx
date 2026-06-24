@@ -65,14 +65,30 @@ const CustomerEmail = ({ email }: { email: string }) => {
   );
 };
 
+/**
+ * The storefront stores the canonical processor id in `revolut_order_id`
+ * (the column predates the Revolut→Stripe migration and is now the generic
+ * idempotency key). Stripe ids carry a typed prefix — label by shape so both
+ * historic Revolut orders and new Stripe orders read correctly.
+ */
+function processorLabel(id: string): string {
+  return /^(cs_|pi_|ch_|in_|seti_|py_)/.test(id) ? "Stripe" : "Revolut";
+}
+
 const ProcessorIds = () => {
   const record = useRecordContext<Order>();
   if (!record) return null;
   const ids = [
-    { label: "Revolut", value: record.revolut_order_id },
-    { label: "Etsy", value: record.etsy_order_id },
-    { label: "Stripe", value: record.stripe_session_id },
-  ].filter((entry) => entry.value);
+    record.revolut_order_id && {
+      label: processorLabel(record.revolut_order_id),
+      value: record.revolut_order_id,
+    },
+    record.stripe_session_id && {
+      label: "Stripe",
+      value: record.stripe_session_id,
+    },
+    record.etsy_order_id && { label: "Etsy", value: record.etsy_order_id },
+  ].filter((entry): entry is { label: string; value: string } => Boolean(entry));
   if (!ids.length) return null;
   return (
     <div className="flex flex-col gap-1 text-xs text-muted-foreground">

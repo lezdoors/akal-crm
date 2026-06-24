@@ -15,11 +15,9 @@ import { ForgotPasswordPage } from "@/components/supabase/forgot-password-page";
 import { SetPasswordPage } from "@/components/supabase/set-password-page";
 import { OAuthConsentPage } from "@/components/supabase/oauth-consent-page";
 
-import companies from "../companies";
 import contacts from "../contacts";
 import orders from "../orders";
 import { Dashboard } from "../dashboard/Dashboard";
-import deals from "../deals";
 import { MaisonLayout } from "../layout/MaisonLayout";
 import { MobileLayout } from "../layout/MobileLayout";
 import { SignupPage } from "../login/SignupPage";
@@ -62,7 +60,6 @@ import { useIsMobile } from "@/hooks/use-mobile.ts";
 import { MobileTasksList } from "../tasks/MobileTasksList.tsx";
 import { ContactListMobile } from "../contacts/ContactList.tsx";
 import { ContactShow } from "../contacts/ContactShow.tsx";
-import { CompanyShow } from "../companies/CompanyShow.tsx";
 import { NoteShowPage } from "../notes/NoteShowPage.tsx";
 
 const defaultStore = localStorageStore(undefined, "CRM");
@@ -265,9 +262,12 @@ const DesktopAdmin = (
         <Route path="/carts" element={<CartsPage />} />
       </CustomRoutes>
       <Resource name="orders" {...orders} />
-      <Resource name="deals" {...deals} />
       <Resource name="contacts" {...contacts} />
-      <Resource name="companies" {...companies} />
+      {/* deals + companies: Atomic's B2B pipeline, off-register for this B2C
+          maison. Registered bare so contact references still resolve, but no
+          list/show pages — unreachable in the UI. Restore the spread to revive. */}
+      <Resource name="deals" />
+      <Resource name="companies" />
       <Resource name="contact_notes" />
       <Resource name="deal_notes" />
       <Resource name="tasks" />
@@ -349,7 +349,7 @@ const MobileAdmin = (
         >
           <Route path=":id/notes/:noteId" element={<NoteShowPage />} />
         </Resource>
-        <Resource name="companies" show={CompanyShow} />
+        <Resource name="companies" />
         <Resource name="contact_notes" />
         <Resource name="tasks" list={MobileTasksList} />
         <Resource name="sales" {...sales} />

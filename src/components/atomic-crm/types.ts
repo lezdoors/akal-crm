@@ -256,7 +256,7 @@ export interface OrderShippingAddress {
  * Storefront-owned `abandoned_checkouts` row (read-only in the CRM).
  * Surfaced via the `abandoned-carts` edge function — the table is RLS-locked
  * to service-role, so the CRM never reads it through PostgREST. The one-click
- * `recovery_token` and `revolut_order_id` are deliberately never exposed here.
+ * `recovery_token` and the processor order id are deliberately never exposed here.
  */
 export type AbandonedCartStatus = "pending" | "converted";
 

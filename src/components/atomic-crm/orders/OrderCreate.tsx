@@ -48,7 +48,7 @@ interface OrderDraft {
 
 /**
  * Manual order entry for sales made off-site (Etsy, in-person).
- * Online orders are inserted by the storefront's Revolut webhook — never here.
+ * Online orders are inserted by the storefront's Stripe webhook — never here.
  * Items are picked from the live products catalogue so the order carries a
  * real product_id (and therefore a photo); free-text remains as fallback.
  */

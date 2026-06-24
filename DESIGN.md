@@ -83,3 +83,32 @@ one quiet action. The register before the season opens.
 - Tinted status pills, colored badges, avatars-as-decoration
 - Inset floating content card (Linear's anatomy) — content sits ON the paper
 - Blue focus rings, cool grays, pure white — the register is never cold
+
+## Installed design skills — how they bind here
+
+Several design skills are installed globally (`minimalist-ui`, `frontend-design`,
+`dashboard`, and `ui-ux-pro-max`'s style packs incl. brutalism). On this repo
+**Le Registre always wins**; the skills are subordinate, not a license to relax
+the rejections above.
+
+- **`dashboard` and `brutalism` (and `ui-ux-pro-max`'s glass/neo/clay packs) are
+  off-register here — do not apply them.** Dark glass panels, modular data
+  grids, heavy borders/shadows, mono-brutalist type and gradient chrome are the
+  exact SaaS look Le Registre rejects. They belong to other product types, not
+  this maison's back office.
+- **`minimalist-ui` is the only on-register skill** — and only as a lens, not a
+  kit (see below). It confirms the direction we already hold; it does not add to it.
+
+- **minimalist-ui** is *not* permission for its component kit. Its bento cards,
+  1px-bordered cards, pill/badge tags, pastel spot-colors, faux-macOS window
+  chrome and `<kbd>` chrome all violate "no boxed cards / no pills / no tinted
+  chips / tobacco is the only accent." Do not introduce any of them. Borrow only
+  its macro-whitespace and `IntersectionObserver` scroll-entry discipline — and
+  even then defer to the single 240ms entrance defined under Motion.
+- **frontend-design** / **minimalist-ui** both say "avoid Inter, never go
+  generic." Here Inter is the register's data and label voice (see Typography) —
+  keep it. Cormorant Garamond is the only display face. Ignore the skills' pull
+  toward bold or maximalist layouts.
+- **Imagery**: both skills suggest stock / `picsum.photos` placeholders. Never.
+  Plates come from real product photography (Studio / Higgsfield pipeline),
+  never stock, on any screen.
