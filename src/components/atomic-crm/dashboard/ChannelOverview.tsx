@@ -33,13 +33,15 @@ const ChannelColumn = ({
   const body = (
     <>
       <span className="overline">{label}</span>
-      <span className="display text-[32px] leading-none tabular-nums mt-2">
-        {monthOrders.length}
-      </span>
-      <span className="text-[13px] tabular-nums mt-1.5 text-ink-soft">
+      <span className="display text-[34px] leading-none lining-nums tabular-nums mt-2 text-ink">
         {revenueLine(monthOrders)}
       </span>
-      <span className="text-[11px] text-muted-foreground mt-0.5 tabular-nums">
+      <span className="text-[11px] text-muted-foreground mt-1.5 tabular-nums lining-nums">
+        {translate("resources.orders.dashboard.orders_count", {
+          smart_count: monthOrders.length,
+          _: "%{smart_count} order this month |||| %{smart_count} orders this month",
+        })}
+        {" · "}
         {translate("resources.orders.dashboard.all_time", {
           smart_count: allOrders.length,
         })}

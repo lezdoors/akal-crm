@@ -52,7 +52,7 @@ export const StockAlerts = () => {
         <div className="flex items-start gap-8">
           {rows.map((row) => (
             <div key={row.key} className="flex flex-col gap-1">
-              <span className="display text-[26px] leading-none tabular-nums">
+              <span className="display text-[26px] leading-none lining-nums tabular-nums">
                 {counts[row.key]}
               </span>
               <span className="overline flex items-center gap-1.5">

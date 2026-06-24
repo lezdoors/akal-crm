@@ -270,6 +270,10 @@ input[type="time"] {
   font-family: "Cormorant Garamond", Georgia, serif;
   font-weight: 500;
   letter-spacing: 0.01em;
+  /* Cormorant defaults to oldstyle figures — "1" reads as I, "0" as O.
+     Force lining figures so serif numerals (dashboard, counts) read as digits. */
+  font-feature-settings: "lnum" 1;
+  font-variant-numeric: lining-nums;
 }
 
 /* Photographs are plates: square, hairline frame, zero radius */
