@@ -10,8 +10,8 @@ import { AuthMiddleware } from "../_shared/authentication.ts";
 // off the public/authenticated client — so the CRM cannot read it through
 // PostgREST. This function, gated to authenticated CRM staff, reads via the
 // service role and returns only the operational columns the CRM needs. The
-// one-click `recovery_token` (an auth secret) and `revolut_order_id` are
-// never returned. The CRM only reads; the storefront owns the write path.
+// one-click `recovery_token` (an auth secret) and `stripe_payment_intent_id`
+// are never returned. The CRM only reads; the storefront owns the write path.
 
 const SELECT_COLUMNS =
   "id, email, customer_name, items, amount_minor, currency, promo_code, status, first_email_sent_at, second_email_sent_at, unsubscribed, created_at, updated_at";

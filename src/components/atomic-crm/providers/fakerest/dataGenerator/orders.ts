@@ -160,8 +160,8 @@ export const generateOrders = (_: Db): Order[] => {
       id: index + 1,
       order_number: `MT-${String(100200 + index * 137).padStart(6, "0")}`,
       sales_channel: seed.sales_channel,
-      revolut_order_id:
-        seed.sales_channel === "direct" ? `demo-rev-${1000 + index}` : undefined,
+      stripe_payment_intent_id:
+        seed.sales_channel === "direct" ? `pi_demo${1000 + index}` : undefined,
       etsy_order_id:
         seed.sales_channel === "etsy" ? `demo-etsy-${2000 + index}` : undefined,
       customer_email: seed.customer_email,

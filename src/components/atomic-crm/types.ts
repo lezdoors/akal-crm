@@ -280,7 +280,7 @@ export type AbandonedCart = {
 export type Order = {
   order_number: string;
   sales_channel: OrderChannel;
-  revolut_order_id?: string;
+  stripe_payment_intent_id?: string;
   stripe_session_id?: string;
   etsy_order_id?: string;
   customer_email: string;

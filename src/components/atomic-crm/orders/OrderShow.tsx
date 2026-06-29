@@ -66,22 +66,18 @@ const CustomerEmail = ({ email }: { email: string }) => {
 };
 
 /**
- * The storefront stores the canonical processor id in `revolut_order_id`
- * (the column predates the Revolut→Stripe migration and is now the generic
- * idempotency key). Stripe ids carry a typed prefix — label by shape so both
- * historic Revolut orders and new Stripe orders read correctly.
+ * The storefront stores the Stripe PaymentIntent id (pi_*) in
+ * `stripe_payment_intent_id` — the idempotency key for direct sales.
+ * (Maison Tanneurs is Stripe-only; this column was renamed from the
+ * pre-launch `revolut_order_id` name on 2026-06-28.)
  */
-function processorLabel(id: string): string {
-  return /^(cs_|pi_|ch_|in_|seti_|py_)/.test(id) ? "Stripe" : "Revolut";
-}
-
 const ProcessorIds = () => {
   const record = useRecordContext<Order>();
   if (!record) return null;
   const ids = [
-    record.revolut_order_id && {
-      label: processorLabel(record.revolut_order_id),
-      value: record.revolut_order_id,
+    record.stripe_payment_intent_id && {
+      label: "Stripe",
+      value: record.stripe_payment_intent_id,
     },
     record.stripe_session_id && {
       label: "Stripe",

@@ -3,7 +3,7 @@
 -- Every order upserts a contact (matched case-insensitively on
 -- customer_email inside email_jsonb) and appends a contact_note with the
 -- order summary. Runs as an AFTER INSERT trigger on public.orders, so it
--- covers both the storefront's Revolut webhook inserts (service role) and
+-- covers both the storefront's Stripe webhook inserts (service role) and
 -- the CRM's manual order entry.
 --
 -- Design constraints:
