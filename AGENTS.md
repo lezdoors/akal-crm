@@ -1,5 +1,7 @@
 # AGENTS.md
 
+> **📚 Project knowledge lives in [`knowledge/`](./knowledge/README.md)** (Open Knowledge Format — plain markdown + YAML, no tooling required). Read it before working, and **keep the relevant nodes current as part of any change you make** — architecture, auth, deployment, money, design, or guardrails. Contract: [`knowledge/SCHEMA.md`](./knowledge/SCHEMA.md). This file below is upstream dev reference (commands, architecture, schema workflow).
+
 ## Project Overview
 
 Atomic CRM is a full-featured CRM built with React, shadcn-admin-kit, and Supabase. It provides contact management, task tracking, notes, email capture, and deal management with a Kanban board.
