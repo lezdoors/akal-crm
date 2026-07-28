@@ -2,7 +2,7 @@ import { useTranslate } from "ra-core";
 import { Link } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { formatMoney } from "../orders/orderUtils";
+import { useFormatMoney } from "../orders/orderUtils";
 import { OrderChannelWord, OrderStatusWord } from "../orders/OrderBadges";
 import { useDashboardOrders } from "./commerceData";
 import { useOrderProductImages } from "../orders/useOrderProductImages";
@@ -13,6 +13,7 @@ export const RecentOrders = () => {
 
   const recent = (orders ?? []).slice(0, 8);
   const imageFor = useOrderProductImages(recent);
+  const money = useFormatMoney();
 
   if (!recent.length) return null;
 
@@ -35,7 +36,7 @@ export const RecentOrders = () => {
             <Link
               key={order.id}
               to={`/orders/${order.id}/show`}
-              className="grid grid-cols-[auto_auto_1fr_auto_auto_auto] items-center gap-4 py-2.5 text-[13px] no-underline transition-colors hover:bg-secondary px-1"
+              className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 py-2.5 text-[13px] no-underline transition-colors hover:bg-secondary px-1 sm:grid-cols-[auto_auto_1fr_auto_auto_auto] sm:gap-4"
             >
               {imageFor(
                 order.items?.[0] ?? {
@@ -53,14 +54,30 @@ export const RecentOrders = () => {
               ) : (
                 <div className="plate h-11 w-11 shrink-0" />
               )}
-              <span className="font-mono text-xs">{order.order_number}</span>
-              <span className="text-muted-foreground truncate">
-                {order.customer_name || "—"}
+              {/* Phone: order number and channel fold away, status sits under
+                  the amount. Six rigid columns pushed the row past 375px. */}
+              <span className="hidden font-mono text-xs sm:inline">
+                {order.order_number}
               </span>
-              <OrderChannelWord channel={order.sales_channel ?? ""} />
-              <OrderStatusWord status={order.status} />
-              <span className="tabular-nums w-24 text-right">
-                {formatMoney(order.total, order.currency)}
+              <span className="min-w-0">
+                <span className="block truncate text-muted-foreground">
+                  {order.customer_name || "—"}
+                </span>
+                <span className="mt-0.5 block truncate font-mono text-xs text-muted-foreground sm:hidden">
+                  {order.order_number}
+                </span>
+              </span>
+              <span className="hidden sm:block">
+                <OrderChannelWord channel={order.sales_channel ?? ""} />
+              </span>
+              <span className="hidden sm:block">
+                <OrderStatusWord status={order.status} />
+              </span>
+              <span className="flex flex-col items-end gap-1 tabular-nums sm:block sm:w-24 sm:text-right">
+                {money(order.total, order.currency)}
+                <span className="sm:hidden">
+                  <OrderStatusWord status={order.status} />
+                </span>
               </span>
             </Link>
           ))}

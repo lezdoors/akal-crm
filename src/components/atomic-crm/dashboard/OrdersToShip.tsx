@@ -2,7 +2,7 @@ import { useTranslate } from "ra-core";
 import { Link } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { formatMoney } from "../orders/orderUtils";
+import { useFormatDate, useFormatMoney } from "../orders/orderUtils";
 import { useOrderProductImages } from "../orders/useOrderProductImages";
 import { needsShipping, useDashboardOrders } from "./commerceData";
 
@@ -16,6 +16,8 @@ export const OrdersToShip = () => {
   const { data: allOrders, isPending } = useDashboardOrders();
   const orders = (allOrders ?? []).filter(needsShipping).reverse();
   const imageFor = useOrderProductImages(orders);
+  const money = useFormatMoney();
+  const formatDate = useFormatDate();
 
   if (isPending || !orders.length) return null;
 
@@ -53,15 +55,26 @@ export const OrdersToShip = () => {
               ) : (
                 <div className="plate h-14 w-14 mr-3 shrink-0" />
               )}
-              <span className="font-mono text-xs">{order.order_number}</span>
-              <span className="text-muted-foreground truncate mx-3 flex-1">
-                {order.customer_name}
+              {/* Five side-by-side columns overflowed a 375px viewport by
+                  42px. On a phone the order number folds under the customer
+                  name and the date drops; from `sm` up the row spreads back
+                  out into columns. */}
+              <span className="hidden font-mono text-xs sm:inline">
+                {order.order_number}
               </span>
-              <span className="text-xs text-muted-foreground mr-3">
-                {new Date(order.created_at).toLocaleDateString()}
+              <span className="min-w-0 flex-1 sm:mx-3">
+                <span className="block truncate text-muted-foreground">
+                  {order.customer_name}
+                </span>
+                <span className="mt-0.5 block font-mono text-xs text-muted-foreground sm:hidden">
+                  {order.order_number}
+                </span>
               </span>
-              <span className="tabular-nums w-24 text-right">
-                {formatMoney(order.total, order.currency)}
+              <span className="hidden text-xs text-muted-foreground sm:mr-3 sm:inline">
+                {formatDate(order.created_at)}
+              </span>
+              <span className="ml-3 shrink-0 text-right tabular-nums">
+                {money(order.total, order.currency)}
               </span>
             </Link>
           ))}

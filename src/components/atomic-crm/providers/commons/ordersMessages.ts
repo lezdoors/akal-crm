@@ -1,4 +1,7 @@
 export const englishOrdersMessages = {
+  // The breadcrumb root is the sidebar's first entry — "Today", not
+  // react-admin's generic "Dashboard".
+  ra: { page: { dashboard: "Today" } },
   crm: {
     auth: {
       welcome_title: "Welcome to Maison Tanneurs",
@@ -8,7 +11,7 @@ export const englishOrdersMessages = {
       placeholder: "Search orders, customers, or jump to…",
       navigation: "Go to",
       actions: "Actions",
-      new_contact: "New contact",
+      new_contact: "New client",
     },
     nav: {
       today: "Today",
@@ -167,6 +170,7 @@ export const englishOrdersMessages = {
 };
 
 export const frenchOrdersMessages = {
+  ra: { page: { dashboard: "Aujourd'hui" } },
   crm: {
     auth: {
       welcome_title: "Bienvenue chez Maison Tanneurs",

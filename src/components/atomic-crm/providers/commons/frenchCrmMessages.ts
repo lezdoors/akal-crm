@@ -65,8 +65,8 @@ export const frenchCrmMessages = {
       },
     },
     contacts: {
-      name: "Contact |||| Contacts",
-      forcedCaseName: "Contact",
+      name: "Client |||| Clients",
+      forcedCaseName: "Client",
       field_categories: {
         background_info: "Informations complémentaires",
         identity: "Identité",
@@ -90,13 +90,13 @@ export const frenchCrmMessages = {
         sales_id: "Responsable de compte",
       },
       action: {
-        add: "Ajouter un contact",
-        add_first: "Ajoutez votre premier contact",
-        create: "Créer un contact",
-        edit: "Modifier le contact",
+        add: "Ajouter un client",
+        add_first: "Ajoutez votre premier client",
+        create: "Créer un client",
+        edit: "Modifier le client",
         export_vcard: "Exporter en vCard",
-        new: "Nouveau contact",
-        show: "Afficher le contact",
+        new: "Nouveau client",
+        show: "Afficher le client",
       },
       background: {
         last_activity_on: "Dernière activité le %{date}",
@@ -108,16 +108,16 @@ export const frenchCrmMessages = {
       position_at: "%{title} chez",
       position_at_company: "%{title} chez %{company}",
       empty: {
-        description: "Il semble que votre liste de contacts soit vide.",
-        title: "Aucun contact trouvé",
+        description: "Il semble que votre liste de clients soit vide.",
+        title: "Aucun client trouvé",
       },
       import: {
-        title: "Importer des contacts",
+        title: "Importer des clients",
         button: "Importer un fichier CSV",
         complete:
-          "Import des contacts terminé. %{importCount} contacts importés, %{errorCount} erreurs",
+          "Import des clients terminé. %{importCount} clients importés, %{errorCount} erreurs",
         progress:
-          "%{importCount} / %{rowCount} contacts importés, avec %{errorCount} erreurs.",
+          "%{importCount} / %{rowCount} clients importés, avec %{errorCount} erreurs.",
         error:
           "Échec de l'importation de ce fichier. Veuillez vous assurer que vous avez fourni un fichier CSV valide.",
         imported: "Importé",
@@ -128,7 +128,7 @@ export const frenchCrmMessages = {
           "Voici un exemple de fichier CSV que vous pouvez utiliser comme modèle",
         stop: "Arrêter l'importation",
         csv_file: "Fichier CSV",
-        contacts_label: "contact |||| contacts",
+        contacts_label: "client |||| clients",
       },
       inputs: {
         genders: {
@@ -143,37 +143,37 @@ export const frenchCrmMessages = {
         },
       },
       list: {
-        error_loading: "Erreur lors du chargement des contacts",
+        error_loading: "Erreur lors du chargement des clients",
       },
       bulk_tag: {
         action: "Étiqueter",
         back: "Retour aux étiquettes",
         create_description:
-          "Créez une nouvelle étiquette et appliquez-la aux contacts sélectionnés.",
+          "Créez une nouvelle étiquette et appliquez-la aux clients sélectionnés.",
         description:
-          "Choisissez une étiquette existante ou créez-en une pour les contacts sélectionnés.",
+          "Choisissez une étiquette existante ou créez-en une pour les clients sélectionnés.",
         empty:
-          "Aucune étiquette pour le moment. Créez-en une pour étiqueter les contacts sélectionnés.",
-        error: "Impossible d'ajouter l'étiquette aux contacts",
-        noop: "Les contacts sélectionnés ont déjà cette étiquette",
+          "Aucune étiquette pour le moment. Créez-en une pour étiqueter les clients sélectionnés.",
+        error: "Impossible d'ajouter l'étiquette aux clients",
+        noop: "Les clients sélectionnés ont déjà cette étiquette",
         success:
-          "Étiquette ajoutée à %{smart_count} contact |||| Étiquette ajoutée à %{smart_count} contacts",
-        title: "Ajouter une étiquette aux contacts",
+          "Étiquette ajoutée à %{smart_count} client |||| Étiquette ajoutée à %{smart_count} clients",
+        title: "Ajouter une étiquette aux clients",
       },
       merge: {
-        action: "Fusionner avec un autre contact",
-        confirm: "Fusionner les contacts",
-        current_contact: "Contact actuel (sera supprimé)",
-        description: "Fusionnez ce contact avec un autre.",
-        error: "Échec de la fusion des contacts",
+        action: "Fusionner avec un autre client",
+        confirm: "Fusionner les clients",
+        current_contact: "Client actuel (sera supprimé)",
+        description: "Fusionnez ce client avec un autre.",
+        error: "Échec de la fusion des clients",
         merging: "Fusion...",
         no_additional_data: "Aucune donnée supplémentaire à fusionner",
-        select_target: "Veuillez sélectionner un contact avec lequel fusionner",
-        success: "Contacts fusionnés avec succès",
-        target_contact: "Contact cible (sera conservé)",
-        title: "Fusionner les contacts",
+        select_target: "Veuillez sélectionner un client avec lequel fusionner",
+        success: "Clients fusionnés avec succès",
+        target_contact: "Client cible (sera conservé)",
+        title: "Fusionner les clients",
         warning_description:
-          "Toutes les données seront transférées au deuxième contact. Cette action ne peut pas être annulée.",
+          "Toutes les données seront transférées au deuxième client. Cette action ne peut pas être annulée.",
         warning_title: "Avertissement : opération destructrice",
         what_will_be_merged: "Ce qui sera fusionné :",
       },
@@ -182,7 +182,7 @@ export const frenchCrmMessages = {
         before_this_month: "Avant ce mois-ci",
         before_this_week: "Avant cette semaine",
         managed_by_me: "Géré par moi",
-        search: "Rechercher nom, entreprise...",
+        search: "Rechercher un client par nom…",
         this_week: "Cette semaine",
         today: "Aujourd'hui",
         tags: "Étiquettes",
@@ -190,9 +190,9 @@ export const frenchCrmMessages = {
       },
       hot: {
         empty_change_status:
-          'Changez le statut d\'un contact en ajoutant une note à ce contact et en cliquant sur "afficher les options".',
-        empty_hint: 'Les contacts avec un statut "chaud" apparaîtront ici.',
-        title: "Contacts chauds",
+          'Changez le statut d\'un client en ajoutant une note à ce client et en cliquant sur "afficher les options".',
+        empty_hint: 'Les clients avec un statut "chaud" apparaîtront ici.',
+        title: "Clients chauds",
       },
     },
     deals: {

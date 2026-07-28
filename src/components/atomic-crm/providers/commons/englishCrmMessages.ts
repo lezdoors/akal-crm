@@ -62,8 +62,8 @@ export const englishCrmMessages = {
       },
     },
     contacts: {
-      name: "Contact |||| Contacts",
-      forcedCaseName: "Contact",
+      name: "Client |||| Clients",
+      forcedCaseName: "Client",
       field_categories: {
         background_info: "Background info",
         identity: "Identity",
@@ -87,13 +87,13 @@ export const englishCrmMessages = {
         sales_id: "Account manager",
       },
       action: {
-        add: "Add contact",
-        add_first: "Add your first contact",
-        create: "Create contact",
-        edit: "Edit contact",
+        add: "Add client",
+        add_first: "Add your first client",
+        create: "Create client",
+        edit: "Edit client",
         export_vcard: "Export to vCard",
-        new: "New Contact",
-        show: "Show contact",
+        new: "New client",
+        show: "Show client",
       },
       background: {
         last_activity_on: "Last activity on %{date}",
@@ -105,16 +105,16 @@ export const englishCrmMessages = {
       position_at: "%{title} at",
       position_at_company: "%{title} at %{company}",
       empty: {
-        description: "It seems your contact list is empty.",
-        title: "No contacts found",
+        description: "It seems your client list is empty.",
+        title: "No clients found",
       },
       import: {
-        title: "Import contacts",
+        title: "Import clients",
         button: "Import CSV",
         complete:
-          "Contacts import complete. Imported %{importCount} contacts, with %{errorCount} errors",
+          "Client import complete. Imported %{importCount} clients, with %{errorCount} errors",
         progress:
-          "Imported %{importCount} / %{rowCount} contacts, with %{errorCount} errors.",
+          "Imported %{importCount} / %{rowCount} clients, with %{errorCount} errors.",
         error:
           "Failed to import this file, please make sure your provided a valid CSV file.",
         imported: "Imported",
@@ -124,7 +124,7 @@ export const englishCrmMessages = {
         sample_hint: "Here is a sample CSV file you can use as a template",
         stop: "Stop import",
         csv_file: "CSV File",
-        contacts_label: "contact |||| contacts",
+        contacts_label: "client |||| clients",
       },
       inputs: {
         genders: {
@@ -139,36 +139,36 @@ export const englishCrmMessages = {
         },
       },
       list: {
-        error_loading: "Error loading contacts",
+        error_loading: "Error loading clients",
       },
       bulk_tag: {
         action: "Tag",
         back: "Back to tags",
         create_description:
-          "Create a new tag and apply it to the selected contacts.",
+          "Create a new tag and apply it to the selected clients.",
         description:
-          "Choose an existing tag or create a new one for the selected contacts.",
-        empty: "No tags yet. Create one to tag the selected contacts.",
-        error: "Failed to add tag to contacts",
-        noop: "Selected contacts already have this tag",
+          "Choose an existing tag or create a new one for the selected clients.",
+        empty: "No tags yet. Create one to tag the selected clients.",
+        error: "Failed to add tag to clients",
+        noop: "Selected clients already have this tag",
         success:
-          "Tag added to %{smart_count} contact |||| Tag added to %{smart_count} contacts",
-        title: "Add tag to contacts",
+          "Tag added to %{smart_count} client |||| Tag added to %{smart_count} clients",
+        title: "Add tag to clients",
       },
       merge: {
-        action: "Merge with another contact",
-        confirm: "Merge Contacts",
-        current_contact: "Current Contact (will be deleted)",
-        description: "Merge this contact with another one.",
-        error: "Failed to merge contacts",
+        action: "Merge with another client",
+        confirm: "Merge clients",
+        current_contact: "Current client (will be deleted)",
+        description: "Merge this client with another one.",
+        error: "Failed to merge clients",
         merging: "Merging...",
         no_additional_data: "No additional data to merge",
-        select_target: "Please select a contact to merge with",
-        success: "Contacts merged successfully",
-        target_contact: "Target Contact (will be kept)",
-        title: "Merge Contact",
+        select_target: "Please select a client to merge with",
+        success: "Clients merged successfully",
+        target_contact: "Target client (will be kept)",
+        title: "Merge client",
         warning_description:
-          "All data will be transferred to the second contact. This action cannot be undone.",
+          "All data will be transferred to the second client. This action cannot be undone.",
         warning_title: "Warning: Destructive Operation",
         what_will_be_merged: "What will be merged:",
       },
@@ -177,7 +177,7 @@ export const englishCrmMessages = {
         before_this_month: "Before this month",
         before_this_week: "Before this week",
         managed_by_me: "Managed by me",
-        search: "Search name, company...",
+        search: "Search a client by name…",
         this_week: "This week",
         today: "Today",
         tags: "Tags",
@@ -185,9 +185,9 @@ export const englishCrmMessages = {
       },
       hot: {
         empty_change_status:
-          'Change the status of a contact by adding a note to that contact and clicking on "show options".',
-        empty_hint: 'Contacts with a "hot" status will appear here.',
-        title: "Hot Contacts",
+          'Change the status of a client by adding a note to that client and clicking on "show options".',
+        empty_hint: 'Clients with a "hot" status will appear here.',
+        title: "Hot clients",
       },
     },
     deals: {

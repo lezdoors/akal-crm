@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router";
 import { ArrowLeft } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
-import { formatMoney } from "../orders/orderUtils";
+import { useFormatMoney } from "../orders/orderUtils";
 import type { CatalogueProduct } from "./ProductsPage";
 import { ProductStatusBadge } from "./ProductsPage";
 
@@ -20,6 +20,7 @@ const Fact = ({ label, value }: { label: string; value?: string | number }) =>
 export const ProductDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const translate = useTranslate();
+  const money = useFormatMoney();
   const { data: product } = useGetOne<CatalogueProduct>(
     "products",
     { id: id! },
@@ -44,7 +45,7 @@ export const ProductDetailPage = () => {
           <h1 className="display text-[28px] leading-none">{product.title}</h1>
           <ProductStatusBadge product={product} />
           <span className="display text-[22px] tabular-nums ml-auto">
-            {formatMoney(product.price, "USD")}
+            {money(product.price, "USD")}
           </span>
         </div>
       </div>

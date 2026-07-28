@@ -1,23 +1,59 @@
+import { useCallback } from "react";
+import { useLocaleState } from "ra-core";
+
 import type { Order, OrderItem, OrderStatus } from "../types";
 
-const CURRENCY_INTL_LOCALE: Record<string, string> = {
-  USD: "en-US",
-  EUR: "fr-FR",
-  GBP: "en-GB",
-};
-
-/** Order amounts are stored as integer minor units (cents) with an ISO currency column. */
+/**
+ * Amounts are formatted in the INTERFACE locale, never in a locale derived
+ * from the currency. A column of orders reads `680,00 €` / `540,00 £` /
+ * `495,00 $` in French and `€680.00` / `£540.00` / `$495.00` in English —
+ * one set of separators per screen. Formatting each currency in its own
+ * home locale (the previous behaviour) mixed `680,00 €` with `$495.00` in
+ * the same column and made the register look broken.
+ */
 export function formatMoney(
   minorUnits: number | null | undefined,
   currency?: string | null,
+  locale = "en",
 ): string {
   // A missing amount must not masquerade as $0.00.
   if (minorUnits == null) return "—";
   const code = currency || "USD";
-  return new Intl.NumberFormat(CURRENCY_INTL_LOCALE[code] ?? "en-US", {
+  return new Intl.NumberFormat(locale, {
     style: "currency",
     currency: code,
+    // French disambiguates foreign currencies as "£GB" / "$US" under the
+    // default `symbol`. The register wants the mark alone.
+    currencyDisplay: "narrowSymbol",
   }).format(minorUnits / 100);
+}
+
+/** `formatMoney` bound to the interface locale. Prefer this in components. */
+export function useFormatMoney() {
+  const [locale = "en"] = useLocaleState();
+  return useCallback(
+    (minorUnits: number | null | undefined, currency?: string | null) =>
+      formatMoney(minorUnits, currency, locale),
+    [locale],
+  );
+}
+
+/** Short numeric date in the interface locale — never the browser's. */
+export function useFormatDate() {
+  const [locale = "en"] = useLocaleState();
+  return useCallback(
+    (value: string | null | undefined) => {
+      if (!value) return "—";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "—";
+      return new Intl.DateTimeFormat(locale, {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+      }).format(date);
+    },
+    [locale],
+  );
 }
 
 /** Matches the production storefront's generateOrderNumber() — "MT-NNNNNN". */

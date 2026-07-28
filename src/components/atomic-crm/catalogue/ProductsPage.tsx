@@ -2,7 +2,7 @@ import { useGetList, useTranslate } from "ra-core";
 import { useState } from "react";
 import { Link } from "react-router";
 
-import { formatMoney } from "../orders/orderUtils";
+import { useFormatMoney } from "../orders/orderUtils";
 
 export interface CatalogueProduct {
   id: string;
@@ -82,6 +82,7 @@ const FilterWord = ({
  */
 export const ProductsPage = () => {
   const translate = useTranslate();
+  const money = useFormatMoney();
   const { data: products } = useCatalogue();
   const [category, setCategory] = useState<string | null>(null);
   const [stock, setStock] = useState<string | null>(null);
@@ -169,7 +170,7 @@ export const ProductsPage = () => {
                 </div>
               </div>
               <div className="text-[13px] tabular-nums shrink-0">
-                {formatMoney(product.price, "USD")}
+                {money(product.price, "USD")}
               </div>
             </div>
             <div className="pt-2">

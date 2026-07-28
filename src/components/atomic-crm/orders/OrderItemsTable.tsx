@@ -1,13 +1,14 @@
 import { useRecordContext, useTranslate } from "ra-core";
 
 import type { Order } from "../types";
-import { formatMoney, orderItemsSubtotal } from "./orderUtils";
+import { orderItemsSubtotal, useFormatMoney } from "./orderUtils";
 import { useOrderProductImages } from "./useOrderProductImages";
 
 /** Renders the order's `items` JSONB array. Production rows may omit `image`. */
 export const OrderItemsTable = () => {
   const record = useRecordContext<Order>();
   const translate = useTranslate();
+  const money = useFormatMoney();
   const imageFor = useOrderProductImages(record);
   if (!record?.items?.length) {
     return (
@@ -67,13 +68,13 @@ export const OrderItemsTable = () => {
               </div>
             </td>
             <td className="py-2 pr-2 text-right tabular-nums">
-              {formatMoney(item.price, record.currency)}
+              {money(item.price, record.currency)}
             </td>
             <td className="py-2 pr-2 text-right tabular-nums">
               {item.quantity}
             </td>
             <td className="py-2 text-right tabular-nums">
-              {formatMoney(item.price * item.quantity, record.currency)}
+              {money(item.price * item.quantity, record.currency)}
             </td>
           </tr>
         ))}
@@ -84,7 +85,7 @@ export const OrderItemsTable = () => {
             {translate("resources.orders.show.subtotal")}
           </td>
           <td className="py-2 text-right tabular-nums">
-            {formatMoney(
+            {money(
               record.subtotal ?? orderItemsSubtotal(record.items),
               record.currency,
             )}
@@ -95,7 +96,7 @@ export const OrderItemsTable = () => {
             {translate("resources.orders.show.shipping_cost")}
           </td>
           <td className="py-2 text-right tabular-nums">
-            {formatMoney(record.shipping_cost ?? 0, record.currency)}
+            {money(record.shipping_cost ?? 0, record.currency)}
           </td>
         </tr>
         <tr className="font-medium">
@@ -103,7 +104,7 @@ export const OrderItemsTable = () => {
             {translate("resources.orders.show.total")}
           </td>
           <td className="py-2 text-right tabular-nums">
-            {formatMoney(record.total, record.currency)}
+            {money(record.total, record.currency)}
           </td>
         </tr>
       </tfoot>

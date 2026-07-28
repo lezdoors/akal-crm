@@ -11,7 +11,7 @@ import { TextInput } from "@/components/admin/text-input";
 
 import type { Order } from "../types";
 import {
-  formatMoney,
+  useFormatMoney,
   generateOrderNumber,
   ORDER_CHANNEL_CHOICES,
   ORDER_CURRENCY_CHOICES,
@@ -54,6 +54,7 @@ interface OrderDraft {
  */
 export function OrderCreate() {
   const translate = useTranslate();
+  const money = useFormatMoney();
   // One-of-one pieces: only what's still available can be sold. The
   // database trigger marks picked pieces sold on save.
   const { data: products } = useGetList<ProductRow>("products", {
@@ -100,7 +101,7 @@ export function OrderCreate() {
   // Catalogue prices are stored in USD minor units.
   const productChoices = (products ?? []).map((product) => ({
     id: product.id,
-    name: `${product.title} — ${formatMoney(product.price, "USD")}`,
+    name: `${product.title} — ${money(product.price, "USD")}`,
   }));
 
   return (

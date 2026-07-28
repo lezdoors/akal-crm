@@ -2,6 +2,7 @@ import { useRecordContext } from "ra-core";
 import { ReferenceArrayField } from "@/components/admin/reference-array-field";
 import { SingleFieldList } from "@/components/admin/single-field-list";
 import { cn } from "@/lib/utils";
+import { registerTagColor } from "../tags/colors";
 
 /**
  * A tag in the register: the user's color survives only as a 6px dot; the
@@ -19,7 +20,7 @@ const TagWord = (props: { className?: string }) => {
     >
       <span
         className="inline-block size-1.5 rounded-full"
-        style={{ backgroundColor: record.color }}
+        style={{ backgroundColor: registerTagColor(record.color) }}
       />
       {record.name}
     </span>

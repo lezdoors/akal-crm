@@ -4,7 +4,7 @@ import { Link } from "react-router";
 import type { CatalogueProduct } from "./ProductsPage";
 import { useCatalogue } from "./ProductsPage";
 
-import { formatMoney } from "../orders/orderUtils";
+import { useFormatMoney } from "../orders/orderUtils";
 
 const Section = ({
   title,
@@ -15,6 +15,7 @@ const Section = ({
   products: CatalogueProduct[];
   dot: string;
 }) => {
+  const money = useFormatMoney();
   if (!products.length) return null;
   return (
     <div className="flex flex-col gap-2 border-t pt-4">
@@ -49,7 +50,7 @@ const Section = ({
               {product.category}
             </span>
             <span className="text-[13px] tabular-nums w-16 text-right">
-              {formatMoney(product.price, "USD")}
+              {money(product.price, "USD")}
             </span>
           </Link>
         ))}

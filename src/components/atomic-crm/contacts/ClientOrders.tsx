@@ -2,7 +2,11 @@ import { useGetList, useRecordContext, useTranslate } from "ra-core";
 import { Link } from "react-router";
 
 import { OrderStatusWord } from "../orders/OrderBadges";
-import { formatMoney, revenueByCurrency } from "../orders/orderUtils";
+import {
+  revenueByCurrency,
+  useFormatDate,
+  useFormatMoney,
+} from "../orders/orderUtils";
 import type { Contact, Order } from "../types";
 
 const contactEmail = (contact: Contact): string | undefined =>
@@ -15,6 +19,8 @@ const contactEmail = (contact: Contact): string | undefined =>
 export const ClientOrders = () => {
   const contact = useRecordContext<Contact>();
   const translate = useTranslate();
+  const money = useFormatMoney();
+  const formatDate = useFormatDate();
   const email = contact ? contactEmail(contact) : undefined;
   const { data: orders } = useGetList<Order>(
     "orders",
@@ -39,7 +45,7 @@ export const ClientOrders = () => {
         <span className="text-xs text-muted-foreground tabular-nums">
           {translate("crm.clients.lifetime", { _: "Lifetime" })}{" "}
           {Object.entries(lifetime)
-            .map(([code, total]) => formatMoney(total, code))
+            .map(([code, total]) => money(total, code))
             .join(" · ")}
         </span>
       </div>
@@ -53,10 +59,10 @@ export const ClientOrders = () => {
             <span className="font-mono text-xs">{order.order_number}</span>
             <OrderStatusWord status={order.status} />
             <span className="text-xs text-muted-foreground flex-1 text-right">
-              {new Date(order.created_at).toLocaleDateString()}
+              {formatDate(order.created_at)}
             </span>
             <span className="tabular-nums w-20 text-right">
-              {formatMoney(order.total, order.currency)}
+              {money(order.total, order.currency)}
             </span>
           </Link>
         ))}

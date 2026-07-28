@@ -10,9 +10,10 @@ import { TopToolbar } from "../layout/TopToolbar";
 import type { Order } from "../types";
 import { OrderStatusWord } from "./OrderBadges";
 import {
-  formatMoney,
   ORDER_CHANNEL_CHOICES,
   ORDER_STATUS_CHOICES,
+  useFormatDate,
+  useFormatMoney,
 } from "./orderUtils";
 import { useOrderProducts } from "./useOrderProductImages";
 
@@ -67,6 +68,8 @@ const filters = [
 const OrderRows = () => {
   const { data: orders, isPending } = useListContext<Order>();
   const productFor = useOrderProducts(orders);
+  const money = useFormatMoney();
+  const formatDate = useFormatDate();
 
   if (isPending || !orders) return null;
 
@@ -125,7 +128,7 @@ const OrderRows = () => {
             <div className="flex shrink-0 flex-col items-end gap-1 md:hidden">
               <OrderStatusWord status={order.status} />
               <div className="text-[13px] tabular-nums">
-                {formatMoney(order.total, order.currency)}
+                {money(order.total, order.currency)}
               </div>
             </div>
             {/* Desktop status */}
@@ -136,10 +139,10 @@ const OrderRows = () => {
               {order.tracking_number || "—"}
             </div>
             <div className="hidden text-[13px] tabular-nums text-right w-20 md:block">
-              {formatMoney(order.total, order.currency)}
+              {money(order.total, order.currency)}
             </div>
             <div className="hidden text-xs text-muted-foreground w-16 text-right md:block">
-              {new Date(order.created_at).toLocaleDateString()}
+              {formatDate(order.created_at)}
             </div>
           </Link>
         );

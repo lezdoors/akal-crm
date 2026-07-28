@@ -16,10 +16,10 @@ describe("ContactList", () => {
   it("renders an invite to create the first contact when the app is empty", async () => {
     const screen = await render(<DesktopEmpty />);
     await expect
-      .element(screen.getByRole("heading", { name: "No contacts found" }))
+      .element(screen.getByRole("heading", { name: "No clients found" }))
       .toBeInTheDocument();
     await expect
-      .element(screen.getByText("It seems your contact list is empty."))
+      .element(screen.getByText("It seems your client list is empty."))
       .toBeVisible();
   });
 
@@ -29,7 +29,7 @@ describe("ContactList", () => {
     await expect.element(screen.getByText("Ada Lovelace")).toBeVisible();
     await expect.element(screen.getByText("Grace Hopper")).toBeVisible();
     await expect
-      .element(screen.getByRole("heading", { name: "No contacts found" }))
+      .element(screen.getByRole("heading", { name: "No clients found" }))
       .not.toBeInTheDocument();
   });
 
@@ -87,7 +87,7 @@ describe("ContactList", () => {
     await screen.getByRole("button", { name: "VIP" }).click();
 
     await expect
-      .element(screen.getByText("Tag added to 1 contact"))
+      .element(screen.getByText("Tag added to 1 client"))
       .toBeInTheDocument();
     await expect
       .poll(() => screen.getByText("VIP").all().length)
@@ -113,7 +113,7 @@ describe("ContactList", () => {
     await expect
       .element(
         screen.getByText(
-          "Create a new tag and apply it to the selected contacts.",
+          "Create a new tag and apply it to the selected clients.",
         ),
       )
       .toBeVisible();
@@ -122,7 +122,7 @@ describe("ContactList", () => {
     await screen.getByRole("button", { name: /^Save$/ }).click();
 
     await expect
-      .element(screen.getByText("Tag added to 2 contacts"))
+      .element(screen.getByText("Tag added to 2 clients"))
       .toBeInTheDocument();
     await expect.element(screen.getByText("Prospect").first()).toBeVisible();
     // close the notification

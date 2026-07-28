@@ -40,11 +40,19 @@ export const defaultDealCategories = [
   { value: "website-design", label: "Website design" },
 ];
 
+/**
+ * Client warmth, in the register's ink — not upstream's pastel traffic
+ * lights (#7dbde8 blue / #e8cb7d amber / #e88b7d salmon / #a4e87d green),
+ * which put four accent colours on every row of the client book. DESIGN.md:
+ * tobacco is the only accent; everything else speaks through ink weight.
+ * Warmth now reads as depth of ink, with tobacco reserved for the client
+ * who has actually committed.
+ */
 export const defaultNoteStatuses = [
-  { value: "cold", label: "Cold", color: "#7dbde8" },
-  { value: "warm", label: "Warm", color: "#e8cb7d" },
-  { value: "hot", label: "Hot", color: "#e88b7d" },
-  { value: "in-contract", label: "In Contract", color: "#a4e87d" },
+  { value: "cold", label: "Cold", color: "#c9c4bc" },
+  { value: "warm", label: "Warm", color: "#86868b" },
+  { value: "hot", label: "Hot", color: "#1c1c1e" },
+  { value: "in-contract", label: "In Contract", color: "#8A6A43" },
 ];
 
 export const defaultTaskTypes = [

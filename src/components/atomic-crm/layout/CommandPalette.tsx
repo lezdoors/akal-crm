@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/command";
 
 import type { Contact, Order } from "../types";
-import { formatMoney } from "../orders/orderUtils";
+import { useFormatMoney } from "../orders/orderUtils";
 
 /**
  * Global command palette (Cmd+K / Ctrl+K) in the register voice: navigation,
@@ -23,6 +23,7 @@ export const CommandPalette = () => {
   const [query, setQuery] = useState("");
   const redirect = useRedirect();
   const translate = useTranslate();
+  const money = useFormatMoney();
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -118,7 +119,7 @@ export const CommandPalette = () => {
                   {order.customer_name}
                 </span>
                 <span className="tabular-nums text-xs">
-                  {formatMoney(order.total, order.currency)}
+                  {money(order.total, order.currency)}
                 </span>
               </CommandItem>
             ))}

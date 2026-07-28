@@ -19,6 +19,7 @@ import { TagCreateModal } from "../tags/TagCreateModal";
 import { TagEditModal } from "../tags/TagEditModal";
 import { useTags } from "../tags/useTags";
 import type { Contact, Tag } from "../types";
+import { registerTagColor } from "../tags/colors";
 
 /**
  * An editable tag in the register: a 6px dot in the user's color + the name
@@ -38,7 +39,7 @@ const TagWordEdit = ({
       <span className="overline inline-flex items-center gap-1.5 whitespace-nowrap">
         <span
           className="inline-block size-1.5 rounded-full"
-          style={{ backgroundColor: tag.color }}
+          style={{ backgroundColor: registerTagColor(tag.color) }}
         />
         <button
           type="button"
@@ -171,7 +172,7 @@ export const TagsListEdit = () => {
                 <span className="overline inline-flex items-center gap-1.5">
                   <span
                     className="inline-block size-1.5 rounded-full"
-                    style={{ backgroundColor: tag.color }}
+                    style={{ backgroundColor: registerTagColor(tag.color) }}
                   />
                   {tag.name}
                 </span>

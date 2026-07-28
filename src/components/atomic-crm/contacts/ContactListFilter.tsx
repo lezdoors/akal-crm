@@ -14,6 +14,7 @@ import { useConfigurationContext } from "../root/ConfigurationContext";
 import { ResponsiveFilters } from "../misc/ResponsiveFilters";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ActiveFilterButton } from "../misc/ActiveFilterButton";
+import { registerTagColor } from "../tags/colors";
 
 export const ContactListFilter = () => {
   const { noteStatuses } = useConfigurationContext();
@@ -114,7 +115,7 @@ export const ContactListFilter = () => {
                 <span className="overline inline-flex items-center gap-1.5">
                   <span
                     className="inline-block size-1.5 rounded-full"
-                    style={{ backgroundColor: record?.color }}
+                    style={{ backgroundColor: registerTagColor(record?.color) }}
                   />
                   {record?.name}
                 </span>
@@ -233,7 +234,7 @@ export const ContactListFilterSummary = () => {
               <span className="overline inline-flex items-center gap-1.5">
                 <span
                   className="inline-block size-1.5 rounded-full"
-                  style={{ backgroundColor: record?.color }}
+                  style={{ backgroundColor: registerTagColor(record?.color) }}
                 />
                 {record?.name}
               </span>

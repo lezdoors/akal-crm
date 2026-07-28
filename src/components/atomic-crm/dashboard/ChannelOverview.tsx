@@ -1,19 +1,47 @@
 import { useTranslate } from "ra-core";
 import { Link } from "react-router";
+import { cn } from "@/lib/utils";
 
 import type { Order } from "../types";
-import { formatMoney, revenueByCurrency } from "../orders/orderUtils";
+import { revenueByCurrency, useFormatMoney } from "../orders/orderUtils";
 import { needsShipping, ordersInMonth, useDashboardOrders } from "./commerceData";
 
 const CHANNELS = ["direct", "etsy", "facebook"] as const;
 
+/** Static class names — Tailwind cannot see an interpolated column count. */
+const COLUMNS_AT_SM: Record<number, string> = {
+  1: "sm:grid-cols-1",
+  2: "sm:grid-cols-2",
+  3: "sm:grid-cols-3",
+  4: "sm:grid-cols-4",
+};
+
 const channelOf = (order: Order): string => order.sales_channel || "direct";
 
-const revenueLine = (orders: Order[]): string => {
-  if (!orders.length) return "—";
-  return Object.entries(revenueByCurrency(orders))
-    .map(([code, total]) => formatMoney(total, code))
-    .join(" · ");
+/**
+ * Never sum across currencies — but never set three currencies as one serif
+ * line either: at 34px that wrapped to two lines on a laptop and three on a
+ * phone. The largest holding carries the figure; the rest follow quietly
+ * beneath it, so every column is exactly one line tall.
+ */
+const useRevenueLines = () => {
+  const money = useFormatMoney();
+  return (orders: Order[]): { lead: string; rest: string | null } => {
+    if (!orders.length) return { lead: "—", rest: null };
+    const totals = Object.entries(revenueByCurrency(orders)).sort(
+      (a, b) => b[1] - a[1],
+    );
+    const [leadCode, leadTotal] = totals[0];
+    return {
+      lead: money(leadTotal, leadCode),
+      rest: totals.length > 1
+        ? totals
+            .slice(1)
+            .map(([code, total]) => money(total, code))
+            .join(" · ")
+        : null,
+    };
+  };
 };
 
 const ChannelColumn = ({
@@ -30,21 +58,34 @@ const ChannelColumn = ({
   filter?: string;
 }) => {
   const translate = useTranslate();
+  const revenueLines = useRevenueLines();
+  const { lead, rest } = revenueLines(monthOrders);
   const body = (
     <>
       <span className="overline">{label}</span>
-      <span className="display text-[34px] leading-none lining-nums tabular-nums mt-2 text-ink">
-        {revenueLine(monthOrders)}
+      <span className="display text-[34px] leading-none lining-nums tabular-nums mt-2 text-ink whitespace-nowrap">
+        {lead}
       </span>
+      {rest && (
+        <span className="text-[11px] text-ink-muted mt-1.5 tabular-nums lining-nums">
+          {rest}
+        </span>
+      )}
+      {/* Each clause holds together; the line breaks between them, never
+          inside "8 all-time". */}
       <span className="text-[11px] text-muted-foreground mt-1.5 tabular-nums lining-nums">
-        {translate("resources.orders.dashboard.orders_count", {
-          smart_count: monthOrders.length,
-          _: "%{smart_count} order this month |||| %{smart_count} orders this month",
-        })}
+        <span className="whitespace-nowrap">
+          {translate("resources.orders.dashboard.orders_count", {
+            smart_count: monthOrders.length,
+            _: "%{smart_count} order this month |||| %{smart_count} orders this month",
+          })}
+        </span>
         {" · "}
-        {translate("resources.orders.dashboard.all_time", {
-          smart_count: allOrders.length,
-        })}
+        <span className="whitespace-nowrap">
+          {translate("resources.orders.dashboard.all_time", {
+            smart_count: allOrders.length,
+          })}
+        </span>
       </span>
       {toShip > 0 && (
         <span className="overline mt-2 flex items-center gap-1.5 !text-tobacco">
@@ -86,6 +127,9 @@ export const ChannelOverview = () => {
   const all = orders ?? [];
   const month = ordersInMonth(all);
 
+  // A channel that has never taken an order is not news — it held a quarter
+  // of the phone screen to say "—". It returns by itself on its first order.
+  // `direct` always shows: it is the house's own counter.
   const columns = CHANNELS.map((channel) => ({
     channel,
     label: translate(`resources.orders.channel.${channel}`, { _: channel }),
@@ -94,7 +138,12 @@ export const ChannelOverview = () => {
     toShip: all.filter(
       (order) => channelOf(order) === channel && needsShipping(order),
     ).length,
-  }));
+  })).filter(
+    (column) => column.channel === "direct" || column.allOrders.length > 0,
+  );
+
+  // With a single channel the Total column would repeat it figure for figure.
+  const showTotal = columns.length > 1;
 
   return (
     <div className="border-t pt-4">
@@ -105,7 +154,7 @@ export const ChannelOverview = () => {
           _: "This month",
         })}
       </p>
-      <div className="mt-5 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-4">
+      <div className={cn("mt-5 grid grid-cols-2 gap-x-6 gap-y-8", COLUMNS_AT_SM[columns.length + (showTotal ? 1 : 0)])}>
         {columns.map((column) => (
           <ChannelColumn
             key={column.channel}
@@ -117,15 +166,20 @@ export const ChannelOverview = () => {
           />
         ))}
         {/* Total: a quiet grid cell on a phone (no divider), set off by a
-            hairline rule on wider screens where it sits in its own column. */}
-        <div className="sm:border-l sm:border-hairline sm:pl-8">
-          <ChannelColumn
-            label={translate("crm.dashboard.total", { _: "Total" })}
-            monthOrders={month}
-            allOrders={all}
-            toShip={all.filter(needsShipping).length}
-          />
-        </div>
+            hairline rule on wider screens where it sits in its own column.
+            It carries no to-ship line — the ship queue is the very next
+            thing on the page, and saying the same number twice in 200px
+            reads as two different facts. */}
+        {showTotal && (
+          <div className="sm:border-l sm:border-hairline sm:pl-8">
+            <ChannelColumn
+              label={translate("crm.dashboard.total", { _: "Total" })}
+              monthOrders={month}
+              allOrders={all}
+              toShip={0}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

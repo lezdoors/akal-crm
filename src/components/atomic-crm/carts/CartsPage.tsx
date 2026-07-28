@@ -1,10 +1,10 @@
-import { useDataProvider, useTranslate } from "ra-core";
+import { useDataProvider, useLocaleState, useTranslate } from "ra-core";
 import { useQuery } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 
 import type { AbandonedCart, OrderItem } from "../types";
 import type { CrmDataProvider } from "../providers/types";
-import { formatMoney } from "../orders/orderUtils";
+import { formatMoney, useFormatMoney } from "../orders/orderUtils";
 
 /** Compact age — "just now", "5h", "2d". Carts are a same-week concern. */
 function formatAge(iso: string): string {
@@ -37,6 +37,7 @@ function cartStatus(cart: AbandonedCart): { dot: string; label: string } {
 
 const Row = ({ cart }: { cart: AbandonedCart }) => {
   const status = cartStatus(cart);
+  const money = useFormatMoney();
   const image = cart.items?.[0]?.image;
   return (
     <div className="flex items-center gap-3 px-1 py-2.5 sm:grid sm:grid-cols-[auto_minmax(0,1fr)_auto_auto_auto] sm:gap-4">
@@ -62,7 +63,7 @@ const Row = ({ cart }: { cart: AbandonedCart }) => {
         {formatAge(cart.created_at)}
       </span>
       <span className="text-[13px] tabular-nums text-right shrink-0 sm:w-20">
-        {formatMoney(cart.amount_minor, cart.currency)}
+        {money(cart.amount_minor, cart.currency)}
       </span>
       <span className="overline hidden items-center justify-end gap-1.5 whitespace-nowrap sm:flex sm:w-24">
         <span className={`inline-block size-1.5 rounded-full ${status.dot}`} />
@@ -91,7 +92,7 @@ const Section = ({
 );
 
 /** Per-ISO-code potential value — never sum across currencies. */
-function valueByCurrency(carts: AbandonedCart[]): string {
+function valueByCurrency(carts: AbandonedCart[], locale: string): string {
   const totals: Record<string, number> = {};
   for (const cart of carts) {
     const code = cart.currency || "USD";
@@ -99,7 +100,7 @@ function valueByCurrency(carts: AbandonedCart[]): string {
   }
   return (
     Object.entries(totals)
-      .map(([code, minor]) => formatMoney(minor, code))
+      .map(([code, minor]) => formatMoney(minor, code, locale))
       .join(" · ") || "—"
   );
 }
@@ -113,6 +114,7 @@ function valueByCurrency(carts: AbandonedCart[]): string {
  */
 export const CartsPage = () => {
   const translate = useTranslate();
+  const [locale = "en"] = useLocaleState();
   const dataProvider = useDataProvider<CrmDataProvider>();
   const { data, isLoading, isError } = useQuery({
     queryKey: ["abandoned-carts"],
@@ -167,7 +169,7 @@ export const CartsPage = () => {
                     {translate("crm.carts.in_play", { _: "In play" })}
                   </span>
                   <span className="tabular-nums">
-                    {valueByCurrency(inProgress)}
+                    {valueByCurrency(inProgress, locale)}
                   </span>
                 </div>
               </>

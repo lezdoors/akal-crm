@@ -3,10 +3,12 @@ import { Link } from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import type { Contact } from "../types";
+import { useFormatDate } from "../orders/orderUtils";
 
 /** Newest entries in the client book — auto-created from orders. */
 export const RecentClients = () => {
   const translate = useTranslate();
+  const formatDate = useFormatDate();
   const { data: contacts } = useGetList<Contact>("contacts", {
     pagination: { page: 1, perPage: 6 },
     sort: { field: "first_seen", order: "DESC" },
@@ -39,9 +41,7 @@ export const RecentClients = () => {
                 {contact.first_name} {contact.last_name}
               </span>
               <span className="text-[11px] text-muted-foreground">
-                {contact.first_seen
-                  ? new Date(contact.first_seen).toLocaleDateString()
-                  : ""}
+                {contact.first_seen ? formatDate(contact.first_seen) : ""}
               </span>
             </Link>
           ))}

@@ -20,7 +20,10 @@ export const Status = ({
         className="inline-block w-2.5 h-2.5 rounded-full"
         style={{ backgroundColor: statusObject.color }}
       />
-      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-background bg-ink rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+      {/* `hidden` rather than `opacity-0`: an absolutely-positioned nowrap
+          tooltip still counts toward document width, and on the last column
+          of the client list it pushed a phone viewport 7px wide. */}
+      <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-xs text-background bg-ink rounded hidden group-hover:block pointer-events-none whitespace-nowrap z-10">
         {statusObject.label}
       </div>
     </div>

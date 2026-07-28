@@ -22,6 +22,7 @@ import { TagForm } from "../tags/TagForm";
 import { useCreateTag } from "../tags/useCreateTag";
 import { useTags } from "../tags/useTags";
 import type { Contact, Tag } from "../types";
+import { registerTagColor } from "../tags/colors";
 
 type BulkTagDialogMode = "select" | "create";
 
@@ -164,7 +165,7 @@ export function BulkTagButton() {
                       <Badge
                         variant="secondary"
                         className="font-normal text-black cursor-pointer hover:opacity-80 transition-opacity"
-                        style={{ backgroundColor: tag.color }}
+                        style={{ backgroundColor: registerTagColor(tag.color) }}
                       >
                         {tag.name}
                       </Badge>
