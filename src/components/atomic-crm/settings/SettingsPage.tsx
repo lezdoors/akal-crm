@@ -206,7 +206,7 @@ const SettingsFormFields = () => {
                     .getElementById(section.id)
                     ?.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="overline w-full border-b py-2 text-left text-ink-muted transition-colors duration-150 hover:text-foreground"
+                className="on-ground overline w-full py-2 text-left transition-opacity duration-150 hover:opacity-70"
               >
                 {translate(section.label, { smart_count: 2 })}
               </button>
@@ -234,7 +234,7 @@ const SettingsFormFields = () => {
                   width={100}
                   height={100}
                   linkPosition="bottom"
-                  backgroundImageColor="#f4f4f3"
+                  backgroundImageColor="#f6f4f1"
                 />
               </div>
               <div className="flex flex-col items-center gap-1">
@@ -246,7 +246,7 @@ const SettingsFormFields = () => {
                   width={100}
                   height={100}
                   linkPosition="bottom"
-                  backgroundImageColor="#1a1a1a"
+                  backgroundImageColor="#211c17"
                 />
               </div>
             </div>

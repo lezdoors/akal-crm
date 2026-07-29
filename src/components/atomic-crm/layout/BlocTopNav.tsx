@@ -53,7 +53,7 @@ const NavChip = ({ entry }: { entry: NavEntry }) => {
       className={cn(
         "inline-flex h-10 items-center gap-2 rounded-[var(--radius-control)] px-4 font-mono text-[13px] no-underline transition-colors",
         isActive
-          ? "bg-blue text-[#10233a]"
+          ? "bg-tobacco text-on-primary"
           : "bg-panel text-ink hover:bg-panel-raised",
       )}
     >
@@ -97,7 +97,9 @@ export const BlocTopNav = ({ trailing }: { trailing?: React.ReactNode }) => {
       {/* Brand chip — reown's black `. / reown` cluster, one chip here. */}
       <Link
         to="/"
-        className="inline-flex h-10 items-center rounded-[var(--radius-control)] bg-panel-strong px-5 font-mono text-[13px] tracking-[-0.02em] text-ink-inverse no-underline"
+        // The house chip inverts after hours — panel-strong on the dark ground
+        // is a black shape on black, so the fill flips to ink instead.
+        className="inline-flex h-10 items-center rounded-[var(--radius-control)] bg-panel-strong px-5 font-mono text-[13px] tracking-[-0.02em] text-ink-inverse no-underline dark:bg-ink dark:text-ground"
       >
         Maison Tanneurs
       </Link>

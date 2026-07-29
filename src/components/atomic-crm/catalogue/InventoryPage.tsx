@@ -28,7 +28,7 @@ const Section = ({
           {products.length}
         </span>
       </div>
-      <div className="flex flex-col -mx-1 divide-y divide-hairline">
+      <div className="flex flex-col -mx-1">
         {products.map((product) => (
           <Link
             key={product.id}
@@ -92,7 +92,7 @@ export const InventoryPage = () => {
       <Section
         title={translate("crm.products.status.available", { _: "Available" })}
         products={available}
-        dot="bg-moss"
+        dot="bg-sage"
       />
       <Section
         title={translate("crm.products.status.reserved", { _: "Reserved" })}

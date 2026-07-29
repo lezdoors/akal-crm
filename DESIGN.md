@@ -3,11 +3,21 @@
 *Supersedes "Le Registre" (2026-06-12 – 2026-07-28), the paper/ink editorial
 system. Ryan moved the CRM onto the **reown.com** design system on 2026-07-28,
 following its use on crm.demande-raccordement.fr. Everything Le Registre
-mandated — hairline rules, zero radius, Cormorant serif, tobacco as the only
-accent, no boxes — is **withdrawn**. Do not reintroduce it.*
+mandated — hairline rules, zero radius, Cormorant serif, no boxes — is
+**withdrawn**. Do not reintroduce it.*
 
-Colours below are sampled from the reown.com screenshots in
-`~/Downloads/Reown`, not estimated.
+*Re-coloured 2026-07-29: the structure stays reown's, the palette is now
+Maison Tanneurs'. Reown's cool greys and its blue/coral/green/yellow read as
+generic SaaS against a catalogue of cognac and saddle-tan leather. Every
+material token below is now either a Maison Tanneurs production value (lifted
+from `mt-lestanneurs/app/globals.css`, the palette that renders at
+maisontanneurs.com) or a warm-register colour derived to hold reown's measured
+luminance relationships. **The geometry, type and layout are unchanged** — this
+was a colour pass, not a redesign.*
+
+Nothing here is estimated: the structure came from the reown.com screenshots in
+`~/Downloads/Reown`, and every contrast figure quoted is produced by
+`node scripts/verify-palette.mjs`, which fails the run if a pair regresses.
 
 ## Thesis
 
@@ -15,8 +25,9 @@ The page is a **field of blocks floating on a grey ground**. Nothing is a
 document; everything is an object with weight, a large radius, and a job.
 Reown gets its character from three moves, and so do we:
 
-1. **The ground is grey, never white.** Panels are legible because they sit
-   *on* something, not because they are outlined.
+1. **The ground is grey, never white — the panels are the white.** A panel is
+   legible because it sits *on* something, not because it is outlined. Invert
+   that (white page, grey cards) and you have the SaaS admin this replaced.
 2. **Radius is enormous and unapologetic.** Panels 28px, controls fully
    round. There are no 4px corners anywhere.
 3. **Monospace is the voice of the interface.** Labels, numerals, buttons,
@@ -32,36 +43,79 @@ artifacts gives huge empty boxes with a tiny table inside. Translate the
 
 - Panel radius is 28px, **not** reown's 64–80px stadium. At CRM density a
   stadium eats its own content.
-- The ground is reown's measured `#9a9a9a`. An earlier lighter `#adadad`
-  was both less faithful and *worse* on contrast (panel/ground 1.85:1 vs
-  2.32:1).
+- The ground sits near reown's measured luminance at `#979490`, a neutral
+  stone. Because the panels on it are white, panel/ground is **3.02:1** —
+  above the 3:1 WCAG 1.4.11 asks of component boundaries, which reown.com's
+  own 2.24:1 never reached. An earlier lighter `#adadad` was both less
+  faithful and worse (1.85:1); lightening the ground is a solved question, do
+  not revisit it.
+- The storefront's own answer — white ground, hairline rules, Cormorant — is
+  **not** available to us. That is a shop window read for ninety seconds; this
+  is a tool read for eight hours. We take the house's *colour*, not its
+  furniture.
 - Dark panels are for **figures and focus** (dashboard totals, login), not
-  for data lists. Long tables go on the light panel, black on `#e9e9e9`,
-  or they cannot be read all day.
+  for data lists. Long tables go on the white panel, ink at 17.36:1, or they
+  cannot be read all day.
 - Colour is **state**, never decoration. reown blocks colour by section; we
   block it by meaning.
 
 ## Material
 
+`MT` marks a value taken unchanged from the Maison Tanneurs storefront.
+
+The storefront calls itself a **clean-white editorial system (Polène
+discipline)**: white, one warm off-white, warm charcoal ink, one accent. There
+is no cream in it. Panels here are therefore **white**, and the ground is the
+neutral stone they sit on — not a warm taupe, which would read the white back
+as cream.
+
 | Token | Light | Dark | Use |
 |---|---|---|---|
-| `ground` | `#9a9a9a` | `#141414` | the page behind everything |
-| `panel` | `#e9e9e9` | `#202020` | data surfaces — lists, forms, tables |
-| `panel-raised` | `#f4f4f4` | `#2a2a2a` | nested block inside a panel |
-| `panel-strong` | `#202020` | `#000000` | figures, login, focus blocks |
-| `ink` | `#202020` | `#ededed` | text on light panels |
-| `ink-muted` | `#5c5c5c` | `#9a9a9a` | labels, secondary data |
-| `ink-inverse` | `#f4f4f4` | `#f4f4f4` | text on `panel-strong` |
+| `ground` | `#979490` | `#100d09` | the page behind everything |
+| `panel` | `#ffffff` MT | `#211c17` MT | data surfaces — lists, forms, tables |
+| `panel-raised` | `#f6f4f1` MT | `#2a241d` MT | nested block inside a panel |
+| `panel-strong` | `#211c17` MT | `#0f0c09` | figures, login, focus blocks |
+| `ink` | `#1c1a17` MT | `#ffffff` MT | text on light panels |
+| `ink-soft` | `#57534c` MT | `#c8c2b8` | secondary type |
+| `ink-muted` | `#8d867c` MT | `#8d867c` MT | labels, secondary data |
+| `ink-inverse` | `#ffffff` MT | `#ffffff` MT | text on `panel-strong` |
+| `ink-muted-inverse` | `#9a9289` | `#9a9289` | muted type on `panel-strong` (5.51:1) |
+| `input` | `#e9e9e7` | `#453c31` | the fill of a form control |
 
-Accents — measured, not invented:
+`panel-raised` is the *only* warm tint in the light stack, and it is the
+storefront's own `--ground-deep`. If you find yourself reaching for another
+off-white, you are reintroducing the cream this build exists to remove.
 
-| Token | Hex | Means |
-|---|---|---|
-| `blue` | `#559be8` | primary action, links, current nav |
-| `blue-deep` | `#3d86e9` | pressed / active |
-| `coral` | `#e36b53` | needs attention — to ship, overdue, error |
-| `green` | `#50a96c` | settled — delivered, available, paid |
-| `yellow` | `#f4bb40` | waiting — pending, draft |
+Accents — five meanings, all inside the tannery's range:
+
+| Token | Light | Dark | Means |
+|---|---|---|---|
+| `tobacco` | `#8b5a2b` MT | `#916030` | primary action, links, current nav |
+| `tobacco-deep` | `#74491f` | `#7a4f26` | pressed / active |
+| `accent-ink` | `#8b5a2b` | `#c9914f` | tobacco doing the work of *type* |
+| `rust` | `#db6b42` | ← | needs attention — to ship, overdue, error |
+| `sage` | `#7f9d63` | ← | settled — delivered, available |
+| `brass` | `#cc9e3d` | ← | waiting — pending, draft |
+| `clay` | `#b89073` | ← | in hand — paid, reserved, chased |
+| `stone` | `#c6c0b6` | ← | in transit — the one uncoloured status |
+
+`tobacco` is the storefront's single accent and it is the CRM's action colour.
+It never states a status, and no status ever uses it — that separation is what
+lets a coloured thing on this page mean exactly one thing.
+
+Three rules the palette is built on, each of which will bite you if ignored:
+
+1. **A fill and a piece of coloured type cannot be the same value.** A fill is
+   read against the ink on top of it; type is read against the panel behind it.
+   Hence the `-ink` pairs: `sage` `#7f9d63` fills a pill, `sage-ink` `#4a5c37`
+   writes a word. Using `text-sage` gets you 3.04:1 and an unreadable line.
+2. **Status pills keep their light fill in dark mode**, so the type on them is
+   `--on-accent`, a fixed dark ink that does *not* follow `--ink` into dark
+   mode. Wire a pill to `--ink` and it turns light-on-light after sunset.
+3. **`tobacco` is the one accent too dark for dark type** (2.97:1). It carries
+   `--on-primary` (white, 5.84:1). Every other accent carries `--on-accent`.
+   This is the single exception to "accents take dark text" — do not generalise
+   it, and do not lighten tobacco to escape it: it is the brand's own value.
 
 ## Radius
 
@@ -71,7 +125,14 @@ Accents — measured, not invented:
 | `--radius-tile` | 16px | photo plates, nested tiles, inputs |
 | `--radius-control` | 999px | buttons, chips, status pills, nav items |
 
-Nothing in the interface has a radius between 0 and 16px.
+Nothing in the interface has a radius between 0 and 16px. Two carve-outs, both
+because the rule would destroy the shape rather than style it: the tooltip
+arrow (a 10px rotated square) and the checkbox glyph (16px would make it a
+radio button). Neither is a panel, a tile or a control surface.
+
+The shadcn scale is remapped onto ours in `@theme` — `rounded-sm` and
+`rounded-md` both resolve to 16px — so untouched primitives land on-register by
+default. A `rounded-md` in an untouched `ui/` file is **not** a violation.
 
 ## Typography
 
@@ -93,29 +154,37 @@ register's signature; diluting it is how this becomes generic.
 
 ## Text on the ground
 
-Only full-strength `ink` survives on the grey ground — measured against
-`#9a9a9a`: `ink` 5.79:1, `ink-soft` 3.86:1, `ink-muted` **2.38:1**. Muted
-text therefore belongs on a panel, never on the ground. Page furniture that
-must sit on the ground (list headers, filter labels) carries the `on-ground`
-class, which promotes it to ink.
+Only full-strength `ink` survives on the ground — measured against `#979490`:
+`ink` 5.75:1, `ink-muted` **1.31:1**. Muted text therefore belongs on a panel,
+never on the ground. Page furniture that must sit on the ground (list headers,
+filter labels, the settings section nav) carries the `on-ground` class, which
+promotes it to ink. Check any label you move onto the ground; the failure is
+silent and looks fine on a bright screen.
 
-Known and accepted: panel-against-ground is 2.32:1, below the 3:1 that
-WCAG 1.4.11 asks of UI component boundaries. reown.com's own is 2.24:1. The
-chips are identified by their label and icon (13.4:1), not by their edge.
+Panel-against-ground is **3.02:1**, which clears WCAG 1.4.11 for component
+boundaries. This is the one place the build beats its source outright —
+reown.com's own panels sit at 2.24:1 — and it is a consequence of the panels
+being white. Darkening them gives it straight back.
 
 ## Navigation
 
 Navigation is a row of **pill chips across the top**, as on reown.com — not a
 rail. The rail version left a tall empty column on every page and took ~260px
-from the content. Active chip is solid `blue` with `#10233a` text (5.47:1).
+from the content. Active chip is solid `tobacco` with `on-primary` text
+(5.84:1). The house chip at the left is `panel-strong`, and inverts to `ink` in
+dark mode — panel-strong on the dark ground is a black shape on black.
 
 ## Status
 
 Le Registre's 6px dot is withdrawn. Status is a **filled pill**: mono 10px,
-uppercase, `0.1em`, fully round, solid accent, with `#202020` text — all five
-accents are light enough to take dark text and none should use white.
+uppercase, `0.1em`, fully round, solid accent, `on-accent` text. Every status
+accent is light enough to take that dark ink; none uses white.
 
-`● PAYÉE` becomes a green `PAYÉE` pill. One pill per row, never two.
+`● PAYÉE` becomes a clay `PAYÉE` pill. One pill per row, never two.
+
+Some surfaces still use a dot + word (carts, stock alerts, catalogue). Those
+predate this rule and are **on the list, not the standard** — convert them to
+pills when you next touch those files.
 
 ## Imagery
 
@@ -131,8 +200,17 @@ shifts its fill one step, 120ms. Nothing slides, bounces, or glows.
 
 ## What is deliberately rejected
 
-- **Hairline rules and 1px borders.** Separation comes from the ground gap
-  and from panel fill. If you reach for `border-b`, you have lost the plot.
+- **Hairline rules and 1px borders.** Separation comes from the ground gap and
+  from panel fill. If you reach for `border-b`, you have lost the plot. Note
+  what this means for form controls: an input cannot be an *outlined* box, so
+  it is a **filled** one (`--input`), and it must separate from whatever
+  surface it lands on by fill alone. An input styled `bg-panel-raised` sitting
+  inside a `panel-raised` tile is invisible — this shipped on the login page
+  and is exactly the failure mode to watch for.
+- **`border-*` classes pointed at a transparent token.** `--hairline` and
+  `--border` resolve to `transparent`, so such a class does not draw a rule —
+  it silently draws nothing while telling the next reader a rule exists. Delete
+  the class; don't leave it as documentation of an intention.
 - **White page backgrounds.** The ground is grey; a white app is the thing
   this replaced.
 - **Serif anything.** Cormorant Garamond and Bodoni Moda SC are retired from
@@ -153,7 +231,25 @@ Borrow nothing but spacing discipline.
 
 ## Provenance
 
-Reference screenshots: `~/Downloads/Reown` (reown.com, captured 2026-07-28).
-Palette sampled directly from those pixels. The sibling implementation on
-crm.demande-raccordement.fr sits behind auth and could not be diffed; if it
-and this file disagree, **the screenshots win**.
+Structure: `~/Downloads/Reown` (reown.com, captured 2026-07-28) — geometry,
+proportion and layout sampled directly from those pixels. The sibling
+implementation on crm.demande-raccordement.fr sits behind auth and could not be
+diffed; if it and this file disagree on structure, **the screenshots win**.
+
+Colour: `/Users/ryanz/mt-lestanneurs/app/globals.css` — github.com/lezdoors/
+mt-lestanneurs, the palette that renders at maisontanneurs.com, verified level
+with `origin` on 2026-07-29. Where a value here is marked MT it is that file's
+value verbatim. Where it is not, it was derived to hold a measured relationship
+and the figure is quoted.
+
+**Only that file is authoritative.** The retired `~/kechken` repo carries an
+older, richer, more tempting MT palette doctrine — cognac `#7a4a2b`, bronze,
+oxblood, and a set of warm stone surfaces (`#ebe9e4` paper-alt, `#f8f7f4`
+plate). It disagrees with production on every core value, and its warm stones
+are where cream enters this design. The first cut of this build used
+`#ebe9e4` for panels for exactly that reason and had to be redone. If a value
+is not in `mt-lestanneurs/app/globals.css`, it is not the house palette.
+
+Verification: `node scripts/verify-palette.mjs` re-derives every contrast pair
+in this document and exits non-zero on a regression. Run it after any token
+change — the numbers in this file are its output, not estimates.

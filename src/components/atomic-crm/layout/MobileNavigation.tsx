@@ -41,9 +41,9 @@ const TABS: Tab[] = [
 ];
 
 /**
- * Le Registre's bottom rail — the maison IA at thumb's reach. Four quiet
- * destinations; the active one is marked by a tobacco icon and ink label,
- * never a pill. Sits on the paper with a single hairline above it.
+ * The bottom rail — four destinations at thumb's reach. The active one is
+ * marked by a tobacco icon and ink label. The bar is a panel laid on the
+ * ground, so it separates from the content by fill rather than by a rule.
  */
 export const MobileNavigation = () => {
   const location = useLocation();
@@ -55,7 +55,7 @@ export const MobileNavigation = () => {
   return (
     <nav
       aria-label={translate("crm.navigation.label", { _: "Navigation" })}
-      className="fixed bottom-0 left-0 right-0 z-50 flex items-stretch border-t border-hairline bg-background"
+      className="fixed bottom-0 left-0 right-0 z-50 flex items-stretch bg-panel"
       style={{ paddingBottom: isPwa && isWebiOS ? 12 : undefined }}
     >
       {TABS.map((tab) => {
@@ -75,7 +75,7 @@ export const MobileNavigation = () => {
             <tab.icon
               className={cn(
                 "size-[22px]",
-                active ? "text-tobacco" : "text-ink-muted",
+                active ? "text-accent-ink" : "text-ink-muted",
               )}
               strokeWidth={active ? 1.75 : 1.5}
             />

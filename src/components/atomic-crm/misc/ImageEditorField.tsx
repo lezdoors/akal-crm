@@ -172,7 +172,7 @@ const ImageEditorDialog = (props: ImageEditorDialogProps) => {
         </DialogHeader>
         <div className="flex flex-col gap-2 justify-center">
           <div
-            className="flex flex-row justify-center bg-secondary cursor-pointer p-4 border border-dashed border-hairline rounded-md hover:bg-muted transition-colors"
+            className="flex flex-row justify-center bg-secondary cursor-pointer p-4 border border-dashed border-ink-muted/50 rounded-md hover:bg-muted transition-colors"
             {...getRootProps()}
           >
             <input {...getInputProps()} />

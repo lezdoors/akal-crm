@@ -172,7 +172,7 @@ const ImportFromJsonSuccess = ({
       {translate("crm.import.status.complete")}{" "}
       {hasFailedImports(importState.failedImports) ? (
         <>
-          <span className="text-tobacco">
+          <span className="text-accent-ink">
             {translate("crm.import.status.some_failed", {
               _: "Some records were not imported.",
             })}{" "}
@@ -220,7 +220,7 @@ const DownloadErrorFileButton = ({
 }) => {
   return (
     <a
-      className="text-tobacco no-underline transition-opacity hover:opacity-80 cursor-pointer"
+      className="text-accent-ink no-underline transition-opacity hover:opacity-80 cursor-pointer"
       onClick={async (event) => {
         const json = JSON.stringify(failedImports);
         const blob = new Blob([json], { type: "octet/stream" });
@@ -296,7 +296,7 @@ const ImportStats = ({
             <TableCell
               className={cn(
                 "text-right tabular-nums",
-                record.failed > 0 && "text-tobacco",
+                record.failed > 0 && "text-accent-ink",
               )}
             >
               {record.failed}

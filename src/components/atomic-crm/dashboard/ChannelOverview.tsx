@@ -62,18 +62,18 @@ const ChannelColumn = ({
   const { lead, rest } = revenueLines(monthOrders);
   const body = (
     <>
-      <span className="overline !text-[#9a9a9a]">{label}</span>
+      <span className="overline !text-ink-muted-inverse">{label}</span>
       <span className="display text-[28px] sm:text-[34px] leading-none tabular-nums mt-2 text-ink-inverse whitespace-nowrap">
         {lead}
       </span>
       {rest && (
-        <span className="font-mono text-[11px] text-[#9a9a9a] mt-1.5 tabular-nums">
+        <span className="font-mono text-[11px] text-ink-muted-inverse mt-1.5 tabular-nums">
           {rest}
         </span>
       )}
       {/* Each clause holds together; the line breaks between them, never
           inside "8 all-time". */}
-      <span className="font-mono text-[11px] text-[#9a9a9a] mt-1.5 tabular-nums">
+      <span className="font-mono text-[11px] text-ink-muted-inverse mt-1.5 tabular-nums">
         <span className="whitespace-nowrap">
           {translate("resources.orders.dashboard.orders_count", {
             smart_count: monthOrders.length,
@@ -88,7 +88,7 @@ const ChannelColumn = ({
         </span>
       </span>
       {toShip > 0 && (
-        <span className="pill bg-coral mt-3">
+        <span className="pill bg-rust mt-3">
           {translate("resources.orders.dashboard.to_ship", {
             smart_count: toShip,
           })}
@@ -158,7 +158,7 @@ export const ChannelOverview = ({ today }: { today?: string }) => {
       )}
     >
       <div className="flex flex-wrap items-baseline justify-between gap-3">
-        <p className="overline !text-[#9a9a9a]">
+        <p className="overline !text-ink-muted-inverse">
           {translate("crm.dashboard.overview", { _: "Overview" })}
           {" — "}
           {translate("resources.orders.dashboard.this_month", {
@@ -166,7 +166,7 @@ export const ChannelOverview = ({ today }: { today?: string }) => {
           })}
         </p>
         {today && (
-          <p className="display text-[15px] capitalize text-[#9a9a9a]">
+          <p className="display text-[15px] capitalize text-ink-muted-inverse">
             {today}
           </p>
         )}
@@ -182,13 +182,13 @@ export const ChannelOverview = ({ today }: { today?: string }) => {
             filter={column.channel}
           />
         ))}
-        {/* Total: a quiet grid cell on a phone (no divider), set off by a
-            hairline rule on wider screens where it sits in its own column.
-            It carries no to-ship line — the ship queue is the very next
-            thing on the page, and saying the same number twice in 200px
-            reads as two different facts. */}
+        {/* Total: a quiet grid cell on a phone, set off on wider screens by
+            the gap alone — separation is space, never a rule. It carries no
+            to-ship line: the ship queue is the very next thing on the page,
+            and saying the same number twice in 200px reads as two different
+            facts. */}
         {showTotal && (
-          <div className="sm:border-l sm:border-[#3a3a3a] sm:pl-8">
+          <div className="sm:pl-8">
             <ChannelColumn
               label={translate("crm.dashboard.total", { _: "Total" })}
               monthOrders={month}

@@ -582,10 +582,6 @@
           "type": "registry:component"
         },
         {
-          "path": "src/components/atomic-crm/layout/MaisonSidebar.tsx",
-          "type": "registry:component"
-        },
-        {
           "path": "src/components/atomic-crm/layout/MaisonLayout.tsx",
           "type": "registry:component"
         },
@@ -603,6 +599,10 @@
         },
         {
           "path": "src/components/atomic-crm/layout/CommandPalette.tsx",
+          "type": "registry:component"
+        },
+        {
+          "path": "src/components/atomic-crm/layout/BlocTopNav.tsx",
           "type": "registry:component"
         },
         {

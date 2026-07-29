@@ -5,7 +5,7 @@
  */
 const MobileHeader = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="sticky top-14 z-30 -mx-5 mb-3 flex h-12 items-center gap-2 border-b border-hairline bg-background px-5">
+    <div className="sticky top-14 z-30 -mx-5 mb-3 flex h-12 items-center gap-2 bg-panel px-5">
       {children}
     </div>
   );

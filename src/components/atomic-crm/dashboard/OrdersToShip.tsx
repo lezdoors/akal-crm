@@ -25,7 +25,7 @@ export const OrdersToShip = () => {
     <Card>
       <CardHeader>
         <CardTitle>
-          <span className="pill bg-coral">
+          <span className="pill bg-rust">
             {translate("resources.orders.dashboard.to_ship", {
               smart_count: orders.length,
             })}

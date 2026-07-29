@@ -11,7 +11,7 @@ export const OrderStatusWord = ({ status }: { status: OrderStatus }) => {
   const translate = useTranslate();
   return (
     <span
-      className={`pill ${ORDER_STATUS_PILL_CLASSES[status] ?? "bg-[#cfcfcf]"}`}
+      className={`pill ${ORDER_STATUS_PILL_CLASSES[status] ?? "bg-stone"}`}
     >
       {translate(`resources.orders.status.${status}`, { _: status })}
     </span>
