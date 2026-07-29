@@ -1,19 +1,18 @@
 import { useRecordContext, useTranslate } from "ra-core";
 
 import type { Order, OrderStatus } from "../types";
-import { ORDER_STATUS_DOT_CLASSES } from "./orderUtils";
+import { ORDER_STATUS_PILL_CLASSES } from "./orderUtils";
 
 /**
- * The register's status voice: a 6px dot and an overline word.
- * `● PAYÉE` — reads at a glance, never shouts.
+ * BLOC's status voice: a filled pill in the accent that carries the meaning.
+ * All five accents are light enough to take the dark ink, never white.
  */
 export const OrderStatusWord = ({ status }: { status: OrderStatus }) => {
   const translate = useTranslate();
   return (
-    <span className="overline flex items-center gap-1.5 whitespace-nowrap">
-      <span
-        className={`inline-block size-1.5 rounded-full ${ORDER_STATUS_DOT_CLASSES[status] ?? "bg-ink-muted"}`}
-      />
+    <span
+      className={`pill ${ORDER_STATUS_PILL_CLASSES[status] ?? "bg-[#cfcfcf]"}`}
+    >
       {translate(`resources.orders.status.${status}`, { _: status })}
     </span>
   );

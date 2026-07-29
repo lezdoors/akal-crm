@@ -25,19 +25,20 @@ export const OrdersToShip = () => {
     <Card>
       <CardHeader>
         <CardTitle>
-          <span className="inline-block size-1.5 rounded-full bg-tobacco" />
-          {translate("resources.orders.dashboard.to_ship", {
-            smart_count: orders.length,
-          })}
+          <span className="pill bg-coral">
+            {translate("resources.orders.dashboard.to_ship", {
+              smart_count: orders.length,
+            })}
+          </span>
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-col divide-y divide-hairline">
+        <div className="flex flex-col gap-1">
           {orders.map((order) => (
             <Link
               key={order.id}
               to={`/orders/${order.id}`}
-              className="flex items-center justify-between py-3 text-[13px] no-underline transition-colors hover:bg-secondary px-1"
+              className="flex items-center justify-between rounded-[var(--radius-tile)] px-3 py-3 font-mono text-[13px] no-underline transition-colors hover:bg-panel-raised"
             >
               {imageFor(
                 order.items?.[0] ?? {

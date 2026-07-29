@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "@fontsource-variable/inter";
+@import "@fontsource-variable/geist-mono";
 
 /* Maison Tanneurs brand fonts — exact files from the production storefront (OFL) */
 @font-face {
@@ -36,12 +37,26 @@
 
 @theme inline {
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Cormorant Garamond", Georgia, serif;
-  --font-display: "Bodoni Moda SC", "Bodoni Moda", serif;
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, monospace;
+  /* BLOC has three radii and nothing between 0 and 16px. The shadcn scale is
+     remapped onto them so untouched primitives land on-register by default. */
+  --radius-sm: var(--radius-tile);
+  --radius-md: var(--radius-tile);
+  --radius-lg: var(--radius-panel);
+  --radius-xl: var(--radius-panel);
+  --radius-panel: var(--radius-panel);
+  --radius-tile: var(--radius-tile);
+  --radius-control: var(--radius-control);
+  --color-ground: var(--ground);
+  --color-panel: var(--panel);
+  --color-panel-raised: var(--panel-raised);
+  --color-panel-strong: var(--panel-strong);
+  --color-ink-inverse: var(--ink-inverse);
+  --color-blue: var(--blue);
+  --color-blue-deep: var(--blue-deep);
+  --color-coral: var(--coral);
+  --color-green: var(--green);
+  --color-yellow: var(--yellow);
   --color-ground: var(--ground);
   --color-ground-deep: var(--ground-deep);
   --color-ink: var(--ink);
@@ -84,111 +99,143 @@
 }
 
 :root {
-  /* Le Registre — clean white & neutral ink. Canvas reads cool/white; the
-     ONLY warmth in the UI is the tobacco accent. Neutrals are true grays so
-     nothing reads as cream. */
-  --radius: 0.25rem;
-  --ground: #ffffff; /* raised surface */
-  --ground-deep: #ffffff; /* page surface */
-  --ink: #1c1c1e;
-  --ink-soft: #515154;
-  --ink-muted: #86868b;
-  --tobacco: #8a6a43;
-  --moss: #5a6b52;
-  --dark-close: #16120d;
-  --hairline: #ececee;
-  --background: var(--ground-deep);
+  /* BLOC — blocks on a grey ground. Palette sampled from the reown.com
+     screenshots in ~/Downloads/Reown; see DESIGN.md. */
+  --radius: 28px;
+  --radius-panel: 28px;
+  --radius-tile: 16px;
+  --radius-control: 999px;
+
+  --ground: #adadad;
+  --panel: #e9e9e9;
+  --panel-raised: #f4f4f4;
+  --panel-strong: #202020;
+
+  --ink: #202020;
+  --ink-soft: #3d3d3d;
+  --ink-muted: #5c5c5c;
+  --ink-inverse: #f4f4f4;
+
+  --blue: #559be8;
+  --blue-deep: #3d86e9;
+  --coral: #e36b53;
+  --green: #50a96c;
+  --yellow: #f4bb40;
+
+  --background: var(--ground);
   --foreground: var(--ink);
-  --card: var(--ground-deep);
+  --card: var(--panel);
   --card-foreground: var(--ink);
-  --popover: var(--ground);
+  --popover: var(--panel-raised);
   --popover-foreground: var(--ink);
-  --primary: var(--ink);
-  --primary-foreground: var(--ground-deep);
-  --secondary: #f5f5f7;
+  --primary: var(--blue);
+  --primary-foreground: #10233a;
+  --secondary: var(--panel-raised);
   --secondary-foreground: var(--ink);
-  --muted: #f5f5f7;
+  --muted: var(--panel-raised);
   --muted-foreground: var(--ink-muted);
-  --accent: #f5f5f7;
+  --accent: var(--panel-raised);
   --accent-foreground: var(--ink);
-  --destructive: #8c3a2e;
-  --border: var(--hairline);
-  --input: var(--hairline);
-  --ring: var(--tobacco);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: var(--ground-deep);
+  --destructive: var(--coral);
+  /* No hairlines in BLOC — separation is the ground gap. Any primitive that
+     still draws a border gets one that vanishes into its panel. */
+  --border: transparent;
+  --input: #d8d8d8;
+  --ring: var(--blue);
+  --chart-1: var(--blue);
+  --chart-2: var(--green);
+  --chart-3: var(--coral);
+  --chart-4: var(--yellow);
+  --chart-5: var(--ink-muted);
+  --sidebar: var(--panel);
   --sidebar-foreground: var(--ink);
-  --sidebar-primary: var(--ink);
-  --sidebar-primary-foreground: var(--ground-deep);
-  --sidebar-accent: #f5f5f7;
+  --sidebar-primary: var(--blue);
+  --sidebar-primary-foreground: #10233a;
+  --sidebar-accent: var(--panel-raised);
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: transparent;
-  --sidebar-ring: var(--tobacco);
-  --avatar-0: oklch(0.85 0.08 240);
-  --avatar-1: oklch(0.88 0.1 340);
-  --avatar-2: oklch(0.85 0.07 180);
-  --avatar-3: oklch(0.9 0.09 40);
-  --avatar-4: oklch(0.87 0.08 300);
-  --avatar-5: oklch(0.85 0.08 150);
-  --avatar-6: oklch(0.87 0.08 200);
-  --avatar-7: oklch(0.88 0.09 10);
-  --avatar-8: oklch(0.92 0.08 80);
-  --avatar-9: oklch(0.86 0.09 270);
+  --sidebar-ring: var(--blue);
+  --avatar-0: #cfcfcf;
+  --avatar-1: #cfcfcf;
+  --avatar-2: #cfcfcf;
+  --avatar-3: #cfcfcf;
+  --avatar-4: #cfcfcf;
+  --avatar-5: #cfcfcf;
+  --avatar-6: #cfcfcf;
+  --avatar-7: #cfcfcf;
+  --avatar-8: #cfcfcf;
+  --avatar-9: #cfcfcf;
+
+  /* Retired Le Registre tokens, aliased so un-migrated components keep
+     rendering on-register while they are converted one surface at a time.
+     Delete these once no `tobacco` / `moss` / `hairline` class names remain. */
+  --tobacco: var(--blue);
+  --moss: var(--green);
+  --hairline: transparent;
+  --ground-deep: var(--ground);
 }
 
 .dark {
-  /* Espresso — the register by lamplight */
-  --background: var(--dark-close);
-  --foreground: #ebe4d8;
-  --card: var(--dark-close);
-  --card-foreground: #ebe4d8;
-  --popover: #1d1812;
-  --popover-foreground: #ebe4d8;
-  --primary: #ebe4d8;
-  --primary-foreground: #16120d;
-  --secondary: #262017;
-  --secondary-foreground: #ebe4d8;
-  --muted: #262017;
-  --muted-foreground: #877c6c;
-  --accent: #262017;
-  --accent-foreground: #ebe4d8;
-  --destructive: #b3614f;
-  --border: #2d2820;
-  --input: #2d2820;
-  --ring: #a8845b;
-  --tobacco: #a8845b;
-  --moss: #7d8f72;
-  --ink: #ebe4d8;
-  --ink-soft: #c9c0b2;
-  --ink-muted: #877c6c;
-  --hairline: #2d2820;
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: var(--dark-close);
-  --sidebar-foreground: #ebe4d8;
-  --sidebar-primary: #ebe4d8;
-  --sidebar-primary-foreground: #16120d;
-  --sidebar-accent: #262017;
-  --sidebar-accent-foreground: #ebe4d8;
+  /* BLOC after hours — the ground drops below the panels instead of above. */
+  --ground: #141414;
+  --panel: #202020;
+  --panel-raised: #2a2a2a;
+  --panel-strong: #000000;
+
+  --ink: #ededed;
+  --ink-soft: #c4c4c4;
+  --ink-muted: #9a9a9a;
+  --ink-inverse: #f4f4f4;
+
+  --background: var(--ground);
+  --foreground: var(--ink);
+  --card: var(--panel);
+  --card-foreground: var(--ink);
+  --popover: var(--panel-raised);
+  --popover-foreground: var(--ink);
+  --primary: var(--blue);
+  --primary-foreground: #10233a;
+  --secondary: var(--panel-raised);
+  --secondary-foreground: var(--ink);
+  --muted: var(--panel-raised);
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--panel-raised);
+  --accent-foreground: var(--ink);
+  --destructive: var(--coral);
+  --border: transparent;
+  --input: #3a3a3a;
+  --ring: var(--blue);
+  --chart-1: var(--blue);
+  --chart-2: var(--green);
+  --chart-3: var(--coral);
+  --chart-4: var(--yellow);
+  --chart-5: var(--ink-muted);
+  --sidebar: var(--panel);
+  --sidebar-foreground: var(--ink);
+  --sidebar-primary: var(--blue);
+  --sidebar-primary-foreground: #10233a;
+  --sidebar-accent: var(--panel-raised);
+  --sidebar-accent-foreground: var(--ink);
   --sidebar-border: transparent;
-  --sidebar-ring: var(--tobacco);
-  --avatar-0: oklch(0.35 0.12 240);
-  --avatar-1: oklch(0.38 0.14 340);
-  --avatar-2: oklch(0.35 0.11 180);
-  --avatar-3: oklch(0.38 0.13 40);
-  --avatar-4: oklch(0.36 0.12 300);
-  --avatar-5: oklch(0.35 0.11 150);
-  --avatar-6: oklch(0.37 0.12 200);
-  --avatar-7: oklch(0.38 0.14 10);
-  --avatar-8: oklch(0.4 0.11 80);
-  --avatar-9: oklch(0.36 0.13 270);
+  --sidebar-ring: var(--blue);
+  --avatar-0: #3a3a3a;
+  --avatar-1: #3a3a3a;
+  --avatar-2: #3a3a3a;
+  --avatar-3: #3a3a3a;
+  --avatar-4: #3a3a3a;
+  --avatar-5: #3a3a3a;
+  --avatar-6: #3a3a3a;
+  --avatar-7: #3a3a3a;
+  --avatar-8: #3a3a3a;
+  --avatar-9: #3a3a3a;
+
+  /* Retired Le Registre tokens, aliased so un-migrated components keep
+     rendering on-register while they are converted one surface at a time.
+     Delete these once no `tobacco` / `moss` / `hairline` class names remain. */
+  --tobacco: var(--blue);
+  --moss: var(--green);
+  --hairline: transparent;
+  --ground-deep: var(--ground);
 }
 
 a,
@@ -253,52 +300,77 @@ input[type="time"] {
 
 /* === Le Registre — the three voices === */
 
-/* Voice 2: the register's overline — section labels, table headers, status.
-   text-decoration none neutralizes Tailwind's same-named decoration utility
-   (this unlayered rule outranks @layer utilities). */
+/* Voice 1b: the label — mono, uppercase, tracked. Section labels, table
+   headers, field names. text-decoration none neutralizes Tailwind's
+   same-named decoration utility (this unlayered rule outranks @layer). */
 .overline {
+  font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-muted);
   text-decoration: none;
 }
 
-/* Voice 1: the maison's serif for page titles and editorial figures */
+/* Voice 1: the interface voice — mono, for titles and every figure. The
+   serif (Cormorant / Bodoni) is retired from the CRM; see DESIGN.md. */
 .display {
-  font-family: "Cormorant Garamond", Georgia, serif;
+  font-family: var(--font-mono);
   font-weight: 500;
-  letter-spacing: 0.01em;
-  /* Cormorant defaults to oldstyle figures — "1" reads as I, "0" as O.
-     Force lining figures so serif numerals (dashboard, counts) read as digits. */
-  font-feature-settings: "lnum" 1;
-  font-variant-numeric: lining-nums;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums lining-nums;
 }
 
-/* Photographs are plates: square, hairline frame, zero radius */
+/* Photographs are tiles: square crop, 16px radius, no border */
 .plate {
-  border-radius: 0;
-  border: 1px solid var(--hairline);
+  border-radius: var(--radius-tile);
   object-fit: cover;
-  background: var(--secondary);
+  background: var(--panel-raised);
+}
+
+/* A block: the unit the whole interface is built from */
+.panel {
+  background: var(--panel);
+  border-radius: var(--radius-panel);
+}
+.panel-strong {
+  background: var(--panel-strong);
+  color: var(--ink-inverse);
+  border-radius: var(--radius-panel);
+}
+
+/* Status is a filled pill — never a dot, never a tinted chip */
+.pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #202020;
+  border-radius: var(--radius-control);
+  padding: 3px 10px;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
 }
 
 /* Each page is placed on the desk once */
 @keyframes page-enter {
-  0% { opacity: 0; transform: translateY(4px); }
+  0% { opacity: 0; transform: translateY(6px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 .page-enter {
-  animation: page-enter 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: page-enter 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 @layer base {
   /* Table headers speak in the overline voice */
   thead th {
+    font-family: var(--font-mono);
     font-size: 10px;
     font-weight: 500;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--ink-muted);
   }

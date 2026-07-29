@@ -83,12 +83,15 @@ export const ORDER_CURRENCY_CHOICES = [
   { id: "GBP", name: "GBP" },
 ];
 
-/** Status speaks in a dot + overline word — never a pill. */
-export const ORDER_STATUS_DOT_CLASSES: Record<OrderStatus, string> = {
-  pending: "bg-ink-muted",
-  paid: "bg-tobacco",
-  shipped: "bg-ink",
-  delivered: "bg-moss",
+/**
+ * BLOC: status is a filled pill, not a dot. Each accent carries one meaning —
+ * yellow waits, blue is in hand, ink is in transit, green is settled.
+ */
+export const ORDER_STATUS_PILL_CLASSES: Record<OrderStatus, string> = {
+  pending: "bg-yellow",
+  paid: "bg-blue",
+  shipped: "bg-[#cfcfcf] dark:bg-[#3a3a3a] dark:text-ink",
+  delivered: "bg-green",
 };
 
 export function orderItemsSubtotal(items: OrderItem[] | undefined): number {

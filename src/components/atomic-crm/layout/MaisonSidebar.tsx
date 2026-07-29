@@ -76,11 +76,11 @@ const NavItem = ({ entry }: { entry: NavEntry }) => {
       <SidebarMenuButton
         asChild
         isActive={isActive}
-        className="h-7 text-[13px] rounded-sm data-[active=true]:bg-transparent data-[active=true]:font-medium data-[active=true]:text-foreground text-ink-soft"
+        className="h-9 px-3 font-mono text-[13px] rounded-[var(--radius-control)] text-ink-soft transition-colors hover:bg-panel-raised data-[active=true]:bg-blue data-[active=true]:font-medium data-[active=true]:text-[#10233a] data-[active=true]:hover:bg-blue"
       >
         <Link to={entry.to} onClick={() => openMobile && setOpenMobile(false)}>
           <entry.icon
-            className={`!size-[15px] ${isActive ? "text-tobacco" : "opacity-50"}`}
+            className={`!size-[15px] ${isActive ? "text-[#10233a]" : "opacity-45"}`}
           />
           <span>
             {translate(
@@ -109,11 +109,11 @@ export function MaisonSidebar() {
   const translate = useTranslate();
   const navigate = useNavigate();
   return (
-    <Sidebar collapsible="offcanvas" className="border-0 bg-background">
-      <SidebarHeader className="px-4 pt-6 pb-4">
+    <Sidebar collapsible="offcanvas" className="border-0 bg-transparent p-3">
+      <SidebarHeader className="rounded-t-[var(--radius-panel)] bg-panel px-5 pt-6 pb-4">
         <div className="flex items-start justify-between gap-2">
           <Link to="/" className="no-underline min-w-0">
-            <span className="display block text-[17px] leading-tight tracking-[0.02em] text-foreground">
+            <span className="display block whitespace-nowrap text-[15px] leading-tight text-foreground">
               Maison Tanneurs
             </span>
             <span className="overline mt-1 block">
@@ -144,7 +144,7 @@ export function MaisonSidebar() {
           </div>
         </div>
       </SidebarHeader>
-      <SidebarContent className="px-1">
+      <SidebarContent className="bg-panel px-3">
         <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -177,12 +177,12 @@ export function MaisonSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter className="px-1 pb-4">
+      <SidebarFooter className="rounded-b-[var(--radius-panel)] bg-panel px-3 pb-5">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
               asChild
-              className="h-7 text-[13px] rounded-sm text-muted-foreground"
+              className="h-9 px-3 font-mono text-[13px] rounded-[var(--radius-control)] text-muted-foreground transition-colors hover:bg-panel-raised"
             >
               <Link to="/settings">
                 <Settings className="!size-[15px] opacity-50" />

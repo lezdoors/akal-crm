@@ -31,12 +31,12 @@ export const RecentOrders = () => {
         </Link>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-col divide-y divide-hairline">
+        <div className="flex flex-col gap-1">
           {recent.map((order) => (
             <Link
               key={order.id}
               to={`/orders/${order.id}/show`}
-              className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 py-2.5 text-[13px] no-underline transition-colors hover:bg-secondary px-1 sm:grid-cols-[auto_auto_1fr_auto_auto_auto] sm:gap-4"
+              className="grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-3 rounded-[var(--radius-tile)] py-2.5 font-mono text-[13px] no-underline transition-colors hover:bg-panel-raised px-3 sm:grid-cols-[auto_auto_1fr_auto_auto_auto] sm:gap-4"
             >
               {imageFor(
                 order.items?.[0] ?? {

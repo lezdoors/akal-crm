@@ -74,7 +74,7 @@ const OrderRows = () => {
   if (isPending || !orders) return null;
 
   return (
-    <div className="flex flex-col divide-y divide-hairline border-t">
+    <div className="panel flex flex-col gap-1 p-3">
       {orders.map((order) => {
         const first = order.items?.[0];
         const product = first ? productFor(first) : undefined;
@@ -88,7 +88,7 @@ const OrderRows = () => {
           <Link
             key={String(order.id)}
             to={`/orders/${order.id}/show`}
-            className="group flex items-center gap-4 px-1 py-3 no-underline transition-colors hover:bg-secondary md:grid md:grid-cols-[auto_minmax(0,2.2fr)_minmax(0,1.6fr)_auto_minmax(0,1fr)_auto_auto] md:items-center md:gap-5"
+            className="group flex items-center gap-4 rounded-[var(--radius-tile)] px-3 py-3 no-underline transition-colors hover:bg-panel-raised md:grid md:grid-cols-[auto_minmax(0,2.2fr)_minmax(0,1.6fr)_auto_minmax(0,1fr)_auto_auto] md:items-center md:gap-5"
           >
             {image ? (
               <img src={image} alt="" className="plate h-16 w-16 shrink-0" />
@@ -96,7 +96,7 @@ const OrderRows = () => {
               <div className="plate h-16 w-16 shrink-0" />
             )}
             <div className="min-w-0 flex-1">
-              <div className="text-[13px] font-medium truncate">
+              <div className="truncate text-[13px] font-medium">
                 {first?.title || order.order_number}
                 {extraCount > 0 && (
                   <span className="text-muted-foreground font-normal">
@@ -105,7 +105,7 @@ const OrderRows = () => {
                   </span>
                 )}
               </div>
-              <div className="text-xs text-muted-foreground truncate mt-0.5">
+              <div className="mt-0.5 truncate font-mono text-xs text-muted-foreground">
                 {detailParts.length
                   ? detailParts.join(" · ")
                   : order.order_number}
@@ -135,13 +135,13 @@ const OrderRows = () => {
             <div className="hidden md:block">
               <OrderStatusWord status={order.status} />
             </div>
-            <div className="hidden text-xs text-muted-foreground font-mono truncate md:block">
+            <div className="hidden truncate font-mono text-xs text-muted-foreground md:block">
               {order.tracking_number || "—"}
             </div>
-            <div className="hidden text-[13px] tabular-nums text-right w-20 md:block">
+            <div className="hidden w-20 text-right font-mono text-[13px] tabular-nums md:block">
               {money(order.total, order.currency)}
             </div>
-            <div className="hidden text-xs text-muted-foreground w-16 text-right md:block">
+            <div className="hidden w-16 text-right font-mono text-xs text-muted-foreground md:block">
               {formatDate(order.created_at)}
             </div>
           </Link>
@@ -154,7 +154,7 @@ const OrderRows = () => {
 const OrdersEmpty = () => {
   const translate = useTranslate();
   return (
-    <div className="border-t pt-4 mt-2">
+    <div className="panel mt-2 p-7">
       <p className="overline">
         {translate("crm.dashboard.empty_title", {
           _: "Awaiting the first order",

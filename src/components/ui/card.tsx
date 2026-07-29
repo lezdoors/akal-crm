@@ -3,15 +3,15 @@ import * as React from "react"
 import { cn } from "@/lib/utils"
 
 /**
- * Le Registre: a "card" is an editorial section — a hairline rule, an
- * overline title, content on the paper itself. No box, no shadow.
+ * BLOC: a card IS the block — a filled panel with a 28px radius, sitting on
+ * the grey ground. No border, no shadow; the ground gap does the separating.
  */
 function Card({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="card"
       className={cn(
-        "text-card-foreground flex flex-col gap-4 border-t pt-4",
+        "bg-card text-card-foreground flex flex-col gap-4 rounded-[var(--radius-panel)] p-5",
         className
       )}
       {...props}

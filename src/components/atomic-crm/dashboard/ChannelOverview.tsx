@@ -62,18 +62,18 @@ const ChannelColumn = ({
   const { lead, rest } = revenueLines(monthOrders);
   const body = (
     <>
-      <span className="overline">{label}</span>
-      <span className="display text-[34px] leading-none lining-nums tabular-nums mt-2 text-ink whitespace-nowrap">
+      <span className="overline !text-[#9a9a9a]">{label}</span>
+      <span className="display text-[28px] sm:text-[34px] leading-none tabular-nums mt-2 text-ink-inverse whitespace-nowrap">
         {lead}
       </span>
       {rest && (
-        <span className="text-[11px] text-ink-muted mt-1.5 tabular-nums lining-nums">
+        <span className="font-mono text-[11px] text-[#9a9a9a] mt-1.5 tabular-nums">
           {rest}
         </span>
       )}
       {/* Each clause holds together; the line breaks between them, never
           inside "8 all-time". */}
-      <span className="text-[11px] text-muted-foreground mt-1.5 tabular-nums lining-nums">
+      <span className="font-mono text-[11px] text-[#7a7a7a] mt-1.5 tabular-nums">
         <span className="whitespace-nowrap">
           {translate("resources.orders.dashboard.orders_count", {
             smart_count: monthOrders.length,
@@ -88,8 +88,7 @@ const ChannelColumn = ({
         </span>
       </span>
       {toShip > 0 && (
-        <span className="overline mt-2 flex items-center gap-1.5 !text-tobacco">
-          <span className="inline-block size-1.5 rounded-full bg-tobacco" />
+        <span className="pill bg-coral mt-3">
           {translate("resources.orders.dashboard.to_ship", {
             smart_count: toShip,
           })}
@@ -146,15 +145,15 @@ export const ChannelOverview = () => {
   const showTotal = columns.length > 1;
 
   return (
-    <div className="border-t pt-4">
-      <p className="overline">
+    <div className="panel-strong p-7">
+      <p className="overline !text-[#9a9a9a]">
         {translate("crm.dashboard.overview", { _: "Overview" })}
         {" — "}
         {translate("resources.orders.dashboard.this_month", {
           _: "This month",
         })}
       </p>
-      <div className={cn("mt-5 grid grid-cols-2 gap-x-6 gap-y-8", COLUMNS_AT_SM[columns.length + (showTotal ? 1 : 0)])}>
+      <div className={cn("mt-5 grid grid-cols-1 gap-x-6 gap-y-8", COLUMNS_AT_SM[columns.length + (showTotal ? 1 : 0)])}>
         {columns.map((column) => (
           <ChannelColumn
             key={column.channel}
@@ -171,7 +170,7 @@ export const ChannelOverview = () => {
             thing on the page, and saying the same number twice in 200px
             reads as two different facts. */}
         {showTotal && (
-          <div className="sm:border-l sm:border-hairline sm:pl-8">
+          <div className="sm:border-l sm:border-[#3a3a3a] sm:pl-8">
             <ChannelColumn
               label={translate("crm.dashboard.total", { _: "Total" })}
               monthOrders={month}

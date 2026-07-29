@@ -54,7 +54,7 @@ export const Dashboard = () => {
   );
 
   return (
-    <div className="flex flex-col gap-10 mt-6">
+    <div className="flex flex-col gap-5 mt-2">
       <div>
         <p className="overline">
           {translate("crm.nav.today", { _: "Today" })}
@@ -64,8 +64,8 @@ export const Dashboard = () => {
         </h1>
       </div>
       <ChannelOverview />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-12 gap-y-10">
-        <div className="lg:col-span-8 flex flex-col gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-5 gap-y-5">
+        <div className="lg:col-span-8 flex flex-col gap-5">
           {orders?.length ? (
             <>
               <OrdersToShip />
@@ -75,7 +75,7 @@ export const Dashboard = () => {
             <AwaitingFirstOrder />
           )}
         </div>
-        <div className="lg:col-span-4 flex flex-col gap-10">
+        <div className="lg:col-span-4 flex flex-col gap-5">
           <RecentClients />
           <StockAlerts />
           <DashboardActivityLog />
