@@ -13,7 +13,7 @@ import { useDashboardOrders } from "./commerceData";
 const AwaitingFirstOrder = () => {
   const translate = useTranslate();
   return (
-    <div className="border-t pt-4">
+    <div className="panel p-7">
       <p className="overline">
         {translate("crm.dashboard.empty_title", {
           _: "Awaiting the first order",
@@ -24,7 +24,7 @@ const AwaitingFirstOrder = () => {
       </p>
       <Link
         to="/orders/create"
-        className="mt-4 inline-block text-[13px] no-underline text-tobacco transition-opacity hover:opacity-80"
+        className="mt-4 inline-block font-mono text-[13px] no-underline text-blue transition-opacity hover:opacity-80"
       >
         {translate("crm.dashboard.empty_action", {
           _: "Enter an order manually",
@@ -41,7 +41,6 @@ const AwaitingFirstOrder = () => {
  */
 export const Dashboard = () => {
   const { data: orders, isPending } = useDashboardOrders();
-  const translate = useTranslate();
   const [locale] = useLocaleState();
 
   if (isPending) {
@@ -54,18 +53,10 @@ export const Dashboard = () => {
   );
 
   return (
-    <div className="flex flex-col gap-5 mt-2">
-      <div>
-        <p className="overline">
-          {translate("crm.nav.today", { _: "Today" })}
-        </p>
-        <h1 className="display mt-1 text-[28px] leading-none capitalize">
-          {today}
-        </h1>
-      </div>
-      <ChannelOverview />
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-5 gap-y-5">
-        <div className="lg:col-span-8 flex flex-col gap-5">
+    <div className="flex flex-col gap-2">
+      <ChannelOverview today={today} />
+      <div className="grid grid-cols-1 gap-2 xl:grid-cols-12">
+        <div className="flex flex-col gap-2 xl:col-span-7">
           {orders?.length ? (
             <>
               <OrdersToShip />
@@ -75,9 +66,11 @@ export const Dashboard = () => {
             <AwaitingFirstOrder />
           )}
         </div>
-        <div className="lg:col-span-4 flex flex-col gap-5">
-          <RecentClients />
-          <StockAlerts />
+        <div className="flex flex-col gap-2 xl:col-span-5">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 xl:grid-cols-1">
+            <RecentClients />
+            <StockAlerts />
+          </div>
           <DashboardActivityLog />
         </div>
       </div>

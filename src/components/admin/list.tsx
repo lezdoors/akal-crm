@@ -143,7 +143,9 @@ export const ListView = <RecordType extends RaRecord = RaRecord>(
       )}
 
       <FilterContext.Provider value={filters}>
-        <div className="flex justify-between items-start flex-wrap gap-2 my-2">
+        {/* Page furniture sits directly on the grey ground, where muted text
+            measures 2.38:1 — `on-ground` promotes it to full ink. */}
+        <div className="on-ground flex justify-between items-start flex-wrap gap-2 my-2">
           <h2 className="display text-[26px] leading-none mb-4 mt-2">
             {finalTitle}
           </h2>
@@ -155,7 +157,9 @@ export const ListView = <RecordType extends RaRecord = RaRecord>(
             </div>
           )}
         </div>
-        <FilterForm />
+        <div className="on-ground">
+          <FilterForm />
+        </div>
 
         <div className={cn("my-2", props.className)}>{children}</div>
         {pagination}

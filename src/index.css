@@ -106,7 +106,7 @@
   --radius-tile: 16px;
   --radius-control: 999px;
 
-  --ground: #adadad;
+  --ground: #9a9a9a;
   --panel: #e9e9e9;
   --panel-raised: #f4f4f4;
   --panel-strong: #202020;
@@ -327,6 +327,21 @@ input[type="time"] {
   border-radius: var(--radius-tile);
   object-fit: cover;
   background: var(--panel-raised);
+}
+
+
+/* Only full-strength ink survives on the grey ground: ink-muted measures
+   2.38:1 there. Anything muted must live on a panel, so the page-level
+   furniture that sits directly on the ground is promoted to ink. */
+#main-content > .list-header,
+#main-content > .list-header .overline,
+#main-content > .list-header label {
+  color: var(--ink);
+}
+.on-ground,
+.on-ground .overline,
+.on-ground label {
+  color: var(--ink);
 }
 
 /* A block: the unit the whole interface is built from */

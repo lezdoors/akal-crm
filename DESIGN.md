@@ -32,8 +32,9 @@ artifacts gives huge empty boxes with a tiny table inside. Translate the
 
 - Panel radius is 28px, **not** reown's 64–80px stadium. At CRM density a
   stadium eats its own content.
-- The grey ground is one step lighter than reown's `#9a9a9a`, because our
-  ground shows in far thinner gaps and reads heavier when it does.
+- The ground is reown's measured `#9a9a9a`. An earlier lighter `#adadad`
+  was both less faithful and *worse* on contrast (panel/ground 1.85:1 vs
+  2.32:1).
 - Dark panels are for **figures and focus** (dashboard totals, login), not
   for data lists. Long tables go on the light panel, black on `#e9e9e9`,
   or they cannot be read all day.
@@ -44,7 +45,7 @@ artifacts gives huge empty boxes with a tiny table inside. Translate the
 
 | Token | Light | Dark | Use |
 |---|---|---|---|
-| `ground` | `#adadad` | `#141414` | the page behind everything |
+| `ground` | `#9a9a9a` | `#141414` | the page behind everything |
 | `panel` | `#e9e9e9` | `#202020` | data surfaces — lists, forms, tables |
 | `panel-raised` | `#f4f4f4` | `#2a2a2a` | nested block inside a panel |
 | `panel-strong` | `#202020` | `#000000` | figures, login, focus blocks |
@@ -89,6 +90,24 @@ register's signature; diluting it is how this becomes generic.
 - Label / overline: mono 10px, uppercase, `0.12em`, `ink-muted`.
 - Data: mono 13px.
 - Prose: Inter 13px / 1.55.
+
+## Text on the ground
+
+Only full-strength `ink` survives on the grey ground — measured against
+`#9a9a9a`: `ink` 5.79:1, `ink-soft` 3.86:1, `ink-muted` **2.38:1**. Muted
+text therefore belongs on a panel, never on the ground. Page furniture that
+must sit on the ground (list headers, filter labels) carries the `on-ground`
+class, which promotes it to ink.
+
+Known and accepted: panel-against-ground is 2.32:1, below the 3:1 that
+WCAG 1.4.11 asks of UI component boundaries. reown.com's own is 2.24:1. The
+chips are identified by their label and icon (13.4:1), not by their edge.
+
+## Navigation
+
+Navigation is a row of **pill chips across the top**, as on reown.com — not a
+rail. The rail version left a tall empty column on every page and took ~260px
+from the content. Active chip is solid `blue` with `#10233a` text (5.47:1).
 
 ## Status
 

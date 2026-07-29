@@ -59,9 +59,13 @@ const ContactListLayoutDesktop = () => {
   if (!data?.length && !hasFilters) return <ContactEmpty />;
 
   return (
-    <div className="flex flex-row gap-8">
-      <ContactListFilter />
-      <div className="w-full flex flex-col gap-4">
+    <div className="flex flex-row gap-2">
+      {/* The filter rail is a panel too — naked on the grey ground its muted
+          labels measured 2.38:1. */}
+      <div className="panel shrink-0 p-5">
+        <ContactListFilter />
+      </div>
+      <div className="w-full flex flex-col gap-2">
         <Card className="py-0">
           <ContactListContent />
         </Card>

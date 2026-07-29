@@ -73,7 +73,7 @@ const ChannelColumn = ({
       )}
       {/* Each clause holds together; the line breaks between them, never
           inside "8 all-time". */}
-      <span className="font-mono text-[11px] text-[#7a7a7a] mt-1.5 tabular-nums">
+      <span className="font-mono text-[11px] text-[#9a9a9a] mt-1.5 tabular-nums">
         <span className="whitespace-nowrap">
           {translate("resources.orders.dashboard.orders_count", {
             smart_count: monthOrders.length,
@@ -118,7 +118,7 @@ const ChannelColumn = ({
  * the to-ship count in tobacco when something must leave the atelier.
  * Each column opens the orders register filtered to that channel.
  */
-export const ChannelOverview = () => {
+export const ChannelOverview = ({ today }: { today?: string }) => {
   const translate = useTranslate();
   const { data: orders, isPending } = useDashboardOrders();
 
@@ -144,16 +144,34 @@ export const ChannelOverview = () => {
   // With a single channel the Total column would repeat it figure for figure.
   const showTotal = columns.length > 1;
 
+  // With one channel and no revenue yet this month the figures fill a fraction
+  // of a full-width slab, so the block sizes itself to its content: it shares
+  // the row with the ship queue when there is little to say, and takes the
+  // whole width only when there are several channels to line up.
+  const wide = columns.length + (showTotal ? 1 : 0) >= 3;
+
   return (
-    <div className="panel-strong p-7">
-      <p className="overline !text-[#9a9a9a]">
-        {translate("crm.dashboard.overview", { _: "Overview" })}
-        {" — "}
-        {translate("resources.orders.dashboard.this_month", {
-          _: "This month",
-        })}
-      </p>
-      <div className={cn("mt-5 grid grid-cols-1 gap-x-6 gap-y-8", COLUMNS_AT_SM[columns.length + (showTotal ? 1 : 0)])}>
+    <div
+      className={cn(
+        "panel-strong p-7",
+        wide ? "" : "xl:max-w-[720px]",
+      )}
+    >
+      <div className="flex flex-wrap items-baseline justify-between gap-3">
+        <p className="overline !text-[#9a9a9a]">
+          {translate("crm.dashboard.overview", { _: "Overview" })}
+          {" — "}
+          {translate("resources.orders.dashboard.this_month", {
+            _: "This month",
+          })}
+        </p>
+        {today && (
+          <p className="display text-[15px] capitalize text-[#9a9a9a]">
+            {today}
+          </p>
+        )}
+      </div>
+      <div className={cn("mt-5 grid grid-cols-1 gap-x-10 gap-y-8", COLUMNS_AT_SM[columns.length + (showTotal ? 1 : 0)])}>
         {columns.map((column) => (
           <ChannelColumn
             key={column.channel}
