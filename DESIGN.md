@@ -25,8 +25,9 @@ The page is a **field of blocks floating on a grey ground**. Nothing is a
 document; everything is an object with weight, a large radius, and a job.
 Reown gets its character from three moves, and so do we:
 
-1. **The ground is grey, never white.** Panels are legible because they sit
-   *on* something, not because they are outlined.
+1. **The ground is grey, never white — the panels are the white.** A panel is
+   legible because it sits *on* something, not because it is outlined. Invert
+   that (white page, grey cards) and you have the SaaS admin this replaced.
 2. **Radius is enormous and unapologetic.** Panels 28px, controls fully
    round. There are no 4px corners anywhere.
 3. **Monospace is the voice of the interface.** Labels, numerals, buttons,
@@ -42,17 +43,19 @@ artifacts gives huge empty boxes with a tiny table inside. Translate the
 
 - Panel radius is 28px, **not** reown's 64–80px stadium. At CRM density a
   stadium eats its own content.
-- The ground holds reown's measured *luminance* and drops its cool cast:
-  `#a3998c`, a warm taupe, panel/ground 2.31:1 against reown's 2.32:1. An
-  earlier lighter `#adadad` was both less faithful and *worse* on contrast
-  (1.85:1) — lightening the ground is a solved question, do not revisit it.
+- The ground sits near reown's measured luminance at `#979490`, a neutral
+  stone. Because the panels on it are white, panel/ground is **3.02:1** —
+  above the 3:1 WCAG 1.4.11 asks of component boundaries, which reown.com's
+  own 2.24:1 never reached. An earlier lighter `#adadad` was both less
+  faithful and worse (1.85:1); lightening the ground is a solved question, do
+  not revisit it.
 - The storefront's own answer — white ground, hairline rules, Cormorant — is
   **not** available to us. That is a shop window read for ninety seconds; this
   is a tool read for eight hours. We take the house's *colour*, not its
   furniture.
 - Dark panels are for **figures and focus** (dashboard totals, login), not
-  for data lists. Long tables go on the light panel, black on `#e9e9e9`,
-  or they cannot be read all day.
+  for data lists. Long tables go on the white panel, ink at 17.36:1, or they
+  cannot be read all day.
 - Colour is **state**, never decoration. reown blocks colour by section; we
   block it by meaning.
 
@@ -60,18 +63,28 @@ artifacts gives huge empty boxes with a tiny table inside. Translate the
 
 `MT` marks a value taken unchanged from the Maison Tanneurs storefront.
 
+The storefront calls itself a **clean-white editorial system (Polène
+discipline)**: white, one warm off-white, warm charcoal ink, one accent. There
+is no cream in it. Panels here are therefore **white**, and the ground is the
+neutral stone they sit on — not a warm taupe, which would read the white back
+as cream.
+
 | Token | Light | Dark | Use |
 |---|---|---|---|
-| `ground` | `#a3998c` | `#100d0a` | the page behind everything |
-| `panel` | `#ebe9e4` MT | `#211c17` MT | data surfaces — lists, forms, tables |
+| `ground` | `#979490` | `#100d09` | the page behind everything |
+| `panel` | `#ffffff` MT | `#211c17` MT | data surfaces — lists, forms, tables |
 | `panel-raised` | `#f6f4f1` MT | `#2a241d` MT | nested block inside a panel |
-| `panel-strong` | `#211c17` MT | `#0f0d0b` | figures, login, focus blocks |
-| `ink` | `#1c1a17` MT | `#ede9e2` | text on light panels |
-| `ink-soft` | `#57534c` MT | `#c0b9ae` | secondary type |
+| `panel-strong` | `#211c17` MT | `#0f0c09` | figures, login, focus blocks |
+| `ink` | `#1c1a17` MT | `#ffffff` MT | text on light panels |
+| `ink-soft` | `#57534c` MT | `#c8c2b8` | secondary type |
 | `ink-muted` | `#8d867c` MT | `#8d867c` MT | labels, secondary data |
-| `ink-inverse` | `#f7f6f2` | `#f7f6f2` | text on `panel-strong` |
+| `ink-inverse` | `#ffffff` MT | `#ffffff` MT | text on `panel-strong` |
 | `ink-muted-inverse` | `#9a9289` | `#9a9289` | muted type on `panel-strong` (5.51:1) |
-| `input` | `#d2cbc0` | `#453c31` | the fill of a form control |
+| `input` | `#e9e9e7` | `#453c31` | the fill of a form control |
+
+`panel-raised` is the *only* warm tint in the light stack, and it is the
+storefront's own `--ground-deep`. If you find yourself reaching for another
+off-white, you are reintroducing the cream this build exists to remove.
 
 Accents — five meanings, all inside the tannery's range:
 
@@ -84,7 +97,7 @@ Accents — five meanings, all inside the tannery's range:
 | `sage` | `#7f9d63` | ← | settled — delivered, available |
 | `brass` | `#cc9e3d` | ← | waiting — pending, draft |
 | `clay` | `#b89073` | ← | in hand — paid, reserved, chased |
-| `stone` | `#d5cfc5` | ← | in transit — the one uncoloured status |
+| `stone` | `#c6c0b6` | ← | in transit — the one uncoloured status |
 
 `tobacco` is the storefront's single accent and it is the CRM's action colour.
 It never states a status, and no status ever uses it — that separation is what
@@ -95,12 +108,12 @@ Three rules the palette is built on, each of which will bite you if ignored:
 1. **A fill and a piece of coloured type cannot be the same value.** A fill is
    read against the ink on top of it; type is read against the panel behind it.
    Hence the `-ink` pairs: `sage` `#7f9d63` fills a pill, `sage-ink` `#4a5c37`
-   writes a word. Using `text-sage` gets you 2.51:1 and an unreadable line.
+   writes a word. Using `text-sage` gets you 3.04:1 and an unreadable line.
 2. **Status pills keep their light fill in dark mode**, so the type on them is
    `--on-accent`, a fixed dark ink that does *not* follow `--ink` into dark
    mode. Wire a pill to `--ink` and it turns light-on-light after sunset.
 3. **`tobacco` is the one accent too dark for dark type** (2.97:1). It carries
-   `--on-primary` (ivory, 5.40:1). Every other accent carries `--on-accent`.
+   `--on-primary` (white, 5.84:1). Every other accent carries `--on-accent`.
    This is the single exception to "accents take dark text" — do not generalise
    it, and do not lighten tobacco to escape it: it is the brand's own value.
 
@@ -141,23 +154,24 @@ register's signature; diluting it is how this becomes generic.
 
 ## Text on the ground
 
-Only full-strength `ink` survives on the ground — measured against `#a3998c`:
-`ink` 6.19:1, `ink-muted` **1.28:1**. Muted text therefore belongs on a panel,
+Only full-strength `ink` survives on the ground — measured against `#979490`:
+`ink` 5.75:1, `ink-muted` **1.31:1**. Muted text therefore belongs on a panel,
 never on the ground. Page furniture that must sit on the ground (list headers,
 filter labels, the settings section nav) carries the `on-ground` class, which
-promotes it to ink. The warm ground is *less* forgiving of muted type than
-reown's grey was — check any label you move onto it.
+promotes it to ink. Check any label you move onto the ground; the failure is
+silent and looks fine on a bright screen.
 
-Known and accepted: panel-against-ground is 2.31:1, below the 3:1 that
-WCAG 1.4.11 asks of UI component boundaries. reown.com's own is 2.24:1. The
-chips are identified by their label and icon, not by their edge.
+Panel-against-ground is **3.02:1**, which clears WCAG 1.4.11 for component
+boundaries. This is the one place the build beats its source outright —
+reown.com's own panels sit at 2.24:1 — and it is a consequence of the panels
+being white. Darkening them gives it straight back.
 
 ## Navigation
 
 Navigation is a row of **pill chips across the top**, as on reown.com — not a
 rail. The rail version left a tall empty column on every page and took ~260px
 from the content. Active chip is solid `tobacco` with `on-primary` text
-(5.40:1). The house chip at the left is `panel-strong`, and inverts to `ink` in
+(5.84:1). The house chip at the left is `panel-strong`, and inverts to `ink` in
 dark mode — panel-strong on the dark ground is a black shape on black.
 
 ## Status
@@ -222,12 +236,19 @@ proportion and layout sampled directly from those pixels. The sibling
 implementation on crm.demande-raccordement.fr sits behind auth and could not be
 diffed; if it and this file disagree on structure, **the screenshots win**.
 
-Colour: `/Users/ryanz/mt-lestanneurs/app/globals.css` (2026-07-29), the palette
-that renders at maisontanneurs.com. Where a value here is marked MT it is that
-file's value verbatim. Where it is not, it was derived to hold a measured
-relationship and the figure is quoted. The retired `~/kechken` repo carries an
-older and richer MT palette doctrine (cognac `#7a4a2b`, bronze, oxblood); it
-disagrees with production on every core value and is **not** authoritative.
+Colour: `/Users/ryanz/mt-lestanneurs/app/globals.css` — github.com/lezdoors/
+mt-lestanneurs, the palette that renders at maisontanneurs.com, verified level
+with `origin` on 2026-07-29. Where a value here is marked MT it is that file's
+value verbatim. Where it is not, it was derived to hold a measured relationship
+and the figure is quoted.
+
+**Only that file is authoritative.** The retired `~/kechken` repo carries an
+older, richer, more tempting MT palette doctrine — cognac `#7a4a2b`, bronze,
+oxblood, and a set of warm stone surfaces (`#ebe9e4` paper-alt, `#f8f7f4`
+plate). It disagrees with production on every core value, and its warm stones
+are where cream enters this design. The first cut of this build used
+`#ebe9e4` for panels for exactly that reason and had to be redone. If a value
+is not in `mt-lestanneurs/app/globals.css`, it is not the house palette.
 
 Verification: `node scripts/verify-palette.mjs` re-derives every contrast pair
 in this document and exits non-zero on a regression. Run it after any token

@@ -95,26 +95,30 @@
   --radius-tile: 16px;
   --radius-control: 999px;
 
-  /* Material. The ground keeps reown's luminance (panel/ground 2.31:1 vs their
-     2.32:1) and trades its cool grey for the house's warm taupe. */
-  --ground: #a3998c;
-  --panel: #ebe9e4;        /* MT paper-alt */
-  --panel-raised: #f6f4f1; /* MT ground-deep */
+  /* Material. The storefront is a clean-white system (its own header: "Polène
+     discipline") — white, one warm off-white, warm charcoal ink, and no cream
+     anywhere. Panels are therefore WHITE, and the ground is the neutral stone
+     they sit on. White panels clear 3.02:1 against it, above the 3:1 WCAG
+     1.4.11 asks of component boundaries — which neither reown.com nor an
+     off-white panel can manage. */
+  --ground: #979490;
+  --panel: #ffffff;        /* MT ground */
+  --panel-raised: #f6f4f1; /* MT ground-deep — the only warm tint in the stack */
   --panel-strong: #211c17; /* MT dark-close */
 
   --ink: #1c1a17;          /* MT ink */
   --ink-soft: #57534c;     /* MT ink-soft */
   --ink-muted: #8d867c;    /* MT ink-muted */
-  --ink-inverse: #f7f6f2;  /* MT ivory */
+  --ink-inverse: #ffffff;  /* MT maps type-on-dark to its white ground */
   --ink-muted-inverse: #9a9289; /* muted type on panel-strong — 5.51:1 */
 
   /* Accents. Five, each with one meaning, all in the tannery's range.
      `tobacco` is MT's single production accent and the only one dark enough to
-     need ivory text (5.40:1); the status three carry `ink` like every other
+     need white text (5.84:1); the status three carry `ink` like every other
      pill. `accent-ink` is tobacco doing the work of *text* rather than fill. */
   --tobacco: #8b5a2b;      /* MT accent — primary action, links, current nav */
   --tobacco-deep: #74491f; /* pressed / active */
-  --accent-ink: #8b5a2b;   /* tobacco as type on a panel — 4.81:1 */
+  --accent-ink: #8b5a2b;   /* tobacco as type on a panel — 5.84:1 */
   --on-primary: var(--ink-inverse);
   /* Status pills keep their light fill in both modes, so the type on them is
      always the dark ink — it must NOT follow `--ink` into dark mode. */
@@ -123,12 +127,12 @@
   --sage: #7f9d63;         /* settled — delivered, available */
   --brass: #cc9e3d;        /* waiting — pending, draft */
   --clay: #b89073;         /* in hand — paid, reserved, chased */
-  --stone: #d5cfc5;        /* in transit — the one uncoloured status */
+  --stone: #c6c0b6;        /* in transit — the one uncoloured status (1.81:1 on white) */
   /* The status accents doing the work of *type* rather than fill. A pill fill
      and a line of coloured text cannot be the same value: one is read against
      ink, the other against the panel. */
-  --sage-ink: #4a5c37;     /* 6.02:1 on panel */
-  --rust-ink: #a4441f;     /* 5.05:1 on panel */
+  --sage-ink: #4a5c37;     /* 7.30:1 on panel */
+  --rust-ink: #a4441f;     /* 6.13:1 on panel */
 
   --background: var(--ground);
   --foreground: var(--ink);
@@ -148,10 +152,10 @@
   /* No hairlines in BLOC — separation is the ground gap. Any primitive that
      still draws a border gets one that vanishes into its panel. */
   --border: transparent;
-  /* The input is a filled control, not an outlined one — BLOC has no
-     borders, so the field has to separate from whatever surface it lands on
-     by fill alone (1.33:1 on panel, 1.47:1 on panel-raised). */
-  --input: #d2cbc0;
+  /* The input is a filled control, not an outlined one — BLOC has no borders,
+     so the field separates from whatever surface it lands on by fill alone.
+     Near-neutral on purpose: a warm fill on a white panel reads as cream. */
+  --input: #e9e9e7;
   --ring: var(--tobacco);
   --chart-1: var(--tobacco);
   --chart-2: var(--sage);
@@ -166,16 +170,16 @@
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: transparent;
   --sidebar-ring: var(--tobacco);
-  --avatar-0: #d5cfc5;
-  --avatar-1: #d5cfc5;
-  --avatar-2: #d5cfc5;
-  --avatar-3: #d5cfc5;
-  --avatar-4: #d5cfc5;
-  --avatar-5: #d5cfc5;
-  --avatar-6: #d5cfc5;
-  --avatar-7: #d5cfc5;
-  --avatar-8: #d5cfc5;
-  --avatar-9: #d5cfc5;
+  --avatar-0: #e4e2de;
+  --avatar-1: #e4e2de;
+  --avatar-2: #e4e2de;
+  --avatar-3: #e4e2de;
+  --avatar-4: #e4e2de;
+  --avatar-5: #e4e2de;
+  --avatar-6: #e4e2de;
+  --avatar-7: #e4e2de;
+  --avatar-8: #e4e2de;
+  --avatar-9: #e4e2de;
 
   /* Retired names, aliased so un-migrated components keep rendering
      on-register while they are converted one surface at a time. Delete each
@@ -193,15 +197,15 @@
 .dark {
   /* After hours — the ground drops below the panels instead of above, and the
      whole stack stays warm. Ground/panel is 1.15:1, matching reown's own 1.13. */
-  --ground: #100d0a;
+  --ground: #100d09;
   --panel: #211c17;        /* MT dark-close */
   --panel-raised: #2a241d; /* MT dark secondary */
-  --panel-strong: #0f0d0b;
+  --panel-strong: #0f0c09;
 
-  --ink: #ede9e2;
-  --ink-soft: #c0b9ae;
+  --ink: #ffffff;          /* MT maps dark foreground to its white ground */
+  --ink-soft: #c8c2b8;
   --ink-muted: #8d867c;    /* MT ink-muted — 4.69:1 on the dark panel */
-  --ink-inverse: #f7f6f2;
+  --ink-inverse: #ffffff;
   --ink-muted-inverse: #9a9289;
 
   /* The fill lifts just enough to hold a 3.15:1 edge against the dark panel
@@ -218,7 +222,7 @@
   --sage: #7f9d63;
   --brass: #cc9e3d;
   --clay: #b89073;
-  --stone: #d5cfc5;   /* stays light in dark mode, like every other pill */
+  --stone: #c6c0b6;   /* stays light in dark mode, like every other pill */
   --sage-ink: #a8c48a;     /* 8.79:1 on the dark panel */
   --rust-ink: #e89372;     /* 7.12:1 on the dark panel */
 

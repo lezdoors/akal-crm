@@ -11,7 +11,7 @@ export const colors = [
   "#1c1a17", // ink
   "#57534c", // ink-soft
   "#8d867c", // ink-muted
-  "#d2cbc0", // input
+  "#cfcdc9", // stone
   "#8b5a2b", // tobacco
   "#b89073", // clay
   "#4a5c37", // sage-ink
@@ -23,7 +23,7 @@ export const colors = [
 const PALETTE = new Set(colors.map((c) => c.toLowerCase()));
 
 /** The four ink steps a legacy colour can land on, darkest first. */
-const INK_STEPS = ["#1c1a17", "#57534c", "#8d867c", "#d2cbc0"];
+const INK_STEPS = ["#1c1a17", "#57534c", "#8d867c", "#cfcdc9"];
 
 /**
  * Tags created before the register palette carry upstream's pastels
