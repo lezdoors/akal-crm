@@ -53,7 +53,7 @@ const NavChip = ({ entry }: { entry: NavEntry }) => {
       className={cn(
         "inline-flex h-10 items-center gap-2 rounded-[var(--radius-control)] px-4 font-mono text-[13px] no-underline transition-colors",
         isActive
-          ? "bg-tobacco text-on-primary"
+          ? "bg-action text-on-primary"
           : "bg-panel text-ink hover:bg-panel-raised",
       )}
     >

@@ -92,12 +92,12 @@ export const InventoryPage = () => {
       <Section
         title={translate("crm.products.status.available", { _: "Available" })}
         products={available}
-        dot="bg-sage"
+        dot="bg-green"
       />
       <Section
         title={translate("crm.products.status.reserved", { _: "Reserved" })}
         products={reserved}
-        dot="bg-tobacco"
+        dot="bg-blue"
       />
       <Section
         title={translate("crm.products.status.sold", { _: "Sold" })}

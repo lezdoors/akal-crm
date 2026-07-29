@@ -27,9 +27,9 @@ export const useCatalogue = () =>
   });
 
 const STATUS_DOT: Record<string, string> = {
-  available: "bg-sage",
+  available: "bg-green",
   sold: "bg-ink",
-  reserved: "bg-tobacco",
+  reserved: "bg-blue",
   draft: "bg-ink-muted",
 };
 

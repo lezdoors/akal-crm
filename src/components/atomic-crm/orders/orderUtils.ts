@@ -84,15 +84,15 @@ export const ORDER_CURRENCY_CHOICES = [
 ];
 
 /**
- * Status is a filled pill, not a dot. Each accent carries one meaning — brass
- * waits, clay is in hand, stone is in transit, sage is settled. Tobacco is
- * reserved for action and never states a status.
+ * Status is a filled pill, not a dot. Each accent carries one meaning —
+ * yellow waits, blue is in hand, stone is in transit, green is settled.
+ * The action fuchsia never states a status.
  */
 export const ORDER_STATUS_PILL_CLASSES: Record<OrderStatus, string> = {
-  pending: "bg-brass",
-  paid: "bg-clay",
+  pending: "bg-yellow",
+  paid: "bg-blue",
   shipped: "bg-stone",
-  delivered: "bg-sage",
+  delivered: "bg-green",
 };
 
 export function orderItemsSubtotal(items: OrderItem[] | undefined): number {

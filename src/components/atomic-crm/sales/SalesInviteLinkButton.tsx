@@ -86,7 +86,7 @@ export const SalesInviteLinkButton = () => {
             <Input readOnly value={link} className="text-[12px] font-mono" />
             <Button variant="outline" size="sm" onClick={copy}>
               {copied ? (
-                <Check className="size-4 text-sage-ink" />
+                <Check className="size-4 text-green-ink" />
               ) : (
                 <Copy className="size-4" />
               )}

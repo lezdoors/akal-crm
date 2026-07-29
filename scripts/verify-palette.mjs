@@ -15,17 +15,17 @@ const light = {
   ground:"#979490", panel:"#ffffff", panelRaised:"#f6f4f1", panelStrong:"#211c17",
   ink:"#1c1a17", inkSoft:"#57534c", inkMuted:"#8d867c",
   inkInverse:"#ffffff", inkMutedInverse:"#9a9289", input:"#e9e9e7",
-  tobacco:"#8b5a2b", tobaccoDeep:"#74491f", accentInk:"#8b5a2b",
-  rust:"#db6b42", sage:"#7f9d63", brass:"#cc9e3d", clay:"#b89073", stone:"#c6c0b6",
-  sageInk:"#4a5c37", rustInk:"#a4441f",
+  action:"#c2188c", actionDeep:"#a5127a", accentInk:"#b81486",
+  coral:"#e36b53", green:"#50a96c", yellow:"#f4bb40", blue:"#559be8", stone:"#c6c0b6",
+  greenInk:"#2f7a4d", coralInk:"#c0442a", blueInk:"#2b6cb8",
 };
 const dark = {
   ground:"#100d09", panel:"#211c17", panelRaised:"#2a241d", panelStrong:"#0f0c09",
   ink:"#ffffff", inkSoft:"#c8c2b8", inkMuted:"#8d867c",
   inkInverse:"#ffffff", inkMutedInverse:"#9a9289", input:"#453c31",
-  tobacco:"#916030", tobaccoDeep:"#7a4f26", accentInk:"#c9914f",
-  rust:"#db6b42", sage:"#7f9d63", brass:"#cc9e3d", clay:"#b89073", stone:"#c6c0b6",
-  sageInk:"#a8c48a", rustInk:"#e89372",
+  action:"#d6219c", actionDeep:"#c2188c", accentInk:"#f27cc7",
+  coral:"#e36b53", green:"#50a96c", yellow:"#f4bb40", blue:"#559be8", stone:"#c6c0b6",
+  greenInk:"#8fd3a8", coralInk:"#f0937c", blueInk:"#85bdf5",
 };
 const ON_ACCENT = "#1c1a17"; // fixed in both modes — pills keep a light fill after dark
 
@@ -44,21 +44,23 @@ say("panel-raised vs ground", light.panelRaised, light.ground, 2.5);
 say("input vs panel", light.input, light.panel, 1.15);
 say("ink on input", light.ink, light.input, 4.5);
 
-console.log("### LIGHT — accents (pills carry on-accent; primary carries ivory) ###");
-say("on-accent on rust pill", ON_ACCENT, light.rust, 4.5);
-say("on-accent on sage pill", ON_ACCENT, light.sage, 4.5);
-say("on-accent on brass pill", ON_ACCENT, light.brass, 4.5);
-say("on-accent on clay pill", ON_ACCENT, light.clay, 4.5);
+console.log("### LIGHT — accents (pills carry on-accent; action carries white) ###");
+say("on-accent on coral pill", ON_ACCENT, light.coral, 4.5);
+say("on-accent on green pill", ON_ACCENT, light.green, 4.5);
+say("on-accent on yellow pill", ON_ACCENT, light.yellow, 4.5);
+say("on-accent on blue pill", ON_ACCENT, light.blue, 4.5);
 say("on-accent on stone pill", ON_ACCENT, light.stone, 4.5);
-say("ivory on tobacco (primary fill)", light.inkInverse, light.tobacco, 4.5);
-say("ivory on tobacco-deep (pressed)", light.inkInverse, light.tobaccoDeep, 4.5);
+say("white on action (primary fill)", light.inkInverse, light.action, 4.5);
+say("white on action-deep (pressed)", light.inkInverse, light.actionDeep, 4.5);
 say("accent-ink as link on panel", light.accentInk, light.panel, 4.5);
 say("accent-ink as link on panel-raised", light.accentInk, light.panelRaised, 4.5);
-say("sage-ink as type on panel", light.sageInk, light.panel, 4.5);
-say("rust-ink as type on panel", light.rustInk, light.panel, 4.5);
-say("tobacco fill vs panel (component edge)", light.tobacco, light.panel, 3);
-say("rust pill vs panel", light.rust, light.panel, 3);
-say("sage pill vs panel", light.sage, light.panel, 3);
+say("green-ink as type on panel", light.greenInk, light.panel, 4.5);
+say("coral-ink as type on panel", light.coralInk, light.panel, 4.5);
+say("blue-ink as type on panel", light.blueInk, light.panel, 4.5);
+say("action fill vs panel (component edge)", light.action, light.panel, 3);
+say("coral pill vs panel", light.coral, light.panel, 3);
+say("blue pill vs panel", light.blue, light.panel, 2.8);
+say("green pill vs panel", light.green, light.panel, 2.8);
 
 console.log("\n### DARK — material ###");
 say("ink on panel", dark.ink, dark.panel, 4.5);
@@ -72,16 +74,17 @@ say("input vs panel", dark.input, dark.panel, 1.15);
 say("ink on input", dark.ink, dark.input, 4.5);
 
 console.log("### DARK — accents ###");
-say("on-accent on rust pill", ON_ACCENT, dark.rust, 4.5);
-say("on-accent on sage pill", ON_ACCENT, dark.sage, 4.5);
-say("on-accent on brass pill", ON_ACCENT, dark.brass, 4.5);
-say("on-accent on clay pill", ON_ACCENT, dark.clay, 4.5);
+say("on-accent on coral pill", ON_ACCENT, dark.coral, 4.5);
+say("on-accent on green pill", ON_ACCENT, dark.green, 4.5);
+say("on-accent on yellow pill", ON_ACCENT, dark.yellow, 4.5);
+say("on-accent on blue pill", ON_ACCENT, dark.blue, 4.5);
 say("on-accent on stone pill", ON_ACCENT, dark.stone, 4.5);
-say("ivory on tobacco (primary fill)", dark.inkInverse, dark.tobacco, 4.5);
+say("white on action (primary fill)", dark.inkInverse, dark.action, 4.5);
 say("accent-ink as link on panel", dark.accentInk, dark.panel, 4.5);
 say("accent-ink as link on panel-raised", dark.accentInk, dark.panelRaised, 4.5);
-say("sage-ink as type on panel", dark.sageInk, dark.panel, 4.5);
-say("rust-ink as type on panel", dark.rustInk, dark.panel, 4.5);
-say("tobacco fill vs panel (component edge)", dark.tobacco, dark.panel, 3);
+say("green-ink as type on panel", dark.greenInk, dark.panel, 4.5);
+say("coral-ink as type on panel", dark.coralInk, dark.panel, 4.5);
+say("blue-ink as type on panel", dark.blueInk, dark.panel, 4.5);
+say("action fill vs panel (component edge)", dark.action, dark.panel, 3);
 
 console.log(process.exitCode ? "\n*** SOME CHECKS FAILED ***" : "\nALL CHECKS PASS");

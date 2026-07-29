@@ -13,7 +13,9 @@ material token below is now either a Maison Tanneurs production value (lifted
 from `mt-lestanneurs/app/globals.css`, the palette that renders at
 maisontanneurs.com) or a warm-register colour derived to hold reown's measured
 luminance relationships. **The geometry, type and layout are unchanged** — this
-was a colour pass, not a redesign.*
+was a colour pass, not a redesign. Later the same day the accents were
+re-brightened at Ryan's direction — see the Accents section; the warm-brown
+accent pass is history, not doctrine.*
 
 Nothing here is estimated: the structure came from the reown.com screenshots in
 `~/Downloads/Reown`, and every contrast figure quoted is produced by
@@ -86,36 +88,59 @@ as cream.
 storefront's own `--ground-deep`. If you find yourself reaching for another
 off-white, you are reintroducing the cream this build exists to remove.
 
-Accents — five meanings, all inside the tannery's range:
+Accents — the action colour is a decision, the statuses are reown's own.
+
+The first accent pass used the storefront's tobacco brown for action and
+warm earth tones for status. Ryan retired it on 2026-07-29 ("change the brown
+with a happier color like even fuscia"): warm browns cannot state status in a
+UI whose photography is *already* brown leather — a clay `PAID` pill next to a
+cognac weekender reads as more leather, not as a state. Colour only means
+something here if it is foreign to the material. So: action is **fuchsia**
+(Ryan's pick), and the four status accents are reown.com's own bright quartet,
+sampled from the `~/Downloads/Reown` screenshots.
 
 | Token | Light | Dark | Means |
 |---|---|---|---|
-| `tobacco` | `#8b5a2b` MT | `#916030` | primary action, links, current nav |
-| `tobacco-deep` | `#74491f` | `#7a4f26` | pressed / active |
-| `accent-ink` | `#8b5a2b` | `#c9914f` | tobacco doing the work of *type* |
-| `rust` | `#db6b42` | ← | needs attention — to ship, overdue, error |
-| `sage` | `#7f9d63` | ← | settled — delivered, available |
-| `brass` | `#cc9e3d` | ← | waiting — pending, draft |
-| `clay` | `#b89073` | ← | in hand — paid, reserved, chased |
-| `stone` | `#c6c0b6` | ← | in transit — the one uncoloured status |
+| `action` | `#c2188c` | `#d6219c` | primary action, links, current nav |
+| `action-deep` | `#a5127a` | `#c2188c` | pressed / active |
+| `accent-ink` | `#b81486` | `#f27cc7` | action doing the work of *type* |
+| `coral` | `#e36b53` | ← | needs attention — to ship, overdue, error |
+| `green` | `#50a96c` | ← | settled — delivered, available, recovered |
+| `yellow` | `#f4bb40` | ← | waiting — pending, draft, chased |
+| `blue` | `#559be8` | ← | in hand — paid, reserved, new |
+| `stone` | `#c6c0b6` | ← | in transit / inert — the uncoloured status |
+| `green-ink` | `#2f7a4d` | `#8fd3a8` | green as type on a panel |
+| `coral-ink` | `#c0442a` | `#f0937c` | coral as type on a panel |
+| `blue-ink` | `#2b6cb8` | `#85bdf5` | blue as type on a panel |
 
-`tobacco` is the storefront's single accent and it is the CRM's action colour.
-It never states a status, and no status ever uses it — that separation is what
-lets a coloured thing on this page mean exactly one thing.
+`action` never states a status, and no status ever uses it — that separation
+is what lets a coloured thing on this page mean exactly one thing. The retired
+names (`tobacco`, `rust`, `sage`, `brass`, `clay`) are aliased onto the new
+tokens in `src/index.css`; do not write them in new code.
 
 Three rules the palette is built on, each of which will bite you if ignored:
 
 1. **A fill and a piece of coloured type cannot be the same value.** A fill is
    read against the ink on top of it; type is read against the panel behind it.
-   Hence the `-ink` pairs: `sage` `#7f9d63` fills a pill, `sage-ink` `#4a5c37`
-   writes a word. Using `text-sage` gets you 3.04:1 and an unreadable line.
+   Hence the `-ink` pairs: `green` `#50a96c` fills a pill, `green-ink`
+   `#2f7a4d` writes a word. Using `text-green` gets you 2.90:1 and an
+   unreadable line.
 2. **Status pills keep their light fill in dark mode**, so the type on them is
    `--on-accent`, a fixed dark ink that does *not* follow `--ink` into dark
    mode. Wire a pill to `--ink` and it turns light-on-light after sunset.
-3. **`tobacco` is the one accent too dark for dark type** (2.97:1). It carries
-   `--on-primary` (white, 5.84:1). Every other accent carries `--on-accent`.
-   This is the single exception to "accents take dark text" — do not generalise
-   it, and do not lighten tobacco to escape it: it is the brand's own value.
+3. **`action` is the one accent too dark for dark type** (2.85:1). It carries
+   `--on-primary` (white, 5.52:1). Every other accent carries `--on-accent`.
+   This is the single exception to "accents take dark text" — do not
+   generalise it.
+
+## Pills are a column, not confetti
+
+Every `.pill` is the same width (`min-width: 6.5rem`, centred label), so a
+list of orders shows status as one aligned column. A pill whose width tracks
+its label produces a ragged edge that reads as disorder at CRM density.
+Status is also **never** a dot + word on this platform — the dot survives only
+in tiny inline legends (inventory counts, filter rows), and any remaining
+dot-status on a data row is on the convert-when-touched list.
 
 ## Radius
 
@@ -170,8 +195,8 @@ being white. Darkening them gives it straight back.
 
 Navigation is a row of **pill chips across the top**, as on reown.com — not a
 rail. The rail version left a tall empty column on every page and took ~260px
-from the content. Active chip is solid `tobacco` with `on-primary` text
-(5.84:1). The house chip at the left is `panel-strong`, and inverts to `ink` in
+from the content. Active chip is solid `action` with `on-primary` text
+(5.52:1). The house chip at the left is `panel-strong`, and inverts to `ink` in
 dark mode — panel-strong on the dark ground is a black shape on black.
 
 ## Status
@@ -180,7 +205,7 @@ Le Registre's 6px dot is withdrawn. Status is a **filled pill**: mono 10px,
 uppercase, `0.1em`, fully round, solid accent, `on-accent` text. Every status
 accent is light enough to take that dark ink; none uses white.
 
-`● PAYÉE` becomes a clay `PAYÉE` pill. One pill per row, never two.
+`● PAYÉE` becomes a blue `PAYÉE` pill. One pill per row, never two.
 
 Some surfaces still use a dot + word (carts, stock alerts, catalogue). Those
 predate this rule and are **on the list, not the standard** — convert them to
@@ -236,11 +261,16 @@ proportion and layout sampled directly from those pixels. The sibling
 implementation on crm.demande-raccordement.fr sits behind auth and could not be
 diffed; if it and this file disagree on structure, **the screenshots win**.
 
-Colour: `/Users/ryanz/mt-lestanneurs/app/globals.css` — github.com/lezdoors/
-mt-lestanneurs, the palette that renders at maisontanneurs.com, verified level
-with `origin` on 2026-07-29. Where a value here is marked MT it is that file's
-value verbatim. Where it is not, it was derived to hold a measured relationship
-and the figure is quoted.
+Colour, material: `/Users/ryanz/mt-lestanneurs/app/globals.css` — github.com/
+lezdoors/mt-lestanneurs, the palette that renders at maisontanneurs.com,
+verified level with `origin` on 2026-07-29. Where a value is marked MT it is
+that file's value verbatim.
+
+Colour, accents: the status quartet is sampled from the reown.com screenshots
+in `~/Downloads/Reown`; the fuchsia action colour is Ryan's directive of
+2026-07-29 and belongs to the CRM, not the storefront — do not carry it back
+to maisontanneurs.com. Everything else was derived to hold a measured
+relationship and the figure is quoted.
 
 **Only that file is authoritative.** The retired `~/kechken` repo carries an
 older, richer, more tempting MT palette doctrine — cognac `#7a4a2b`, bronze,

@@ -88,7 +88,7 @@ const ChannelColumn = ({
         </span>
       </span>
       {toShip > 0 && (
-        <span className="pill bg-rust mt-3">
+        <span className="pill bg-coral mt-3">
           {translate("resources.orders.dashboard.to_ship", {
             smart_count: toShip,
           })}

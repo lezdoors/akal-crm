@@ -22,12 +22,12 @@ export const StockAlerts = () => {
   const rows = [
     {
       key: "available",
-      dot: "bg-sage",
+      dot: "bg-green",
       label: translate("crm.products.status.available", { _: "Available" }),
     },
     {
       key: "reserved",
-      dot: "bg-tobacco",
+      dot: "bg-blue",
       label: translate("crm.products.status.reserved", { _: "Reserved" }),
     },
     {

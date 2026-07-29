@@ -12,12 +12,12 @@ export const colors = [
   "#57534c", // ink-soft
   "#8d867c", // ink-muted
   "#cfcdc9", // stone
-  "#8b5a2b", // tobacco
-  "#b89073", // clay
-  "#4a5c37", // sage-ink
-  "#7f9d63", // sage
-  "#a4441f", // rust-ink
-  "#cc9e3d", // brass
+  "#b81486", // accent-ink (fuchsia)
+  "#2b6cb8", // blue-ink
+  "#2f7a4d", // green-ink
+  "#50a96c", // green
+  "#c0442a", // coral-ink
+  "#946f1d", // yellow-ink
 ];
 
 const PALETTE = new Set(colors.map((c) => c.toLowerCase()));

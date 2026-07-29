@@ -26,7 +26,7 @@ const OptionsField = (_props: { label?: string | boolean }) => {
     <div className="flex flex-row items-center gap-4">
       {record.administrator && (
         <span className="overline flex items-center gap-1.5 whitespace-nowrap">
-          <span className="inline-block size-1.5 rounded-full bg-tobacco" />
+          <span className="inline-block size-1.5 rounded-full bg-action" />
           {translate("resources.sales.fields.administrator")}
         </span>
       )}

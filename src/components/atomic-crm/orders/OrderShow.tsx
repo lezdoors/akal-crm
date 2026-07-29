@@ -56,7 +56,7 @@ const CustomerEmail = ({ email }: { email: string }) => {
         }}
       >
         {copied ? (
-          <Check className="size-3.5 text-sage-ink" />
+          <Check className="size-3.5 text-green-ink" />
         ) : (
           <Copy className="size-3.5" />
         )}

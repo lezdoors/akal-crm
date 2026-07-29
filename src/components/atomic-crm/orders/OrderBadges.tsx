@@ -5,7 +5,7 @@ import { ORDER_STATUS_PILL_CLASSES } from "./orderUtils";
 
 /**
  * BLOC's status voice: a filled pill in the accent that carries the meaning.
- * All five accents are light enough to take the dark ink, never white.
+ * Status accents take the dark on-accent ink, never white.
  */
 export const OrderStatusWord = ({ status }: { status: OrderStatus }) => {
   const translate = useTranslate();

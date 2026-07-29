@@ -406,7 +406,7 @@ export const ClearArrayButton = (props: React.ComponentProps<"button">) => {
       <Tooltip>
         <TooltipTrigger asChild>
           <Button type="button" variant="ghost" size="icon" {...props}>
-            <Trash className="h-5 w-5 text-rust-ink" />
+            <Trash className="h-5 w-5 text-coral-ink" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>
@@ -454,7 +454,7 @@ export const RemoveItemButton = (props: React.ComponentProps<"button">) => {
             )}
             {...rest}
           >
-            <XCircle className="h-5 w-5 text-rust-ink" />
+            <XCircle className="h-5 w-5 text-coral-ink" />
           </Button>
         </TooltipTrigger>
         <TooltipContent>{translate("ra.action.remove")}</TooltipContent>

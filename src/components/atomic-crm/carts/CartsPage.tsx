@@ -26,13 +26,14 @@ function cartTitle(items: OrderItem[] | undefined): string {
   return rest.length ? `${base} +${rest.length}` : base;
 }
 
-/** The cart's lifecycle state, said as a dot + word — never a pill. */
-function cartStatus(cart: AbandonedCart): { dot: string; label: string } {
-  if (cart.status === "converted") return { dot: "bg-sage", label: "Recovered" };
-  if (cart.unsubscribed) return { dot: "bg-ink-muted", label: "Opted out" };
-  if (cart.second_email_sent_at) return { dot: "bg-tobacco", label: "Chased ×2" };
-  if (cart.first_email_sent_at) return { dot: "bg-tobacco", label: "Chased ×1" };
-  return { dot: "bg-sage", label: "New" };
+/** The cart's lifecycle state as a filled pill, per DESIGN.md. Chasing is
+ * waiting on the shopper (yellow); recovered is settled (green). */
+function cartStatus(cart: AbandonedCart): { pill: string; label: string } {
+  if (cart.status === "converted") return { pill: "bg-green", label: "Recovered" };
+  if (cart.unsubscribed) return { pill: "bg-stone", label: "Opted out" };
+  if (cart.second_email_sent_at) return { pill: "bg-yellow", label: "Chased ×2" };
+  if (cart.first_email_sent_at) return { pill: "bg-yellow", label: "Chased ×1" };
+  return { pill: "bg-blue", label: "New" };
 }
 
 const Row = ({ cart }: { cart: AbandonedCart }) => {
@@ -54,8 +55,7 @@ const Row = ({ cart }: { cart: AbandonedCart }) => {
         </div>
         {/* On a phone the status reads under the email; on desktop it has its
             own column at the end of the row. */}
-        <span className="overline mt-1 flex items-center gap-1.5 whitespace-nowrap sm:hidden">
-          <span className={`inline-block size-1.5 rounded-full ${status.dot}`} />
+        <span className={`pill mt-1.5 sm:hidden ${status.pill}`}>
           {status.label}
         </span>
       </div>
@@ -65,9 +65,8 @@ const Row = ({ cart }: { cart: AbandonedCart }) => {
       <span className="text-[13px] tabular-nums text-right shrink-0 sm:w-20">
         {money(cart.amount_minor, cart.currency)}
       </span>
-      <span className="overline hidden items-center justify-end gap-1.5 whitespace-nowrap sm:flex sm:w-24">
-        <span className={`inline-block size-1.5 rounded-full ${status.dot}`} />
-        {status.label}
+      <span className="hidden sm:flex sm:w-28 justify-end">
+        <span className={`pill ${status.pill}`}>{status.label}</span>
       </span>
     </div>
   );
@@ -82,12 +81,12 @@ const Section = ({
   count: number;
   children: ReactNode;
 }) => (
-  <div className="flex flex-col gap-1 border-t pt-4">
-    <div className="flex items-baseline gap-2">
+  <div className="flex flex-col gap-2">
+    <div className="on-ground flex items-baseline gap-2 px-1">
       <h2 className="overline">{title}</h2>
-      <span className="text-xs text-muted-foreground tabular-nums">{count}</span>
+      <span className="text-xs tabular-nums">{count}</span>
     </div>
-    <div className="flex flex-col">{children}</div>
+    <div className="panel flex flex-col px-5 py-3">{children}</div>
   </div>
 );
 
@@ -132,7 +131,7 @@ export const CartsPage = () => {
         <h1 className="display mt-1 text-[28px] leading-none">
           {translate("crm.carts.title", { _: "Carts in progress" })}
         </h1>
-        <p className="text-xs text-muted-foreground mt-3">
+        <p className="on-ground text-xs mt-3">
           {translate("crm.carts.note", {
             _: "Shoppers who started checkout but haven't paid. The storefront emails them automatically — this is a read-only view.",
           })}
@@ -140,13 +139,13 @@ export const CartsPage = () => {
       </div>
 
       {isLoading && (
-        <p className="text-xs text-muted-foreground border-t pt-4">
+        <p className="on-ground text-xs">
           {translate("ra.page.loading", { _: "Loading" })}…
         </p>
       )}
 
       {isError && (
-        <p className="text-xs text-muted-foreground border-t pt-4">
+        <p className="on-ground text-xs">
           {translate("crm.carts.error", {
             _: "Couldn't load carts. The recovery service may not be deployed yet.",
           })}
