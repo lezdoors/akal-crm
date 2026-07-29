@@ -3,35 +3,8 @@
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/geist-mono";
 
-/* Maison Tanneurs brand fonts — exact files from the production storefront (OFL) */
-@font-face {
-  font-family: "Bodoni Moda SC";
-  src: url("./fonts/bodoni-moda-sc.ttf") format("truetype-variations");
-  font-weight: 400 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Bodoni Moda SC";
-  src: url("./fonts/bodoni-moda-sc-italic.ttf") format("truetype-variations");
-  font-weight: 400 900;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Cormorant Garamond";
-  src: url("./fonts/cormorant-garamond.ttf") format("truetype-variations");
-  font-weight: 300 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Cormorant Garamond";
-  src: url("./fonts/cormorant-garamond-italic.ttf") format("truetype-variations");
-  font-weight: 300 700;
-  font-style: italic;
-  font-display: swap;
-}
+/* The storefront's Bodoni Moda SC / Cormorant Garamond faces were removed on
+   2026-07-29 with their TTFs. This is the back office: mono + Inter only. */
 
 @custom-variant dark (&:is(.dark *));
 
@@ -52,6 +25,19 @@
   --color-panel-raised: var(--panel-raised);
   --color-panel-strong: var(--panel-strong);
   --color-ink-inverse: var(--ink-inverse);
+  --color-tobacco: var(--tobacco);
+  --color-tobacco-deep: var(--tobacco-deep);
+  --color-rust: var(--rust);
+  --color-sage: var(--sage);
+  --color-brass: var(--brass);
+  --color-clay: var(--clay);
+  --color-stone: var(--stone);
+  --color-sage-ink: var(--sage-ink);
+  --color-rust-ink: var(--rust-ink);
+  --color-accent-ink: var(--accent-ink);
+  --color-on-primary: var(--on-primary);
+  --color-on-accent: var(--on-accent);
+  /* Retired reown accent names, aliased while consumers migrate. */
   --color-blue: var(--blue);
   --color-blue-deep: var(--blue-deep);
   --color-coral: var(--coral);
@@ -62,7 +48,7 @@
   --color-ink: var(--ink);
   --color-ink-soft: var(--ink-soft);
   --color-ink-muted: var(--ink-muted);
-  --color-tobacco: var(--tobacco);
+  --color-ink-muted-inverse: var(--ink-muted-inverse);
   --color-moss: var(--moss);
   --color-hairline: var(--hairline);
   --color-background: var(--background);
@@ -99,28 +85,50 @@
 }
 
 :root {
-  /* BLOC — blocks on a grey ground. Palette sampled from the reown.com
-     screenshots in ~/Downloads/Reown; see DESIGN.md. */
+  /* BLOC in Maison Tanneurs' register — reown's structure, the house's colour.
+     Every value below is either a Maison Tanneurs production token (marked MT,
+     lifted from mt-lestanneurs/app/globals.css) or a warm-register colour
+     derived to hold reown's measured luminance relationships. Verified by
+     `node scripts/verify-palette.mjs`; see DESIGN.md. */
   --radius: 28px;
   --radius-panel: 28px;
   --radius-tile: 16px;
   --radius-control: 999px;
 
-  --ground: #9a9a9a;
-  --panel: #e9e9e9;
-  --panel-raised: #f4f4f4;
-  --panel-strong: #202020;
+  /* Material. The ground keeps reown's luminance (panel/ground 2.31:1 vs their
+     2.32:1) and trades its cool grey for the house's warm taupe. */
+  --ground: #a3998c;
+  --panel: #ebe9e4;        /* MT paper-alt */
+  --panel-raised: #f6f4f1; /* MT ground-deep */
+  --panel-strong: #211c17; /* MT dark-close */
 
-  --ink: #202020;
-  --ink-soft: #3d3d3d;
-  --ink-muted: #5c5c5c;
-  --ink-inverse: #f4f4f4;
+  --ink: #1c1a17;          /* MT ink */
+  --ink-soft: #57534c;     /* MT ink-soft */
+  --ink-muted: #8d867c;    /* MT ink-muted */
+  --ink-inverse: #f7f6f2;  /* MT ivory */
+  --ink-muted-inverse: #9a9289; /* muted type on panel-strong — 5.51:1 */
 
-  --blue: #559be8;
-  --blue-deep: #3d86e9;
-  --coral: #e36b53;
-  --green: #50a96c;
-  --yellow: #f4bb40;
+  /* Accents. Five, each with one meaning, all in the tannery's range.
+     `tobacco` is MT's single production accent and the only one dark enough to
+     need ivory text (5.40:1); the status three carry `ink` like every other
+     pill. `accent-ink` is tobacco doing the work of *text* rather than fill. */
+  --tobacco: #8b5a2b;      /* MT accent — primary action, links, current nav */
+  --tobacco-deep: #74491f; /* pressed / active */
+  --accent-ink: #8b5a2b;   /* tobacco as type on a panel — 4.81:1 */
+  --on-primary: var(--ink-inverse);
+  /* Status pills keep their light fill in both modes, so the type on them is
+     always the dark ink — it must NOT follow `--ink` into dark mode. */
+  --on-accent: #1c1a17;
+  --rust: #db6b42;         /* needs attention — to ship, overdue, error */
+  --sage: #7f9d63;         /* settled — delivered, available */
+  --brass: #cc9e3d;        /* waiting — pending, draft */
+  --clay: #b89073;         /* in hand — paid, reserved, chased */
+  --stone: #d5cfc5;        /* in transit — the one uncoloured status */
+  /* The status accents doing the work of *type* rather than fill. A pill fill
+     and a line of coloured text cannot be the same value: one is read against
+     ink, the other against the panel. */
+  --sage-ink: #4a5c37;     /* 6.02:1 on panel */
+  --rust-ink: #a4441f;     /* 5.05:1 on panel */
 
   --background: var(--ground);
   --foreground: var(--ink);
@@ -128,64 +136,91 @@
   --card-foreground: var(--ink);
   --popover: var(--panel-raised);
   --popover-foreground: var(--ink);
-  --primary: var(--blue);
-  --primary-foreground: #10233a;
+  --primary: var(--tobacco);
+  --primary-foreground: var(--on-primary);
   --secondary: var(--panel-raised);
   --secondary-foreground: var(--ink);
   --muted: var(--panel-raised);
   --muted-foreground: var(--ink-muted);
   --accent: var(--panel-raised);
   --accent-foreground: var(--ink);
-  --destructive: var(--coral);
+  --destructive: var(--rust);
   /* No hairlines in BLOC — separation is the ground gap. Any primitive that
      still draws a border gets one that vanishes into its panel. */
   --border: transparent;
-  --input: #d8d8d8;
-  --ring: var(--blue);
-  --chart-1: var(--blue);
-  --chart-2: var(--green);
-  --chart-3: var(--coral);
-  --chart-4: var(--yellow);
+  /* The input is a filled control, not an outlined one — BLOC has no
+     borders, so the field has to separate from whatever surface it lands on
+     by fill alone (1.33:1 on panel, 1.47:1 on panel-raised). */
+  --input: #d2cbc0;
+  --ring: var(--tobacco);
+  --chart-1: var(--tobacco);
+  --chart-2: var(--sage);
+  --chart-3: var(--rust);
+  --chart-4: var(--brass);
   --chart-5: var(--ink-muted);
   --sidebar: var(--panel);
   --sidebar-foreground: var(--ink);
-  --sidebar-primary: var(--blue);
-  --sidebar-primary-foreground: #10233a;
+  --sidebar-primary: var(--tobacco);
+  --sidebar-primary-foreground: var(--on-primary);
   --sidebar-accent: var(--panel-raised);
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: transparent;
-  --sidebar-ring: var(--blue);
-  --avatar-0: #cfcfcf;
-  --avatar-1: #cfcfcf;
-  --avatar-2: #cfcfcf;
-  --avatar-3: #cfcfcf;
-  --avatar-4: #cfcfcf;
-  --avatar-5: #cfcfcf;
-  --avatar-6: #cfcfcf;
-  --avatar-7: #cfcfcf;
-  --avatar-8: #cfcfcf;
-  --avatar-9: #cfcfcf;
+  --sidebar-ring: var(--tobacco);
+  --avatar-0: #d5cfc5;
+  --avatar-1: #d5cfc5;
+  --avatar-2: #d5cfc5;
+  --avatar-3: #d5cfc5;
+  --avatar-4: #d5cfc5;
+  --avatar-5: #d5cfc5;
+  --avatar-6: #d5cfc5;
+  --avatar-7: #d5cfc5;
+  --avatar-8: #d5cfc5;
+  --avatar-9: #d5cfc5;
 
-  /* Retired Le Registre tokens, aliased so un-migrated components keep
-     rendering on-register while they are converted one surface at a time.
-     Delete these once no `tobacco` / `moss` / `hairline` class names remain. */
-  --tobacco: var(--blue);
-  --moss: var(--green);
+  /* Retired names, aliased so un-migrated components keep rendering
+     on-register while they are converted one surface at a time. Delete each
+     once no class name references it. */
+  --blue: var(--tobacco);
+  --blue-deep: var(--tobacco-deep);
+  --coral: var(--rust);
+  --green: var(--sage);
+  --yellow: var(--brass);
+  --moss: var(--sage);
   --hairline: transparent;
   --ground-deep: var(--ground);
 }
 
 .dark {
-  /* BLOC after hours — the ground drops below the panels instead of above. */
-  --ground: #141414;
-  --panel: #202020;
-  --panel-raised: #2a2a2a;
-  --panel-strong: #000000;
+  /* After hours — the ground drops below the panels instead of above, and the
+     whole stack stays warm. Ground/panel is 1.15:1, matching reown's own 1.13. */
+  --ground: #100d0a;
+  --panel: #211c17;        /* MT dark-close */
+  --panel-raised: #2a241d; /* MT dark secondary */
+  --panel-strong: #0f0d0b;
 
-  --ink: #ededed;
-  --ink-soft: #c4c4c4;
-  --ink-muted: #9a9a9a;
-  --ink-inverse: #f4f4f4;
+  --ink: #ede9e2;
+  --ink-soft: #c0b9ae;
+  --ink-muted: #8d867c;    /* MT ink-muted — 4.69:1 on the dark panel */
+  --ink-inverse: #f7f6f2;
+  --ink-muted-inverse: #9a9289;
+
+  /* The fill lifts just enough to hold a 3.15:1 edge against the dark panel
+     while ivory stays at 4.95:1 on it. Tobacco-as-type has to go the other
+     way — a light tan, or it disappears into the panel. */
+  --tobacco: #916030;
+  --tobacco-deep: #7a4f26;
+  --accent-ink: #c9914f;   /* 6.15:1 on panel */
+  --on-primary: var(--ink-inverse);
+  /* Status pills keep their light fill in both modes, so the type on them is
+     always the dark ink — it must NOT follow `--ink` into dark mode. */
+  --on-accent: #1c1a17;
+  --rust: #db6b42;
+  --sage: #7f9d63;
+  --brass: #cc9e3d;
+  --clay: #b89073;
+  --stone: #d5cfc5;   /* stays light in dark mode, like every other pill */
+  --sage-ink: #a8c48a;     /* 8.79:1 on the dark panel */
+  --rust-ink: #e89372;     /* 7.12:1 on the dark panel */
 
   --background: var(--ground);
   --foreground: var(--ink);
@@ -193,47 +228,49 @@
   --card-foreground: var(--ink);
   --popover: var(--panel-raised);
   --popover-foreground: var(--ink);
-  --primary: var(--blue);
-  --primary-foreground: #10233a;
+  --primary: var(--tobacco);
+  --primary-foreground: var(--on-primary);
   --secondary: var(--panel-raised);
   --secondary-foreground: var(--ink);
   --muted: var(--panel-raised);
   --muted-foreground: var(--ink-muted);
   --accent: var(--panel-raised);
   --accent-foreground: var(--ink);
-  --destructive: var(--coral);
+  --destructive: var(--rust);
   --border: transparent;
-  --input: #3a3a3a;
-  --ring: var(--blue);
-  --chart-1: var(--blue);
-  --chart-2: var(--green);
-  --chart-3: var(--coral);
-  --chart-4: var(--yellow);
+  --input: #453c31;
+  --ring: var(--tobacco);
+  --chart-1: var(--tobacco);
+  --chart-2: var(--sage);
+  --chart-3: var(--rust);
+  --chart-4: var(--brass);
   --chart-5: var(--ink-muted);
   --sidebar: var(--panel);
   --sidebar-foreground: var(--ink);
-  --sidebar-primary: var(--blue);
-  --sidebar-primary-foreground: #10233a;
+  --sidebar-primary: var(--tobacco);
+  --sidebar-primary-foreground: var(--on-primary);
   --sidebar-accent: var(--panel-raised);
   --sidebar-accent-foreground: var(--ink);
   --sidebar-border: transparent;
-  --sidebar-ring: var(--blue);
-  --avatar-0: #3a3a3a;
-  --avatar-1: #3a3a3a;
-  --avatar-2: #3a3a3a;
-  --avatar-3: #3a3a3a;
-  --avatar-4: #3a3a3a;
-  --avatar-5: #3a3a3a;
-  --avatar-6: #3a3a3a;
-  --avatar-7: #3a3a3a;
-  --avatar-8: #3a3a3a;
-  --avatar-9: #3a3a3a;
+  --sidebar-ring: var(--tobacco);
+  --avatar-0: #3b332a;
+  --avatar-1: #3b332a;
+  --avatar-2: #3b332a;
+  --avatar-3: #3b332a;
+  --avatar-4: #3b332a;
+  --avatar-5: #3b332a;
+  --avatar-6: #3b332a;
+  --avatar-7: #3b332a;
+  --avatar-8: #3b332a;
+  --avatar-9: #3b332a;
 
-  /* Retired Le Registre tokens, aliased so un-migrated components keep
-     rendering on-register while they are converted one surface at a time.
-     Delete these once no `tobacco` / `moss` / `hairline` class names remain. */
-  --tobacco: var(--blue);
-  --moss: var(--green);
+  /* Retired names, aliased while consumers migrate — see :root. */
+  --blue: var(--tobacco);
+  --blue-deep: var(--tobacco-deep);
+  --coral: var(--rust);
+  --green: var(--sage);
+  --yellow: var(--brass);
+  --moss: var(--sage);
   --hairline: transparent;
   --ground-deep: var(--ground);
 }
@@ -275,34 +312,17 @@ input[type="time"] {
 }
 
 
-/* === Maison Tanneurs refinements === */
 @layer base {
   a, button, [role="button"] {
     transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease, opacity 150ms ease;
   }
 }
 
-@keyframes login-pan {
-  0% { transform: scale(1.04) translateX(0); }
-  100% { transform: scale(1.12) translateX(-1.5%); }
-}
-.login-pan {
-  animation: login-pan 28s ease-in-out infinite alternate;
-  will-change: transform;
-}
-@keyframes login-enter {
-  0% { opacity: 0; transform: translateY(14px); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-.login-enter {
-  animation: login-enter 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
+/* === The two voices === */
 
-/* === Le Registre — the three voices === */
-
-/* Voice 1b: the label — mono, uppercase, tracked. Section labels, table
-   headers, field names. text-decoration none neutralizes Tailwind's
-   same-named decoration utility (this unlayered rule outranks @layer). */
+/* The label — mono, uppercase, tracked. Section labels, table headers, field
+   names. text-decoration none neutralizes Tailwind's same-named decoration
+   utility (this unlayered rule outranks @layer). */
 .overline {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -313,8 +333,8 @@ input[type="time"] {
   text-decoration: none;
 }
 
-/* Voice 1: the interface voice — mono, for titles and every figure. The
-   serif (Cormorant / Bodoni) is retired from the CRM; see DESIGN.md. */
+/* The interface voice — mono, for titles and every figure. The serif
+   (Cormorant / Bodoni) is retired from the CRM; see DESIGN.md. */
 .display {
   font-family: var(--font-mono);
   font-weight: 500;
@@ -362,7 +382,7 @@ input[type="time"] {
   font-weight: 500;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #202020;
+  color: var(--on-accent);
   border-radius: var(--radius-control);
   padding: 3px 10px;
   display: inline-flex;
