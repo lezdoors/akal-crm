@@ -46,37 +46,30 @@
         touch-action: manipulation;
       }
 
+      /* First paint. Hard-coded because it renders before any stylesheet
+         loads — keep these values in step with :root in src/index.css. */
       .loader-container {
         display: flex;
         align-items: center;
         justify-content: center;
-        flex-direction: column;
-        gap: 18px;
         position: absolute;
         inset: 0;
-        background-color: #ffffff;
+        background-color: #a3998c; /* --ground */
       }
       .boot-wordmark {
-        font-family: Georgia, serif;
-        font-variant: small-caps;
-        letter-spacing: 0.12em;
-        font-size: 22px;
-        color: #1c1a17;
+        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-size: 11px;
+        color: #1c1a17; /* --ink */
+        background: #ebe9e4; /* --panel */
+        border-radius: 999px; /* --radius-control */
+        padding: 10px 22px;
         animation: bootfade 1.6s ease-in-out infinite;
       }
-      .boot-rule {
-        width: 64px;
-        height: 1px;
-        background: rgba(28, 26, 23, 0.3);
-        animation: bootrule 1.6s ease-in-out infinite;
-      }
       @keyframes bootfade {
-        0%, 100% { opacity: 0.45; }
+        0%, 100% { opacity: 0.55; }
         50% { opacity: 1; }
-      }
-      @keyframes bootrule {
-        0%, 100% { transform: scaleX(0.4); opacity: 0.3; }
-        50% { transform: scaleX(1); opacity: 1; }
       }
       </style>
   </head>
@@ -84,7 +77,6 @@
     <div id="root">
       <div class="loader-container">
         <div class="boot-wordmark">Maison Tanneurs</div>
-        <div class="boot-rule"></div>
       </div>
     </div>
     <noscript>You need to enable JavaScript to run this app.</noscript>
