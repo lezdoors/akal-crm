@@ -62,7 +62,7 @@ export function Markdown({ children, className }: MarkdownProps) {
         // Blockquotes
         "[&_blockquote]:border-l-2 [&_blockquote]:pl-3 [&_blockquote]:my-2 [&_blockquote]:text-muted-foreground",
         // Links
-        "[&_a]:text-tobacco [&_a]:underline [&_a:hover]:no-underline",
+        "[&_a]:text-accent-ink [&_a]:underline [&_a:hover]:no-underline",
         // Lists
         "[&_ul]:list-disc [&_ul]:ml-6 [&_ul]:my-2",
         "[&_ol]:list-decimal [&_ol]:ml-6 [&_ol]:my-2",

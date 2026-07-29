@@ -32,7 +32,7 @@ export const MobileLayout = ({ children }: { children: ReactNode }) => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="fixed top-0 left-0 right-0 z-40 flex h-14 items-center justify-between gap-2 border-b border-hairline bg-background px-5">
+      <header className="fixed top-0 left-0 right-0 z-40 flex h-14 items-center justify-between gap-2 bg-panel px-5">
         <Link to="/" className="no-underline min-w-0">
           <span className="display block truncate text-[17px] leading-none tracking-[0.02em] text-foreground">
             Maison Tanneurs

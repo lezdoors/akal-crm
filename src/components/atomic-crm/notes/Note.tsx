@@ -204,7 +204,7 @@ export const Note = ({
                 e.stopPropagation();
                 setExpanded(!isExpanded);
               }}
-              className="text-tobacco text-[13px] mt-1 no-underline transition-opacity hover:opacity-80 cursor-pointer"
+              className="text-accent-ink text-[13px] mt-1 no-underline transition-opacity hover:opacity-80 cursor-pointer"
             >
               {isExpanded
                 ? translate("crm.common.show_less")

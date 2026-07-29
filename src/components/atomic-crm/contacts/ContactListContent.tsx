@@ -76,7 +76,7 @@ export const ContactListContent = () => {
   }
 
   return (
-    <div className="md:divide-y md:divide-hairline">
+    <div className="">
       {contacts.map((contact) => (
         <RecordContextProvider key={contact.id} value={contact}>
           <ContactItemContent
@@ -230,7 +230,7 @@ export const ContactListContentMobile = () => {
   }
 
   return (
-    <div className="md:divide-y md:divide-hairline">
+    <div className="">
       {contacts.map((contact) => (
         <RecordContextProvider key={contact.id} value={contact}>
           <ContactItemContentMobile contact={contact} />

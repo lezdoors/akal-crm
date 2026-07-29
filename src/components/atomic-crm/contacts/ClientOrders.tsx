@@ -49,7 +49,7 @@ export const ClientOrders = () => {
             .join(" · ")}
         </span>
       </div>
-      <div className="flex flex-col -mx-1 divide-y divide-hairline">
+      <div className="flex flex-col -mx-1">
         {orders.map((order) => (
           <Link
             key={String(order.id)}

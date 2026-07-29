@@ -30,7 +30,7 @@ export const RecentClients = () => {
         </Link>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-col -mx-1 divide-y divide-hairline">
+        <div className="flex flex-col -mx-1">
           {contacts.map((contact) => (
             <Link
               key={String(contact.id)}

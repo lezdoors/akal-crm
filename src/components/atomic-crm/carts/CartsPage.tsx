@@ -28,11 +28,11 @@ function cartTitle(items: OrderItem[] | undefined): string {
 
 /** The cart's lifecycle state, said as a dot + word — never a pill. */
 function cartStatus(cart: AbandonedCart): { dot: string; label: string } {
-  if (cart.status === "converted") return { dot: "bg-moss", label: "Recovered" };
+  if (cart.status === "converted") return { dot: "bg-sage", label: "Recovered" };
   if (cart.unsubscribed) return { dot: "bg-ink-muted", label: "Opted out" };
   if (cart.second_email_sent_at) return { dot: "bg-tobacco", label: "Chased ×2" };
   if (cart.first_email_sent_at) return { dot: "bg-tobacco", label: "Chased ×1" };
-  return { dot: "bg-moss", label: "New" };
+  return { dot: "bg-sage", label: "New" };
 }
 
 const Row = ({ cart }: { cart: AbandonedCart }) => {
@@ -87,7 +87,7 @@ const Section = ({
       <h2 className="overline">{title}</h2>
       <span className="text-xs text-muted-foreground tabular-nums">{count}</span>
     </div>
-    <div className="flex flex-col divide-y divide-hairline">{children}</div>
+    <div className="flex flex-col">{children}</div>
   </div>
 );
 

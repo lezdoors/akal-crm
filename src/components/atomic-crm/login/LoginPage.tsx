@@ -90,85 +90,66 @@ export const LoginPage = (props: { redirectTo?: string }) => {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden bg-zinc-950">
-      {/* Full-bleed entrance: rotating hide in golden particles, plays once
-          and settles on the embossed brand reveal. */}
-      <video
-        className="absolute inset-0 h-full w-full object-cover"
-        src="./login-leather.mp4"
-        poster="./login-poster.webp"
-        autoPlay
-        muted
-        playsInline
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/25 to-black/60" />
-
-      <div className="relative z-20 flex flex-col items-center w-full px-4 login-enter">
-        <img className="h-9 mb-4" src={darkModeLogo} alt={title} />
-        <div className="display text-[34px] tracking-[0.04em] text-white text-center leading-none">
-          {title}
-        </div>
-        <div className="mt-3 mb-8 flex items-center gap-3 text-white/60">
-          <span className="h-px w-10 bg-white/30" />
-          <span className="font-mono text-[10px] tracking-[0.24em] uppercase">
-            Atelier · Marrakech
-          </span>
-          <span className="h-px w-10 bg-white/30" />
+    // The only unauthenticated surface: one focus block on the ground, per
+    // DESIGN.md. The form sits on a raised tile inside it so the inputs are
+    // read on a light surface rather than against the dark block.
+    <div className="min-h-screen flex items-center justify-center bg-ground px-4 py-10">
+      <div className="panel-strong page-enter w-full max-w-[440px] px-8 py-10 sm:px-10">
+        <div className="flex flex-col items-center text-center">
+          <img className="h-8" src={darkModeLogo} alt="" />
+          <h1 className="display mt-5 text-[26px] leading-none text-ink-inverse">
+            {title}
+          </h1>
+          <p className="mt-3 font-mono text-[10px] uppercase tracking-[0.16em] text-ink-muted-inverse">
+            Espace équipe
+          </p>
         </div>
 
-        <div className="w-full max-w-[380px] bg-card border px-8 py-8 space-y-6">
-          <div className="text-center">
-            <h1 className="overline text-white/70">
-              {translate("ra.auth.sign_in")}
-            </h1>
-          </div>
-            {disableEmailPasswordAuthentication ? null : (
-              <Form className="space-y-8" onSubmit={handleSubmit}>
-                <TextInput
-                  label="ra.auth.email"
-                  source="email"
-                  type="email"
-                  validate={required()}
-                />
-                <TextInput
-                  label="ra.auth.password"
-                  source="password"
-                  type="password"
-                  validate={required()}
-                />
-                <div className="flex flex-col gap-4">
-                  <Button
-                    type="submit"
-                    className="cursor-pointer"
-                    disabled={loading}
-                  >
-                    {translate("ra.auth.sign_in")}
-                  </Button>
-                </div>
-              </Form>
-            )}
-            {googleWorkplaceDomain ? (
-              <SSOAuthButton className="w-full" domain={googleWorkplaceDomain}>
-                {translate("crm.auth.sign_in_google_workspace", {
-                  _: "Sign in with Google Workplace",
-                })}
-              </SSOAuthButton>
-            ) : null}
-            {disableEmailPasswordAuthentication ? null : (
-              <Link
-                to={"/forgot-password"}
-                className="block text-sm text-center hover:underline"
+        <div className="mt-8 rounded-[var(--radius-tile)] bg-panel-raised px-6 py-7 space-y-6">
+          <h2 className="overline text-center">
+            {translate("ra.auth.sign_in")}
+          </h2>
+          {disableEmailPasswordAuthentication ? null : (
+            <Form className="space-y-6" onSubmit={handleSubmit}>
+              <TextInput
+                label="ra.auth.email"
+                source="email"
+                type="email"
+                validate={required()}
+              />
+              <TextInput
+                label="ra.auth.password"
+                source="password"
+                type="password"
+                validate={required()}
+              />
+              <Button
+                type="submit"
+                className="w-full"
+                disabled={loading}
               >
-                {translate("ra-supabase.auth.forgot_password", {
-                  _: "Forgot password?",
-                })}
-              </Link>
-            )}
+                {translate("ra.auth.sign_in")}
+              </Button>
+            </Form>
+          )}
+          {googleWorkplaceDomain ? (
+            <SSOAuthButton className="w-full" domain={googleWorkplaceDomain}>
+              {translate("crm.auth.sign_in_google_workspace", {
+                _: "Sign in with Google Workplace",
+              })}
+            </SSOAuthButton>
+          ) : null}
+          {disableEmailPasswordAuthentication ? null : (
+            <Link
+              to={"/forgot-password"}
+              className="block text-center font-mono text-[12px] text-accent-ink no-underline hover:underline"
+            >
+              {translate("ra-supabase.auth.forgot_password", {
+                _: "Forgot password?",
+              })}
+            </Link>
+          )}
         </div>
-
-        <p className="mt-6 font-mono text-[9px] tracking-[0.24em] uppercase text-white/40">
-          Espace équipe — Maison Tanneurs
-        </p>
       </div>
       <Notification />
     </div>

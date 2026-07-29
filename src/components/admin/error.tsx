@@ -39,7 +39,7 @@ export const Error = (props: InternalErrorProps & {}) => {
         className="display text-[26px] leading-none flex items-center mt-5 mb-5 gap-3"
         role="alert"
       >
-        <CircleAlert className="w-2em h-2em text-tobacco" />
+        <CircleAlert className="w-2em h-2em text-accent-ink" />
         <Translate i18nKey="ra.page.error" />
       </h1>
       <div>
@@ -71,7 +71,7 @@ export const Error = (props: InternalErrorProps & {}) => {
               <li>
                 Check the{" "}
                 <a
-                  className="text-tobacco underline-offset-4 hover:underline"
+                  className="text-accent-ink underline-offset-4 hover:underline"
                   href="https://marmelab.com/shadcn-admin-kit/docs"
                 >
                   shadcn-admin-kit documentation
@@ -80,7 +80,7 @@ export const Error = (props: InternalErrorProps & {}) => {
               <li>
                 Search on{" "}
                 <a
-                  className="text-tobacco underline-offset-4 hover:underline"
+                  className="text-accent-ink underline-offset-4 hover:underline"
                   href="https://stackoverflow.com/questions/tagged/shadcn-admin-kit"
                 >
                   StackOverflow
@@ -90,7 +90,7 @@ export const Error = (props: InternalErrorProps & {}) => {
               <li>
                 Get help from the core team via{" "}
                 <a
-                  className="text-tobacco underline-offset-4 hover:underline"
+                  className="text-accent-ink underline-offset-4 hover:underline"
                   href="https://marmelab.com/shadcn-admin-kit/"
                 >
                   Shadcn Enterprise Edition

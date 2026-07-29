@@ -165,7 +165,7 @@ const OrdersEmpty = () => {
       </p>
       <Link
         to="/orders/create"
-        className="mt-4 inline-block text-[13px] no-underline text-tobacco transition-opacity hover:opacity-80"
+        className="mt-4 inline-block text-[13px] no-underline text-accent-ink transition-opacity hover:opacity-80"
       >
         {translate("crm.dashboard.empty_action", {
           _: "Enter an order manually",
